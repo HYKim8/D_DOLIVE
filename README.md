@@ -15,6 +15,7 @@
 ### 3. 요구사항
 
 ### 4. WBS
+(https://github.com/HYKim8/D_DOLIVE/blob/master/WBS%20%EC%9D%B4%EB%AF%B8%EC%A7%80.PNG)
 
 ### 5. 개발아키텍쳐 : MVC
 
