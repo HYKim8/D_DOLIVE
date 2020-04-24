@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	//제발 되어 주세여
+	//제발 되어 주세여 니가 뭔데??
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -33,7 +33,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+		return "JISU";
 	}
 	
 }
