@@ -1,6 +1,6 @@
 ## 1. COREA
-- COrona REcovery Assistance  
-- 코로나19 대비~~~~~설명 오네가이시마스~~~~~~  
+- Corona Recovery Assistance  
+- 코로나19 대비
 
 ## 2. 팀장/팀원
 ``` 
