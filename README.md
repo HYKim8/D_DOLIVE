@@ -30,7 +30,7 @@
 ![WBS](https://github.com/HYKim8/D_DOLIVE/blob/master/WBS%EC%9D%B4%EB%AF%B8%EC%A7%803.PNG)
 
 ## 5. 개발아키텍쳐 : MVC
-
+![MVC 아키텍처]()
 ## 6. 개발목록
 
 ## 7. 단위테스트
