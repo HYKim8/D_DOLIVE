@@ -11,17 +11,17 @@ import com.sist.d_dolive.cmn.DTO;
  */
 public class CodeVO extends DTO {
 
-	private String	mstId	/*	마스터코드	*/	;
-	private String	dtlId	/*	상세코드	*/	;
+	private String	mstId	/*	마스터코드		*/	;
+	private String	dtlId	/*	상세코드		*/	;
 	private String	mstNm	/*	마스터코드명	*/	;
-	private String	dtlNm	/*	상세코드명	*/	;
-	private String	seq	/*	순번	*/	;
-	private String	useYn	/*	사용여부	*/	;
+	private String	dtlNm	/*	상세코드명		*/	;
+	private String	seq		/*	순번			*/	;
+	private String	useYn	/*	사용여부		*/	;
 	private String	pmstId	/*	상위마스터코드	*/	;
 	private String	regId	/*	등록자아이디	*/	;
-	private String	regDt	/*	등록일	*/	;
+	private String	regDt	/*	등록일		*/	;
 	private String	modId	/*	수정자아이디	*/	;
-	private String	modDt	/*	수정일	*/	;
+	private String	modDt	/*	수정일		*/	;
 
 	public CodeVO() {}
 
