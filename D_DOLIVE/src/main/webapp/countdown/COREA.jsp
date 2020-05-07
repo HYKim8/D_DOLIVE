@@ -1,7 +1,8 @@
+<%@page import="org.jsoup.select.Elements"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="com.sist.countdown.Parser"%>
+<%@page import="com.sist.d_dolive.countdown.Parser"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
@@ -66,15 +67,26 @@
 	
 	<%
 		Parser ps = new Parser();
+		
 
-	List<String> newlist = ps.coreaParse();
-
+	List<String> newlist = ps.Parse();
+	Elements sitelist= ps.ParseSite();
+	
 	%>
 <div class="countdown2" >
 		
 <h1>MASK COUNT DOWN SERVICE</h1>
+
 </div>
-	<!-- 판매중인 마스크 리스트 뽑기 -->
+<div class="countdown" id="count1">
+		<h2> 시간 확인 </h2>
+			<span class="timeel days">00</span> <span class="timeel timeRefDays">days</span>
+			<span class="timeel hours">00</span> <span class="timeel timeRefHours">hours</span> 
+			<span class="timeel minutes">00</span> <span class="timeel timeRefMinutes">minutes</span>
+			<span class="timeel seconds">00</span> <span class="timeel timeRefSeconds">seconds</span>
+			<hr>
+		</div>
+	<!-- 판매중인 마스크 리스트 뽑기+ 해당 URL 연결 -->
 	<% 	
 	
 		for(int i=0; i<newlist.size();i++){
@@ -88,7 +100,7 @@
 
 	
 		<div >
-			<a><%=newlist.get(i).substring( newlist.get(i).indexOf("["),newlist.get(i).length() ) %></a>
+			<h4><%=sitelist.get(i) %></h4>
 			
 			<input class="powerup" type="button" value="CountDown" onclick=" countDownToTime('<%=newlist.get(i).substring(newlist.get(i).length()-16, newlist.get(i).length())%>','count1'); " />
 			
@@ -104,15 +116,9 @@
 			}
 	%>
 	
+		<!-- 판매중인 마스크 리스트 뽑기+ 해당 URL 연결 -->
 		
-		<div class="countdown" id="count1">
-		<h2> 시간 확인 </h2>
-			<span class="timeel days">00</span> <span class="timeel timeRefDays">days</span>
-			<span class="timeel hours">00</span> <span class="timeel timeRefHours">hours</span> 
-			<span class="timeel minutes">00</span> <span class="timeel timeRefMinutes">minutes</span>
-			<span class="timeel seconds">00</span> <span class="timeel timeRefSeconds">seconds</span>
-		</div>
-	<!-- 판매중인 마스크 리스트 뽑기 -->
+	
 
 <script>
 			window.onload = function() {
