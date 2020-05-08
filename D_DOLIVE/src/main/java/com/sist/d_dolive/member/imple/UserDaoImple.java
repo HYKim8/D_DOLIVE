@@ -119,7 +119,7 @@ public class UserDaoImple implements UserDao {
 		return flag;
 	}
 
-	public int doPwUpdate(DTO dto) { //비밀번호 수정
+	public int doUpdate(DTO dto) { //회원정보 수정
 		int flag = 0;
 		UserVO inVO = (UserVO) dto;
 		StringBuilder sb=new StringBuilder();
@@ -140,50 +140,50 @@ public class UserDaoImple implements UserDao {
 	}
 	
 	
-	public int doTelUpdate(DTO dto) { //전화번호수정
-		int flag = 0;
-		UserVO inVO = (UserVO) dto;
-		StringBuilder sb=new StringBuilder();
-		sb.append(" UPDATE member \n");
-		sb.append(" SET pw=?      \n");
-		sb.append(" WHERE email=? \n");
-		
-		LOG.debug("==============================");
-		LOG.debug("=Query=\n"+sb.toString());
-		LOG.debug("=Param= "+inVO.toString());
-		Object[] args= {inVO.getPw()
-				      ,inVO.getEmail()
-				      };
-		flag = this.jdbcTemplate.update(sb.toString(), args);
-		LOG.debug("=flag= "+flag);
-		LOG.debug("==============================");
-		return flag;
-	}
-	
-	
-	public int doAddrUpdate(DTO dto) { //주소 수정
-		int flag = 0;
-		UserVO inVO = (UserVO) dto;
-		StringBuilder sb=new StringBuilder();
-		sb.append(" UPDATE member   \n");
-		sb.append(" SET zipno=?,    \n");
-		sb.append("     addr=?,     \n");
-		sb.append("     addr2=?     \n");
-		sb.append(" WHERE email=?   \n");
-		
-		LOG.debug("==============================");
-		LOG.debug("=Query=\n"+sb.toString());
-		LOG.debug("=Param= "+inVO.toString());
-		Object[] args= {inVO.getZipno()
-				      ,inVO.getAddr()
-				      ,inVO.getAddr2()
-				      ,inVO.getEmail()
-				      };
-		flag = this.jdbcTemplate.update(sb.toString(), args);
-		LOG.debug("=flag= "+flag);
-		LOG.debug("==============================");
-		return flag;
-	}
+//	public int doTelUpdate(DTO dto) { //전화번호수정
+//		int flag = 0;
+//		UserVO inVO = (UserVO) dto;
+//		StringBuilder sb=new StringBuilder();
+//		sb.append(" UPDATE member \n");
+//		sb.append(" SET pw=?      \n");
+//		sb.append(" WHERE email=? \n");
+//		
+//		LOG.debug("==============================");
+//		LOG.debug("=Query=\n"+sb.toString());
+//		LOG.debug("=Param= "+inVO.toString());
+//		Object[] args= {inVO.getPw()
+//				      ,inVO.getEmail()
+//				      };
+//		flag = this.jdbcTemplate.update(sb.toString(), args);
+//		LOG.debug("=flag= "+flag);
+//		LOG.debug("==============================");
+//		return flag;
+//	}
+//	
+//	
+//	public int doAddrUpdate(DTO dto) { //주소 수정
+//		int flag = 0;
+//		UserVO inVO = (UserVO) dto;
+//		StringBuilder sb=new StringBuilder();
+//		sb.append(" UPDATE member   \n");
+//		sb.append(" SET zipno=?,    \n");
+//		sb.append("     addr=?,     \n");
+//		sb.append("     addr2=?     \n");
+//		sb.append(" WHERE email=?   \n");
+//		
+//		LOG.debug("==============================");
+//		LOG.debug("=Query=\n"+sb.toString());
+//		LOG.debug("=Param= "+inVO.toString());
+//		Object[] args= {inVO.getZipno()
+//				      ,inVO.getAddr()
+//				      ,inVO.getAddr2()
+//				      ,inVO.getEmail()
+//				      };
+//		flag = this.jdbcTemplate.update(sb.toString(), args);
+//		LOG.debug("=flag= "+flag);
+//		LOG.debug("==============================");
+//		return flag;
+//	}
 	
 	
 	
@@ -261,7 +261,7 @@ public class UserDaoImple implements UserDao {
 	}
 	
 
-	public int doDelete(DTO dto) {
+	public int doDelete(DTO dto) { //회원탈퇴
 		int flag = 0;
 		UserVO inVO = (UserVO) dto;
 		StringBuilder  sb=new StringBuilder();
@@ -278,6 +278,32 @@ public class UserDaoImple implements UserDao {
 		LOG.debug("==============================");	
 		return flag;
 	}
+	
+	public DTO getMember(DTO dto) {//로그인
+		UserVO outVO = null;        //return UserVO
+		UserVO inVO  = (UserVO) dto;//Param UserVO
+		StringBuilder  sb = new StringBuilder();
+		sb.append(" select * from member  \n");
+		sb.append(" where email= ?        \n");
+		sb.append(" and pw= ?             \n");
+		
+		//Query수행
+		LOG.debug("==============================");
+		LOG.debug("=Query=\n"+sb.toString());
+		LOG.debug("=Param=\n"+inVO.getEmail());
+		
+		Object []args = {inVO.getEmail(),
+						 inVO.getPw()
+						 };
+		outVO = this.jdbcTemplate.queryForObject(sb.toString()
+				,args
+				,rowMapper); 
+		LOG.debug("=outVO=\n"+outVO);
+		LOG.debug("==============================");
+		
+		return outVO;
+	}
+	
 
 	/**
 	 * 
@@ -289,9 +315,10 @@ public class UserDaoImple implements UserDao {
 	 *@return
 	 */
 	@Override
-	public List<UserVO> doRetrieve(DTO dto) { //마이페이지 회원정보출력
-		UserVO inVO = (UserVO) dto;
-		StringBuilder  sb=new StringBuilder();
+	public DTO doSelectOne(DTO dto) {//마이페이지 회원정보출력
+		UserVO outVO = null;        //return UserVO
+		UserVO inVO  = (UserVO) dto;//Param UserVO
+		StringBuilder  sb = new StringBuilder();
 		sb.append(" SELECT email,						\n");
 		sb.append("        gender,                      \n");
 		sb.append("        SUBSTR(IHIDNUM,1,6),         \n");
@@ -301,127 +328,30 @@ public class UserDaoImple implements UserDao {
 		sb.append("        addr2                        \n");
 		sb.append(" FROM member                         \n");
 		sb.append(" WHERE email=?                       \n");
+		
+		//Query수행
 		LOG.debug("==============================");
 		LOG.debug("=Query=\n"+sb.toString());
-		LOG.debug("=Param="+inVO);
-		//new Object[] {"%"+inVO.getU_id()+"%"}
-		List<UserVO> list = this.jdbcTemplate.query(sb.toString()
-				               , new Object[] {"%"+inVO.getEmail()+"%"}
-				               , rowMapper);
-		LOG.debug("=list="+list);
+		LOG.debug("=Param=\n"+inVO.getEmail());
+		
+		Object []args = {inVO.getEmail(),
+						 inVO.getPw()
+						 };
+		outVO = this.jdbcTemplate.queryForObject(sb.toString()
+				,args
+				,rowMapper); 
+		LOG.debug("=outVO=\n"+outVO);
 		LOG.debug("==============================");
-		return list;
+		
+		return outVO;
 	}
 
 
 
-	@Override
-	public int doUpdate(DTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 
 
-	@Override
-	public DTO doSelectOne(DTO dto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-
-
-	@Override
-	public List<?> getAll(DTO dto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-	
-//	public List<?> doRetrieve(DTO dto) {
-//		SearchVO  inVO= (SearchVO) dto;
-//		//검색구분
-//		  //ID : 10
-//		  //이름: 20
-//		//검색어
-//		StringBuilder whereSb=new StringBuilder();
-//		
-//		if(null !=inVO && !"".equals(inVO.getSearchDiv())) {
-//			if(inVO.getSearchDiv().equals("10")) {
-//				whereSb.append("WHERE u_id like '%' || ? ||'%'   \n");
-//			}else if(inVO.getSearchDiv().equals("20")) {
-//				whereSb.append("WHERE name like '%' || ? ||'%'   \n");
-//			}
-//		}
-//		
-//		
-//		StringBuilder sb=new StringBuilder();
-//		sb.append("SELECT T1.*,T2.*                                              \n");
-//		sb.append("FROM(                                                         \n");
-//		sb.append("    SELECT  B.u_id,                                           \n");
-//		sb.append("            B.name,                                           \n");
-//		sb.append("            B.passwd,                                         \n");
-//		sb.append("            B.u_level,                                        \n");
-//		sb.append("            B.login,                                          \n");
-//		sb.append("            B.recommend,                                      \n");
-//		sb.append("            B.mail,                                           \n");
-//		sb.append("            TO_CHAR(B.reg_dt,'YYYY/MM/DD') reg_dt,            \n");
-//		sb.append("            rnum                                              \n");		
-//		sb.append("    FROM(                                                     \n");
-//		sb.append("        SELECT ROWNUM rnum,                                   \n");
-//		sb.append("               A.*                                            \n");
-//		sb.append("        FROM (                                                \n");
-//		sb.append("            SELECT *                                          \n");
-//		sb.append("            FROM hr_member                                    \n");
-//		sb.append("            --검색조건                                                                               \n");
-//		//--검색----------------------------------------------------------------------
-//		sb.append(whereSb.toString());
-//		//--검색----------------------------------------------------------------------				
-//		sb.append("        )A --10                                               \n");
-//		//sb.append("        WHERE ROWNUM <= (&PAGE_SIZE*(&PAGE_NUM-1)+&PAGE_SIZE) \n");
-//		sb.append("        WHERE ROWNUM <= (?*(?-1)+?) \n");
-//		sb.append("    )B --1                                                    \n");
-//		//sb.append("    WHERE B.RNUM >= (&PAGE_SIZE*(&PAGE_NUM-1)+1)              \n");
-//		sb.append("    WHERE B.RNUM >= (?*(?-1)+1)              \n");
-//		sb.append("    )T1 CROSS JOIN                                            \n");
-//		sb.append("    (                                                         \n");
-//		sb.append("    SELECT count(*) total_cnt                                 \n");
-//		sb.append("    FROM hr_member                                            \n");
-//		sb.append("    --검색조건                                                   \n");
-//		//--검색----------------------------------------------------------------------
-//		sb.append(whereSb.toString());
-//		//--검색----------------------------------------------------------------------
-//		sb.append("    )T2                                                       \n");
-//
-//		//param 
-//		List<Object> listArg = new ArrayList<Object>();
-//		
-//		
-//		//param set
-//		if(null !=inVO && !"".equals(inVO.getSearchDiv())) {
-//			listArg.add(inVO.getSearchWord());
-//			listArg.add(inVO.getPageSize());
-//			listArg.add(inVO.getPageNum());
-//			listArg.add(inVO.getPageSize());
-//			listArg.add(inVO.getPageSize());
-//			listArg.add(inVO.getPageNum());				
-//			listArg.add(inVO.getSearchWord());
-//			
-//		}else {
-//			listArg.add(inVO.getPageSize());
-//			listArg.add(inVO.getPageNum());
-//			listArg.add(inVO.getPageSize());
-//			listArg.add(inVO.getPageSize());
-//			listArg.add(inVO.getPageNum());			
-//		}
-//		List<UserVO> retList = this.jdbcTemplate.query(sb.toString(), listArg.toArray(), rowMapper);
-//		LOG.debug("query \n"+sb.toString());
-//		LOG.debug("param:"+listArg);
-//		return retList;
-//	}
-//
 }
 
 

@@ -6,44 +6,26 @@ import com.sist.d_dolive.cmn.DTO;
 
 public interface UserDao {
 
-	/**
-	 * 등록
-	 * @param dto
-	 * @return int
-	 */
+
 	public int doInsert(DTO dto);
-	/**
-	 * 수정   
-	 * @param dto
-	 * @return int
-	 */
+	
 	public int doUpdate(DTO dto);
+
+	public int idCount(DTO dto);
 	
-	/**
-	 * 단건조회
-	 * @param dto
-	 * @return DTO
-	 */
-	public DTO doSelectOne(DTO dto);
+	public DTO doFindId(DTO dto);
 	
-	/**
-	 * 삭제
-	 * @param dto
-	 * @return int
-	 */
+	public DTO doFindPw(DTO dto);
+	
 	public int doDelete(DTO dto);
 	
-	/**
-	 * 목록조회
-	 * @param dto
-	 * @return
-	 */
-	public List<?> doRetrieve(DTO dto);
-	   
-	/**
-	 * 전체 조회
-	 * @param dto
-	 * @return
-	 */
-	public List<?> getAll(DTO dto);	   
+	public DTO getMember(DTO dto);
+
+	public DTO doSelectOne(DTO dto);
+
+	
+	
+
+	
+	
 }

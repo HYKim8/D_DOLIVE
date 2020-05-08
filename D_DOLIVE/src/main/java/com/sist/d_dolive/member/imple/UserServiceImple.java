@@ -66,8 +66,6 @@ public class UserServiceImple implements UserService {
 		this.userDao = userDao;
 	}
 
-
-
 	@Override
 	public int doInsert(DTO dto) {
 		return userDao.doInsert(dto);
@@ -79,20 +77,33 @@ public class UserServiceImple implements UserService {
 	}
 
 	@Override
-	public DTO doSelectOne(DTO dto) {
-		return userDao.doSelectOne(dto);
+	public int idCount(DTO dto) {
+		return userDao.idCount(dto);
 	}
-
+	
+	@Override
+	public DTO doFindId(DTO dto) {
+		return userDao.doFindId(dto);
+	}
+	
+	@Override
+	public DTO doFindPw(DTO dto) {
+		return userDao.doFindPw(dto);
+	}
+	
 	@Override
 	public int doDelete(DTO dto) {
 		return userDao.doDelete(dto);
 	}
-
-	@Override
-	public List<?> doRetrieve(DTO dto) {
-		return userDao.doRetrieve(dto);
+	
+	public DTO getMember(DTO dto) {
+		return userDao.getMember(dto);
 	}
-
+	
+	@Override
+	public DTO doSelectOne(DTO dto) {
+		return userDao.doSelectOne(dto);
+	}
 
 }
 
