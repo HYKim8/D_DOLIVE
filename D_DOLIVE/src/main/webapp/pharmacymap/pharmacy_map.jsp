@@ -26,9 +26,9 @@
 <html>
 <head>
 <style>
-    .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+    .wrap {position: absolute;left: 0;bottom: 40px;width: 300px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
     .wrap * {padding: 0;margin: 0;}
-    .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+    .wrap .info {width: 300px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
     .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
     .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
     .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
@@ -36,6 +36,89 @@
     .info .body {position: relative;overflow: hidden;}
     .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
     .info .link {color: #5085BB;}
+    
+    .switch {
+	  position: relative;
+	  display: inline-block;
+	  width: 30px;
+	  height: 17px;
+	}
+	
+	.switch input { 
+	  opacity: 0;
+	  width: 0;
+	  height: 0;
+	}
+	
+	.slider {
+	  position: absolute;
+	  cursor: pointer;
+	  top: 0;
+	  left: 0;
+	  right: 0;
+	  bottom: 0;
+	  background-color: #ccc;
+	  -webkit-transition: .4s;
+	  transition: .4s;
+	}
+	
+	.slider:before {
+	  position: absolute;
+	  content: "";
+	  height: 13px;
+	  width: 13px;
+	  left: 2px;
+	  bottom: 2px;
+	  background-color: white;
+	  -webkit-transition: .2s;
+	  transition: .2s;
+	}
+	
+	input:checked + .slider {
+	  background-color: #2196F3;
+	}
+	
+	input:focus + .slider {
+	  box-shadow: 0 0 1px #2196F3;
+	}
+	
+	input:checked + .slider:before {
+	  -webkit-transform: translateX(13px);
+	  -ms-transform: translateX(13px);
+	  transform: translateX(13px);
+	}
+	
+	/* Rounded sliders */
+	.slider.round {
+	  border-radius: 17px;
+	}
+	
+	.slider.round:before {
+	  border-radius: 50%;
+	}
+	
+	.button {
+	  display: inline-block;
+	  padding: 5px 10px;
+	  font-size: 10px;
+	  cursor: pointer;
+	  text-align: center;
+	  text-decoration: none;
+	  outline: none;
+	  color: #fff;
+	  background-color: #4CAF50;
+	  border: none;
+	  border-radius: 5px;
+	  box-shadow: 0 1px #999;
+	}
+	
+	.button:hover {background-color: #3e8e41}
+	
+	.button:active {
+	  background-color: #3e8e41;
+	  box-shadow: 0 5px #666;
+	  transform: translateY(4px);
+	}
 </style>
 <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7c798e37b13fac506a55eb2eebfd5a18&libraries=services"></script>
@@ -158,7 +241,21 @@
                           title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
                           image : markerImage // 마커 이미지 
                       });
-                      
+
+					  if(data.stores[i].remain_stat == "break"){
+						  data.stores[i].remain_stat = "재고 없음"
+					  }else if(data.stores[i].remain_stat == "some"){
+						  data.stores[i].remain_stat = "30개~100개"
+					  }else if(data.stores[i].remain_stat == "plenty"){
+						  data.stores[i].remain_stat = "100개 이상"
+					  }else if(data.stores[i].remain_stat == "empty"){
+						  data.stores[i].remain_stat = "재고 없음"
+					  }else if(data.stores[i].remain_stat == "few"){
+						  data.stores[i].remain_stat = "1개~30개"
+					  }else if(data.stores[i].remain_stat == null){
+						  data.stores[i].remain_stat = "재고 없음"
+				      }
+				      
                       kakao.maps.event.addListener(marker, 'click', openOverlay(data.stores[i].code, map, marker,data.stores[i].name,
                                                  data.stores[i].addr,data.stores[i].stock_at,data.stores[i].remain_stat));
                   }
@@ -186,11 +283,16 @@
                          '            '+name+'' + 
                          '            <div class="close" onclick="closeOverlay('+"$(this).parent().parent().parent()"+')" title="닫기"></div>' + 
                          '        </div>' + 
+                         '        <div class="remain" align="center" style="font-size: 16px;">재고 상태:<b>'+remain+'</b></div>' + 
+                         '        <div align="center">'+
+                         '           <label class="switch">'+
+                         '               <input type="checkbox"><span class="slider round"></span>'+
+                         '           </label>'+ 
+                         '           <button class="button" >예약</button>'+ 
+                         '        </div>'+
                          '        <div class="body">' + 
-                         '                <div class="ellipsis">주소:'+addr+'</div>' + 
-                         '                <div class="jibun ellipsis">'+stock+'</div>' + 
-                         '                <div>마스크:<b>10~30개</b>'+remain+'</div>' + 
-                         '                <div>예약:<b>가능</b></div>' + 
+                         '                <div class="ellipsis">'+addr+'</div>' + 
+                         '                <div class="jibun ellipsis">업데이트:<b>'+stock+'</b></div>' + 
                          '        </div>' + 
                          '    </div>' +    
                          '</div>',
