@@ -3,5 +3,15 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<settings>
+		<!-- 전통적인 데이터베이스 컬럼명 현태인 A_COLUMN을
+			CamelCase형태의 자바 프로퍼티명 형태인 aColumn으로 자동으로 매핑하도록 함 -->
+		<setting name="mapUnderscoreToCamelCase" value="false"/>
+	</settings>
 
+	<!-- type별칭: parameterType="com.sist.ehr.board.service.BoardVO" BoardVO -->
+	<typeAliases>
+		<typeAlias type="com.sist.d_dolive.bizmember.BizMemberVO" alias="BizMemberVO"/>
+		<typeAlias type="com.sist.d_dolive.cmn.SearchVO" alias="SearchVO"/>
+	</typeAliases>
 </configuration>  
