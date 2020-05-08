@@ -1,5 +1,10 @@
 ![미안하다](https://github.com/HYKim8/D_DOLIVE/blob/master/%EB%AF%B8%EC%95%88%ED%95%98%EB%8B%A4.jpg)
 
+## 미안하다 이거 보여주려고 어그로끌었다..
+COREA 프로젝트 수준 ㄹㅇ실화냐? 진짜 세계관최강자들의 프로젝트다.. 그찐따같던 D_DOLIVE가 맞나?
+진짜 D_DOLIVE는 전설이다.. 진짜옛날에 맨날자바봘는데 왕같은존재인 개발자 되서 세계최강 전설적인 개발자된D_DOLIVE보면 진짜내가다 감격스럽고
+첫 페이지부터 마지막 페이지까지 가슴울리는장면들이 뇌리에 스치면서 가슴이 웅장해진다..
+
 ## 1. COREA
 - Corona Recovery Assistance  
 - 코로나19 대비
