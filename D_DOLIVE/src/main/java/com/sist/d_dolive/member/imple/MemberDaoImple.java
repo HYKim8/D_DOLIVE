@@ -179,7 +179,7 @@ public class MemberDaoImple implements MemberDao {
 	}
 	
 
-	public DTO doFindId(DTO dto) {//아이디찾기 단건조회
+	public DTO doFindId(DTO dto) {//이메일찾기 단건조회
 		MemberVO outVO = null;        //return UserVO
 		MemberVO inVO  = (MemberVO) dto;//Param UserVO
 		StringBuilder  sb=new StringBuilder();
@@ -191,7 +191,8 @@ public class MemberDaoImple implements MemberDao {
 		//Query수행
 		LOG.debug("==============================");
 		LOG.debug("=Query=\n"+sb.toString());
-		LOG.debug("=Param=\n"+inVO.getEmail());
+		LOG.debug("=Param=\n"+inVO.getName());
+		LOG.debug("=Param=\n"+inVO.getIhidnum());
 		
 		Object []args = {inVO.getName(), inVO.getIhidnum() };
 		outVO = this.jdbcTemplate.queryForObject(sb.toString()
@@ -261,9 +262,8 @@ public class MemberDaoImple implements MemberDao {
 		LOG.debug("=Query=\n"+sb.toString());
 		LOG.debug("=Param=\n"+inVO.getEmail());
 		
-		Object []args = {inVO.getEmail(),
-						 inVO.getPw()
-						 };
+		Object []args = {inVO.getEmail(),inVO.getPw() };
+		
 		outVO = this.jdbcTemplate.queryForObject(sb.toString()
 				,args
 				,rowMapper); 
