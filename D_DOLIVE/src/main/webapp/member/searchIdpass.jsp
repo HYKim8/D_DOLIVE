@@ -5,7 +5,7 @@
 <head>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="./css/searchID.css?ver=5">
+<link rel="stylesheet" href="./resources/css/searchID.css?ver=5">  
 <title>Insert title here</title>
 <script>
 $(document).ready(function(){
@@ -73,7 +73,7 @@ $(document).ready(function(){
 				</div>
 			</div>
 			<img id="siOkbtn" class="showMask"
-				src="./img/btn_ok.png" style="cursor: pointer;">
+				src="./resources/img/btn_ok.png" style="cursor: pointer;">
 			<div class="setDiv">
 
 
@@ -112,7 +112,7 @@ $(document).ready(function(){
 						placeholder="도메인">
 			</div>
 			<img id="spwOkbtn" class="sendEmail"
-				src="./img/btn_email.png" style="cursor: pointer;">
+				src="./resources/img/btn_email.png" style="cursor: pointer;">
 
 			<div class="setDiv">
 

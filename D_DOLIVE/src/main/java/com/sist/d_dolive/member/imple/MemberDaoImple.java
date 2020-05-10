@@ -134,7 +134,7 @@ public class MemberDaoImple implements MemberDao {
 		sb.append("     ,tel = ?            \n");
 		sb.append("     ,modId = ?          \n");
 		sb.append("     ,modDt = sysdate    \n");
-		sb.append(" WHERE email = ?;        \n");
+		sb.append(" WHERE email = ?         \n");
 		
 		LOG.debug("==============================");
 		LOG.debug("=Query=\n"+sb.toString());
@@ -183,10 +183,10 @@ public class MemberDaoImple implements MemberDao {
 		MemberVO outVO = null;        //return UserVO
 		MemberVO inVO  = (MemberVO) dto;//Param UserVO
 		StringBuilder  sb=new StringBuilder();
-		sb.append(" SELECT email  \n");
-		sb.append(" FROM member   \n");
-		sb.append(" WHERE name=?  \n");
-		sb.append(" AND IHIDNUM=? \n");
+		sb.append(" SELECT email    \n");
+		sb.append(" FROM member     \n");
+		sb.append(" WHERE name=?    \n");
+		sb.append(" AND IHIDNUM=?   \n");
 		
 		//Query수행
 		LOG.debug("==============================");
@@ -194,7 +194,9 @@ public class MemberDaoImple implements MemberDao {
 		LOG.debug("=Param=\n"+inVO.getName());
 		LOG.debug("=Param=\n"+inVO.getIhidnum());
 		
-		Object []args = {inVO.getName(), inVO.getIhidnum() };
+		Object []args = {inVO.getName(),
+						 inVO.getIhidnum() 
+						 };
 		outVO = this.jdbcTemplate.queryForObject(sb.toString()
 				,args
 				,rowMapper); 

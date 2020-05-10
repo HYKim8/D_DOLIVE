@@ -94,7 +94,7 @@ public class MemberCont {
 	
 	
 	
-	@RequestMapping(value = "member/do_update.do",method = RequestMethod.POST ,produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "member/update.do",method = RequestMethod.POST ,produces = "application/json;charset=UTF-8")
 	@ResponseBody	
 	public String doUpdate(MemberVO user) {
 		LOG.debug("1===================");
@@ -149,10 +149,10 @@ public class MemberCont {
 		return cnt;
 	}
 	
-	@RequestMapping(value="member/do_find_id.do",method = RequestMethod.POST
+	@RequestMapping(value="member/find_id.do",method = RequestMethod.POST
 		       ,produces = "application/json;charset=UTF-8")
 	@ResponseBody	
-	public MemberVO doFindId(MemberVO user) {
+	public String doFindId(MemberVO user) {
 		LOG.debug("1===================");
 		LOG.debug("1=user="+user);
 		LOG.debug("1===================");		
@@ -171,7 +171,7 @@ public class MemberCont {
 		LOG.debug("1.3=json="+json);
 		LOG.debug("1.3===================");		
 		
-		return outVO;
+		return json;
 	}
 		
 	
