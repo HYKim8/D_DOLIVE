@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.d_dolive.notice">
+	<!-- 검색 조건
+		10: 이메일
+	 -->
+	<sql id="baseCondition">
+		<choose>
+			<when test="'10' == searchDiv">
+				AND email like '%' || #{searchWord} || '%'
+			</when>
+		</choose>
+	</sql>
+
+	<!-- 목록 조회 -->
+	<select id="doRetrieve" parameterType="SearchVO" resultType="NoticeVO">
+		SELECT t1.*, t2.*
+		FROM(
+		    SELECT b.pcode
+		           , b.email
+		           , b.remainStockYn
+		           , b.emptyStockYn
+		           , b.rnum as num
+		    FROM(
+		        SELECT ROWNUM AS rnum, a.*
+		        FROM (
+		            SELECT *
+		            FROM notice
+		            WHERE 1 = 1
+		            --검색조건
+		            <include refid="baseCondition"></include>
+		        )A
+		        WHERE ROWNUM <![CDATA[ <= ]]> (#{pageSize} * (#{pageNum} -1) + #{pageSize})
+		    )B
+		    WHERE rnum <![CDATA[ >= ]]> (#{pageSize} * (#{pageNum} -1) +1)
+		)t1
+		NATURAL JOIN
+		(
+		    SELECT COUNT(*) totalCnt
+		    FROM notice
+		    WHERE 1 = 1
+		    --검색조건
+		    <include refid="baseCondition"></include>
+		)t2
+	</select>
+
+	<sql id="noticeColumns">
+		pcode	
+		, email		
+		, remainStockYn	
+		, emptyStockYn	
+	</sql>
+	 
+	<!-- 단건조회 -->
+	<select id="doSelectOne" parameterType="BizMemberVO" resultType="NoticeVO">
+		SELECT
+			<include refid="noticeColumns"></include>
+		FROM notice
+		WHERE pcode = #{pcode}
+		AND email = #{email}
+	</select>
+	 
+	<!-- 등록 -->
+	<insert id="doInsert" parameterType="NoticeVO">
+		INSERT INTO notice (
+			pcode	
+			, email		
+			, remainStockYn	
+			, emptyStockYn	
+		) VALUES (
+			#{pcode, jdbcType = VARCHAR}
+			, #{email, jdbcType = VARCHAR}	
+			, #{remainStockYn, jdbcType = VARCHAR}	
+			, #{emptyStockYn, jdbcType = VARCHAR}
+		)
+	</insert>
+	 
+	<!-- 삭제 -->
+	<delete id="doDelete" parameterType="NoticeVO">
+		<![CDATA[
+			DELETE FROM notice WHERE pcode = #{pcode} AND email = #{email}
+		]]>
+	</delete>
+	
+	<delete id="doDeleteAll">
+		<![CDATA[
+			DELETE FROM notice
+		]]>
+	</delete>
+</mapper>

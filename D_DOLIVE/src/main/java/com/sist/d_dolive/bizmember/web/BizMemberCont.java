@@ -157,8 +157,8 @@ public class BizMemberCont {
 		
 		if(null == bizMemberVO.getEmail() || "".equals(bizMemberVO.getEmail().trim())) {
 			//다국어 메시지 처리
-			String title = messageSource.getMessage("message.bizmember.email", null, locale);
-			Object[] args = new String[]{title};			
+			String email = messageSource.getMessage("message.bizmember.email", null, locale);
+			Object[] args = new String[]{email};			
 			String commMsg = messageSource.getMessage("message.common.message.save", args, locale);
 			LOG.debug("1.1==================");
 			LOG.debug("1.1=commMsg="+commMsg);
@@ -169,8 +169,8 @@ public class BizMemberCont {
 		
 		if(null == bizMemberVO.getPw() || "".equals(bizMemberVO.getPw().trim())) {
 			//다국어 메시지 처리
-			String contents = messageSource.getMessage("message.bizmember.pw", null, locale);
-			Object[] args = new String[]{contents};			
+			String pw = messageSource.getMessage("message.bizmember.pw", null, locale);
+			Object[] args = new String[]{pw};			
 			String commMsg = messageSource.getMessage("message.common.message.save", args, locale);
 			LOG.debug("1.1==================");
 			LOG.debug("1.1=commMsg="+commMsg);

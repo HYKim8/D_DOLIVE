@@ -4,27 +4,27 @@ import com.sist.d_dolive.cmn.DTO;
 
 public class NoticeVO extends DTO {
 
-	public NoticeVO() {}
-	
-	private String	pCode			/*	판매처코드		*/	;
+	private String	pcode			/*	판매처코드		*/	;
 	private String	email			/*	이메일		*/	;
 	private String	remainStockYn	/*	입고발송여부	*/	;
 	private String	emptyStockYn	/*	품절발송여부	*/	;
 	
+	public NoticeVO() {}
+
 	public NoticeVO(String pcode, String email, String remainStockYn, String emptyStockYn) {
 		super();
-		this.pCode = pcode;
+		this.pcode = pcode;
 		this.email = email;
 		this.remainStockYn = remainStockYn;
 		this.emptyStockYn = emptyStockYn;
 	}
 
 	public String getPcode() {
-		return pCode;
+		return pcode;
 	}
 
 	public void setPcode(String pcode) {
-		this.pCode = pcode;
+		this.pcode = pcode;
 	}
 
 	public String getEmail() {
@@ -53,7 +53,7 @@ public class NoticeVO extends DTO {
 
 	@Override
 	public String toString() {
-		return "NoticeVO [pcode=" + pCode + ", email=" + email + ", remainStockYn=" + remainStockYn + ", emptyStockYn="
+		return "NoticeVO [pcode=" + pcode + ", email=" + email + ", remainStockYn=" + remainStockYn + ", emptyStockYn="
 				+ emptyStockYn + ", toString()=" + super.toString() + "]";
 	}
 	

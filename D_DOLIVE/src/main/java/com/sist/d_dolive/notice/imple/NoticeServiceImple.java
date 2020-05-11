@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.sist.d_dolive.bizmember.imple;
+package com.sist.d_dolive.notice.imple;
 
 import java.util.List;
 
@@ -10,47 +10,47 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sist.d_dolive.bizmember.BizMemberDao;
-import com.sist.d_dolive.bizmember.BizMemberService;
-import com.sist.d_dolive.bizmember.BizMemberVO;
 import com.sist.d_dolive.cmn.DTO;
+import com.sist.d_dolive.notice.NoticeDao;
+import com.sist.d_dolive.notice.NoticeService;
+import com.sist.d_dolive.notice.NoticeVO;
 
 /**
  * @author sist
  *
  */
 @Service
-public class BizMemberServiceImple implements BizMemberService {
+public class NoticeServiceImple implements NoticeService {
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	BizMemberDao bizMemberDao;
+	NoticeDao noticeDao;
 
 	@Override
 	public int doInsert(DTO dto) {
-		return bizMemberDao.doInsert(dto);
+		return noticeDao.doInsert(dto);
 	}
 
 	@Override
 	public int doUpdate(DTO dto) {
-		return bizMemberDao.doUpdate(dto);
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public DTO doSelectOne(DTO dto) {
-		BizMemberVO outVO = (BizMemberVO) bizMemberDao.doSelectOne(dto);
+		NoticeVO outVO = (NoticeVO) noticeDao.doSelectOne(dto);
 		return outVO;
 	}
 
 	@Override
 	public int doDelete(DTO dto) {
-		return bizMemberDao.doDelete(dto);
+		return noticeDao.doDelete(dto);
 	}
 
 	@Override
 	public List<?> doRetrieve(DTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		return noticeDao.doRetrieve(dto);
 	}
 
 	@Override

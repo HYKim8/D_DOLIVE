@@ -3,6 +3,10 @@ message.bizmember.email=이메일
 message.bizmember.pw=비밀번호
 message.bizmember.name=이름
 
+#notice
+message.notice.pcode=판매처코드
+message.notice.email=이메일
+
 #common
 message.common.message={0} 하시겠습니까? 
 message.common.message.save={0} 입력 하세요.
