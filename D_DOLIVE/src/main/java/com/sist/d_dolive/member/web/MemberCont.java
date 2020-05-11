@@ -25,7 +25,7 @@ import com.sist.d_dolive.member.MemberService;
 import com.sist.d_dolive.member.MemberVO;
 import com.sist.d_dolive.member.imple.MemberServiceImple;
 
-@Controller
+//@Controller
 public class MemberCont {
 
 	private final Logger  LOG = LoggerFactory.getLogger(MemberCont.class);

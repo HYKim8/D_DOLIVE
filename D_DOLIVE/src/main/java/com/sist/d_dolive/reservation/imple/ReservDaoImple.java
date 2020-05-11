@@ -35,13 +35,13 @@ public class ReservDaoImple implements ReservDao {
 			
 			outData.setrNo(rs.getString("rno"));
 			outData.setpCode(rs.getString("pcode"));
-			outData.setMaskCnt(rs.getInt("mask_cnt"));
+			outData.setMaskCnt(rs.getInt("maskCnt"));
 			outData.setApproval(rs.getString("approval"));
-			outData.setPay(rs.getInt("pay"));
-			outData.setRegId(rs.getString("reg_id"));
-			outData.setRegDt(rs.getString("reg_dt"));
-			outData.setModId(rs.getString("mod_id"));
-			outData.setModDt(rs.getString("mod_dt"));
+			outData.setAmount(rs.getInt("amount"));
+			outData.setRegId(rs.getString("regId"));
+			outData.setRegDt(rs.getString("regDt"));
+			outData.setModId(rs.getString("modId"));
+			outData.setModDt(rs.getString("modDt"));
 			
 			return outData;
 		}
@@ -53,6 +53,7 @@ public class ReservDaoImple implements ReservDao {
 	
 	@Override
 	public int doInsert(DTO dto) {
+		
 		int flag = 0;
 		ReservVO inVO = (ReservVO) dto;
 		
@@ -60,13 +61,13 @@ public class ReservDaoImple implements ReservDao {
 		sb.append("INSERT INTO reservation (								\n");
 		sb.append("    rno,                                                 \n");
 		sb.append("    pcode,                                               \n");
-		sb.append("    mask_cnt,                                            \n");
+		sb.append("    maskcnt,                                             \n");
 		sb.append("    approval,                                            \n");
-		sb.append("    pay,                                                 \n");
-		sb.append("    reg_id,                                              \n");
-		sb.append("    reg_dt,                                              \n");
-		sb.append("    mod_id,                                              \n");
-		sb.append("    mod_dt                                               \n");
+		sb.append("    amount,                                              \n");
+		sb.append("    regid,                                               \n");
+		sb.append("    regdt,                                               \n");
+		sb.append("    modid,                                               \n");
+		sb.append("    moddt                                                \n");
 		sb.append(") VALUES (                                               \n");
 		sb.append("    TO_CHAR(SYSDATE,'YYMMDD')||'_'||RESERV_SEQ.NEXTVAL,  \n");
 		sb.append("    ?,                                                   \n");
@@ -83,19 +84,17 @@ public class ReservDaoImple implements ReservDao {
 		
 		LOG.debug("=!!query!!=\n"+sb.toString());
 		LOG.debug("=!!param!!=\n"+inVO.toString());
-		Object[] args = {inVO.getrNo()
-						,inVO.getpCode()
+		Object[] args = {inVO.getpCode()
 						,inVO.getMaskCnt()
 						,inVO.getApproval()
-						,inVO.getPay()
+						,inVO.getAmount()
 						,inVO.getRegId()
-						,inVO.getRegDt()
 						,inVO.getModId()
-						,inVO.getModDt()
 						};
 		
 		flag = this.jdbcTemplate.update(sb.toString(), args);
 		LOG.debug("=!!flag!!="+flag);
+		
 		LOG.debug("================================");
 		
 		return flag;
@@ -103,8 +102,37 @@ public class ReservDaoImple implements ReservDao {
 
 	@Override
 	public int doUpdate(DTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		//화면에서 받아오는 파라미터에 따라 승인상태값을 변경해주기!
+		//1. 예약신청(회원)
+		//2. 취소완료(회원)
+		//3. 승인완료(업체)
+		//4. 승인거절(업체)
+		//5. 결제완료(회원)
+		//6. 상품배정(업체)
+		//7. 구매확정(업체)
+		
+		int flag = 0;
+		ReservVO inVO = (ReservVO) dto;
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("UPDATE reservation	\n");
+		sb.append("SET approval = ?     \n");
+		sb.append("WHERE rno = ?        \n");
+		
+		LOG.debug("================================");
+		
+		LOG.debug("=!!query!!=\n"+sb.toString());
+		LOG.debug("=!!param!!=\n"+inVO.toString());
+		Object[] args = {inVO.getApproval()
+						,inVO.getrNo()
+						};
+		
+		flag = this.jdbcTemplate.update(sb.toString(),args);
+		LOG.debug("=!!flag!!="+flag);
+		
+		LOG.debug("================================");
+		
+		return flag;
 	}
 
 	@Override
@@ -115,8 +143,12 @@ public class ReservDaoImple implements ReservDao {
 
 	@Override
 	public int doDelete(DTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		//신청취소용 : 승인상태가 2(신청취소)로 변경
+		
+		int flag = 0;
+
+		
+		return flag;
 	}
 
 	@Override
