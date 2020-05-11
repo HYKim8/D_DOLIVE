@@ -20,7 +20,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="/cmn/common.jsp" %>
-<c:set  var="hContext" value="${pageContext.request.contextPath }"></c:set>
+<c:set var="hContext" value="${pageContext.request.contextPath }"></c:set>
 
 <!DOCTYPE html>
 <html>
@@ -126,18 +126,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-   <!-- 주소 입력란 -->
-   <input type="text" id="address" placeholder="주소를 입력하세요." value="서울특별시 마포구"/>
-   <!-- //주소 입력란 -->
-   
-   <!-- 검색 버튼 -->
-   <input type="button" value="검색" onclick="javascript:test();"/>
-   <!-- 검색 버튼 -->
-   
-   <!-- 지도 -->
-   <div id="map" style="width:100%;height:700px;"></div>
-   <!-- //지도 -->
-   
+   <div align="center" style="width: 100%;height: 100%;">
+	   <!-- 주소 입력란 -->
+	   <input type="text" id="address" placeholder="주소를 입력하세요." value="서울특별시 마포구"/>
+	   <!-- //주소 입력란 -->
+	   
+	   <!-- 검색 버튼 -->
+	   <input type="button" value="검색" onclick="javascript:test();"/>
+	   <!-- 검색 버튼 -->
+	   
+	   <!-- 지도 -->
+	   <div id="map" style="width:100%;height:1000px;"/>
+	   <!-- //지도 -->
+    </div>
    <script type="text/javascript">
    
       //검색 버튼
@@ -220,16 +221,12 @@
             
                   }
                   
-                  
+                  // 마커 이미지의 이미지 크기 입니다
                   var imageSize = new kakao.maps.Size(30, 40); 
                   
                   
                   // 검색 결과의 수만큼 마커 출력
                   for (var i = 0; i < positions.length; i ++) {
-                     
-                      // 마커 이미지의 이미지 크기 입니다
-                     
-                      
                       // 마커 이미지를 생성합니다    
                       //var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize,imageSrc1,imageSrc2,imageSrc3,imageSrc4); 
                       var markerImage = new kakao.maps.MarkerImage(positions[i].image, imageSize ); 
@@ -255,12 +252,14 @@
 					  }else if(data.stores[i].remain_stat == null){
 						  data.stores[i].remain_stat = "재고 없음"
 				      }
+
+					  if(null == data.stores[i].stock_at){
+						  data.stores[i].stock_at = "예정 없음"
+				  	  }
 				      
                       kakao.maps.event.addListener(marker, 'click', openOverlay(data.stores[i].code, map, marker,data.stores[i].name,
                                                  data.stores[i].addr,data.stores[i].stock_at,data.stores[i].remain_stat));
                   }
-                  
-                  
                   
             },
                error:function(xhr,status,error){
@@ -285,14 +284,16 @@
                          '        </div>' + 
                          '        <div class="remain" align="center" style="font-size: 16px;">재고 상태:<b>'+remain+'</b></div>' + 
                          '        <div align="center">'+
-                         '           <label class="switch">'+
-                         '               <input type="checkbox"><span class="slider round"></span>'+
-                         '           </label>'+ 
+                         //'           <label class="switch">'+
+                         //'               <input type="checkbox"><span class="slider round"></span>'+
+                         //'           </label>'+
+                         '           <button class="button" >알림</button>'+  
+                         '           <button class="button" >길찾기</button>'+ 
                          '           <button class="button" >예약</button>'+ 
                          '        </div>'+
                          '        <div class="body">' + 
-                         '                <div class="ellipsis">'+addr+'</div>' + 
-                         '                <div class="jibun ellipsis">업데이트:<b>'+stock+'</b></div>' + 
+                         '           <div class="ellipsis" align="center">'+addr+'</div>' + 
+                         '           <div class="jibun ellipsis" align="center">업데이트:<b>'+stock+'</b></div>' + 
                          '        </div>' + 
                          '    </div>' +    
                          '</div>',
@@ -300,7 +301,7 @@
                          position: marker.getPosition()       
                      });
                }
-             };
+            };
          }//--openOverlay
       }//--test
       
