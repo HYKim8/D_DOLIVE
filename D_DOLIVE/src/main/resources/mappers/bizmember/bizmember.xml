@@ -16,7 +16,7 @@
 			, tel = #{tel, jdbcType = VARCHAR}
 			, bizRno = #{bizRno, jdbcType = VARCHAR}
 			, bizTel = #{bizTel, jdbcType = VARCHAR}
-			, pCode	= #{pCode, jdbcType = VARCHAR}
+			, pcode	= #{pcode, jdbcType = VARCHAR}
 			, modId	= #{modId, jdbcType = VARCHAR}
 			, modDt = SYSDATE
 		WHERE email = #{email}
@@ -24,21 +24,21 @@
 	 
 	<sql id="bizMemberColumns">
 		email	
-		pw		
-		gender	
-		name	
-		birth	
-		addr	
-		addr2	
-		zipNo	
-		tel		
-		bizRno	
-		bizTel	
-		pCode	
-		regId	
-		TO_CHAR(regDt, 'YYYY/MM/DD HH24MISS') regDt	
-		modId	
-		TO_CHAR(modDt, 'YYYY/MM/DD HH24MISS') modDt
+		, pw		
+		, gender	
+		, name	
+		, birth	
+		, addr	
+		, addr2	
+		, zipNo	
+		, tel		
+		, bizRno	
+		, bizTel	
+		, pcode	
+		, regId	
+		, TO_CHAR(regDt, 'YYYY/MM/DD HH24MISS') regDt	
+		, modId	
+		, TO_CHAR(modDt, 'YYYY/MM/DD HH24MISS') modDt
 	</sql>
 	 
 	<!-- 단건조회 -->
@@ -63,7 +63,7 @@
 			, tel		
 			, bizRno	
 			, bizTel	
-			, pCode	
+			, pcode	
 			, regId	
 			, modId	
 		) VALUES (
@@ -78,7 +78,7 @@
 			, #{tel, jdbcType = VARCHAR}	
 			, #{bizRno, jdbcType = VARCHAR}	
 			, #{bizTel, jdbcType = VARCHAR}	
-			, #{pCode, jdbcType = VARCHAR}
+			, #{pcode, jdbcType = VARCHAR}
 			, #{regId, jdbcType = VARCHAR}
 			, #{modId, jdbcType = VARCHAR}
 		)

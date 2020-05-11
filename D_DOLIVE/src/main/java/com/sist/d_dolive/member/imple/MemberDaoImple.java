@@ -26,7 +26,7 @@ import com.sist.d_dolive.member.MemberVO;
  * @author sist
  *
  */
-@Repository("userDao")
+@Repository("memberDao")
 public class MemberDaoImple implements MemberDao {
 	//Logger
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
