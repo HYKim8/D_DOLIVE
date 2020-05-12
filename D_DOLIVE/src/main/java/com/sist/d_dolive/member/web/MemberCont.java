@@ -257,6 +257,32 @@ public class MemberCont {
 		return outVO;
 	}
 	
+	@RequestMapping(value="member/do_select_one1.do",method = RequestMethod.POST
+		       ,produces = "application/json;charset=UTF-8")
+	@ResponseBody	
+	public MemberVO doSelectOne1(MemberVO memberVO,Locale locale, Model model) {
+		LOG.debug("1===================");
+		LOG.debug("1=memberVO="+memberVO);
+		LOG.debug("1===================");		
+		
+		MemberVO outVO = (MemberVO) this.memberService.doSelectOne1(memberVO);
+		//outVO.setLevel(outVO.getLevel().intValue());
+		
+		LOG.debug("1.2===================");
+		LOG.debug("1.2=outVO="+outVO);
+		LOG.debug("1.2===================");		
+		
+		Gson gson=new Gson();
+		String json = gson.toJson(outVO);
+		
+		LOG.debug("1.3===================");
+		LOG.debug("1.3=json="+json);
+		LOG.debug("1.3===================");		
+		
+		return outVO;
+	}
+	
+	
 
 	
 }

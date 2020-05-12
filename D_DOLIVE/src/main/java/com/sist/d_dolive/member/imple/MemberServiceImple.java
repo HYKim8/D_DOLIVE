@@ -96,6 +96,10 @@ public class MemberServiceImple implements MemberService {
 		MemberVO outVO =  (MemberVO)memberDao.doSelectOne(dto);
 		return outVO;
 	}
+	public DTO doSelectOne1(DTO dto) {
+		MemberVO outVO =  (MemberVO)memberDao.doSelectOne1(dto);
+		return outVO;
+	}
 
 }
 

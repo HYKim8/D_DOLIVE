@@ -93,6 +93,28 @@ public class MemberDaoImple implements MemberDao {
 		return outVO;
 	}
 	
+	public DTO doSelectOne1(DTO dto) {
+		MemberVO inVO = (MemberVO) dto;
+		LOG.debug("1==========================");
+		LOG.debug("1=inVO="+inVO);
+		LOG.debug("1==========================");
+		
+		// namespace+id = com.sist.ehr.board.doInsert
+		String statement = NAMESPACE + ".doSelectOne1";
+		LOG.debug("2==========================");
+		LOG.debug("2=statement="+statement);
+		LOG.debug("2==========================");
+		
+		MemberVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("3==========================");
+		LOG.debug("3=outVO="+outVO);
+		LOG.debug("3==========================");
+		
+		return outVO;
+	}
+	
+	
+	
 	public void doDeleteAll() {
 		// namespace+id = com.sist.ehr.board.doInsert
 		String statement = NAMESPACE + ".doDeleteAll";

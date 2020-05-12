@@ -23,7 +23,7 @@ public interface MemberDao {
 
 	public DTO doSelectOne(DTO dto);
 
-	
+	public DTO doSelectOne1(DTO dto);
 	
 
 	

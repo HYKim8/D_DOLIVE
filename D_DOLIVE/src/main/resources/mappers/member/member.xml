@@ -14,10 +14,10 @@
 		, addr2	
 		, zipno	 
 		, tel		 
-		, regId	
-		, TO_CHAR(regDt, 'YYYY/MM/DD HH24MISS') regDt	
-		, modId	
-		, TO_CHAR(modDt, 'YYYY/MM/DD HH24MISS') modDt
+		, regid	
+		, TO_CHAR(regdt, 'YYYY/MM/DD HH24MISS') regdt	
+		, modid	
+		, TO_CHAR(moddt, 'YYYY/MM/DD HH24MISS') moddt
 	</sql>
 
 
@@ -59,9 +59,9 @@
 			, ihidnum	= #{ihidnum, jdbcType = VARCHAR}
 			, addr	= #{addr, jdbcType = VARCHAR}
 			, addr2	= #{addr2, jdbcType = VARCHAR}
-			, zipno	= #{zipNo, jdbcType = VARCHAR}
+			, zipno	= #{zipno, jdbcType = VARCHAR}
 			, tel = #{tel, jdbcType = VARCHAR}
-			, modid	= #{modId, jdbcType = VARCHAR}
+			, modid	= #{modid, jdbcType = VARCHAR}
 			, moddt = SYSDATE
 		WHERE email = #{email}
 	</update>
@@ -87,8 +87,7 @@
 	 
 	<!-- 아이디 중복체크 -->
 	<select id="idCount" parameterType="MemberVO" resultType="MemberVO">
-		SELECT
-			<include refid="MemberColumns"></include>
+		SELECT COUNT(*)
 		FROM member
 		WHERE email = #{email}
 	</select>
@@ -104,7 +103,7 @@
 	<!-- 로그인 -->
 	<select id="getMember" parameterType="MemberVO" resultType="MemberVO">
 		SELECT*FROM member
-		WHERE email = #{email}
+		WHERE email = #{email} 
 		AND pw =#{pw}
 	</select>	
 	
@@ -119,8 +118,18 @@
 			   ,addr
 			   ,addr2
 		FROM member
+		WHERE email = #{email}  
+	</select>	
+	
+	<!-- 단건조회 -->
+	<select id="doSelectOne1" parameterType="MemberVO" resultType="MemberVO">
+		SELECT
+			<include refid="MemberColumns"></include>
+		FROM member
 		WHERE email = #{email}
 	</select>	
+	
+	
 	
 	<delete id="doDeleteAll">
 		<![CDATA[

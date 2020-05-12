@@ -25,6 +25,8 @@ public interface MemberService {
 	public DTO getMember(DTO dto);
 
 	public DTO doSelectOne(DTO dto);
+	
+	public DTO doSelectOne1(DTO dto);
 
 
 }
