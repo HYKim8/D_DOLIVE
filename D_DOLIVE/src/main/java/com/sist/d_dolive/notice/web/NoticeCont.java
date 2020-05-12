@@ -29,7 +29,7 @@ import com.sist.d_dolive.notice.NoticeVO;
  */
 @Controller
 public class NoticeCont {
-Logger LOG = LoggerFactory.getLogger(this.getClass());
+	Logger LOG = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	NoticeService noticeService;
@@ -121,7 +121,9 @@ Logger LOG = LoggerFactory.getLogger(this.getClass());
 		return gsonStr;
 	}
 	
-	@RequestMapping(value = "notice/do_selectone.do", method = RequestMethod.GET)
+	@RequestMapping(value = "notice/do_selectone.do", method = RequestMethod.GET
+			, produces = "application/json; charset=UTF-8")
+	@ResponseBody
 	public String doSelectOne(NoticeVO noticeVO, Locale locale, Model model) {
 		//board_id
 		LOG.debug("1==================");
@@ -141,9 +143,13 @@ Logger LOG = LoggerFactory.getLogger(this.getClass());
 		LOG.debug("1.1=outVO="+outVO);
 		LOG.debug("1.1==================");
 		
-		model.addAttribute("vo", outVO);
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(outVO);
+		LOG.debug("1.2==================");
+		LOG.debug("1.2=jsonStr="+jsonStr);
+		LOG.debug("1.2==================");
 		
-		return "notice/notice_mng";
+		return jsonStr;
 	}
 	
 	@RequestMapping(value = "notice/do_insert.do", method = RequestMethod.POST
