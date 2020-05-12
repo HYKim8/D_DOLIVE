@@ -10,57 +10,46 @@ import org.jsoup.select.Elements;
 
 public class Parser {
 
-	public Parser() {
-	};
+	public Parser() {};
 
+	//날짜 뽑기용
 	public List<String> Parse() throws IOException {
-
+		
+		//리턴용 list
 		List<String> outList = new ArrayList<String>();
+		 
 		String URL = "https://flexable.kr/mask";
 		Document doc = Jsoup.connect(URL).get();
+		Elements elem = doc.select(".relative"); // 사이트에서 클래스이름 .relative 크롤링
+		String[] str = elem.text().split("문제가 있는 마스크 인가요\\?"); // "문제가 있는 마스크 인가요\\?"기준으로 잘라서 배열에 한 건씩 담기
 
-		Elements elem = doc.select(".relative");
-		String[] str = elem.text().split("문제가 있는 마스크 인가요\\?");
 
-		Elements elemSite = doc.select(".relative a");
-
-		// Elements elem2=doc.select(".tbl_weather tbody>tr:nth-child(1) img");
-
-//		for(String element:str)	{
-//			System.out.println(element.trim());
-//		}
-
-		for (String element : str) {
-
-			// if( element.substring(element.length()-5, element.length())!="판매종료" ) {
-			String result = element.substring(element.length() - 5, element.length() - 1);
-
-			if (!result.equals("판매종료")) { // 판매종료만 제외
-				// if(result2.equals("2020")) { //판매종료 , 게릴라판매 제외..
-				// System.out.println(element.trim());
-				outList.add(element.trim());
+		for (String element : str) { 
+		  String result = element.substring(element.length() - 5, element.length() - 1); //뒤에 4글자 잘라서
+			if (!result.equals("판매종료")) { // 판매종료는 제외				
+				outList.add(element.trim()); 
 				System.out.println(element.trim());
 			}
 		}
-		return outList;
+		return outList; //판매종료 제외한 값 리턴
 	}
 
+	
+	//사이트 연결용
 	public Elements ParseSite() throws IOException {
 
 		Elements outSite = new Elements();
 		String URL = "https://flexable.kr/mask";
 		Document doc = Jsoup.connect(URL).get();
-
-		Elements elemSite = doc.select(".relative a");
+		Elements elemSite = doc.select(".relative a"); // relative 클래스의 a태그 크롤링
 
 		for (int i = 0; i < elemSite.size(); i++) {
-			if (i % 2 == 0) {
-				System.out.println("키키:" + elemSite.get(i).attr("href"));
+			
+			if (i % 2 == 0) { // 필요없는 링크도 와서 필요한 짝수 링크만 받아오기
+				System.out.println("키키:" + elemSite.get(i).attr("href")); //href 만 가져오기
 				outSite.add(elemSite.get(i));
-
 			} 
-
 		}
-		return outSite;
+		return outSite; 
 	}
 }
