@@ -211,39 +211,39 @@ public class TestMemberControllerWeb {
 //		LOG.debug("=====================");  		
 //	}
 //	
-	@Test
-	public void doInsert() throws Exception {
-		//memberDaoImple.doDeleteAll();
-		
-		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/member/insert.do")
-				.param("email", memberList.get(0).getEmail())
-				.param("pw", memberList.get(0).getPw())
-				.param("gender", memberList.get(0).getGender())
-				.param("name", memberList.get(0).getName())
-				.param("ihidnum", memberList.get(0).getIhidnum())
-				.param("addr", memberList.get(0).getAddr())
-				.param("addr2", memberList.get(0).getAddr2())
-				.param("zipno", memberList.get(0).getZipno())
-				.param("tel", memberList.get(0).getTel())
-				.param("regid", memberList.get(0).getRegid())
-				.param("regdt", memberList.get(0).getRegdt())
-				.param("modid", memberList.get(0).getModid())
-				.param("moddt", memberList.get(0).getModdt())
-		;
-		
-		ResultActions resultActions = mockMvc.perform(createMessage)
-				.andExpect(MockMvcResultMatchers.content().contentType("application/json; charset=UTF-8"))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.msgId", is("1")))
-		;
-		
-		String result = resultActions.andDo(print())
-				.andReturn()
-				.getResponse().getContentAsString()
-		;
-		LOG.debug("=====================");
-		LOG.debug("=result="+result);
-		LOG.debug("=====================");
-	}
+//	@Test
+//	public void doInsert() throws Exception {
+//		//memberDaoImple.doDeleteAll();
+//		
+//		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/member/insert.do")
+//				.param("email", memberList.get(0).getEmail())
+//				.param("pw", memberList.get(0).getPw())
+//				.param("gender", memberList.get(0).getGender())
+//				.param("name", memberList.get(0).getName())
+//				.param("ihidnum", memberList.get(0).getIhidnum())
+//				.param("addr", memberList.get(0).getAddr())
+//				.param("addr2", memberList.get(0).getAddr2())
+//				.param("zipno", memberList.get(0).getZipno())
+//				.param("tel", memberList.get(0).getTel())
+//				.param("regid", memberList.get(0).getRegid())
+//				.param("regdt", memberList.get(0).getRegdt())
+//				.param("modid", memberList.get(0).getModid())
+//				.param("moddt", memberList.get(0).getModdt())
+//		;
+//		
+//		ResultActions resultActions = mockMvc.perform(createMessage)
+//				.andExpect(MockMvcResultMatchers.content().contentType("application/json; charset=UTF-8"))
+//				.andExpect(MockMvcResultMatchers.jsonPath("$.msgId", is("1")))
+//		;
+//		
+//		String result = resultActions.andDo(print())
+//				.andReturn()
+//				.getResponse().getContentAsString()
+//		;
+//		LOG.debug("=====================");
+//		LOG.debug("=result="+result);
+//		LOG.debug("=====================");
+//	}
 	
 	public void checkSameUser(MemberVO orgVO, MemberVO vsVO) {
 		//assertTrue(orgVO.equals(vsVO));

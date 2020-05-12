@@ -42,7 +42,7 @@
 			, #{ihidnum, jdbcType = VARCHAR}
 			, #{name, jdbcType = VARCHAR}
 			, #{tel, jdbcType = VARCHAR}
-			, #{zipNo, jdbcType = VARCHAR}
+			, #{zipno, jdbcType = VARCHAR}
 			, #{addr, jdbcType = VARCHAR}
 			, #{addr2, jdbcType = VARCHAR}	
 			, #{regid, jdbcType = VARCHAR}	
@@ -59,10 +59,10 @@
 			, ihidnum	= #{ihidnum, jdbcType = VARCHAR}
 			, addr	= #{addr, jdbcType = VARCHAR}
 			, addr2	= #{addr2, jdbcType = VARCHAR}
-			, zipNo	= #{zipNo, jdbcType = VARCHAR}
+			, zipno	= #{zipNo, jdbcType = VARCHAR}
 			, tel = #{tel, jdbcType = VARCHAR}
-			, modId	= #{modId, jdbcType = VARCHAR}
-			, modDt = SYSDATE
+			, modid	= #{modId, jdbcType = VARCHAR}
+			, moddt = SYSDATE
 		WHERE email = #{email}
 	</update>
 	 
@@ -113,7 +113,7 @@
 	<select id="doSelectOne" parameterType="MemberVO" resultType="MemberVO">
 		SELECT email
 			   ,gender
-			   ,SUBSTR(IHIDNUM,1,6)
+			   ,SUBSTR(ihidnum,1,6)
 			   ,name
 			   ,tel
 			   ,addr
