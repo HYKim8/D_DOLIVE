@@ -28,6 +28,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
+import com.sist.d_dolive.member.MemberVO;
 import com.sist.d_dolive.cmn.DTO;
 import com.sist.d_dolive.member.MemberDao;
 import com.sist.d_dolive.member.MemberService;
@@ -42,67 +43,58 @@ import com.sist.d_dolive.member.MemberVO;
 @Service
 public class MemberServiceImple implements MemberService {
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
-	/*
-	 * case BASIC: return user.getLogin()>=50; case SILVER:return
-	 * user.getRecommend()>=30;
-	 */
-
-	public static final int MIN_LOGINCOUNT_FOR_SILVER = 50;
-	public static final int MIN_RECCOMENDCOUNT_FOR_GOLD = 30;
 
 	@Autowired
-	private MemberDao userDao;
+	MemberDao memberDao;
 
 	@Autowired
 	@Qualifier("dummyMailSender")
 	private MailSender mailSender;
 
 
-	public MemberServiceImple() {
-
-	}
-
-	public void setUserDao(MemberDao userDao) {
-		this.userDao = userDao;
-	}
-
+	
+	
 	@Override
 	public int doInsert(DTO dto) {
-		return userDao.doInsert(dto);
+		return memberDao.doInsert(dto);
 	}
 
 	@Override
 	public int doUpdate(DTO dto) {
-		return userDao.doUpdate(dto);
+		return memberDao.doUpdate(dto);
 	}
 
 	@Override
 	public int idCount(DTO dto) {
-		return userDao.idCount(dto);
+		return memberDao.idCount(dto);
 	}
 	
 	@Override
 	public DTO doFindId(DTO dto) {
-		return userDao.doFindId(dto);
+		MemberVO outVO =  (MemberVO)memberDao.doFindId(dto);
+		return outVO;
 	}
 	
 	@Override
 	public DTO doFindPw(DTO dto) {
-		return userDao.doFindPw(dto);
+		MemberVO outVO =  (MemberVO)memberDao.doFindPw(dto);
+		return outVO;
 	}
 	
 	@Override
 	public int doDelete(DTO dto) {
-		return userDao.doDelete(dto);
+		return memberDao.doDelete(dto);
 	}
 	
 	public DTO getMember(DTO dto) {
-		return userDao.getMember(dto);
+		MemberVO outVO =  (MemberVO)memberDao.getMember(dto);
+		return outVO;
 	}
 	
 	@Override
 	public DTO doSelectOne(DTO dto) {
-		return userDao.doSelectOne(dto);
+		MemberVO outVO =  (MemberVO)memberDao.doSelectOne(dto);
+		return outVO;
 	}
 
 }
