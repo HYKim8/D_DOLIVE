@@ -29,12 +29,14 @@
 
 <!DOCTYPE html>
 <html lang="ko">
-<head>
+<head profile="http://www.w3.org/2005/10/profile">
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
 <title>회원관리</title>
+<link rel="icon" type="image/png" href="http://example.com/myicon.png">
 
 <link rel="shortcut icon" type="image/x-icon"
 	href="${hContext}/resources/img/main/favicon.ico">
@@ -78,7 +80,7 @@
 		<!--// Button Area -->
 
 		<!-- 입력 Form -->
-		<form action="${hContext}/member/do_update.do" name="member_edit" method="post" class="form-horizontal">
+		<form action="${hContext}/member/insert.do" name="member_edit" method="post" class="form-horizontal">
 			
 			
 			<div class="form-group">
@@ -274,7 +276,7 @@
 		$("#doInsert").on("click", function() {
 			
 
-   /*           alert("email="+$("#email").val());
+ /*            alert("email="+$("#email").val());
             alert("pw="+$("#pw").val());
             alert("gender="+$("#gender").val());
             alert("ihidNum="+$("#ihidNum").val());
@@ -282,7 +284,7 @@
             alert("tel="+$("#tel").val());
             alert("sample2_postcode="+$("#sample2_postcode").val());
             alert("sample2_address="+$("#sample2_address").val());
-            alert("ADDR2="+$("#ADDR2").val());  */
+            alert("ADDR2="+$("#ADDR2").val());  */ 
 
             if ($("#email").val() == "" || $("#email").val() == false) {
                 alert("이메일을 입력 하세요.");
@@ -330,10 +332,6 @@
                 return;
             }
 
-
-
-
-            
             //confirm
             if (confirm("등록 하시겠습니까?") == false)return;
             

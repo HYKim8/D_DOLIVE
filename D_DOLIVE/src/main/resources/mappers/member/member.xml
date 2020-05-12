@@ -3,22 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.d_dolive.member">
-	<!-- 수정 -->
-	<update id="doUpdate" parameterType="MemberVO">
-		UPDATE member
-		SET pw = #{pw, jdbcType = VARCHAR}
-			, gender = #{gender, jdbcType = VARCHAR}
-			, name	= #{name, jdbcType = VARCHAR}
-			, ihidnum	= #{ihidnum, jdbcType = VARCHAR}
-			, addr	= #{addr, jdbcType = VARCHAR}
-			, addr2	= #{addr2, jdbcType = VARCHAR}
-			, zipNo	= #{zipNo, jdbcType = VARCHAR}
-			, tel = #{tel, jdbcType = VARCHAR}
-			, modId	= #{modId, jdbcType = VARCHAR}
-			, modDt = SYSDATE
-		WHERE email = #{email}
-	</update>
-	 
+
 	<sql id="MemberColumns"> 
 		email	
 		, pw		
@@ -34,50 +19,81 @@
 		, modId	
 		, TO_CHAR(modDt, 'YYYY/MM/DD HH24MISS') modDt
 	</sql>
+
+
+	<!-- 회원가입 -->
+	<insert id="doInsert" parameterType="MemberVO">
+		INSERT INTO member (
+			email	
+			, pw		
+			, gender
+			, ihidnum	
+			, name
+			, tel
+			, zipNo		
+			, addr	
+			, addr2	
+			, regid
+			, modid	
+		) VALUES (
+			#{email, jdbcType = VARCHAR}
+			, #{pw, jdbcType = VARCHAR}	
+			, #{gender, jdbcType = VARCHAR}	
+			, #{ihidnum, jdbcType = VARCHAR}
+			, #{name, jdbcType = VARCHAR}
+			, #{tel, jdbcType = VARCHAR}
+			, #{zipNo, jdbcType = VARCHAR}
+			, #{addr, jdbcType = VARCHAR}
+			, #{addr2, jdbcType = VARCHAR}	
+			, #{regid, jdbcType = VARCHAR}	
+			, #{modid, jdbcType = VARCHAR}
+		)
+	</insert>
+	
+	<!-- 회원정보수정 -->
+	<update id="doUpdate" parameterType="MemberVO">
+		UPDATE member
+		SET pw = #{pw, jdbcType = VARCHAR}
+			, gender = #{gender, jdbcType = VARCHAR}
+			, name	= #{name, jdbcType = VARCHAR}
+			, ihidnum	= #{ihidnum, jdbcType = VARCHAR}
+			, addr	= #{addr, jdbcType = VARCHAR}
+			, addr2	= #{addr2, jdbcType = VARCHAR}
+			, zipNo	= #{zipNo, jdbcType = VARCHAR}
+			, tel = #{tel, jdbcType = VARCHAR}
+			, modId	= #{modId, jdbcType = VARCHAR}
+			, modDt = SYSDATE
+		WHERE email = #{email}
+	</update>
 	 
-	<!-- 단건조회 -->
-	<select id="doSelectOne" parameterType="MemberVO" resultType="MemberVO">
+
+	<!-- 이메일찾기 단건조회 -->
+	<select id="doFindId" parameterType="MemberVO" resultType="MemberVO">
+		SELECT email
+		FROM member
+		WHERE name = #{name}
+		AND ihidnum = #{ihidnum}
+	</select>	
+	
+	<!-- 비밀번호찾기 단건조회 -->
+	<select id="doFindPw" parameterType="MemberVO" resultType="MemberVO">
+		SELECT pw
+		FROM member
+		WHERE email = #{email}
+		AND name = #{name}
+		AND ihidnum = #{ihidnum}
+	</select>		 
+	 
+	 
+	<!-- 아이디 중복체크 -->
+	<select id="idCount" parameterType="MemberVO" resultType="MemberVO">
 		SELECT
 			<include refid="MemberColumns"></include>
 		FROM member
 		WHERE email = #{email}
 	</select>
-	 
-	<!-- 등록 -->
-	<insert id="doInsert" parameterType="MemberVO">
-		INSERT INTO member (
-			email	
-			, pw		
-			, gender	
-			, name	
-			, birth	
-			, addr	
-			, addr2	
-			, zipNo	
-			, tel		
-			, bizRno	
-			, bizTel	
-			, pcode	
-			, regId	
-			, modId	
-		) VALUES (
-			#{email, jdbcType = VARCHAR}
-			, #{pw, jdbcType = VARCHAR}	
-			, #{gender, jdbcType = VARCHAR}	
-			, #{name, jdbcType = VARCHAR}
-			, #{birth, jdbcType = VARCHAR}
-			, #{addr, jdbcType = VARCHAR}
-			, #{addr2, jdbcType = VARCHAR}
-			, #{zipNo, jdbcType = VARCHAR}
-			, #{tel, jdbcType = VARCHAR}	
-			, #{bizRno, jdbcType = VARCHAR}	
-			, #{bizTel, jdbcType = VARCHAR}	
-			, #{pcode, jdbcType = VARCHAR}
-			, #{regId, jdbcType = VARCHAR}
-			, #{modId, jdbcType = VARCHAR}
-		)
-	</insert>
-	 
+	 	
+	
 	<!-- 삭제 -->
 	<delete id="doDelete" parameterType="MemberVO">
 		<![CDATA[
@@ -85,9 +101,31 @@
 		]]>
 	</delete>
 	
+	<!-- 로그인 -->
+	<select id="getMember" parameterType="MemberVO" resultType="MemberVO">
+		SELECT*FROM member
+		WHERE email = #{email}
+		AND pw =#{pw}
+	</select>	
+	
+	
+	<!-- 마이페이지 회원정보출력 -->
+	<select id="doSelectOne" parameterType="MemberVO" resultType="MemberVO">
+		SELECT email
+			   ,gender
+			   ,SUBSTR(IHIDNUM,1,6)
+			   ,name
+			   ,tel
+			   ,addr
+			   ,addr2
+		FROM member
+		WHERE email = #{email}
+	</select>	
+	
 	<delete id="doDeleteAll">
 		<![CDATA[
 			DELETE FROM member
 		]]>
 	</delete>
+	
 </mapper>

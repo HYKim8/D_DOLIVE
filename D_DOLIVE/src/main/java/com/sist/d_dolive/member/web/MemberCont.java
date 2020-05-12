@@ -27,7 +27,7 @@ import com.sist.d_dolive.member.MemberService;
 import com.sist.d_dolive.member.MemberVO;
 import com.sist.d_dolive.member.imple.MemberServiceImple;
 
-//@Controller
+@Controller
 public class MemberCont {
 
 	private final Logger  LOG = LoggerFactory.getLogger(MemberCont.class);
@@ -38,46 +38,34 @@ public class MemberCont {
 	
 	@Autowired
 	MessageSource messageSource;
-
-
-
 	
 	@RequestMapping(value = "member/insert.do",method = RequestMethod.POST
-			,produces = "application/json;charset=UTF-8")
+			,produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public String insert(MemberVO memberVO, Locale locale) {
+	public String doInsert(MemberVO memberVO, Locale locale) {
 		
 		LOG.debug("1===================");
-		LOG.debug("1=memberVO="+memberVO);
+		LOG.debug("1=memberVO11="+memberVO);
 		LOG.debug("1===================");
 		
-		int  flag = memberService.doInsert(memberVO);
+		int  flag = this.memberService.doInsert(memberVO);
 		
-		LOG.debug("1.2===================");
-		LOG.debug("1.2=flag="+flag); 
-		LOG.debug("1.2===================");
-		
-		//메시지 처리
 		MessageVO message=new MessageVO();
-
-		message.setMsgId(flag+"");
-		//성공
-		if(flag ==1) {
-			message.setMsgMsg(memberVO.getEmail()+"님이 등록 되었습니다.");
-		//실패	
+		
+		if(flag>0) {
+			message.setMsgId(String.valueOf(flag));
+			message.setMsgMsg("등록 성공.");
 		}else {
-			message.setMsgMsg(memberVO.getEmail()+"님 등록 실패.");			
+			message.setMsgId(String.valueOf(flag));
+			message.setMsgMsg("등록 실패.");			
 		}
 		
-		//JSON
 		Gson gson=new Gson();
-		String json = gson.toJson(message);
-		
-		LOG.debug("1.3===================");
-		LOG.debug("1.3=json="+json); 
-		LOG.debug("1.3===================");		
-		
-		return json;
+		String jsonStr = gson.toJson(message);
+		LOG.debug("1.2=================");
+		LOG.debug("1.2=jsonStr="+jsonStr);
+		LOG.debug("1.2=================");		
+		return jsonStr;
 	}
 	
 	
@@ -125,7 +113,7 @@ public class MemberCont {
 	public int idCount(MemberVO memberVO, Locale locale) {
 		
 		LOG.debug("1===================");
-		LOG.debug("1=user="+memberVO);
+		LOG.debug("1=memberVO="+memberVO);
 		LOG.debug("1===================");
 		
 		int  cnt = memberService.idCount(memberVO);
@@ -164,7 +152,7 @@ public class MemberCont {
 		       ,produces = "application/json;charset=UTF-8")
 	public String doFindPw(MemberVO MemberVO,Locale locale, Model model ) {//이메일찾기 단건조회
 		LOG.debug("1===================");
-		LOG.debug("1=user="+MemberVO);
+		LOG.debug("1=memberVO="+MemberVO);
 		LOG.debug("1===================");		
 		
 		MemberVO outVO = (MemberVO) memberService.doFindPw(MemberVO);
@@ -185,7 +173,7 @@ public class MemberCont {
 	@ResponseBody
 	public String doDelete(MemberVO memberVO, Locale locale) {
 		LOG.debug("1===================");
-		LOG.debug("1=user="+memberVO);
+		LOG.debug("1=memberVO="+memberVO);
 		LOG.debug("1===================");		
 		
 		int flag = 0;
