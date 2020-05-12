@@ -11,74 +11,62 @@ import com.sist.d_dolive.cmn.DTO;
  */
 public class CodeVO extends DTO {
 
-	private String	mstId	/*	마스터코드		*/	;
-	private String	dtlId	/*	상세코드		*/	;
-	private String	mstNm	/*	마스터코드명	*/	;
-	private String	dtlNm	/*	상세코드명		*/	;
-	private String	seq		/*	순번			*/	;
-	private String	useYn	/*	사용여부		*/	;
-	private String	pmstId	/*	상위마스터코드	*/	;
-	private String	regId	/*	등록자아이디	*/	;
-	private String	regDt	/*	등록일		*/	;
-	private String	modId	/*	수정자아이디	*/	;
-	private String	modDt	/*	수정일		*/	;
+	private String	codeTypeId	;	/*	코드유형아이디	*/
+	private String	codeId		;	/*	코드아이디		*/
+	private String	codeTypeNm	;	/*	코드유형명		*/
+	private String	codeNm		;	/*	코드명		*/
+	private String	useYn		;	/*	사용여부		*/
+	private String	seq			;	/*	순서			*/
+	private String	pcodeTypeId	;	/*	상위마스터코드	*/
+	private String	regId		;	/*	등록자아이디	*/
+	private String	regDt		;	/*	등록일		*/
 
 	public CodeVO() {}
 
-	public CodeVO(String mstId, String dtlId, String mstNm, String dtlNm, String seq, String useYn, String pmstId,
-			String regId, String regDt, String modId, String modDt) {
+	public CodeVO(String codeTypeId, String codeId, String codeTypeNm, String codeNm, String useYn, String seq,
+			String pcodeTypeId, String regId, String regDt) {
 		super();
-		this.mstId = mstId;
-		this.dtlId = dtlId;
-		this.mstNm = mstNm;
-		this.dtlNm = dtlNm;
-		this.seq = seq;
+		this.codeTypeId = codeTypeId;
+		this.codeId = codeId;
+		this.codeTypeNm = codeTypeNm;
+		this.codeNm = codeNm;
 		this.useYn = useYn;
-		this.pmstId = pmstId;
+		this.seq = seq;
+		this.pcodeTypeId = pcodeTypeId;
 		this.regId = regId;
 		this.regDt = regDt;
-		this.modId = modId;
-		this.modDt = modDt;
 	}
 
-	public String getMstId() {
-		return mstId;
+	public String getCodeTypeId() {
+		return codeTypeId;
 	}
 
-	public void setMstId(String mstId) {
-		this.mstId = mstId;
+	public void setCodeTypeId(String codeTypeId) {
+		this.codeTypeId = codeTypeId;
 	}
 
-	public String getDtlId() {
-		return dtlId;
+	public String getCodeId() {
+		return codeId;
 	}
 
-	public void setDtlId(String dtlId) {
-		this.dtlId = dtlId;
+	public void setCodeId(String codeId) {
+		this.codeId = codeId;
 	}
 
-	public String getMstNm() {
-		return mstNm;
+	public String getCodeTypeNm() {
+		return codeTypeNm;
 	}
 
-	public void setMstNm(String mstNm) {
-		this.mstNm = mstNm;
+	public void setCodeTypeNm(String codeTypeNm) {
+		this.codeTypeNm = codeTypeNm;
 	}
 
-	public String getDtlNm() {
-		return dtlNm;
+	public String getCodeNm() {
+		return codeNm;
 	}
 
-	public void setDtlNm(String dtlNm) {
-		this.dtlNm = dtlNm;
-	}
-
-	public String getSeq() {
-		return seq;
-	}
-
-	public void setSeq(String seq) {
-		this.seq = seq;
+	public void setCodeNm(String codeNm) {
+		this.codeNm = codeNm;
 	}
 
 	public String getUseYn() {
@@ -89,12 +77,20 @@ public class CodeVO extends DTO {
 		this.useYn = useYn;
 	}
 
-	public String getPmstId() {
-		return pmstId;
+	public String getSeq() {
+		return seq;
 	}
 
-	public void setPmstId(String pmstId) {
-		this.pmstId = pmstId;
+	public void setSeq(String seq) {
+		this.seq = seq;
+	}
+
+	public String getPcodeTypeId() {
+		return pcodeTypeId;
+	}
+
+	public void setPcodeTypeId(String pcodeTypeId) {
+		this.pcodeTypeId = pcodeTypeId;
 	}
 
 	public String getRegId() {
@@ -113,27 +109,11 @@ public class CodeVO extends DTO {
 		this.regDt = regDt;
 	}
 
-	public String getModId() {
-		return modId;
-	}
-
-	public void setModId(String modId) {
-		this.modId = modId;
-	}
-
-	public String getModDt() {
-		return modDt;
-	}
-
-	public void setModDt(String modDt) {
-		this.modDt = modDt;
-	}
-
 	@Override
 	public String toString() {
-		return "CodeVO [mstId=" + mstId + ", dtlId=" + dtlId + ", mstNm=" + mstNm + ", dtlNm=" + dtlNm + ", seq=" + seq
-				+ ", useYn=" + useYn + ", pmstId=" + pmstId + ", regId=" + regId + ", regDt=" + regDt + ", modId="
-				+ modId + ", modDt=" + modDt + ", toString()=" + super.toString() + "]";
+		return "CodeVO [codeTypeId=" + codeTypeId + ", codeId=" + codeId + ", codeTypeNm=" + codeTypeNm + ", codeNm="
+				+ codeNm + ", useYn=" + useYn + ", seq=" + seq + ", pcodeTypeId=" + pcodeTypeId + ", regId=" + regId
+				+ ", regDt=" + regDt + ", toString()=" + super.toString() + "]";
 	}
-	
+
 }

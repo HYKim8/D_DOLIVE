@@ -24,32 +24,25 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<button onclick="cancelPay()">환불하기</button>
 	<input type="button" value="환불" id="cancle"/>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" ></script>
-<script type="text/javascript">
-	$("#cancle").on("click",function(){
-		//alert("성공");
-		//ajax
-		$.ajax({
-		    type : "POST",
-		    url : "https://api.iamport.kr/payments/cancel",
-		    dataType : "json",
-		    data : {
-		        "imp_uid" : "imp_229901617008"
-		    },
-		    success : function(data) { //성공
-				alert("성공");	
-		    },
-		    error : function(xhr, status, error) {
-		    	alert("실패");	
-		    },
-		    complete : function(data) {
-		
-		    }
-	
-		});//--ajax
-	});
+<script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script><!-- jQuery CDN --->
+  <script>
+function cancelPay() {
+    jQuery.ajax({
+      "url": "http://www.myservice.com/payments/cancel",
+      "type": "POST",
+      "contentType": "application/json",
+      "data": JSON.stringify({
+    	  "merchant_uid": "mid_" + new Date().getTime(), // 주문번호
+        "reason": "테스트 결제 환불" // 환불사유
+      }),
+      "dataType": "json"
+    });
+  }
 	
 	
 </script>
