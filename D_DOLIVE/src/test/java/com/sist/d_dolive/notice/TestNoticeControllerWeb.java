@@ -72,7 +72,6 @@ public class TestNoticeControllerWeb {
 	}
 	
 	@Test
-	@Ignore
 	public void doRetrieve() throws Exception {
 		//1. 전체 삭제
 		noticeDaoImple.doDeleteAll();
@@ -147,6 +146,7 @@ public class TestNoticeControllerWeb {
 	}
 	
 	@Test
+	@Ignore
 	public void doSelectOne() throws Exception {
 		//1. 전체 삭제
 		noticeDaoImple.doDeleteAll();

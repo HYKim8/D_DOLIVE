@@ -72,6 +72,7 @@ public class TestBizMemberControllerWeb {
 	}
 	
 	@Test
+	@Ignore
 	public void doUpdate() throws Exception {
 		//1. 전체 삭제
 		bizMemberDaoImple.doDeleteAll();
@@ -143,6 +144,7 @@ public class TestBizMemberControllerWeb {
 	}
 	
 	@Test
+	@Ignore
 	public void doDelete() throws Exception {
 		//1. 전체 삭제
 		bizMemberDaoImple.doDeleteAll();
@@ -211,6 +213,7 @@ public class TestBizMemberControllerWeb {
 	}
 	
 	@Test
+	@Ignore
 	public void doInsert() throws Exception {
 		bizMemberDaoImple.doDeleteAll();
 		

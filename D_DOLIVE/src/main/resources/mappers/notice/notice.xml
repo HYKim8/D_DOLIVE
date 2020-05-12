@@ -20,8 +20,8 @@
 		FROM(
 		    SELECT b.pcode
 		           , b.email
-		           , b.remainStockYn
-		           , b.emptyStockYn
+		           , func_code('REMAINSTOCKYN', b.remainStockYn) AS remainStockYn
+		           , func_code('EMPTYSTOCKYN', b.emptyStockYn) AS emptyStockYn
 		           , b.rnum as num
 		    FROM(
 		        SELECT ROWNUM AS rnum, a.*
@@ -49,8 +49,8 @@
 	<sql id="noticeColumns">
 		pcode	
 		, email		
-		, remainStockYn	
-		, emptyStockYn	
+		, func_code('REMAINSTOCKYN', remainStockYn) AS remainStockYn	
+		, func_code('EMPTYSTOCKYN', emptyStockYn) AS emptyStockYn	
 	</sql>
 	 
 	<!-- 단건조회 -->
