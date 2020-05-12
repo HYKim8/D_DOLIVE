@@ -22,7 +22,7 @@ public class BizMemberVO extends DTO {
 	private String	tel		/*	전화번호		*/	;
 	private String	bizRno	/*	사업자등록번호	*/	;
 	private String	bizTel	/*	업체전화번호	*/	;
-	private String	pCode	/*	판매처코드		*/	;
+	private String	pcode	/*	판매처코드		*/	;
 	private String	regId	/*	등록자아이디	*/	;
 	private String	regDt	/*	등록일		*/	;
 	private String	modId	/*	수정자아이디	*/	;
@@ -31,7 +31,7 @@ public class BizMemberVO extends DTO {
 	public BizMemberVO() {}
 
 	public BizMemberVO(String email, String pw, String gender, String name, String birth, String addr, String addr2,
-			String zipNo, String tel, String bizRno, String bizTel, String pCode, String regId, String regDt,
+			String zipNo, String tel, String bizRno, String bizTel, String pcode, String regId, String regDt,
 			String modId, String modDt) {
 		super();
 		this.email = email;
@@ -45,7 +45,7 @@ public class BizMemberVO extends DTO {
 		this.tel = tel;
 		this.bizRno = bizRno;
 		this.bizTel = bizTel;
-		this.pCode = pCode;
+		this.pcode = pcode;
 		this.regId = regId;
 		this.regDt = regDt;
 		this.modId = modId;
@@ -140,12 +140,12 @@ public class BizMemberVO extends DTO {
 		this.bizTel = bizTel;
 	}
 
-	public String getpCode() {
-		return pCode;
+	public String getPcode() {
+		return pcode;
 	}
 
-	public void setpCode(String pCode) {
-		this.pCode = pCode;
+	public void setPcode(String pcode) {
+		this.pcode = pcode;
 	}
 
 	public String getRegId() {
@@ -184,7 +184,7 @@ public class BizMemberVO extends DTO {
 	public String toString() {
 		return "BizMemberVO [email=" + email + ", pw=" + pw + ", gender=" + gender + ", name=" + name + ", birth="
 				+ birth + ", addr=" + addr + ", addr2=" + addr2 + ", zipNo=" + zipNo + ", tel=" + tel + ", bizRno="
-				+ bizRno + ", bizTel=" + bizTel + ", pCode=" + pCode + ", regId=" + regId + ", regDt=" + regDt
+				+ bizRno + ", bizTel=" + bizTel + ", pcode=" + pcode + ", regId=" + regId + ", regDt=" + regDt
 				+ ", modId=" + modId + ", modDt=" + modDt + ", toString()=" + super.toString() + "]";
 	}
 	

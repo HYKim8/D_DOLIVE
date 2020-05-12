@@ -12,17 +12,17 @@
 	
 	<!-- 마이바티스 -->
 	<!-- mybatis -->
-<!-- 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"
+ 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"
 		destroy-method="clearCache">
 		<constructor-arg index="0" ref="sqlSessionFactoryBean"></constructor-arg>
-	</bean> -->
+	</bean>
 	
 	<!-- mybatis config파일 read: SqlSessionFactoryBean -->
-<!-- 	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+ 	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
 	   <property name="configLocation" value="classpath:mybatis-config.xml" />
 	   <property name="mapperLocations" value="classpath:mappers/**/*.xml" />
 	   <property name="dataSource" ref="dataSource"></property>
-	</bean> -->
+	</bean>
 	<!-- //마이바티스 -->
 	
 	

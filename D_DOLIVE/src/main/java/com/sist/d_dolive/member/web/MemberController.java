@@ -21,9 +21,9 @@ import com.sist.d_dolive.cmn.DTO;
 import com.sist.d_dolive.cmn.MessageVO;
 import com.sist.d_dolive.cmn.SearchVO;
 import com.sist.d_dolive.cmn.StringUtil;
-import com.sist.d_dolive.member.UserService;
-import com.sist.d_dolive.member.UserVO;
-import com.sist.d_dolive.member.imple.UserServiceImple;
+import com.sist.d_dolive.member.MemberService;
+import com.sist.d_dolive.member.MemberVO;
+import com.sist.d_dolive.member.imple.MemberServiceImple;
 
 @Controller
 public class MemberController {
@@ -32,16 +32,16 @@ public class MemberController {
 	
 	//@Qualifier("dummyMailSender") : root-context.xml bean id
 	@Autowired
-	UserService userService;
+	MemberService userService;
 
 	@RequestMapping("/login.do")
-	public ModelAndView login(UserVO vo, HttpServletRequest request) {
+	public ModelAndView login(MemberVO vo, HttpServletRequest request) {
 		System.out.println("로그인 인증 처리...");
 		System.out.println(vo.getEmail().trim().substring(0, 1));
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 		
-			UserVO mem = (UserVO) userService.getMember(vo);
+			MemberVO mem = (MemberVO) userService.getMember(vo);
 			if (mem != null) {
 				session.setAttribute("authUser", mem);
 				mav.setViewName("index.jsp");
@@ -60,12 +60,12 @@ public class MemberController {
 	@RequestMapping(value="member/do_select_one.do",method = RequestMethod.POST
 		       ,produces = "application/json;charset=UTF-8")
     @ResponseBody	
-	public String doSelectOne(UserVO user) {
+	public String doSelectOne(MemberVO user) {
 		LOG.debug("1===================");
 		LOG.debug("1=user="+user);
 		LOG.debug("1===================");		
 		
-		UserVO outVO = (UserVO) userService.doSelectOne(user);
+		MemberVO outVO = (MemberVO) userService.doSelectOne(user);
 		//outVO.setLevel(outVO.getLevel().intValue());
 		
 		LOG.debug("1.2===================");
@@ -86,7 +86,7 @@ public class MemberController {
 	@RequestMapping(value="member/do_delete.do",method = RequestMethod.POST
 			       ,produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String doDelete(UserVO user) {
+	public String doDelete(MemberVO user) {
 		LOG.debug("1===================");
 		LOG.debug("1=user="+user);
 		LOG.debug("1===================");		
@@ -128,7 +128,7 @@ public class MemberController {
 	
 	
 	@ResponseBody	
-	public String doUpdate(UserVO user) {
+	public String doUpdate(MemberVO user) {
 		LOG.debug("1===================");
 		LOG.debug("1=user="+user);
 		LOG.debug("1===================");
@@ -166,7 +166,7 @@ public class MemberController {
 	@RequestMapping(value = "member/insert.do",method = RequestMethod.POST
 			,produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String insert(UserVO user) {
+	public String insert(MemberVO user) {
 		
 		LOG.debug("1===================");
 		LOG.debug("1=user="+user);
