@@ -37,8 +37,8 @@ function cancelPay() {
       "type": "POST",
       "contentType": "application/json",
       "data": JSON.stringify({
-    	  "merchant_uid": "mid_" + new Date().getTime(), // 주문번호
-        "reason": "테스트 결제 환불" // 환불사유
+    	 	"imp_uid": "imp_120399097759", // 주문번호
+        	"reason": "테스트 결제 환불" // 환불사유
       }),
       "dataType": "json"
     });
