@@ -300,21 +300,11 @@ public class MemberCont {
 	         return "webapp/member/login";
 	      }else {
 	         MemberVO memVO=new MemberVO();
-	         
 	         memVO.setEmail(outVO.getEmail());
-	         
-	         
 	         HttpSession session=req.getSession();
-	         
 	         StringBuilder out=new StringBuilder();
-	    
-	        
-	    
-	          
-	           model.addAttribute("memberVO", outVO);
-	           session.setAttribute("memberEmail", outVO.getEmail());
-
-	           
+	         model.addAttribute("memberVO", outVO);
+	         session.setAttribute("memberEmail", outVO.getEmail());
 	         return "pharmacymap/Main";
 
 	      }

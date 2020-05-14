@@ -41,6 +41,9 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
+
+
 <body>
 	<!-- div container -->
 	<div class="container">
@@ -403,6 +406,13 @@
     	 bindEventHandler();
     	 
      });
+
+ 	function goLogin(){
+    	location.href="http://localhost:8080/d_dolive/member/login.jsp";
+    }
+
+
+     
 		//등록
 		 $("#doInsert").on("click", function() { 
 			
@@ -435,7 +445,7 @@
                     var parseData = $.parseJSON(data);
                     if (parseData.msgId == "1") {
                         alert(parseData.msgMsg);
-                        doRetrieve();
+                        goLogin();
                     } else {
                         alert(parseData.msgMsg);
                     }
