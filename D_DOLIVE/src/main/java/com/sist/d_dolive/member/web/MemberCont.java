@@ -282,7 +282,43 @@ public class MemberCont {
 		return outVO;
 	}
 	
-	
+	   @RequestMapping(value="member/login.do",method = RequestMethod.POST)
+	   public String doLogin(HttpServletRequest req, Model model) {
+	      LOG.debug("=======================================");
+	      LOG.debug("=doLogin/param");
+	      LOG.debug("=doLogin/memberId:"+req.getParameter("email"));
+	      LOG.debug("=doLogin/password:"+req.getParameter("pw"));
+	      LOG.debug("=======================================");
+	      
+	      MemberVO inVO=new MemberVO();
+	      inVO.setEmail(req.getParameter("email"));
+	      inVO.setPw(req.getParameter("pw"));
+	      
+	      MemberVO outVO=(MemberVO)this.memberService.getMember(inVO);
+	      if(outVO.getEmail()==null || "".equals(outVO.getEmail())) {
+	         model.addAttribute("loginFailure","아이디와 비밀번호를 확인해주세요.");
+	         return "webapp/member/login";
+	      }else {
+	         MemberVO memVO=new MemberVO();
+	         
+	         memVO.setEmail(outVO.getEmail());
+	         
+	         
+	         HttpSession session=req.getSession();
+	         
+	         StringBuilder out=new StringBuilder();
+	    
+	        
+	    
+	          
+	           model.addAttribute("memberVO", outVO);
+	           session.setAttribute("memberEmail", outVO.getEmail());
+
+	           
+	         return "pharmacymap/Main";
+
+	      }
+	   }	
 
 	
 }
