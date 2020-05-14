@@ -7,7 +7,7 @@
 	<sql id="MemberColumns"> 
 		email	
 		, pw		
-		, gender	
+		, gender	 
 		, name	
 		, ihidnum	
 		, addr	
