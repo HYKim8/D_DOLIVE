@@ -151,26 +151,86 @@ public class MemberDaoImple implements MemberDao {
 
 	@Override
 	public int idCount(DTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		MemberVO inVO = (MemberVO) dto;
+		LOG.debug("1==========================");
+		LOG.debug("1=inVO="+inVO);
+		LOG.debug("1==========================");
+		
+		// namespace+id = com.sist.ehr.board.doInsert
+		String statement = NAMESPACE + ".idCount";
+		LOG.debug("2==========================");
+		LOG.debug("2=statement="+statement);
+		LOG.debug("2==========================");
+		
+		int outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("3==========================");
+		LOG.debug("3=outVO="+outVO);
+		LOG.debug("3==========================");
+		
+		return outVO;
 	}
 
 	@Override
 	public DTO doFindId(DTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		MemberVO inVO = (MemberVO) dto;
+		LOG.debug("1==========================");
+		LOG.debug("1=inVO="+inVO);
+		LOG.debug("1==========================");
+		
+		// namespace+id = com.sist.ehr.board.doInsert
+		String statement = NAMESPACE + ".doFindId";
+		LOG.debug("2==========================");
+		LOG.debug("2=statement="+statement);
+		LOG.debug("2==========================");
+		
+		MemberVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("3==========================");
+		LOG.debug("3=outVO="+outVO);
+		LOG.debug("3==========================");
+		
+		return outVO;
 	}
 
 	@Override
 	public DTO doFindPw(DTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		MemberVO inVO = (MemberVO) dto;
+		LOG.debug("1==========================");
+		LOG.debug("1=inVO="+inVO);
+		LOG.debug("1==========================");
+		
+		// namespace+id = com.sist.ehr.board.doInsert
+		String statement = NAMESPACE + ".doFindPw";
+		LOG.debug("2==========================");
+		LOG.debug("2=statement="+statement);
+		LOG.debug("2==========================");
+		
+		MemberVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("3==========================");
+		LOG.debug("3=outVO="+outVO);
+		LOG.debug("3==========================");
+		
+		return outVO;
 	}
 
 	@Override
 	public DTO getMember(DTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		MemberVO inVO = (MemberVO) dto;
+		LOG.debug("1==========================");
+		LOG.debug("1=inVO="+inVO);
+		LOG.debug("1==========================");
+		
+		// namespace+id = com.sist.ehr.board.doInsert
+		String statement = NAMESPACE + ".getMember";
+		LOG.debug("2==========================");
+		LOG.debug("2=statement="+statement);
+		LOG.debug("2==========================");
+		
+		MemberVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("3==========================");
+		LOG.debug("3=outVO="+outVO);
+		LOG.debug("3==========================");
+		
+		return outVO;
 	}
 
 
