@@ -154,13 +154,14 @@ public class MemberCont {
 
 	@RequestMapping(value="member/do_find_pw.do",method = RequestMethod.POST
 		       ,produces = "application/json;charset=UTF-8")
-	public String doFindPw(MemberVO MemberVO,Locale locale, Model model ) {//이메일찾기 단건조회
+	@ResponseBody
+	public String doFindPw(MemberVO memberVO,Locale locale, Model model ) {//이메일찾기 단건조회
 		LOG.debug("1===================");
-		LOG.debug("1=memberVO="+MemberVO);
+		LOG.debug("1=memberVO="+memberVO);
 		LOG.debug("1===================");		
 		
-		MemberVO outVO = (MemberVO) memberService.doFindPw(MemberVO);
-		//outVO.setLevel(outVO.getLevel().intValue());
+		MemberVO outVO = (MemberVO) memberService.doFindPw(memberVO);
+		memberService.sendEmail(outVO);
 		
 		LOG.debug("1.2===================");
 		LOG.debug("1.2=outVO="+outVO);

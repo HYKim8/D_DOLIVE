@@ -130,7 +130,7 @@
 				<label for="name" class="col-lg-4 col-sm-4 col-xs-4  control-label">이름</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
 					<input type="text" maxlength="350" class="form-control input-sm"
-						id="name" name="name" placeholder="이름" />
+						id="name1" name="name1" placeholder="이름" />
 				</div>
 			</div>			
 			
@@ -138,8 +138,8 @@
 				<label for="ihidnum"
 					class="col-lg-4 col-sm-4 col-xs-4  control-label">주민번호</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-					<input type="password" maxlength="50" class="form-control input-sm"
-						id="ihidnum" name="ihidnum" placeholder="비밀번호" />
+					<input type="text" maxlength="50" class="form-control input-sm"
+						id="ihidnum1" name="ihidnum1" placeholder="비밀번호" />
 				</div>
 			</div>
 	
@@ -223,9 +223,9 @@
 		//비밀번호찾기버튼
 		$("#findPw").on("click", function() {
 
-			alert("email="+$("#email").val());
- 			alert("name="+$("#name").val());
-            alert("ihidnum="+$("#ihidnum").val()); 
+/* 			alert("email="+$("#email").val());
+ 			alert("name="+$("#name1").val());
+            alert("ihidnum="+$("#ihidnum1").val());  */
             
 
             if ($("#email").val() == "" || $("#email").val() == false) {
@@ -234,14 +234,14 @@
                 return;
             }
             
-            if ($("#name").val() == "" || $("#name").val() == false) {
+            if ($("#name1").val() == "" || $("#name1").val() == false) {
                 alert("이름를 입력 하세요.");
                 $("#name").focus();
                 return;
             }
             
-            if ($("#ihidnum").val() == "" || $("#ihidnum").val() == false) {
-                alert("이름를 입력 하세요.");
+            if ($("#ihidnum1").val() == "" || $("#ihidnum1").val() == false) {
+                alert("주민번호를 입력 하세요.");
                 $("#ihidnum").focus();
                 return;
             }
@@ -252,13 +252,13 @@
             
             //ajax
             $.ajax({
-                type : "GET",
+                type : "POST",
                 url : "${hContext}/member/do_find_pw.do",
                 dataType : "html",
                 data : {
                     "email" :$("#email").val(),
-                	"name" : $("#name").val(),
-                    "ihidnum" : $("#ihidnum").val()
+                	"name" : $("#name1").val(),
+                    "ihidnum" : $("#ihidnum1").val()
                 },
                 success : function(data) { //성공
                 alert("전송완료");

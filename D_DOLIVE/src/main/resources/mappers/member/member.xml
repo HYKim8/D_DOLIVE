@@ -77,7 +77,8 @@
 	
 	<!-- 비밀번호찾기 단건조회 -->
 	<select id="doFindPw" parameterType="MemberVO" resultType="MemberVO">
-		SELECT pw
+		SELECT email,
+			   pw
 		FROM member
 		WHERE email = #{email}
 		AND name = #{name}
