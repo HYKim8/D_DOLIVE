@@ -19,10 +19,12 @@
 		SELECT t1.*, t2.*
 		FROM(
 		    SELECT b.pcode
-		           , b.email
-		           , func_code('REMAINSTOCKYN', b.remainStockYn) AS remainStockYn
-		           , func_code('EMPTYSTOCKYN', b.emptyStockYn) AS emptyStockYn
-		           , b.rnum as num
+		    		, p.name
+		    		, p.addr
+		           	, b.email
+		           	, func_code('REMAINSTOCKYN', b.remainStockYn) AS remainStockYn
+		           	, func_code('EMPTYSTOCKYN', b.emptyStockYn) AS emptyStockYn
+		           	, b.rnum as num
 		    FROM(
 		        SELECT ROWNUM AS rnum, a.*
 		        FROM (
@@ -33,8 +35,9 @@
 		            <include refid="baseCondition"></include>
 		        )A
 		        WHERE ROWNUM <![CDATA[ <= ]]> (#{pageSize} * (#{pageNum} -1) + #{pageSize})
-		    )B
-		    WHERE rnum <![CDATA[ >= ]]> (#{pageSize} * (#{pageNum} -1) +1)
+		    )B, pharmacy p
+		    WHERE b.pcode = p.pcode
+		    AND rnum <![CDATA[ >= ]]> (#{pageSize} * (#{pageNum} -1) +1)
 		)t1
 		NATURAL JOIN
 		(

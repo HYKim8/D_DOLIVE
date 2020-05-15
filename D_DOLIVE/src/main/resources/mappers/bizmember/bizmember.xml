@@ -19,7 +19,7 @@
 			, pcode	= #{pcode, jdbcType = VARCHAR}
 			, modId	= #{modId, jdbcType = VARCHAR}
 			, modDt = SYSDATE
-		WHERE email = #{email}
+		WHERE email = #{email, jdbcType = VARCHAR}
 	</update>
 	 
 	<sql id="bizMemberColumns">
@@ -46,7 +46,7 @@
 		SELECT
 			<include refid="bizMemberColumns"></include>
 		FROM bizmember
-		WHERE email = #{email}
+		WHERE email = #{email, jdbcType = VARCHAR}
 	</select>
 	 
 	<!-- 등록 -->
@@ -79,8 +79,8 @@
 			, #{bizRno, jdbcType = VARCHAR}	
 			, #{bizTel, jdbcType = VARCHAR}	
 			, #{pcode, jdbcType = VARCHAR}
-			, #{regId, jdbcType = VARCHAR}
-			, #{modId, jdbcType = VARCHAR}
+			, #{email, jdbcType = VARCHAR}
+			, #{email, jdbcType = VARCHAR}
 		)
 	</insert>
 	 

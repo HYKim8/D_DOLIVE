@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="basede-finition" 
+    template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">
+        <!-- 제목처리 -->
+        <put-attribute name="title" value=""/>
+        
+        <!-- top -->
+        <put-attribute name="header" 
+        value="/WEB-INF/views/tiles/layouts/header.jsp"/>
+        
+        <!-- 메뉴 -->
+        <put-attribute name="menu" 
+        value="/WEB-INF/views/tiles/layouts/menu.jsp"/>
+        
+        <!-- body -->
+        <put-attribute name="body" 
+        value=""/>
+        
+        <!-- 메뉴 -->
+        <put-attribute name="footer" 
+        value="/WEB-INF/views/tiles/layouts/footer.jsp"/>
+    </definition>
+    
+    <!-- bizmember -->
+    <definition name="bizmember/*" extends="basede-finition">
+        <put-attribute name="title" value="D_DOLIVE>Bizmember"/>
+        <put-attribute name="body" value="/bizmember/{1}.jsp"/>
+    </definition>
+</tiles-definitions>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

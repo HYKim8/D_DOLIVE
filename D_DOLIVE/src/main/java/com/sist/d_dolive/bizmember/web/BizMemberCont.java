@@ -126,7 +126,7 @@ public class BizMemberCont {
 		return gsonStr;
 	}
 	
-	@RequestMapping(value = "bizmember/do_selectone.do", method = RequestMethod.GET)
+	@RequestMapping(value = "bizmember/do_select_one.do", method = RequestMethod.GET)
 	public String doSelectOne(BizMemberVO bizMemberVO, Locale locale, Model model) {
 		//board_id
 		LOG.debug("1==================");
@@ -144,7 +144,15 @@ public class BizMemberCont {
 		
 		model.addAttribute("vo", outVO);
 		
-		return "bizmember/bizmember_mng";
+		String url = "";
+		
+		if(bizMemberVO.getOptionDiv().equals("1")) {
+			url = "bizmember/bizmember_select_one";
+		}else if(bizMemberVO.getOptionDiv().equals("2")) {
+			url = "bizmember/bizmember_update";
+		}
+		
+		return url;
 	}
 	
 	@RequestMapping(value = "bizmember/do_insert.do", method = RequestMethod.POST
