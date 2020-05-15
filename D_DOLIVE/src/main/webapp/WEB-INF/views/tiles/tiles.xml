@@ -23,26 +23,11 @@
         value="/WEB-INF/views/tiles/layouts/footer.jsp"/>
     </definition>
     
-    <!-- board -->
-    <definition name="board/*" extends="basede-finition">
-        <put-attribute name="title" value="EHR>Board"/>
-        <put-attribute name="body" value="/board/{1}.jsp"/>
+    <!-- bizmember -->
+    <definition name="bizmember/*" extends="basede-finition">
+        <put-attribute name="title" value="D_DOLIVE>Bizmember"/>
+        <put-attribute name="body" value="/bizmember/{1}.jsp"/>
     </definition>
-    
-    <!-- hello -->
-    <definition name="hello/*" extends="basede-finition">
-        <put-attribute name="title" value="EHR>Hello"/>
-        <put-attribute name="body" value="/hello/{1}.jsp"/>
-    </definition>    
-    
-    <!-- hello -->
-    <definition name="chart/*" extends="basede-finition">
-        <put-attribute name="title" value="EHR>파이차트"/>
-        <put-attribute name="body" value="/chart/{1}.jsp"/>
-    </definition>     
-    
-    
-
 </tiles-definitions>
 
 

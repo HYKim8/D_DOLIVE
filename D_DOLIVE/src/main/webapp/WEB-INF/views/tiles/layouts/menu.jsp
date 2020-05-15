@@ -20,13 +20,7 @@
 <c:set var="context" value="${pageContext.request.contextPath }" />
 <table>
   <tr>
-    <td><a href="${context}/board/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=">게시판</a></td>
+    <td><a href="${context}/bizmember/do_select_one.do?email=jnhoon111&optionDiv=1">업체회원 조회</a></td>
   </tr>
-  <tr>
-    <td><a href="${context}/hello/hello.do">hello</a></td>
-  </tr>
-  <tr>
-    <td><a href="${context}/chart/pie_chart_view.do">파이차트</a></td>
-  </tr>  
 </table>
 
