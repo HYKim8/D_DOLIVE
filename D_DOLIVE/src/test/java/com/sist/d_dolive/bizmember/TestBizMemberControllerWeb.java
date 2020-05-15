@@ -194,7 +194,7 @@ public class TestBizMemberControllerWeb {
 		//3. 단건 조회
 		//url+param
 		MockHttpServletRequestBuilder createMesage
-			= MockMvcRequestBuilders.get("/bizmember/do_selectone.do")
+			= MockMvcRequestBuilders.get("/bizmember/do_select_one.do")
 				.param("email", bizMemberList.get(0).getEmail())
 		;		
 		

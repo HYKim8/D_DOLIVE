@@ -59,9 +59,9 @@ public class TestNoticeControllerWeb {
 		LOG.debug("*********************");
 		
 		noticeList = Arrays.asList(
-				new NoticeVO("판매처코드1", "이메일1", "1", "0")
-				, new NoticeVO("판매처코드2", "이메일2", "0", "1")
-				, new NoticeVO("판매처코드3", "이메일3", "1", "0")
+				new NoticeVO("판매처코드1", "", "", "이메일1", "1", "0")
+				, new NoticeVO("판매처코드2", "", "", "이메일2", "0", "1")
+				, new NoticeVO("판매처코드3", "", "", "이메일3", "1", "0")
 		);
 				
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
@@ -158,7 +158,7 @@ public class TestNoticeControllerWeb {
 		//3. 단건 조회
 		//url+param
 		MockHttpServletRequestBuilder createMesage
-			= MockMvcRequestBuilders.get("/notice/do_selectone.do")
+			= MockMvcRequestBuilders.get("/notice/do_select_one.do")
 				.param("pcode", noticeList.get(0).getPcode())
 				.param("email", noticeList.get(0).getEmail())
 		;		

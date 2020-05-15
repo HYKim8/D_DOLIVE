@@ -24,10 +24,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.text.StringCharacterIterator;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.sist.d_dolive.code.CodeVO;
 
 /**
  * 모든 메소드는 static method
@@ -97,25 +100,21 @@ public class StringUtil {
 	 *@param scriptName_i
 	 *@return String
 	 */
-	public static String renderPaging(int maxNum_i, int currPageNoIn_i, int rowsPerPage_i, int bottomCount_i, String url_i, String scriptName_i) {
-		int maxNum = 0; // 총 갯수
-		int currPageNo = 1; // 현재 페이지 번호 : page_num
-		int rowPerPage = 10; // 한페이지에 보여질 행수 : page_size
-		int bottomCount = 10; // 바닥에 보여질 페이지 수: 10
-	
-		maxNum = maxNum_i;
-		currPageNo = currPageNoIn_i;
-		rowPerPage = rowsPerPage_i;
-		bottomCount = bottomCount_i;
+	public static String renderPaging(int maxNum, int currPageNo, int rowPerPage, int bottomCount, String url, String scriptName) {
+		/**
+		 * 총글수: 21
+		 * 현재페이지: 1
+		 * 한페이지에 보여질 행수: 10
+		 * 바닥에 보여질 페이지 수: 10
+		 * << < 1 2 3 4 5 6 7 8 9 10 > >>
+		 */
 
-		String url = url_i; // 호출 URL
-		String scriptName = scriptName_i; // 호출 자바스크립트
-
-		int maxPageNo = ((maxNum - 1) / rowPerPage) + 1;
-		int startPageNo = ((currPageNo - 1) / bottomCount) * bottomCount + 1;//
-		int endPageNo = ((currPageNo - 1) / bottomCount + 1) * bottomCount;
-		int nowBlockNo = ((currPageNo - 1) / bottomCount) + 1;
-		int maxBlockNo = ((maxNum - 1) / bottomCount) + 1;
+		int maxPageNo = ((maxNum - 1) / rowPerPage) + 1;//3
+		int startPageNo = ((currPageNo - 1) / bottomCount) * bottomCount + 1;//1
+		int endPageNo = ((currPageNo - 1) / bottomCount + 1) * bottomCount;//10
+	   
+		int nowBlockNo = ((currPageNo - 1) / bottomCount) + 1;//1
+		int maxBlockNo = ((maxNum - 1) / bottomCount) + 1;//3
 
 		int inx = 0;
 		StringBuilder html = new StringBuilder();
@@ -126,44 +125,52 @@ public class StringUtil {
 		html.append("<table border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">   \n");
 		html.append("<tr>                       \n");
 		html.append("<td align=\"center\">                                                                    \n");
-		//html.append("<ul class=\"pagination pagination-sm\">                                                  \n");
+		html.append("<ul class=\"pagination pagination-sm\">                                                  \n");
+	   
 		// <<
 		if (nowBlockNo > 1 && nowBlockNo <= maxBlockNo) {
-			html.append("<a href=\"javascript:" + scriptName + "( '" + url+ "', 1 );\">  \n");
+			html.append("<li class=\"active\"> <a href=\"javascript:" + scriptName + "( '" + url+ "', 1 );\">  \n");
 			html.append("&laquo;   \n");
-			html.append("</a>      \n");
+			html.append("</a></li> \n");
 		}
 
 		// <
 		if (startPageNo > bottomCount) {
-			html.append("<a href=\"javascript:" + scriptName + "( '" + url + "'," + (startPageNo - 1)+ ");\"> \n");
+			html.append("<li class=\"active\"> <a href=\"javascript:" + scriptName + "( '" + url + "'," + (startPageNo - 1)+ ");\"> \n");
 			html.append("<        \n");
-			html.append("</a>     \n");
+			html.append("</a></li>     \n");
 		}
 
 
 		// 1 2 3 ... 10 (숫자보여주기)
 		for (inx = startPageNo; inx <= maxPageNo && inx <= endPageNo; inx++) {
-	    
-			if (inx == currPageNo) {
-				html.append("<b>" + inx + "</b> &nbsp;&nbsp; \n");
+			if (inx == currPageNo) {// 현재 page
+				html.append("<li  class=\"disabled\" 	>");
+				html.append("<a  href=\"javascript:#\"  > ");
+				html.append(inx);
+				html.append("</a> \n");
+				html.append("</li>");
 			} else {
-				html.append("<a href=\"javascript:" + scriptName + "('" + url + "'," + inx+ ");\" >" + inx + "</a> &nbsp;&nbsp; \n");
+				html.append("<li  class=\"active\">");
+				html.append("<a  href=\"javascript:" + scriptName + "('" + url + "'," + inx + ");\"  > ");
+				html.append(inx);
+				html.append("</a> \n");
+				html.append("</li>");
 			}
 		}
 	   
 		// >
 		if (maxPageNo >= inx) {
-			html.append("<a href=\"javascript:" + scriptName + "('" + url + "',"+ ((nowBlockNo * bottomCount) + 1) + ");\"> \n");
+			html.append("<li class=\"active\"><a href=\"javascript:" + scriptName + "('" + url + "',"+ ((nowBlockNo * bottomCount) + 1) + ");\"> \n");
 			html.append(">                       \n");
-			html.append("</a>              \n");
+			html.append("</a></li>              \n");
 		}
 
 		// >>
 		if (maxPageNo >= inx) {
-			html.append("<a href=\"javascript:" + scriptName + "('" + url + "'," + maxPageNo+ ");\">      \n");
+			html.append("<li class=\"active\"><a href=\"javascript:" + scriptName + "('" + url + "'," + maxPageNo+ ");\">      \n");
 			html.append("&raquo;     \n");
-			html.append("</a>    \n");
+			html.append("</a></li>    \n");
 		}
 
 		html.append("</td>   \n");
@@ -185,38 +192,31 @@ public class StringUtil {
 	 *@param allYn
 	 *@return String
 	 */
-//	public static String makeSelectBox(List<CodeVO> list, String selectBoxNm, String selectNm, boolean allYn) {
-//		StringBuilder sb = new StringBuilder();
-//		sb.append("<select class='form-control input-sm' name='"+selectBoxNm+"' id='"+selectBoxNm+"' > \n");
-//		//전체
-//		if(allYn==true) {
-//			sb.append("<option value='' >전체</option> \n");
-//		}
-//		//for
-//		for(CodeVO vo:list) {
-//			sb.append("<option value='"+vo.getDtlId()+"' ");
-//			if(selectNm.equals(vo.getDtlId())) {
-//				sb.append("selected='selected' ");
-//			}
-//			sb.append(">");
-//			sb.append(vo.getDtlNm());
-//			sb.append("</option> \n");
-//		}
-//		sb.append("</select> \n");
-//		
-//		LOG.debug("========================================");
-//		LOG.debug("=sb.toString()="+sb.toString());
-//		LOG.debug("========================================");
-//		
-//		return sb.toString();
-//		
-////		<select name="search_div" id="search_div">
-////			<option value="">전체</option>
-////			<option value="10" <%if(searchDiv.equals("10"))out.print("selected"); %> >제목</option>
-////			<option value="20" <%if(searchDiv.equals("20"))out.print("selected"); %> >내용</option>
-////			<option value="30" <%if(searchDiv.equals("30"))out.print("selected"); %> >등록자</option>
-////		</select>
-//	}
+	public static String makeSelectBox(List<CodeVO> list, String selectBoxNm, String selectNm, boolean allYn) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("<select class='form-control input-sm' name='"+selectBoxNm+"' id='"+selectBoxNm+"' > \n");
+		//전체
+		if(allYn==true) {
+			sb.append("<option value='' >전체</option> \n");
+		}
+		//for
+		for(CodeVO vo:list) {
+			sb.append("\t\t<option value='"+vo.getCodeId()+"' ");
+			if(selectNm.equals(vo.getCodeId())) {
+				sb.append("selected");
+			}
+			sb.append(">");
+			sb.append(vo.getCodeNm());
+			sb.append("</option> \n");
+		}
+		sb.append("</select> \n");
+		
+		LOG.debug("========================================");
+		LOG.debug("=sb.toString()="+sb.toString());
+		LOG.debug("========================================");
+		
+		return sb.toString();
+	}
 	
 	/**
 	 * 

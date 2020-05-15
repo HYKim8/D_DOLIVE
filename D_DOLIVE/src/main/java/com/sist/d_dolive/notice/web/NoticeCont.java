@@ -22,6 +22,8 @@ import com.sist.d_dolive.cmn.SearchVO;
 import com.sist.d_dolive.cmn.StringUtil;
 import com.sist.d_dolive.notice.NoticeService;
 import com.sist.d_dolive.notice.NoticeVO;
+import com.sist.d_dolive.code.CodeVO;
+import com.sist.d_dolive.code.CodeService;
 
 /**
  * @author sist
@@ -33,6 +35,9 @@ public class NoticeCont {
 	
 	@Autowired
 	NoticeService noticeService;
+	
+	@Autowired
+	CodeService codeService;
 	
 	@Autowired
 	MessageSource messageSource;
@@ -58,6 +63,14 @@ public class NoticeCont {
 		model.addAttribute("vo", search);
 		
 		//TODO: codeTable : 검색 조건, 페이지 사이즈
+		CodeVO code = new CodeVO();
+		
+		//페이지 사이즈: PAGE_SIZE
+		code.setCodeTypeId("PAGE_SIZE");
+		List<CodeVO> pageSizeList = (List<CodeVO>) this.codeService.doRetrieve(code);
+		LOG.debug("1.2=pageSizeList="+pageSizeList);
+		model.addAttribute("pageSizeList", pageSizeList);
+		
 		List<NoticeVO> list = (List<NoticeVO>) this.noticeService.doRetrieve(search);
 	
 		//조회 결과 화면 전달
@@ -79,7 +92,7 @@ public class NoticeCont {
 		//조회 결과 화면 전달
 		model.addAttribute("totalCnt", totalCnt);
 		
-		return "notice/notice_list";//"board/board_list.jsp"
+		return "notice/notice";//"board/board_list.jsp"
 	}
 	
 	@RequestMapping(value = "notice/do_delete.do", method = RequestMethod.POST
@@ -121,7 +134,7 @@ public class NoticeCont {
 		return gsonStr;
 	}
 	
-	@RequestMapping(value = "notice/do_selectone.do", method = RequestMethod.GET
+	@RequestMapping(value = "notice/do_select_one.do", method = RequestMethod.GET
 			, produces = "application/json; charset=UTF-8")
 	@ResponseBody
 	public String doSelectOne(NoticeVO noticeVO, Locale locale, Model model) {

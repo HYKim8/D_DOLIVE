@@ -31,12 +31,16 @@ public class DTO {
 	//총글수 
 	private int totalCnt;
 	
+	//컨트롤러 페이지 이동
+	private String optionDiv;
+	
 	public DTO() {}
 
-	public DTO(int num, int totalCnt) {
+	public DTO(int num, int totalCnt, String optionDiv) {
 		super();
 		this.num = num;
 		this.totalCnt = totalCnt;
+		this.optionDiv = optionDiv;
 	}
 
 	public int getNum() {
@@ -55,9 +59,18 @@ public class DTO {
 		this.totalCnt = totalCnt;
 	}
 
+	public String getOptionDiv() {
+		return optionDiv;
+	}
+
+	public void setOptionDiv(String optionDiv) {
+		this.optionDiv = optionDiv;
+	}
+
 	@Override
 	public String toString() {
-		return "DTO [num=" + num + ", totalCnt=" + totalCnt + ", toString()=" + super.toString() + "]";
+		return "DTO [num=" + num + ", totalCnt=" + totalCnt + ", optionDiv=" + optionDiv + ", toString()="
+				+ super.toString() + "]";
 	}
-	
+
 }
