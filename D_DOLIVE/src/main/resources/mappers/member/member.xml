@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.d_dolive.member">
+
+	<sql id="MemberColumns"> 
+		email	
+		, pw		
+		, gender	 
+		, name	
+		, ihidnum	
+		, addr	
+		, addr2	
+		, zipno	 
+		, tel		 
+		, regid	
+		, TO_CHAR(regdt, 'YYYY/MM/DD HH24MISS') regdt	
+		, modid	
+		, TO_CHAR(moddt, 'YYYY/MM/DD HH24MISS') moddt
+	</sql>
+
+
+	<!-- 회원가입 -->
+	<insert id="doInsert" parameterType="MemberVO">
+		INSERT INTO member (
+			email	
+			, pw		
+			, gender
+			, ihidnum	
+			, name
+			, tel
+			, zipNo		
+			, addr	
+			, addr2	
+			, regid
+			, modid	
+		) VALUES (
+			#{email, jdbcType = VARCHAR}
+			, #{pw, jdbcType = VARCHAR}	
+			, #{gender, jdbcType = VARCHAR}	
+			, #{ihidnum, jdbcType = VARCHAR}
+			, #{name, jdbcType = VARCHAR}
+			, #{tel, jdbcType = VARCHAR}
+			, #{zipno, jdbcType = VARCHAR}
+			, #{addr, jdbcType = VARCHAR}
+			, #{addr2, jdbcType = VARCHAR}	
+			, #{regid, jdbcType = VARCHAR}	
+			, #{modid, jdbcType = VARCHAR}
+		)
+	</insert>
+	
+	<!-- 회원정보수정 -->
+	<update id="doUpdate" parameterType="MemberVO">
+		UPDATE member
+		SET pw = #{pw, jdbcType = VARCHAR}
+			, gender = #{gender, jdbcType = VARCHAR}
+			, name	= #{name, jdbcType = VARCHAR}
+			, ihidnum	= #{ihidnum, jdbcType = VARCHAR}
+			, addr	= #{addr, jdbcType = VARCHAR}
+			, addr2	= #{addr2, jdbcType = VARCHAR}
+			, zipno	= #{zipno, jdbcType = VARCHAR}
+			, tel = #{tel, jdbcType = VARCHAR}
+			, modid	= #{modid, jdbcType = VARCHAR}
+			, moddt = SYSDATE
+		WHERE email = #{email}
+	</update>
+	 
+
+	<!-- 이메일찾기 단건조회 -->
+	<select id="doFindId" parameterType="MemberVO" resultType="MemberVO">
+		SELECT email
+		FROM member
+		WHERE name = #{name}
+		AND ihidnum = #{ihidnum}
+	</select>	
+	
+	<!-- 비밀번호찾기 단건조회 -->
+	<select id="doFindPw" parameterType="MemberVO" resultType="MemberVO">
+		SELECT email,
+			   pw
+		FROM member
+		WHERE email = #{email}
+		AND name = #{name}
+		AND ihidnum = #{ihidnum}
+	</select>		 
+	 
+	 
+	<!-- 아이디 중복체크 -->
+	<select id="idCount" parameterType="MemberVO" resultType="MemberVO">
+		SELECT COUNT(*)
+		FROM member
+		WHERE email = #{email}
+	</select>
+	 	
+	
+	<!-- 삭제 -->
+	<delete id="doDelete" parameterType="MemberVO">
+		<![CDATA[
+			DELETE FROM member WHERE email = #{email}
+		]]>
+	</delete>
+	
+	<!-- 로그인 -->
+	<select id="getMember" parameterType="MemberVO" resultType="MemberVO">
+		SELECT*FROM member
+		WHERE email = #{email} 
+		AND pw =#{pw}
+	</select>	
+	
+	
+	<!-- 마이페이지 회원정보출력 -->
+	<select id="doSelectOne" parameterType="MemberVO" resultType="MemberVO">
+		SELECT email
+			   ,gender
+			   ,SUBSTR(ihidnum,1,6)
+			   ,name
+			   ,tel
+			   ,addr
+			   ,addr2
+		FROM member
+		WHERE email = #{email}  
+	</select>	
+	
+	<!-- 단건조회 -->
+	<select id="doSelectOne1" parameterType="MemberVO" resultType="MemberVO">
+		SELECT
+			<include refid="MemberColumns"></include>
+		FROM member
+		WHERE email = #{email}
+	</select>	
+	
+	
+	
+	<delete id="doDeleteAll">
+		<![CDATA[
+			DELETE FROM member
+		]]>
+	</delete>
+	
+</mapper>

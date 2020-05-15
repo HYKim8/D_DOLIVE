@@ -78,7 +78,7 @@
 		</div>
 		<!--// Button Area -->
 
-		<!-- 입력 Form -->
+		<!-- 아이디찾기 Form -->
 		<form action="${hContext}/member/find_id.do" name="member_edit" method="post" class="form-horizontal">
 			
 			
@@ -103,12 +103,56 @@
 
 		</form>
 		
-		<!--// 입력 Form -->
+		<!--// 아이디찾기 Form -->
+		
+		<!-- Button Area -->
+		<div class="row">
+			<div class="col-lg-10 col-sm-10 col-xs-10 ">
+				<div class="text-right">
+					<button type="button" class="btn btn-default btn-sm" id="findPw">비밀번호찾기</button>
+				</div>
+			</div>
+		</div>
+		<!--// Button Area -->		
+		
+		<!-- 비번찾기 Form -->
+		<form action="${hContext}/member/do_find_pw.do" name="member_edit" method="post" class="form-horizontal">
+			
+			<div class="form-group">
+				<label for="email" class="col-lg-4 col-sm-4 col-xs-4  control-label">이메일</label>
+				<div class="col-lg-6 col-sm-6 col-xs-6">
+					<input type="text" maxlength="350" class="form-control input-sm"
+						id="email" name="email" placeholder="이메일" />
+				</div>
+			</div>				
+			
+			<div class="form-group">
+				<label for="name" class="col-lg-4 col-sm-4 col-xs-4  control-label">이름</label>
+				<div class="col-lg-6 col-sm-6 col-xs-6">
+					<input type="text" maxlength="350" class="form-control input-sm"
+						id="name1" name="name1" placeholder="이름" />
+				</div>
+			</div>			
+			
+			<div class="form-group">
+				<label for="ihidnum"
+					class="col-lg-4 col-sm-4 col-xs-4  control-label">주민번호</label>
+				<div class="col-lg-6 col-sm-6 col-xs-6">
+					<input type="text" maxlength="50" class="form-control input-sm"
+						id="ihidnum1" name="ihidnum1" placeholder="비밀번호" />
+				</div>
+			</div>
+	
+
+
+		</form>
+		
+		<!--// 비번찾기 Form -->		
+		
 
 
 	</div>
-	<!--// 입력 form -->
-
+	<!-- 입력 form -->
 
 
 
@@ -122,12 +166,12 @@
 	<script type="text/javascript">
 	
     	
-		//등록
+		//아이디찾기버튼
 		$("#findId").on("click", function() {
 			
-
-            alert("ihidnum="+$("#ihidnum").val());
-            alert("name="+$("#name").val());
+/* 			alert("name="+$("#name").val());
+            alert("ihidnum="+$("#ihidnum").val()); */
+            
 
             if ($("#name").val() == "" || $("#name").val() == false) {
                 alert("이름를 입력 하세요.");
@@ -147,7 +191,7 @@
             
             //ajax
             $.ajax({
-                type : "POST",
+                type : "GET",
                 url : "${hContext}/member/find_id.do",
                 dataType : "html",
                 data : {
@@ -155,14 +199,12 @@
                     "ihidnum" : $("#ihidnum").val()
                 },
                 success : function(data) { //성공
-                    console.log("data:" + data);
-                    alert("당신의 이메일:");
-                    var parseData = $.parseJSON(data);
-                    if (parseData.msgId == "1") {
-                        alert(parseData.msgMsg);
-                    } else {
-                        alert(parseData.msgMsg);
-                    } 
+                	if($.trim(data) == "x"){
+    					alert("가입기록이 없습니다.<br>이름 또는 이메일을 다시 한 번 확인해주세요!");
+                    }
+                    else{
+                    	alert("회원님의 아이디는"+$.trim(data)+"입니다.");
+                    }
 
                 },
                 error : function(xhr, status, error) {
@@ -175,6 +217,63 @@
             });//--ajax 
 
         });
+
+
+
+		//비밀번호찾기버튼
+		$("#findPw").on("click", function() {
+
+/* 			alert("email="+$("#email").val());
+ 			alert("name="+$("#name1").val());
+            alert("ihidnum="+$("#ihidnum1").val());  */
+            
+
+            if ($("#email").val() == "" || $("#email").val() == false) {
+                alert("이메일를 입력 하세요.");
+                $("#email").focus();
+                return;
+            }
+            
+            if ($("#name1").val() == "" || $("#name1").val() == false) {
+                alert("이름를 입력 하세요.");
+                $("#name").focus();
+                return;
+            }
+            
+            if ($("#ihidnum1").val() == "" || $("#ihidnum1").val() == false) {
+                alert("주민번호를 입력 하세요.");
+                $("#ihidnum").focus();
+                return;
+            }
+
+            
+            //confirm
+            if (confirm("비밀번호를 이메일로 전송하시겠습니까?") == false)return;
+            
+            //ajax
+            $.ajax({
+                type : "POST",
+                url : "${hContext}/member/do_find_pw.do",
+                dataType : "html",
+                data : {
+                    "email" :$("#email").val(),
+                	"name" : $("#name1").val(),
+                    "ihidnum" : $("#ihidnum1").val()
+                },
+                success : function(data) { //성공
+                alert("전송완료");
+
+                },
+                error : function(xhr, status, error) {
+                    alert("error:" + error);
+                },
+                complete : function(data) {
+
+                }
+
+            });//--ajax 
+
+        });        
 
 
  

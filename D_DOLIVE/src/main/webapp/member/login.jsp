@@ -29,7 +29,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-<title><spring:message code="message.user.login.title" /></title>
+<title>로그인</title>
 
 <!-- 부트스트랩 -->
 <link href="${hContext}/resources/css/bootstrap.min.css"
@@ -51,11 +51,8 @@
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 "></div>
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 ">
                 <!-- div title -->
-                <div>
-                    <h2 class="text-center"><spring:message code="message.user.login.title" /></h2>
-                </div>  
-                <form action="${hContext}/login.do" class="form-horizontal" name="login_form" method="get">
-				    <!-- div 언어 -->
+                <form action="login.do" class="form-horizontal" name="login_form" method="post">
+				    <%-- <!-- div 언어 -->
 				    <div class="form-group">
 				         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">   
 						     <select class="form-control" name="lang" id="lang">
@@ -63,13 +60,13 @@
 						       <option value="ko"><spring:message code='message.user.login.language.ko' /></option>
 						     </select>
 					     </div>
-				    </div>
+				    </div> --%>
                         
                     <!-- div 아이디 -->
                     <div class="form-group">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <input class="form-control" type="text" name="email" id="email" size="30"
-                             placeholder="<spring:message code='message.user.login.id' />"
+                             placeholder="이메일입력"
                              maxlength="20"> 
                         </div>
                     </div>
@@ -77,18 +74,18 @@
                     <div class="form-group">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <input class="form-control" type="password" name="pw" id="pw" size="30"
-                             placeholder="<spring:message code='message.user.login.password' />"
+                             placeholder="비밀번호입력"
                              maxlength="50">
                         </div>
                     </div>   
-                </form>	
-                    <!-- div 버튼 -->
+                    
+                   <!-- div 버튼 -->
                     <div class="text-center">
-                        <button type="button" class="btn btn-lg btn-primary btn-block"  id="member_login" size="30">
-                        
-                            <spring:message code='message.user.login.login.btn' />
-                        </button>  
-                    </div>                     
+                        <input type="submit" value="로그인" class="submit">  
+                    </div>  
+                    <a href="member_insert.jsp" class="more">아직  회원이 아니신가요?</a>                     
+                </form>	
+                   
                 	
 		    </div>
 		</div>
@@ -99,10 +96,8 @@
 	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
 	<script src="${hContext}/resources/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
-	   $("#member_login").on("click",function(){
-		  // console.log("member_login");
-		    document.login_form.submit();
-	   });
+
+	  
 	</script>
 </body>
 </html>

@@ -18,29 +18,21 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:set var="hContext" value="${pageContext.request.contextPath }"></c:set>
-<c:if test="${maxPageNo == null }">
-	<c:set var="maxPageNo" value="0"></c:set>
-</c:if>
-<c:if test="${pageNum == null }">
-	<c:set var="pageNum" value="1"></c:set>
-</c:if>
-
-
+<%@ taglib  prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ include file="/common/common.jsp" %>    
 <!DOCTYPE html>
 <html lang="ko">
-<head>
+<head profile="http://www.w3.org/2005/10/profile">
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
 <title>회원관리</title>
 
-<link rel="shortcut icon" type="image/x-icon"
-	href="${hContext}/resources/img/main/favicon.ico">
 <!-- 부트스트랩 -->
-<link href="${hContext}/resources/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="${hContext}/resources/css/bootstrap.min.css" rel="stylesheet">
+<link rel="icon" type="image/png" href="http://example.com/myicon.png">
 
 <!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
 <!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->
@@ -49,6 +41,9 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
+
+
 <body>
 	<!-- div container -->
 	<div class="container">
@@ -65,20 +60,10 @@
 		<div class="col-lg-12"></div>
 		<div class="panel panel-default"></div>
 
-		<!-- Button Area -->
-		<div class="row">
-			<div class="col-lg-10 col-sm-10 col-xs-10 ">
-				<div class="text-right">
-					<button type="button" class="btn btn-default btn-sm" id="doInsert">등록</button>
-					 <a href="javascript:history.go(-2)"><button type="button"
-								class="cancel">취 소</button></a>
-				</div>
-			</div>
-		</div>
-		<!--// Button Area -->
+
 
 		<!-- 입력 Form -->
-		<form action="${hContext}/member/do_update.do" name="member_edit" method="post" class="form-horizontal">
+		<form class="form-horizontal" name="registerForm" id="registerForm" method="post" >
 			
 			
 			<div class="form-group">
@@ -98,14 +83,12 @@
 				</div>
 			</div>
 			
-<!-- 			<div class="form-group">
-				<label for="pwcheck"
-					class="col-lg-4 col-sm-4 col-xs-4  control-label">비밀번호확인</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
-					<input type="password" maxlength="50" class="form-control input-sm"
-						id="pwcheck" name="pwcheck" placeholder="비밀번호확인" />
-				</div>
-			</div>	 -->		
+         <div class="form-group">
+              <label for="confirm_pass" class="col-lg-4 col-sm-4 col-xs-4  control-label">비밀번호 확인</label>
+            <div class="col-lg-6 col-sm-6 col-xs-6">
+               <input type="password" class="form-control" name="confirm_pass" id="confirm_pass" placeholder="비밀번호 확인">
+            </div>
+         </div>		
 						
 			<div class="form-group">
 				<label for="gender" class="col-lg-4 col-sm-4 col-xs-4  control-label">성별</label>
@@ -116,10 +99,10 @@
 			</div>				
 			
 			<div class="form-group">
-				<label for="ihidNum" class="col-lg-4 col-sm-4 col-xs-4  control-label">주민번호</label>
+				<label for="ihidnum" class="col-lg-4 col-sm-4 col-xs-4  control-label">주민번호</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
 					<input type="text" maxlength="50" class="form-control input-sm"
-						id="ihidNum" name="ihidNum" placeholder="주민번호" />
+						id="ihidnum" name="ihidnum" placeholder="주민번호" />
 				</div>
 			</div>				
 			
@@ -159,10 +142,25 @@
 				<div class="col-lg-6 col-sm-6 col-xs-6">
 						<input type="text" id=ADDR2 name="ADDR2" class="address" placeholder="상세주소" >
 				</div>
-			</div>										
+			</div>	
+			
+			
+			<!-- Button Area -->
+			<div class="form-group">
+				<div class="col-lg-10 col-sm-10 col-xs-10 ">
+<!-- 					<div class="text-right">
+						<button type="button" class="btn btn-default btn-sm" id="doInsert">등록</button>
+						 <a href="javascript:history.go(-2)"><button type="button"
+									class="cancel">취 소</button></a>
+					</div> -->
+					<input  type="button"  name="doInsert" onclick="$(this.form).submit()" class="btn btn-primary btn-sm"  value="등록" id="doInsert" />
+					  
+				</div>
+			</div>
+			<!--// Button Area -->												
 
 
-		</form>
+	</form>
 		
 		<!--// 입력 Form -->
 
@@ -262,78 +260,163 @@
 
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 	<script src="${hContext}/resources/js/jquery-migrate-1.4.1.js"></script>
+    <!-- jQuery validator -->
+    <script src="${hContext}/resources/js/jquery.validate.js"></script>	
 	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
 	<script src="${hContext}/resources/js/bootstrap.min.js"></script>
 	<!-- page -->
 	<script src="${hContext}/resources/js/jquery.bootpag.min.js"></script>
 
-	<script type="text/javascript">
+ 
 	
-    	
+	
+    <script type="text/javascript">
+         function bindEventHandler(){
+        	 $("#registerForm").validate({
+                 onfocus: true,
+                 //서버전송여부
+                 debug: true,
+                  
+                 rules: {
+                	 email:{
+                        //필수값
+                        required: true,
+                        //최소길이
+                        email: true
+                     },pw:{
+                         //필수값
+                         required: true,
+                         //범위
+                         rangelength: [5,12]
+                     },confirm_pass:{
+                         //필수값
+                         required: true,
+                         //범위
+                         rangelength: [5,12],
+
+                         equalTo:"#pw"
+                     },gender:{
+                    	required: true
+
+                 	 },ihidnum:{
+                 		required: true
+                 		
+                 	 },name:{
+                    	 //필수값
+                         required: true,
+                         //이메일형식
+                         minlength: 3
+                     },tel:{
+                         //필수값
+                         required: true,
+                         number:true,
+                         rangelength: [10,11]
+                         
+                     },sample2_postcode:{
+                    	 required: true
+                     },sample2_address:{
+                    	 required: true
+                     },ADDR2:{
+                    	 required: true
+                     }     
+
+                 },messages: {
+                     //message
+                     email:{
+                         //필수값
+                         required: "이메일은 필수값 입니다.",
+                         //이메일형식
+                         email:  "올바른 이메일 형식이 아닙니다."
+                 	 },pw:{
+                         //필수값 
+                         required: "비밀번호는 필수값 입니다.",
+                         //최소길이
+                         rangelength: $.validator.format('비밀번호는 {0}이상~{1}이하로 입력하세요.')
+                     },confirm_pass:{
+                          //필수값 
+                          required: "비밀번호확인을 입력하세요.",
+                          //최소길이
+                          rangelength: $.validator.format('비밀번호확인는 {0}이상~{1}이하로 입력하세요.'),
+                          //pass==confirm_pass 
+                          equalTo:"비밀번호 항목과 일치하지 않습니다."
+                     },gender:{
+                         //필수값 
+                         required: "필수값 선택값입니다.",
+                         //최소길이
+                         minlength: $.validator.format('{0}자 이상 입력하세요.')
+                     },ihidnum:{
+                         //필수값 
+                         required: "주민번호는 필수값 입니다.",
+                         //최소길이
+                         minlength: $.validator.format('{0}자 이상 입력하세요.')
+                     },name:{
+                         //필수값 
+                         required: "제목은 필수값 입니다.",
+                         //최소길이
+                         minlength: $.validator.format('{0}자 이상 입력하세요.')
+                     },tel:{
+                         //필수값 
+                         required: "전화번호는 필수값 입니다.",
+                         //최소길이
+						 rangelength: $.validator.format('비밀번호는 {0}이상~{1}이하로 입력하세요.')                           
+                     },sample2_postcode:{
+                         //필수값
+                         required: "우편번호는 필수값 입니다."
+                     },sample2_address:{
+                    	 required: "기본주소는 필수값 입니다."
+                     },ADDR2:{
+                    	 required: "상세주소는 필수값 입니다."
+                     }       
+   
+                 },errorElement: "em"
+                 ,errorPlacement: function ( error, element ) {
+                     // Add the `help-block` class to the error element
+                     error.addClass( "help-block" );
+
+                     if ( element.prop( "type" ) === "checkbox" ) {
+                         error.insertAfter( element.parent( "label" ) );
+                     } else {
+                         error.insertAfter( element );
+                     }
+                 },
+                 highlight: function ( element, errorClass, validClass ) {
+                     $( element ).parents( ".col-lg-6 " ).addClass( "has-error" ).removeClass( "has-success" );
+                 },
+                 unhighlight: function (element, errorClass, validClass) {
+                     $( element ).parents( ".col-lg-6 " ).addClass( "has-success" ).removeClass( "has-error" );
+                 }
+				
+
+          });
+
+         }
+    
+/*           $(document).ready(function(){
+             //input validation
+        	 bindEventHandler();
+        	 
+         });  */
+
+    </script>	
+	
+ 	<script type="text/javascript">
+	
+ 	 $(document).ready(function(){
+         //input validation
+    	 bindEventHandler();
+    	 
+     });
+
+ 	function goLogin(){
+    	location.href="http://localhost:8080/d_dolive/member/login.jsp";
+    }
+
+
+     
 		//등록
-		$("#doInsert").on("click", function() {
+		 $("#doInsert").on("click", function() { 
 			
 
-   /*           alert("email="+$("#email").val());
-            alert("pw="+$("#pw").val());
-            alert("gender="+$("#gender").val());
-            alert("ihidNum="+$("#ihidNum").val());
-            alert("name="+$("#name").val());
-            alert("tel="+$("#tel").val());
-            alert("sample2_postcode="+$("#sample2_postcode").val());
-            alert("sample2_address="+$("#sample2_address").val());
-            alert("ADDR2="+$("#ADDR2").val());  */
-
-            if ($("#email").val() == "" || $("#email").val() == false) {
-                alert("이메일을 입력 하세요.");
-                $("#email").focus();
-                return;
-            }
-            if ($("#pw").val() == "" || $("#pw").val() == false) {
-                alert("이름를 입력 하세요.");
-                $("#pw").focus();
-                return;
-            }
-            if ($("#gender").val() == "" || $("#gender").val() == false) {
-                alert("이름를 입력 하세요.");
-                $("#u_id").focus();
-                return;
-            }
-            if ($("#ihidnum").val() == "" || $("#ihidnum").val() == false) {
-                alert("이름를 입력 하세요.");
-                $("#ihidnum").focus();
-                return;
-            }
-            if ($("#name").val() == "" || $("#name").val() == false) {
-                alert("이름를 입력 하세요.");
-                $("#name").focus();
-                return;
-            }
-            if ($("#tel").val() == "" || $("#tel").val() == false) {
-                alert("이름를 입력 하세요.");
-                $("#tel").focus();
-                return;
-            }
-            if ($("#zipno").val() == "" || $("#zipno").val() == false) {
-                alert("이름를 입력 하세요.");
-                $("#zipno").focus();
-                return;
-            }
-            if ($("#addr").val() == "" || $("#addr").val() == false) {
-                alert("이름를 입력 하세요.");
-                $("#addr").focus();
-                return;
-            }
-            if ($("#addr2").val() == "" || $("#addr2").val() == false) {
-                alert("이름를 입력 하세요.");
-                $("#addr2").focus();
-                return;
-            }
-
-
-
-
-            
             //confirm
             if (confirm("등록 하시겠습니까?") == false)return;
             
@@ -346,7 +429,7 @@
                     "email" : $("#email").val(),
                     "pw" : $("#pw").val(),
                     "gender" : $("#gender").val(),
-                    "ihidnum" : $("#ihidNum").val(),
+                    "ihidnum" : $("#ihidnum").val(),
                     "name" : $("#name").val(),
                     "tel" : $("#tel").val(),
                     "zipno" : $("#sample2_postcode").val(),
@@ -362,14 +445,14 @@
                     var parseData = $.parseJSON(data);
                     if (parseData.msgId == "1") {
                         alert(parseData.msgMsg);
-                        doRetrieve();
+                        goLogin();
                     } else {
                         alert(parseData.msgMsg);
                     }
 
                 },
                 error : function(xhr, status, error) {
-                    alert("error:" + error);
+                    //alert("error:" + error);
                 },
                 complete : function(data) {
 
@@ -381,7 +464,11 @@
 
 
  
-	</script>
+	</script> 	
+	
+	
+	
+	
 </body>
 </html>
 

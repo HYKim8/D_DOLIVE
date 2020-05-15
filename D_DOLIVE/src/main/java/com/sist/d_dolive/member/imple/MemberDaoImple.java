@@ -3,339 +3,292 @@
  */
 package com.sist.d_dolive.member.imple;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.sql.DataSource;
-
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Repository;
 
+import com.sist.d_dolive.member.MemberDao;
+import com.sist.d_dolive.member.MemberVO;
 import com.sist.d_dolive.cmn.DTO;
 import com.sist.d_dolive.cmn.SearchVO;
 import com.sist.d_dolive.member.MemberDao;
-import com.sist.d_dolive.member.MemberVO;
 
 /**
  * @author sist
  *
  */
-@Repository("memberDao")
+@Repository
 public class MemberDaoImple implements MemberDao {
-	//Logger
-	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
-	  
+	Logger LOG = LoggerFactory.getLogger(this.getClass());
 	
-	RowMapper<MemberVO> rowMapper = new RowMapper<MemberVO>() {
-
-		public MemberVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-			MemberVO outData=new MemberVO();
-			outData.setEmail(rs.getString("email"));
-			outData.setPw(rs.getString("pw"));
-			outData.setGender(rs.getString("gender"));
-			outData.setName(rs.getString("name"));
-			outData.setIhidnum(rs.getString("ihidnum"));
-			outData.setAddr(rs.getString("addr"));
-			outData.setAddr2(rs.getString("addr2"));
-			outData.setZipno(rs.getString("zipno"));
-			outData.setTel(rs.getString("tel"));
-			
-			return outData;
-		}
-
-	};
-	
-
-	//JDBCTemplate
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
+	SqlSessionTemplate sqlSessionTemplate;
 	
-	public MemberDaoImple() {}
+	@Autowired
+	@Qualifier("mailSender")
+	private MailSender mailSender;
 	
+	private final String NAMESPACE= "com.sist.d_dolive.member";
 
-
-	public int doInsert(DTO dto) {// 회원가입
-		int flag = 0;
-		MemberVO inVO = (MemberVO) dto;
-		
-		StringBuilder  sb=new StringBuilder();
-		sb.append(" INSERT INTO member ( \n");
-		sb.append("     email,           \n");
-		sb.append("     pw,              \n");
-		sb.append("     gender,          \n");
-		sb.append("     ihidnum,         \n");
-		sb.append("     name,            \n");
-		sb.append("     tel,             \n");
-		sb.append("     zipno,           \n");
-		sb.append("     addr,            \n");
-		sb.append("     addr2,           \n");
-		sb.append("     regid,           \n");
-		sb.append("     regdt,           \n");
-		sb.append("     modid,           \n");
-		sb.append("     moddt            \n");
-		sb.append(" ) VALUES (           \n");
-		sb.append("     ?,               \n");
-		sb.append("     ?,               \n");
-		sb.append("     ?,               \n");
-		sb.append("     ?,               \n");
-		sb.append("     ?,               \n");
-		sb.append("     ?,               \n");
-		sb.append("     ?,               \n");
-		sb.append("     ?,               \n");
-		sb.append("     ?,               \n");
-		sb.append("     ?,               \n");
-		sb.append("     sysdate,         \n");
-		sb.append("     ?,               \n");
-		sb.append("     sysdate          \n");
-		sb.append(" )                    \n");
-		//Query수행
-		LOG.debug("==============================");
-		LOG.debug("=Query=\n"+sb.toString());
-		LOG.debug("=Param=\n"+inVO.toString());
-		Object[] args= {inVO.getEmail()
-				       ,inVO.getPw()
-				       ,inVO.getGender()
-				       ,inVO.getIhidnum()
-				       ,inVO.getName()
-				       ,inVO.getTel()
-				       ,inVO.getZipno()
-				       ,inVO.getAddr()
-				       ,inVO.getAddr2()
-				       ,inVO.getRegid()
-				       ,inVO.getModid()
-				       
-		};
-		flag = this.jdbcTemplate.update(sb.toString(), args);
-		
-		
-		LOG.debug("==============================");
-		
-		return flag;
-	}
-
-	public int doUpdate(DTO dto) { //회원정보 수정
-		int flag = 0;
-		MemberVO inVO = (MemberVO) dto;
-		StringBuilder sb=new StringBuilder();
-		sb.append(" UPDATE member			\n");
-		sb.append(" SET pw = ?              \n");
-		sb.append("     ,gender = ?         \n");
-		sb.append("     ,name = ?           \n");
-		sb.append("     ,ihidnum = ?        \n");
-		sb.append("     ,addr = ?           \n");
-		sb.append("     ,addr2 = ?          \n");
-		sb.append("     ,zipno = ?          \n");
-		sb.append("     ,tel = ?            \n");
-		sb.append("     ,modId = ?          \n");
-		sb.append("     ,modDt = sysdate    \n");
-		sb.append(" WHERE email = ?         \n");
-		
-		LOG.debug("==============================");
-		LOG.debug("=Query=\n"+sb.toString());
-		LOG.debug("=Param= "+inVO.toString());
-		Object[] args= {inVO.getPw()
-					   ,inVO.getGender()
-					   ,inVO.getName()
-					   ,inVO.getIhidnum()
-					   ,inVO.getAddr()
-					   ,inVO.getAddr2()
-					   ,inVO.getZipno()
-					   ,inVO.getTel()
-					   ,inVO.getModid()
-				       ,inVO.getEmail()
-				      };
-		flag = this.jdbcTemplate.update(sb.toString(), args);
-		LOG.debug("=flag= "+flag);
-		LOG.debug("==============================");
-		return flag;
-	}
-	
-	
-	public int idCount(DTO dto) { //아이디 중복체크
-		int cnt = 0;
-		MemberVO inVO = (MemberVO) dto;
-		StringBuilder  sb=new StringBuilder();
-		sb.append(" SELECT COUNT(*) \n");
-		sb.append(" FROM member     \n");
-		sb.append(" WHERE email= ?  \n");
-		
-		
-		//Query수행
-		LOG.debug("==============================");
-		LOG.debug("=Query=\n"+sb.toString());
-		LOG.debug("=Param= "+inVO.toString());
-		cnt = this.jdbcTemplate.queryForObject(sb.toString()
-				, new Object[] {"%"+inVO.getEmail()+"%"}
-		        , Integer.class);
-		
-		LOG.debug("=cnt= "+cnt);
-		return cnt;
-	}
-	
-
-	public DTO doFindId(DTO dto) {//이메일찾기 단건조회
-		MemberVO outVO = null;        //return UserVO
-		MemberVO inVO  = (MemberVO) dto;//Param UserVO
-		StringBuilder  sb=new StringBuilder();
-		sb.append(" SELECT email    \n");
-		sb.append(" FROM member     \n");
-		sb.append(" WHERE name=?    \n");
-		sb.append(" AND IHIDNUM=?   \n");
-		
-		//Query수행
-		LOG.debug("==============================");
-		LOG.debug("=Query=\n"+sb.toString());
-		LOG.debug("=Param=\n"+inVO.getName());
-		LOG.debug("=Param=\n"+inVO.getIhidnum());
-		
-		Object []args = {inVO.getName(),
-						 inVO.getIhidnum() 
-						 };
-		outVO = this.jdbcTemplate.queryForObject(sb.toString()
-				,args
-				,rowMapper); 
-		LOG.debug("=outVO=\n"+outVO);
-		LOG.debug("==============================");
-		
-		return outVO;
-	}
-	
-	
-	public DTO doFindPw(DTO dto) {//비밀번호찾기 단건조회
-		MemberVO outVO = null;        //return UserVO
-		MemberVO inVO  = (MemberVO) dto;//Param UserVO
-		StringBuilder  sb=new StringBuilder();
-		sb.append(" SELECT pw		\n");
-		sb.append(" FROM member     \n");
-		sb.append(" WHERE email =?  \n");
-		sb.append(" AND name =?     \n");
-		sb.append(" AND IHIDNUM=?   \n");
-		
-		//Query수행
-		LOG.debug("==============================");
-		LOG.debug("=Query=\n"+sb.toString());
-		LOG.debug("=Param=\n"+inVO.getEmail());
-		
-		Object []args = {inVO.getEmail(), inVO.getName(), inVO.getIhidnum() };
-		outVO = this.jdbcTemplate.queryForObject(sb.toString()
-				,args
-				,rowMapper); 
-		LOG.debug("=outVO=\n"+outVO);
-		LOG.debug("==============================");
-		
-		return outVO;
-	}
-	
-
-	public int doDelete(DTO dto) { //회원탈퇴
-		int flag = 0;
-		MemberVO inVO = (MemberVO) dto;
-		StringBuilder  sb=new StringBuilder();
-		sb.append(" DELETE FROM member \n");
-		sb.append(" WHERE email = ?    \n");
-		LOG.debug("==============================");
-		LOG.debug("=Query=\n"+sb.toString());
-		LOG.debug("=Param="+inVO);
-		
-		Object[] args = {inVO.getEmail()};
-		flag = jdbcTemplate.update(sb.toString(), args);
-		
-		LOG.debug("=flag="+flag);		
-		LOG.debug("==============================");	
-		return flag;
-	}
-	
-	public DTO getMember(DTO dto) {//로그인
-		MemberVO outVO = null;        //return UserVO
-		MemberVO inVO  = (MemberVO) dto;//Param UserVO
-		StringBuilder  sb = new StringBuilder();
-		sb.append(" select * from member  \n");
-		sb.append(" where email= ?        \n");
-		sb.append(" and pw= ?             \n");
-		
-		//Query수행
-		LOG.debug("==============================");
-		LOG.debug("=Query=\n"+sb.toString());
-		LOG.debug("=Param=\n"+inVO.getEmail());
-		
-		Object []args = {inVO.getEmail(),inVO.getPw() };
-		
-		outVO = this.jdbcTemplate.queryForObject(sb.toString()
-				,args
-				,rowMapper); 
-		LOG.debug("=outVO=\n"+outVO);
-		LOG.debug("==============================");
-		
-		return outVO;
-	}
-	
-
-	/**
-	 * 
-	 *Method Name:getAll
-	 *작성일: 2020. 4. 8.
-	 *작성자: sist
-	 *설명: 전체 조회
-	 *@param dto
-	 *@return
-	 */
 	@Override
-	public DTO doSelectOne(DTO dto) {//마이페이지 회원정보출력
-		MemberVO outVO = null;        //return UserVO
-		MemberVO inVO  = (MemberVO) dto;//Param UserVO
-		StringBuilder  sb = new StringBuilder();
-		sb.append(" SELECT email,						\n");
-		sb.append("        gender,                      \n");
-		sb.append("        SUBSTR(IHIDNUM,1,6),         \n");
-		sb.append("        name,                        \n");
-		sb.append("        tel,                         \n");
-		sb.append("        addr,                        \n");
-		sb.append("        addr2                        \n");
-		sb.append(" FROM member                         \n");
-		sb.append(" WHERE email=?                       \n");
+	public int doInsert(DTO dto) {
+		MemberVO inVO = (MemberVO) dto;
+		LOG.debug("1==========================");
+		LOG.debug("1=inVO="+inVO);
+		LOG.debug("1==========================");
 		
-		//Query수행
-		LOG.debug("==============================");
-		LOG.debug("=Query=\n"+sb.toString());
-		LOG.debug("=Param=\n"+inVO.getEmail());
+		// namespace+id = com.sist.ehr.board.doInsert
+		String statement = NAMESPACE + ".doInsert";
+		LOG.debug("2==========================");
+		LOG.debug("2=statement="+statement);
+		LOG.debug("2==========================");
 		
-		Object []args = {inVO.getEmail(),
-						 inVO.getPw()
-						 };
-		outVO = this.jdbcTemplate.queryForObject(sb.toString()
-				,args
-				,rowMapper); 
-		LOG.debug("=outVO=\n"+outVO);
-		LOG.debug("==============================");
+		int flag = this.sqlSessionTemplate.insert(statement, inVO);
+		LOG.debug("3==========================");
+		LOG.debug("3=flag="+flag);
+		LOG.debug("3==========================");
+		
+		return flag;
+	}
+
+	@Override
+	public int doUpdate(DTO dto) {
+		MemberVO inVO = (MemberVO) dto;
+		LOG.debug("1==========================");
+		LOG.debug("1=inVO="+inVO);
+		LOG.debug("1==========================");
+		
+		// namespace+id = com.sist.ehr.board.doInsert
+		String statement = NAMESPACE + ".doUpdate";
+		LOG.debug("2==========================");
+		LOG.debug("2=statement="+statement);
+		LOG.debug("2==========================");
+		
+		int flag = this.sqlSessionTemplate.update(statement, inVO);
+		LOG.debug("3==========================");
+		LOG.debug("3=flag="+flag);
+		LOG.debug("3==========================");
+		
+		return flag;
+	}
+
+	@Override
+	public DTO doSelectOne(DTO dto) {
+		MemberVO inVO = (MemberVO) dto;
+		LOG.debug("1==========================");
+		LOG.debug("1=inVO="+inVO);
+		LOG.debug("1==========================");
+		
+		// namespace+id = com.sist.ehr.board.doInsert
+		String statement = NAMESPACE + ".doSelectOne";
+		LOG.debug("2==========================");
+		LOG.debug("2=statement="+statement);
+		LOG.debug("2==========================");
+		
+		MemberVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("3==========================");
+		LOG.debug("3=outVO="+outVO);
+		LOG.debug("3==========================");
+		
+		return outVO;
+	}
+	
+	public DTO doSelectOne1(DTO dto) {
+		MemberVO inVO = (MemberVO) dto;
+		LOG.debug("1==========================");
+		LOG.debug("1=inVO="+inVO);
+		LOG.debug("1==========================");
+		
+		// namespace+id = com.sist.ehr.board.doInsert
+		String statement = NAMESPACE + ".doSelectOne1";
+		LOG.debug("2==========================");
+		LOG.debug("2=statement="+statement);
+		LOG.debug("2==========================");
+		
+		MemberVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("3==========================");
+		LOG.debug("3=outVO="+outVO);
+		LOG.debug("3==========================");
+		
+		return outVO;
+	}
+	
+	
+	
+	public void doDeleteAll() {
+		// namespace+id = com.sist.ehr.board.doInsert
+		String statement = NAMESPACE + ".doDeleteAll";
+		LOG.debug("1==========================");
+		LOG.debug("1=statement="+statement);
+		LOG.debug("1==========================");
+		
+		int flag = this.sqlSessionTemplate.delete(statement);
+		LOG.debug("2==========================");
+		LOG.debug("2=flag="+flag);
+		LOG.debug("2==========================");
+	}
+
+	@Override
+	public int doDelete(DTO dto) {
+		MemberVO inVO = (MemberVO) dto;
+		LOG.debug("1==========================");
+		LOG.debug("1=inVO="+inVO);
+		LOG.debug("1==========================");
+		
+		// namespace+id = com.sist.ehr.board.doInsert
+		String statement = NAMESPACE + ".doDelete";
+		LOG.debug("2==========================");
+		LOG.debug("2=statement="+statement);
+		LOG.debug("2==========================");
+		
+		int flag = this.sqlSessionTemplate.delete(statement, inVO);
+		LOG.debug("3==========================");
+		LOG.debug("3=flag="+flag);
+		LOG.debug("3==========================");
+		
+		return flag;
+	}
+
+	@Override
+	public int idCount(DTO dto) {
+		MemberVO inVO = (MemberVO) dto;
+		LOG.debug("1==========================");
+		LOG.debug("1=inVO="+inVO);
+		LOG.debug("1==========================");
+		
+		// namespace+id = com.sist.ehr.board.doInsert
+		String statement = NAMESPACE + ".idCount";
+		LOG.debug("2==========================");
+		LOG.debug("2=statement="+statement);
+		LOG.debug("2==========================");
+		
+		int outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("3==========================");
+		LOG.debug("3=outVO="+outVO);
+		LOG.debug("3==========================");
 		
 		return outVO;
 	}
 
+	@Override
+	public DTO doFindId(DTO dto) {
+		MemberVO inVO = (MemberVO) dto;
+		LOG.debug("1==========================");
+		LOG.debug("1=inVO="+inVO);
+		LOG.debug("1==========================");
+		
+		// namespace+id = com.sist.ehr.board.doInsert
+		String statement = NAMESPACE + ".doFindId";
+		LOG.debug("2==========================");
+		LOG.debug("2=statement="+statement);
+		LOG.debug("2==========================");
+		
+		MemberVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("3==========================");
+		LOG.debug("3=outVO="+outVO);
+		LOG.debug("3==========================");
+		
+		return outVO;
+	}
 
+	@Override
+	public DTO doFindPw(DTO dto) {
+		MemberVO inVO = (MemberVO) dto;
+		LOG.debug("1==========================");
+		LOG.debug("1=inVO="+inVO);
+		LOG.debug("1==========================");
+		
+		// namespace+id = com.sist.ehr.board.doInsert
+		String statement = NAMESPACE + ".doFindPw";
+		LOG.debug("2==========================");
+		LOG.debug("2=statement="+statement);
+		LOG.debug("2==========================");
+		
+		MemberVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("3==========================");
+		LOG.debug("3=outVO="+outVO);
+		LOG.debug("3==========================");
+		
+		return outVO;
+	}
 
+	@Override
+	public DTO getMember(DTO dto) {
+		MemberVO inVO = (MemberVO) dto;
+		LOG.debug("1==========================");
+		LOG.debug("1=inVO="+inVO);
+		LOG.debug("1==========================");
+		
+		// namespace+id = com.sist.ehr.board.doInsert
+		String statement = NAMESPACE + ".getMember";
+		LOG.debug("2==========================");
+		LOG.debug("2=statement="+statement);
+		LOG.debug("2==========================");
+		
+		MemberVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("3==========================");
+		LOG.debug("3=outVO="+outVO);
+		LOG.debug("3==========================");
+		
+		return outVO;
+	}
+	
+	
+	@Override
+	public void sendEmail(DTO dto) {
+		/*
+		 * POP 서버명 : pop.naver.com SMTP 서버명 : smtp.naver.com POP 포트 : 995, 보안연결(SSL) 필요
+		 * SMTP 포트 : 465, 보안 연결(SSL) 필요 아이디 : jamesol 비밀번호 : 네이버 로그인 비밀번호
+		 */
 
+		// ------------------------------------------
+		// 받는사람
+		// 제목
+		// 내용
+		// ------------------------------------------
+		// 받는사람
+		String recipient = ((MemberVO) dto).getEmail();
+		// 제목
+		String title = "비밀번호찾기";
+		// 내용
+		String contents = "비밀번호:"+((MemberVO) dto).getPw() ;
+
+		// ------------------------------------------
+		// Message에,받는사람,제목,내용,인증
+		// 전송:Java
+		// ------------------------------------------
+
+		SimpleMailMessage mimeMessage = new SimpleMailMessage();
+
+		// 보내는 사람
+		mimeMessage.setFrom("wkdkfl815@naver.com");
+
+		// 받는사람
+		mimeMessage.setTo(recipient);
+		// 제목
+		mimeMessage.setSubject(title);
+		// 내용
+		mimeMessage.setText(contents);
+
+		// 전송
+		mailSender.send(mimeMessage);
+
+		LOG.debug("===================");
+		LOG.debug("=mail send to=" + recipient);
+		LOG.debug("===================");
+	}
+
+	
+	
+	
 
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

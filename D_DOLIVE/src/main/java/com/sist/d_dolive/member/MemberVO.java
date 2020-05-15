@@ -228,11 +228,13 @@ public class MemberVO extends DTO {
 
 	@Override
 	public String toString() {
-		return "UserVO [email=" + email + ", pw=" + pw + ", gender=" + gender + ", name=" + name + ", ihidnum="
+		return "MemberVO [email=" + email + ", pw=" + pw + ", gender=" + gender + ", name=" + name + ", ihidnum="
 				+ ihidnum + ", addr=" + addr + ", addr2=" + addr2 + ", zipno=" + zipno + ", tel=" + tel + ", regid="
 				+ regid + ", regdt=" + regdt + ", modid=" + modid + ", moddt=" + moddt + ", toString()="
 				+ super.toString() + "]";
 	}
+
+
 
 	
 

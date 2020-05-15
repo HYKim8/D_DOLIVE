@@ -1,6 +1,7 @@
 package com.sist.d_dolive.member.web;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Qualifier;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,83 +27,57 @@ import com.sist.d_dolive.member.MemberService;
 import com.sist.d_dolive.member.MemberVO;
 import com.sist.d_dolive.member.imple.MemberServiceImple;
 
-//@Controller
+@Controller
 public class MemberCont {
 
 	private final Logger  LOG = LoggerFactory.getLogger(MemberCont.class);
 	
 	//@Qualifier("dummyMailSender") : root-context.xml bean id
 	@Autowired
-	MemberService userService;
-
-	@RequestMapping("/login.do")
-	public ModelAndView login(MemberVO vo, HttpServletRequest request) {
-		System.out.println("로그인  처리...");
-		ModelAndView mav = new ModelAndView();
-		HttpSession session = request.getSession();
-		
-			MemberVO mem = (MemberVO) userService.getMember(vo);
-			if (mem != null) {
-				session.setAttribute("authUser", mem);
-				mav.setViewName("index.jsp");
-				return mav;
-				
-			} else
-				mav.setViewName("login.jsp");
-			mav.addObject("notExist", true);
-			return mav;
-		
-	}
-
+	MemberService memberService;
+	
+	@Autowired
+	MessageSource messageSource;
 	
 	@RequestMapping(value = "member/insert.do",method = RequestMethod.POST
-			,produces = "application/json;charset=UTF-8")
+			,produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public String insert(MemberVO user) {
+	public String doInsert(MemberVO memberVO, Locale locale) {
 		
 		LOG.debug("1===================");
-		LOG.debug("1=user="+user);
+		LOG.debug("1=memberVO11="+memberVO);
 		LOG.debug("1===================");
 		
-		int  flag = userService.doInsert(user);
+		int  flag = this.memberService.doInsert(memberVO);
 		
-		LOG.debug("1.2===================");
-		LOG.debug("1.2=flag="+flag); 
-		LOG.debug("1.2===================");
-		
-		//메시지 처리
 		MessageVO message=new MessageVO();
-
-		message.setMsgId(flag+"");
-		//성공
-		if(flag ==1) {
-			message.setMsgMsg(user.getEmail()+"님이 등록 되었습니다.");
-		//실패	
+		
+		if(flag>0) {
+			message.setMsgId(String.valueOf(flag));
+			message.setMsgMsg("등록 성공.");
 		}else {
-			message.setMsgMsg(user.getEmail()+"님 등록 실패.");			
+			message.setMsgId(String.valueOf(flag));
+			message.setMsgMsg("등록 실패.");			
 		}
 		
-		//JSON
 		Gson gson=new Gson();
-		String json = gson.toJson(message);
-		
-		LOG.debug("1.3===================");
-		LOG.debug("1.3=json="+json); 
-		LOG.debug("1.3===================");		
-		
-		return json;
+		String jsonStr = gson.toJson(message);
+		LOG.debug("1.2=================");
+		LOG.debug("1.2=jsonStr="+jsonStr);
+		LOG.debug("1.2=================");		
+		return jsonStr;
 	}
 	
 	
 	
 	@RequestMapping(value = "member/update.do",method = RequestMethod.POST ,produces = "application/json;charset=UTF-8")
 	@ResponseBody	
-	public String doUpdate(MemberVO user) {
+	public String doUpdate(MemberVO memberVO, Locale locale) {
 		LOG.debug("1===================");
-		LOG.debug("1=user="+user);
+		LOG.debug("1=memberVO="+memberVO);
 		LOG.debug("1===================");
 		
-		int  flag = userService.doUpdate(user);
+		int  flag = this.memberService.doUpdate(memberVO);
 		LOG.debug("1.2===================");
 		LOG.debug("1.2=flag="+flag); 
 		LOG.debug("1.2===================");
@@ -112,10 +88,10 @@ public class MemberCont {
 		message.setMsgId(flag+"");
 		//성공
 		if(flag ==1) {
-			message.setMsgMsg(user.getEmail()+"님이 수정 되었습니다.");
+			message.setMsgMsg(memberVO.getEmail()+"님이 수정 되었습니다.");
 		//실패	
 		}else {
-			message.setMsgMsg(user.getEmail()+"님 등록 실패.");			
+			message.setMsgMsg(memberVO.getEmail()+"님 등록 실패.");			
 		}		
 		
 		//JSON
@@ -134,13 +110,13 @@ public class MemberCont {
 	@RequestMapping(value = "member/idCount.do",method = RequestMethod.POST
 			,produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public int idCount(MemberVO user) {
+	public int idCount(MemberVO memberVO, Locale locale) {
 		
 		LOG.debug("1===================");
-		LOG.debug("1=user="+user);
+		LOG.debug("1=memberVO="+memberVO);
 		LOG.debug("1===================");
 		
-		int  cnt = userService.idCount(user);
+		int  cnt = memberService.idCount(memberVO);
 		
 		LOG.debug("1.2===================");
 		LOG.debug("1.2=cnt="+cnt); 
@@ -149,29 +125,27 @@ public class MemberCont {
 		return cnt;
 	}
 	
-	@RequestMapping(value="member/find_id.do",method = RequestMethod.POST
+	@ResponseBody
+	@RequestMapping(value="member/find_id.do",method = RequestMethod.GET
 		       ,produces = "application/json;charset=UTF-8")
-	@ResponseBody	
-	public String doFindId(MemberVO user) {
+	public String doFindId(MemberVO MemberVO,Locale locale, Model model ) {
 		LOG.debug("1===================");
-		LOG.debug("1=user="+user);
+		LOG.debug("1=param="+MemberVO);
 		LOG.debug("1===================");		
 		
-		MemberVO outVO = (MemberVO) userService.doFindId(user);
+		MemberVO outVO = (MemberVO) this.memberService.doFindId(MemberVO);
 		//outVO.setLevel(outVO.getLevel().intValue());
 		
 		LOG.debug("1.2===================");
 		LOG.debug("1.2=outVO="+outVO);
-		LOG.debug("1.2===================");		
+		LOG.debug("1.2===================");
+		model.addAttribute("vo", outVO);
+		if (outVO != null) {
+			return outVO.getEmail();
+		} else {
+			return "x";
+		}
 		
-		Gson gson=new Gson();
-		String json = gson.toJson(outVO);
-		
-		LOG.debug("1.3===================");
-		LOG.debug("1.3=json="+json);
-		LOG.debug("1.3===================");		
-		
-		return json;
 	}
 		
 	
@@ -180,40 +154,35 @@ public class MemberCont {
 
 	@RequestMapping(value="member/do_find_pw.do",method = RequestMethod.POST
 		       ,produces = "application/json;charset=UTF-8")
-    @ResponseBody	
-	public MemberVO doFindPw(MemberVO user) {//이메일찾기 단건조회
+	@ResponseBody
+	public String doFindPw(MemberVO memberVO,Locale locale, Model model ) {//이메일찾기 단건조회
 		LOG.debug("1===================");
-		LOG.debug("1=user="+user);
+		LOG.debug("1=memberVO="+memberVO);
 		LOG.debug("1===================");		
 		
-		MemberVO outVO = (MemberVO) userService.doFindPw(user);
-		//outVO.setLevel(outVO.getLevel().intValue());
+		MemberVO outVO = (MemberVO) memberService.doFindPw(memberVO);
+		memberService.sendEmail(outVO);
 		
 		LOG.debug("1.2===================");
 		LOG.debug("1.2=outVO="+outVO);
 		LOG.debug("1.2===================");		
 		
-		Gson gson=new Gson();
-		String json = gson.toJson(outVO);
+		model.addAttribute("vo", outVO);
 		
-		LOG.debug("1.3===================");
-		LOG.debug("1.3=json="+json);
-		LOG.debug("1.3===================");		
-		
-		return outVO;
+		return "member/id_pw_find";
 	}
 	
 	
 	@RequestMapping(value="member/do_delete.do",method = RequestMethod.POST
 			       ,produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String doDelete(MemberVO user) {
+	public String doDelete(MemberVO memberVO, Locale locale) {
 		LOG.debug("1===================");
-		LOG.debug("1=user="+user);
+		LOG.debug("1=memberVO="+memberVO);
 		LOG.debug("1===================");		
 		
 		int flag = 0;
-		flag = userService.doDelete(user);
+		flag = this.memberService.doDelete(memberVO);
 		
 		MessageVO message=new MessageVO();
 		message.setMsgId(String.valueOf(flag));
@@ -223,10 +192,10 @@ public class MemberCont {
 		
 		//성공
 		if(flag ==1) {
-			message.setMsgMsg(user.getEmail()+"님이 삭제 되었습니다.");
+			message.setMsgMsg(memberVO.getEmail()+"님이 삭제 되었습니다.");
 		//실패	
 		}else {
-			message.setMsgMsg(user.getEmail()+"삭제 실패.");
+			message.setMsgMsg(memberVO.getEmail()+"삭제 실패.");
 		}
 		
 		
@@ -245,12 +214,12 @@ public class MemberCont {
 	@RequestMapping(value="member/do_getmember.do",method = RequestMethod.POST
 		       ,produces = "application/json;charset=UTF-8")
 	@ResponseBody	
-	public MemberVO getMember(MemberVO user) {
+	public MemberVO getMember(MemberVO memberVO,Locale locale, Model model) {
 		LOG.debug("1===================");
-		LOG.debug("1=user="+user);
+		LOG.debug("1=memberVO="+memberVO);
 		LOG.debug("1===================");		
 		
-		MemberVO outVO = (MemberVO) userService.getMember(user);
+		MemberVO outVO = (MemberVO) this.memberService.getMember(memberVO);
 		//outVO.setLevel(outVO.getLevel().intValue());
 		
 		LOG.debug("1.2===================");
@@ -271,12 +240,12 @@ public class MemberCont {
 	@RequestMapping(value="member/do_select_one.do",method = RequestMethod.POST
 		       ,produces = "application/json;charset=UTF-8")
 	@ResponseBody	
-	public MemberVO doSelectOne(MemberVO user) {
+	public MemberVO doSelectOne(MemberVO memberVO,Locale locale, Model model) {
 		LOG.debug("1===================");
-		LOG.debug("1=user="+user);
+		LOG.debug("1=memberVO="+memberVO);
 		LOG.debug("1===================");		
 		
-		MemberVO outVO = (MemberVO) userService.doSelectOne(user);
+		MemberVO outVO = (MemberVO) this.memberService.doSelectOne(memberVO);
 		//outVO.setLevel(outVO.getLevel().intValue());
 		
 		LOG.debug("1.2===================");
@@ -293,6 +262,58 @@ public class MemberCont {
 		return outVO;
 	}
 	
+	@RequestMapping(value="member/do_select_one1.do",method = RequestMethod.POST
+		       ,produces = "application/json;charset=UTF-8")
+	@ResponseBody	
+	public MemberVO doSelectOne1(MemberVO memberVO,Locale locale, Model model) {
+		LOG.debug("1===================");
+		LOG.debug("1=memberVO="+memberVO);
+		LOG.debug("1===================");		
+		
+		MemberVO outVO = (MemberVO) this.memberService.doSelectOne1(memberVO);
+		//outVO.setLevel(outVO.getLevel().intValue());
+		
+		LOG.debug("1.2===================");
+		LOG.debug("1.2=outVO="+outVO);
+		LOG.debug("1.2===================");		
+		
+		Gson gson=new Gson();
+		String json = gson.toJson(outVO);
+		
+		LOG.debug("1.3===================");
+		LOG.debug("1.3=json="+json);
+		LOG.debug("1.3===================");		
+		
+		return outVO;
+	}
+	
+	   @RequestMapping(value="member/login.do",method = RequestMethod.POST)
+	   public String doLogin(HttpServletRequest req, Model model) {
+	      LOG.debug("=======================================");
+	      LOG.debug("=doLogin/param");
+	      LOG.debug("=doLogin/memberId:"+req.getParameter("email"));
+	      LOG.debug("=doLogin/password:"+req.getParameter("pw"));
+	      LOG.debug("=======================================");
+	      
+	      MemberVO inVO=new MemberVO();
+	      inVO.setEmail(req.getParameter("email"));
+	      inVO.setPw(req.getParameter("pw"));
+	      
+	      MemberVO outVO=(MemberVO)this.memberService.getMember(inVO);
+	      if(outVO.getEmail()==null || "".equals(outVO.getEmail())) {
+	         model.addAttribute("loginFailure","아이디와 비밀번호를 확인해주세요.");
+	         return "webapp/member/login";
+	      }else {
+	         MemberVO memVO=new MemberVO();
+	         memVO.setEmail(outVO.getEmail());
+	         HttpSession session=req.getSession();
+	         StringBuilder out=new StringBuilder();
+	         model.addAttribute("memberVO", outVO);
+	         session.setAttribute("memberEmail", outVO.getEmail());
+	         return "pharmacymap/Main";
+
+	      }
+	   }	
 
 	
 }
