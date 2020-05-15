@@ -59,6 +59,8 @@ public class TestMemberControllerWeb {
 		LOG.debug("=setUp()=");
 		LOG.debug("*********************");
 		
+		
+		
 		memberList = Arrays.asList(
 				new MemberVO("bealright6@naver.com", "비밀번호1", "1", "박종훈1", "920826", "서울시 노원구", "안알랴줌동", "12345", "010-0000-0000", "admin01", "2020/05/11", "admin01", "2020/05/11")
 				, new MemberVO("이메일2", "비밀번호2", "2", "박종훈2", "920826", "서울시 노원구", "안알랴줌동", "12345", "010-0000-0000", "admin01", "2020/05/11", "admin01", "2020/05/11")
