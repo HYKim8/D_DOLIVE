@@ -72,71 +72,71 @@ public class TestMemberControllerWeb {
 		LOG.debug("=====================");		
 	}
 	
-//	@Test
-//	public void doUpdate() throws Exception {
-//		//1. 전체 삭제
-//		memberDaoImple.doDeleteAll();
-//		
-//		//2. 단건 입력
-//		int flag = memberDaoImple.doInsert(memberList.get(0));
-//		assertThat(flag, is(1));
-//		
-//		//3. 단건 조회: Member 조회
-//		MemberVO member = (MemberVO) memberDaoImple.doSelectOne1(memberList.get(0));
-//		LOG.debug("=====================");
-//		LOG.debug("=Member="+member);
-//		LOG.debug("=====================");
-//		
-//		//3.1. 단건 수정
-//		
-//		member.setPw(member.getPw() + "_U");
-//		member.setGender("2");
-//		member.setName(member.getName() + "_U");
-//		member.setIhidnum(member.getIhidnum() + "_U");
-//		member.setAddr(member.getAddr() + "_U");
-//		member.setAddr2(member.getAddr2() + "_U");
-//		member.setZipno("96548");
-//		member.setTel("010-8888-8888");
-//		member.setModid(member.getModid() + "_U");
-//		member.setEmail(member.getEmail());
-//		
-//		//4. 수정
-//		//url+param
-//		MockHttpServletRequestBuilder createMesage
-//			= MockMvcRequestBuilders.post("/member/update.do")
-//				.param("pw", member.getPw())
-//				.param("gender", member.getGender())
-//				.param("name", member.getName())
-//				.param("ihidnum", member.getIhidnum())
-//				.param("addr", member.getAddr())
-//				.param("addr2", member.getAddr2())
-//				.param("zipno", member.getZipno())
-//				.param("tel", member.getTel())
-//				.param("modid", member.getModid())
-//				.param("email",member.getEmail())
-//		;		
-//		
-//		//MediaType.APPLICATION_JSON_UTF8 ==application/json;charset=UTF-8
-//		ResultActions resultActions = mockMvc.perform(createMesage)
-//			.andExpect(status().is2xxSuccessful())
-//			.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
-//		    .andExpect(MockMvcResultMatchers.jsonPath("$.msgId", is("1")))
-//		;
-//				
-//		String result = resultActions.andDo(print())
-//				.andReturn()
-//				.getResponse().getContentAsString()
-//		;
-//		LOG.debug("=====================");
-//		LOG.debug("=result="+result);
-//		LOG.debug("=====================");
-//		
-//		//5. 수정 데이터 조회
-//		MemberVO vsVO = (MemberVO) memberDaoImple.doSelectOne1(member);
-//		
-//		//6. 비교
-//		checkSameUser(member, vsVO);
-//	}
+	@Test
+	public void doUpdate() throws Exception {
+		//1. 전체 삭제
+		memberDaoImple.doDeleteAll();
+		
+		//2. 단건 입력
+		int flag = memberDaoImple.doInsert(memberList.get(0));
+		assertThat(flag, is(1));
+		
+		//3. 단건 조회: Member 조회
+		MemberVO member = (MemberVO) memberDaoImple.doSelectOne1(memberList.get(0));
+		LOG.debug("=====================");
+		LOG.debug("=Member="+member);
+		LOG.debug("=====================");
+		
+		//3.1. 단건 수정
+		
+		member.setPw(member.getPw() + "_U");
+		member.setGender("2");
+		member.setName(member.getName() + "_U");
+		member.setIhidnum(member.getIhidnum() + "_U");
+		member.setAddr(member.getAddr() + "_U");
+		member.setAddr2(member.getAddr2() + "_U");
+		member.setZipno("96548");
+		member.setTel("010-8888-8888");
+		member.setModid(member.getModid() + "_U");
+		member.setEmail(member.getEmail());
+		
+		//4. 수정
+		//url+param
+		MockHttpServletRequestBuilder createMesage
+			= MockMvcRequestBuilders.post("/member/update.do")
+				.param("pw", member.getPw())
+				.param("gender", member.getGender())
+				.param("name", member.getName())
+				.param("ihidnum", member.getIhidnum())
+				.param("addr", member.getAddr())
+				.param("addr2", member.getAddr2())
+				.param("zipno", member.getZipno())
+				.param("tel", member.getTel())
+				.param("modid", member.getModid())
+				.param("email",member.getEmail())
+		;		
+		
+		//MediaType.APPLICATION_JSON_UTF8 ==application/json;charset=UTF-8
+		ResultActions resultActions = mockMvc.perform(createMesage)
+			.andExpect(status().is2xxSuccessful())
+			.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
+		    .andExpect(MockMvcResultMatchers.jsonPath("$.msgId", is("1")))
+		;
+				
+		String result = resultActions.andDo(print())
+				.andReturn()
+				.getResponse().getContentAsString()
+		;
+		LOG.debug("=====================");
+		LOG.debug("=result="+result);
+		LOG.debug("=====================");
+		
+		//5. 수정 데이터 조회
+		MemberVO vsVO = (MemberVO) memberDaoImple.doSelectOne1(member);
+		
+		//6. 비교
+		checkSameUser(member, vsVO);
+	}
 	
 	
 	
@@ -178,7 +178,7 @@ public class TestMemberControllerWeb {
 		LOG.debug("=result="+result);
 		LOG.debug("=====================");
 	}
-//	
+	
 //	@Test
 //	public void doSelectOne() throws Exception {
 //		//1. 전체 삭제
@@ -209,40 +209,40 @@ public class TestMemberControllerWeb {
 //		LOG.debug("=====================");  		
 //	}
 	
-//	
-//	@Test
-//	public void doInsert() throws Exception {
-//		//memberDaoImple.doDeleteAll();
-//		
-//		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/member/insert.do")
-//				.param("email", memberList.get(0).getEmail())
-//				.param("pw", memberList.get(0).getPw())
-//				.param("gender", memberList.get(0).getGender())
-//				.param("name", memberList.get(0).getName())
-//				.param("ihidnum", memberList.get(0).getIhidnum())
-//				.param("addr", memberList.get(0).getAddr())
-//				.param("addr2", memberList.get(0).getAddr2())
-//				.param("zipno", memberList.get(0).getZipno())
-//				.param("tel", memberList.get(0).getTel())
-//				.param("regid", memberList.get(0).getRegid())
-//				.param("regdt", memberList.get(0).getRegdt())
-//				.param("modid", memberList.get(0).getModid())
-//				.param("moddt", memberList.get(0).getModdt())
-//		;
-//		
-//		ResultActions resultActions = mockMvc.perform(createMessage)
-//				.andExpect(MockMvcResultMatchers.content().contentType("application/json; charset=UTF-8"))
-//				.andExpect(MockMvcResultMatchers.jsonPath("$.msgId", is("1")))
-//		;
-//		
-//		String result = resultActions.andDo(print())
-//				.andReturn()
-//				.getResponse().getContentAsString()
-//		;
-//		LOG.debug("=====================");
-//		LOG.debug("=result="+result);
-//		LOG.debug("=====================");
-//	}
+	
+	@Test
+	public void doInsert() throws Exception {
+		//memberDaoImple.doDeleteAll();
+		
+		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/member/insert.do")
+				.param("email", memberList.get(0).getEmail())
+				.param("pw", memberList.get(0).getPw())
+				.param("gender", memberList.get(0).getGender())
+				.param("name", memberList.get(0).getName())
+				.param("ihidnum", memberList.get(0).getIhidnum())
+				.param("addr", memberList.get(0).getAddr())
+				.param("addr2", memberList.get(0).getAddr2())
+				.param("zipno", memberList.get(0).getZipno())
+				.param("tel", memberList.get(0).getTel())
+				.param("regid", memberList.get(0).getRegid())
+				.param("regdt", memberList.get(0).getRegdt())
+				.param("modid", memberList.get(0).getModid())
+				.param("moddt", memberList.get(0).getModdt())
+		;
+		
+		ResultActions resultActions = mockMvc.perform(createMessage)
+				.andExpect(MockMvcResultMatchers.content().contentType("application/json; charset=UTF-8"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.msgId", is("1")))
+		;
+		
+		String result = resultActions.andDo(print())
+				.andReturn()
+				.getResponse().getContentAsString()
+		;
+		LOG.debug("=====================");
+		LOG.debug("=result="+result);
+		LOG.debug("=====================");
+	}
 	
 	public void checkSameUser(MemberVO orgVO, MemberVO vsVO) {
 		//assertTrue(orgVO.equals(vsVO));
