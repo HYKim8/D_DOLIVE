@@ -79,8 +79,8 @@
 			, #{bizRno, jdbcType = VARCHAR}	
 			, #{bizTel, jdbcType = VARCHAR}	
 			, #{pcode, jdbcType = VARCHAR}
-			, #{regId, jdbcType = VARCHAR}
-			, #{modId, jdbcType = VARCHAR}
+			, #{email, jdbcType = VARCHAR}
+			, #{email, jdbcType = VARCHAR}
 		)
 	</insert>
 	 

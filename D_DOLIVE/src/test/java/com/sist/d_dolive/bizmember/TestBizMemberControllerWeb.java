@@ -59,7 +59,7 @@ public class TestBizMemberControllerWeb {
 		LOG.debug("*********************");
 		
 		bizMemberList = Arrays.asList(
-				new BizMemberVO("이메일1", "비밀번호1", "1", "박종훈1", "920826", "서울시 노원구", "안알랴줌동", "12345", "010-0000-0000", "123-45-67891", "010-1111-1111", "PCODE_12345", "admin01", "2020/05/11", "admin01", "2020/05/11")
+				new BizMemberVO("이메일123", "비밀번호1", "1", "박종훈1", "920826", "서울시 노원구", "안알랴줌동", "12345", "010-0000-0000", "123-45-67891", "010-1111-1111", "PCODE_12345", "admin01", "2020/05/11", "admin01", "2020/05/11")
 				, new BizMemberVO("이메일2", "비밀번호2", "2", "박종훈2", "920826", "서울시 노원구", "안알랴줌동", "12345", "010-0000-0000", "123-45-67891", "010-1111-1111", "PCODE_12345", "admin01", "2020/05/11", "admin01", "2020/05/11")
 				, new BizMemberVO("이메일3", "비밀번호3", "1", "박종훈3", "920826", "서울시 노원구", "안알랴줌동", "12345", "010-0000-0000", "123-45-67891", "010-1111-1111", "PCODE_12345", "admin01", "2020/05/11", "admin01", "2020/05/11")
 		);
@@ -72,7 +72,6 @@ public class TestBizMemberControllerWeb {
 	}
 	
 	@Test
-	@Ignore
 	public void doUpdate() throws Exception {
 		//1. 전체 삭제
 		bizMemberDaoImple.doDeleteAll();
@@ -144,7 +143,6 @@ public class TestBizMemberControllerWeb {
 	}
 	
 	@Test
-	@Ignore
 	public void doDelete() throws Exception {
 		//1. 전체 삭제
 		bizMemberDaoImple.doDeleteAll();
@@ -213,7 +211,6 @@ public class TestBizMemberControllerWeb {
 	}
 	
 	@Test
-	@Ignore
 	public void doInsert() throws Exception {
 		bizMemberDaoImple.doDeleteAll();
 		
