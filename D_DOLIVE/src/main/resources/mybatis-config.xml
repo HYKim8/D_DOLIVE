@@ -14,6 +14,7 @@
 		<typeAlias type="com.sist.d_dolive.code.CodeVO" alias="CodeVO"/>
 		<typeAlias type="com.sist.d_dolive.notice.NoticeVO" alias="NoticeVO"/>
 		<typeAlias type="com.sist.d_dolive.bizmember.BizMemberVO" alias="BizMemberVO"/>
+		<typeAlias type="com.sist.d_dolive.reservation.ReservVO" alias="ReservVO"/>
 		<typeAlias type="com.sist.d_dolive.member.MemberVO" alias="MemberVO"/>
 		<typeAlias type="com.sist.d_dolive.cmn.SearchVO" alias="SearchVO"/>
 	</typeAliases>

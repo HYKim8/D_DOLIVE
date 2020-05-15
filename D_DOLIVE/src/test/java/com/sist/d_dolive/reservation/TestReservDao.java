@@ -3,6 +3,8 @@ package com.sist.d_dolive.reservation;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -46,7 +48,7 @@ public class TestReservDao {
 		LOG.debug("~~webApplicationContext~~"+webApplicationContext);
 		LOG.debug("~~~~~~~~~~~~~~~~~~~~~~~~");
 		
-		reserv01 = new ReservVO("200511_41","code_1",3,"1",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일");
+		reserv01 = new ReservVO("200515_60","code_1",3,"1",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일");
 		reserv02 = new ReservVO("2","code_2",3,"1",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일");
 		reserv03 = new ReservVO("3","code_3",3,"1",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일");
 		
@@ -71,6 +73,7 @@ public class TestReservDao {
 	}
 	
 	@Test
+	@Ignore
 	public void doUpdate() {
 		
 		reserv01.setApproval("2");
@@ -85,22 +88,25 @@ public class TestReservDao {
 	
 	@Test
 	@Ignore
-	public void doDelete() {
+	public void doSelectOne() {
 		
-		// 신청취소 처리 -> 승인상태 변경
+		ReservVO vsVO = (ReservVO) dao.doSelectOne(reserv01);
 		
-		reserv01.setpCode(reserv01.getpCode()+"_U");
-		reserv01.setMaskCnt(1);
-		reserv01.setRegId(reserv01.getRegId()+"_U");
-		reserv01.setModId(reserv01.getModId()+"_U");
+		LOG.debug("----------------------");
+		LOG.debug("-doSelectOne vsVO-"+vsVO);
+		LOG.debug("----------------------");
+	}
+	
+	@Test
+	public void getAll() {
 		
-		int flag = dao.doDelete(reserv01);
+		reserv04.setRegId("bealright6@naver.com");
 		
-		LOG.debug("---------------------");
-		LOG.debug("-flag:-"+flag);
-		LOG.debug("---------------------");
-		assertThat(flag, is(1));
-				
+		List<ReservVO> list = (List<ReservVO>) dao.getAll(reserv04);
+		
+		for(ReservVO vo :list) {
+			LOG.debug("=vo="+vo);
+		}
 	}
 	
 	@After

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.d_dolive.reservation">
+
+	<!-- 등록 -->
+	<insert id="doInsert" parameterType="ReservVO">
+		INSERT INTO reservation (									    
+		    rNo				
+			, pCode			
+			, maskCnt			
+			, approval				
+			, amount		
+			, regId			
+			, regDt			
+			, modId			
+			, modDt							                                      
+		) VALUES (                                              
+		    TO_CHAR(SYSDATE,'YYMMDD')||'_'||RESERV_SEQ.NEXTVAL, 
+		    ?,                                                  
+		    ?,                                                  
+		    ?,                                                  
+		    ?,                                                  
+		    ?,                                                  
+		    SYSDATE,                                            
+		    ?,                                                  
+		    SYSDATE                                             
+		); 
+	</insert>
+</mapper>
