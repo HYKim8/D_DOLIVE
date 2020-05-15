@@ -27,7 +27,7 @@ import com.sist.d_dolive.cmn.MessageVO;
  *
  */
 @Controller
-public class IamportCancel {
+public class IamportCont {
 	Logger LOG = LoggerFactory.getLogger(this.getClass());
 	
 	@RequestMapping(value = "iamport/do_cancel.do", method = RequestMethod.POST
@@ -35,7 +35,7 @@ public class IamportCancel {
 	@ResponseBody
 	public String cancelPaymentAlreadyCancelledImpUid(HttpServletRequest req) {
 		LOG.debug("==========");
-		LOG.debug("=asd=");
+		LOG.debug("=cancelPaymentAlreadyCancelledImpUid=");
 		LOG.debug("==========");
 		
 		String test_api_key = "imp_apikey";
@@ -44,6 +44,8 @@ public class IamportCancel {
 		IamportClient client = new IamportClient(test_api_key, test_api_secret);
 		
 		String test_already_cancelled_imp_uid = req.getParameter("imp_uid");
+		LOG.debug("=test_already_cancelled_imp_uid="+test_already_cancelled_imp_uid);
+		
 		CancelData cancel_data = new CancelData(test_already_cancelled_imp_uid, true); //imp_uid를 통한 전액취소
 		
 		try {
