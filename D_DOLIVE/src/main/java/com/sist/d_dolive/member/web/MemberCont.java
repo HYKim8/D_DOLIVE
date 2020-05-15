@@ -125,6 +125,7 @@ public class MemberCont {
 		return cnt;
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="member/find_id.do",method = RequestMethod.GET
 		       ,produces = "application/json;charset=UTF-8")
 	public String doFindId(MemberVO MemberVO,Locale locale, Model model ) {
@@ -137,11 +138,14 @@ public class MemberCont {
 		
 		LOG.debug("1.2===================");
 		LOG.debug("1.2=outVO="+outVO);
-		LOG.debug("1.2===================");		
-		
+		LOG.debug("1.2===================");
 		model.addAttribute("vo", outVO);
+		if (outVO != null) {
+			return outVO.getEmail();
+		} else {
+			return "x";
+		}
 		
-		return "member/id_pw_find";
 	}
 		
 	
