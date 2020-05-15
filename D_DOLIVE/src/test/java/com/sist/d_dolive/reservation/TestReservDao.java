@@ -73,7 +73,6 @@ public class TestReservDao {
 	}
 	
 	@Test
-	@Ignore
 	public void doUpdate() {
 		
 		reserv01.setApproval("2");
@@ -87,7 +86,6 @@ public class TestReservDao {
 	}
 	
 	@Test
-	@Ignore
 	public void doSelectOne() {
 		
 		ReservVO vsVO = (ReservVO) dao.doSelectOne(reserv01);
