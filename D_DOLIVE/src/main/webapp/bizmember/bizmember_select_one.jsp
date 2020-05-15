@@ -62,91 +62,90 @@
 	      		<label for="email" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">이메일</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="email" name="email" placeholder="이메일"
-		      		value="${vo.email }">
+		      		value="${vo.email }" readonly>
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="pw" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">비밀번호</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="pw" name="pw" placeholder="비밀번호"
-		      	 	value="${vo.pw }">
+		      	 	value="${vo.pw }" readonly>
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="gender" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">성별</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-		      		<input type="text" class="form-control" id="gender" name="gender" placeholder="성별"
-		      	 	value="${vo.gender }">
+		      		<c:if test="${vo.gender eq '남자'}">
+						&nbsp;<input type="radio" id="gender" name="gender" value="${vo.gender }" checked/>&nbsp;남자
+						&nbsp;<input type="radio" id="gender" name="gender" value="${vo.gender }" />&nbsp;여자
+					</c:if>
+					<c:if test="${vo.gender eq '여자'}">
+						&nbsp;<input type="radio" id="gender" name="gender" value="${vo.gender }" />&nbsp;남자
+						&nbsp;<input type="radio" id="gender" name="gender" value="${vo.gender }" checked/>&nbsp;여자
+					</c:if>
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="name" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">이름</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="name" name="name" placeholder="이름"
-		      	 	value="${vo.name }">
+		      	 	value="${vo.name }" readonly>
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="birth" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">생년월일</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="birth" name="birth" placeholder="생년월일"
-		      	 	value="${vo.birth }">
+		      	 	value="${vo.birth }" readonly>
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="addr" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">주소</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="addr" name="addr" placeholder="주소"
-		      	 	value="${vo.addr }">
+		      	 	value="${vo.addr }" readonly>
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
-	      		<label for="addr2" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">주소2</label>
+	      		<label for="addr2" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">상세주소</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-		      		<input type="text" class="form-control" id="addr2" name="addr2" placeholder="주소2"
-		      	 	value="${vo.addr2 }">
+		      		<input type="text" class="form-control" id="addr2" name="addr2" placeholder="상세주소"
+		      	 	value="${vo.addr2 }" readonly>
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="zipNo" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">우편번호</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="zipNo" name="zipNo" placeholder="우편번호"
-		      	 	value="${vo.zipNo }">
+		      	 	value="${vo.zipNo }" readonly>
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="tel" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">전화번호</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="tel" name="tel" placeholder="전화번호"
-		      	 	value="${vo.tel }">
+		      	 	value="${vo.tel }" readonly>
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="bizRno" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">사업자등록번호</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="bizRno" name="bizRno" placeholder="사업자등록번호"
-		      	 	value="${vo.bizRno }">
+		      	 	value="${vo.bizRno }" readonly>
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="bizTel" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">업체전화번호</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="bizTel" name="bizTel" placeholder="업체전화번호"
-		      	 	value="${vo.bizTel }">
+		      	 	value="${vo.bizTel }" readonly>
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="pcode" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">판매처코드</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="pcode" name="pcode" placeholder="판매처코드"
-		      	 	value="${vo.pcode }">
-		      	</div>
-	      	</div>
-	      	<div class="form-group">
-	      		<label for="modId" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">수정자ID</label>
-		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-		      		<input type="text" class="form-control" id="modId" name="modId" placeholder="수정자ID"
-		      	 	value="${vo.modId }">
+		      	 	value="${vo.pcode }" readonly>
 		      	</div>
 	      	</div>
    		</form>

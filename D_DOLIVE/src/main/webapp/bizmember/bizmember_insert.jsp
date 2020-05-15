@@ -73,8 +73,8 @@
 	      	<div class="form-group">
 	      		<label for="gender" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">성별</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-		      		<input type="text" class="form-control" id="gender" name="gender" placeholder="성별"
-		      	 	value="1">
+		      		&nbsp;<input type="radio" id="gender" name="gender" value="1" />&nbsp;남자
+					&nbsp;<input type="radio" id="gender" name="gender" value="2" />&nbsp;여자
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
@@ -100,9 +100,9 @@
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
-	      		<label for="addr2" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">주소2</label>
+	      		<label for="addr2" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">상세주소</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-		      		<input type="text" class="form-control" id="addrDetail" name="addrDetail" placeholder="주소2"
+		      		<input type="text" class="form-control" id="addrDetail" name="addrDetail" placeholder="상세주소"
 		      	 	value="">
 		      	</div>
 	      	</div>
@@ -141,20 +141,6 @@
 		      	 	value="12345">
 		      	</div>
 	      	</div>
-	      	<div class="form-group">
-	      		<label for="regId" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">등록자ID</label>
-		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-		      		<input type="text" class="form-control" id="regId" name="regId" placeholder="등록자ID"
-		      	 	value="SYSTEM">
-		      	</div>
-	      	</div>
-	      	<div class="form-group">
-	      		<label for="modId" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">수정자ID</label>
-		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-		      		<input type="text" class="form-control" id="modId" name="modId" placeholder="수정자ID"
-		      	 	value="SYSTEM">
-		      	</div>
-	      	</div>
    		</form>
  	</div>   
  	
@@ -189,7 +175,7 @@
 			
 			var email = $("#email").val();
 			var pw = $("#pw").val();
-			var gender = $("#gender").val();
+			var gender = $("input[name='gender']:checked").val();
 			var name = $("#name").val();
 			var birth = $("#birth").val();
 			var addr = $("#roadAddrPart1").val();
@@ -199,8 +185,6 @@
 			var bizRno = $("#bizRno").val();
 			var bizTel = $("#bizTel").val();
 			var pcode = $("#pcode").val();
-			var regId = $("#regId").val();
-			var modId = $("#modId").val();
 
 			if(false==confirm("등록 하시겠습니까?"))return;
 
@@ -222,8 +206,6 @@
 					, "bizRno" : bizRno
 					, "bizTel" : bizTel
 					, "pcode" : pcode
-					, "regId" : regId
-					, "modId" : modId
 				},
 				success : function(data) { //성공
 					var jData = JSON.parse(data);

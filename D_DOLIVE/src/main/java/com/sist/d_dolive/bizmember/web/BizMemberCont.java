@@ -110,11 +110,11 @@ public class BizMemberCont {
 		//삭제 성공
 		if(flag>0) {
 			message.setMsgId(String.valueOf(flag));
-			message.setMsgMsg("삭제 되었습니다.");
+			message.setMsgMsg("탈퇴 되었습니다.");
 		//실패
 		}else {
 			message.setMsgId(String.valueOf(flag));
-			message.setMsgMsg("삭제 실패.");
+			message.setMsgMsg("탈퇴 실패.");
 		}
 		
 		Gson gson = new Gson();

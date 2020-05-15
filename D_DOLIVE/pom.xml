@@ -46,8 +46,14 @@
 			<name>ORACLE JDBC Repository</name>
 			<url>https://maven.xwiki.org/externals/</url>
 		</repository>
-	</repositories>    
-    
+		
+		<!-- Iamport -->
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories> 
+	
     <dependencies>
     	<!-- Test -->
     	<!-- Junit은 맨위에 아니면 오류남 -->
@@ -75,6 +81,15 @@
         </dependency>
         <!-- //Test -->
         
+        
+        <!-- Iamport -->
+		<dependency>
+		    <groupId>com.github.iamport</groupId>
+		    <artifactId>iamport-rest-client-java</artifactId>
+		    <version>0.2.7</version>
+		</dependency>
+		<!-- //Iamport -->
+
         
         <!-- tiles -->
         <!-- https://mvnrepository.com/artifact/org.apache.tiles/tiles-jsp -->

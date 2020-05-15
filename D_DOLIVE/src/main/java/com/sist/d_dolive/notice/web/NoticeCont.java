@@ -92,7 +92,7 @@ public class NoticeCont {
 		//조회 결과 화면 전달
 		model.addAttribute("totalCnt", totalCnt);
 		
-		return "notice/notice";//"board/board_list.jsp"
+		return "notice/notice_list";
 	}
 	
 	@RequestMapping(value = "notice/do_delete.do", method = RequestMethod.POST
