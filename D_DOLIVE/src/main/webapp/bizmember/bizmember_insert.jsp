@@ -93,23 +93,24 @@
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="addr" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">주소</label>
+	      		<input type="button" value="주소 조회" onclick="goJusoPopup();"/>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-		      		<input type="text" class="form-control" id="addr" name="addr" placeholder="주소"
-		      	 	value="서울시 노원구">
+		      		<input type="text" class="form-control" id="roadAddrPart1" name="roadAddrPart1" placeholder="주소"
+		      	 	value="">
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="addr2" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">주소2</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-		      		<input type="text" class="form-control" id="addr2" name="addr2" placeholder="주소2"
-		      	 	value="안알랴줄거지롱">
+		      		<input type="text" class="form-control" id="addrDetail" name="addrDetail" placeholder="주소2"
+		      	 	value="">
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="zipNo" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">우편번호</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="zipNo" name="zipNo" placeholder="우편번호"
-		      	 	value="12345">
+		      	 	value="">
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
@@ -165,6 +166,24 @@
     
     
     <script type="text/javascript">
+	    function goJusoPopup(){
+	    	// 주소검색을 수행할 팝업 페이지를 호출합니다.
+	    	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+	    	var pop = window.open("${hContext}/jusoapi/juso_popup_api.jsp", "pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	    	
+	    	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+	        //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+	    }
+
+	    function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, engAddr, jibunAddr, zipNo
+	    		, admCd, rnMgtSn, bdMgtSn, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm
+	    		, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo) {
+			// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+			document.insertFrm.roadAddrPart1.value = roadAddrPart1;
+			document.insertFrm.addrDetail.value = addrDetail;
+			document.insertFrm.zipNo.value = zipNo;
+		}
+    
 		$("#insertBtn").on("click", function() {
 			//console.log("update_btn");
 			
@@ -173,8 +192,8 @@
 			var gender = $("#gender").val();
 			var name = $("#name").val();
 			var birth = $("#birth").val();
-			var addr = $("#addr").val();
-			var addr2 = $("#addr2").val();
+			var addr = $("#roadAddrPart1").val();
+			var addr2 = $("#addrDetail").val();
 			var zipNo = $("#zipNo").val();
 			var tel = $("#tel").val();
 			var bizRno = $("#bizRno").val();
