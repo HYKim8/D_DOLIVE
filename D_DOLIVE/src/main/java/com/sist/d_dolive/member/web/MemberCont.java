@@ -237,14 +237,14 @@ public class MemberCont {
 	}
 	
 
-	@RequestMapping(value="member/do_select_one.do",method = RequestMethod.POST
-		       ,produces = "application/json;charset=UTF-8")
-	@ResponseBody	
-	public MemberVO doSelectOne(MemberVO memberVO,Locale locale, Model model) {
+	@RequestMapping(value="member/do_select_one.do",method = RequestMethod.GET)
+	public String doSelectOne(MemberVO memberVO,Locale locale, Model model) {
 		LOG.debug("1===================");
 		LOG.debug("1=memberVO="+memberVO);
 		LOG.debug("1===================");		
-		
+		if(null==memberVO.getEmail() || memberVO.getEmail().equals("")) {
+			throw new IllegalArgumentException("Email을 확인 하세요.");
+		}
 		MemberVO outVO = (MemberVO) this.memberService.doSelectOne(memberVO);
 		//outVO.setLevel(outVO.getLevel().intValue());
 		
@@ -252,24 +252,19 @@ public class MemberCont {
 		LOG.debug("1.2=outVO="+outVO);
 		LOG.debug("1.2===================");		
 		
-		Gson gson=new Gson();
-		String json = gson.toJson(outVO);
+		model.addAttribute("vo", outVO);
 		
-		LOG.debug("1.3===================");
-		LOG.debug("1.3=json="+json);
-		LOG.debug("1.3===================");		
-		
-		return outVO;
+		return "member/member_update";
 	}
 	
-	@RequestMapping(value="member/do_select_one1.do",method = RequestMethod.POST
-		       ,produces = "application/json;charset=UTF-8")
-	@ResponseBody	
-	public MemberVO doSelectOne1(MemberVO memberVO,Locale locale, Model model) {
+	@RequestMapping(value="member/do_select_one1.do",method = RequestMethod.GET)
+	public String doSelectOne1(MemberVO memberVO,Locale locale, Model model) {
 		LOG.debug("1===================");
 		LOG.debug("1=memberVO="+memberVO);
 		LOG.debug("1===================");		
-		
+		if(null==memberVO.getEmail() || memberVO.getEmail().equals("")) {
+			throw new IllegalArgumentException("Email을 확인 하세요.");
+		}
 		MemberVO outVO = (MemberVO) this.memberService.doSelectOne1(memberVO);
 		//outVO.setLevel(outVO.getLevel().intValue());
 		
@@ -277,14 +272,9 @@ public class MemberCont {
 		LOG.debug("1.2=outVO="+outVO);
 		LOG.debug("1.2===================");		
 		
-		Gson gson=new Gson();
-		String json = gson.toJson(outVO);
+		model.addAttribute("vo", outVO);
 		
-		LOG.debug("1.3===================");
-		LOG.debug("1.3=json="+json);
-		LOG.debug("1.3===================");		
-		
-		return outVO;
+		return "member/member_select_one";
 	}
 	
 	   @RequestMapping(value="member/login.do",method = RequestMethod.POST)

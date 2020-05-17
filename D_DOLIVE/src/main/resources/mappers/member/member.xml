@@ -111,15 +111,10 @@
 	
 	<!-- 마이페이지 회원정보출력 -->
 	<select id="doSelectOne" parameterType="MemberVO" resultType="MemberVO">
-		SELECT email
-			   ,gender
-			   ,SUBSTR(ihidnum,1,6)
-			   ,name
-			   ,tel
-			   ,addr
-			   ,addr2
+		SELECT
+			<include refid="MemberColumns"></include>
 		FROM member
-		WHERE email = #{email}  
+		WHERE email = #{email} 
 	</select>	
 	
 	<!-- 단건조회 -->
