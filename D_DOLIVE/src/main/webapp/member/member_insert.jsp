@@ -69,8 +69,10 @@
 			<div class="form-group">
 				<label for="email" class="col-lg-4 col-sm-4 col-xs-4  control-label">메일</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-					<input type="text" maxlength="350" class="form-control input-sm"
-						id="email" name="email" placeholder="메일" />
+					<input type="text" maxlength="350" class="form-control input-sm" id="email" name="email" placeholder="메일" />
+				</div>
+				<div>
+					<input  type="button"  name="checkbtn" class="btn btn-primary btn-sm"  value="중복확인" id="checkbtn" />
 				</div>
 			</div>			
 			
@@ -148,13 +150,9 @@
 			<!-- Button Area -->
 			<div class="form-group">
 				<div class="col-lg-10 col-sm-10 col-xs-10 ">
-<!-- 					<div class="text-right">
-						<button type="button" class="btn btn-default btn-sm" id="doInsert">등록</button>
-						 <a href="javascript:history.go(-2)"><button type="button"
-									class="cancel">취 소</button></a>
-					</div> -->
-					<input  type="button"  name="doInsert" onclick="$(this.form).submit()" class="btn btn-primary btn-sm"  value="등록" id="doInsert" />
-					  
+					<span style="float:right">
+						<input  type="button"  name="doInsert" onclick="$(this.form).submit()" class="btn btn-primary btn-sm"  value="등록" id="doInsert" />
+					</span>
 				</div>
 			</div>
 			<!--// Button Area -->												
@@ -271,6 +269,12 @@
 	
 	
     <script type="text/javascript">
+
+
+
+
+
+    
          function bindEventHandler(){
         	 $("#registerForm").validate({
                  onfocus: true,
@@ -391,11 +395,6 @@
 
          }
     
-/*           $(document).ready(function(){
-             //input validation
-        	 bindEventHandler();
-        	 
-         });  */
 
     </script>	
 	
@@ -411,12 +410,45 @@
     	location.href="http://localhost:8080/d_dolive/member/login.jsp";
     }
 
+	var duplicate = false;
+		$('#checkbtn').on('click', function() {
+			//alert($('#m_id').val());
+			$.ajax({
+				type : 'POST',
+				url : "${hContext}/member/idCount.do",
+				data : {
+					"email" : $("#email").val()
+				},
+				success : function(data) {
+					if ($.trim(data) == 0) {
+						//$('#checkMsg').html('<p style="color:blue;width:100px;">사용가능</p>');
+						alert("사용 가능한 아이디 입니다!");
+						duplicate = true;
+					} else if ($.trim(data) == "blank") {
+						alert("아이디에 공백은 불가합니다!");
+						duplicate = false;
+					} else if ($.trim(data) == "@") {
+						alert("아이디에 특수문자@는 불가합니다!");
+						duplicate = false;
+					} else {
+						alert("사용 불가능한 아이디 입니다!");
+						duplicate = false;
+					}
+				}
+			}); //end ajax   
+		}); //end on    
 
+	
      
 		//등록
 		 $("#doInsert").on("click", function() { 
 			
-
+			 if (duplicate == false) {
+					alert("아이디 중복확인을 해주세요!");
+					return false;
+				} else if (duplicate == true) {
+					return true;
+					}
             //confirm
             if (confirm("등록 하시겠습니까?") == false)return;
             
@@ -441,7 +473,6 @@
                 },
                 success : function(data) { //성공
                     console.log("data:" + data);
-                    //{"msgId":"1","msgMsg":"j_hr0000002님이 삭제 되었습니다.","num":0,"totalCnt":0}   
                     var parseData = $.parseJSON(data);
                     if (parseData.msgId == "1") {
                         alert(parseData.msgMsg);
