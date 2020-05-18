@@ -61,9 +61,9 @@ public class TestReservWeb {
 		LOG.debug("*********************");
 		
 		reservList = Arrays.asList(
-				new ReservVO("200515_60","code_1",3,"1","imp_111",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일","약국명","약국주소")
-				,new ReservVO("200515_61","code_1",3,"1","imp_111",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일","약국명","약국주소")        
-				,new ReservVO("200515_62","code_12",3,"1","imp_111",4500,"bealright6@naver.com2","등록일","bealright6@naver.com","수정일","약국명","약국주소")       
+				new ReservVO("200515_60","code_1",3,"1","imp_111",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일","이름1","주민1","약국명","약국주소")
+				,new ReservVO("200515_61","code_1",3,"1","imp_111",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일","이름2","주민2","약국명","약국주소")        
+				,new ReservVO("200515_62","code_12",3,"1","imp_111",4500,"bealright6@naver.com2","등록일","bealright6@naver.com","수정일","이름3","주민3","약국명","약국주소")       
 				);
 		
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
@@ -109,7 +109,6 @@ public class TestReservWeb {
 	}
 	
 	@Test
-	@Ignore
 	public void doInsert() throws Exception {
 		//1. 전체 삭제
 		reservDaoImple.doDeleteAll();
@@ -139,8 +138,13 @@ public class TestReservWeb {
 		LOG.debug("=====================");
 	}
 	
+	@Test
 	public void doUpdate() throws Exception {
+		//1. 전체 삭제
+		reservDaoImple.doDeleteAll();
 		
+		//2. 단건 입력
+		int flag = reservService.doInsert(reservList.get(0));
 	}
 
 	@After

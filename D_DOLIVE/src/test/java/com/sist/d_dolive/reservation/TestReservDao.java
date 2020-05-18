@@ -48,9 +48,9 @@ public class TestReservDao {
 		LOG.debug("~~webApplicationContext~~"+webApplicationContext);
 		LOG.debug("~~~~~~~~~~~~~~~~~~~~~~~~");
 		
-		reserv01 = new ReservVO("200515_60","code_1",3,"1","imp_111",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일","약국명","약국주소");
-		reserv02 = new ReservVO("200515_61","code_1",3,"1","imp_111",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일","약국명","약국주소");
-		reserv03 = new ReservVO("200515_62","code_1",3,"1","imp_111",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일","약국명","약국주소");
+		reserv01 = new ReservVO("200515_60","code_1",3,"1","imp_111",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일","이름1","주민1","약국명","약국주소");
+		reserv02 = new ReservVO("200515_61","code_1",3,"1","imp_111",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일","이름2","주민2","약국명","약국주소");
+		reserv03 = new ReservVO("200515_62","code_1",3,"1","imp_111",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일","이름3","주민3","약국명","약국주소");
 		
 		reserv04 = new ReservVO();
 	}
