@@ -2,13 +2,18 @@ package com.sist.d_dolive.reservation.imple;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.sist.d_dolive.cmn.DTO;
 import com.sist.d_dolive.reservation.ReservService;
 import com.sist.d_dolive.reservation.ReservVO;
 
+@Service
 public class ReservServiceImple implements ReservService {
 
-	ReservDaoImpleXXX dao;
+	@Autowired
+	ReservDaoImple dao;
 	
 	@Override
 	public int doInsert(DTO dto) {

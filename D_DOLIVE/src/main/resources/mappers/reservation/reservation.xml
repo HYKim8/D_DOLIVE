@@ -7,8 +7,8 @@
 	<!-- 등록 -->
 	<insert id="doInsert" parameterType="ReservVO">
 		INSERT INTO reservation (									    
-		    rNo				
-			, pCode			
+		    rno				
+			, pcode			
 			, maskCnt			
 			, approval				
 			, amount		
@@ -16,16 +16,40 @@
 			, regDt			
 			, modId			
 			, modDt							                                      
-		) VALUES (                                        
-		    (TO_CHAR(SYSDATE,'YYMMDD')||'_'||RESERV_SEQ.NEXTVAL,#{rNo})
-		    ,#{pCode,jdbcType=VARCHAR}                                                
-		    ,#{maskCnt}                                                    
-		    ,#{approval,jdbcType=VARCHAR}                                                       
-		    ,#{amount}                                                       
-		    ,#{regId,jdbcType=VARCHAR}                                                      
-		    ,SYSDATE                                            
-		    ,#{modId,jdbcType=VARCHAR}                                                      
-		    ,SYSDATE                                             
-		); 
+		) VALUES (                                            
+		    #{rno, jdbcType = VARCHAR} 
+		    , #{pcode, jdbcType = VARCHAR}	                                                  
+		    , #{maskCnt}                                                  
+		    , #{approval, jdbcType = VARCHAR}                                                  
+		    , #{amount}                                            
+		    , #{regId, jdbcType = VARCHAR}                                                  
+		    , SYSDATE                                      
+		    , #{modId, jdbcType = VARCHAR}                                                  
+		    , SYSDATE                                             
+		) 
 	</insert>
+	
+	<!-- 수정 -->
+	<update id="doUpdate" parameterType="ReservVO">
+		UPDATE reservation
+		SET approval = #{approval, jdbcType = VARCHAR}  
+		WHERE rno = #{rNo, jdbcType = VARCHAR}   
+	</update>
+	
+	<!-- 단건 조회 -->
+	<select id="doSelectOne" parameterType="ReservVO" resultType="ReservVO">
+		SELECT							
+    		t1.rNo,                   
+		    t1.approval,              
+		    t1.amount,                
+		    t2.email,                 
+		    t2.name,                  
+		    t2.tel,                   
+		    t2.addr,                  
+		    t2.zipno                  
+		FROM reservation t1, member t2
+		WHERE t1.rNo = #{rNo, jdbcType = VARCHAR}              
+		AND t1.regId = t2.email       
+	</select>
+  
 </mapper>
