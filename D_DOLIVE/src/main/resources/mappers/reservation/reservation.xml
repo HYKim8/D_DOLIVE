@@ -111,18 +111,18 @@
 	
 	<!-- 단건 조회 -->
 	<select id="doSelectOne" parameterType="ReservVO" resultType="ReservVO">
-		SELECT							
-    		t1.rno,                   
-		    t1.approval,              
-		    t1.amount,                
-		    t2.email,                 
-		    t2.name,                  
-		    t2.tel,                   
-		    t2.addr,                  
-		    t2.zipno                  
-		FROM reservation t1, member t2
-		WHERE t1.rno = #{rno, jdbcType = VARCHAR}              
-		AND t1.regId = t2.email       
+		SELECT
+		   rno				
+			, pcode			
+			, maskCnt			
+			, approval				
+			, amount		
+			, regId			
+			, regDt			
+			, modId			
+			, modDt	
+		FROM reservation
+		WHERE rno = #{rno, jdbcType = VARCHAR}    
 	</select>
   
 </mapper>

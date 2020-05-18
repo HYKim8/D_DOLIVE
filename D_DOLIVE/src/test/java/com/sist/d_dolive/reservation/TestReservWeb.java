@@ -141,20 +141,28 @@ public class TestReservWeb {
 	}
 	
 	@Test
-	@Ignore
 	public void doSelectOne() throws Exception {
-		//1. 전체삭제
-		reservDaoImple.doDeleteAll();
-		
-		//2. 단건 입력
-		int flag = reservService.doInsert(reservList.get(0));
-		assertThat(flag, is(1));
-		
-		//3. 
+		MockHttpServletRequestBuilder createMesage = MockMvcRequestBuilders.get("/reserv/do_select_one.do")
+			.param("rno", reservList.get(0).getRno())
+			;		
+	
+	//MediaType.APPLICATION_JSON_UTF8 ==application/json;charset=UTF-8
+	ResultActions resultActions = mockMvc.perform(createMesage)
+		.andExpect(status().is2xxSuccessful())	
+	;
+			
+	String result = resultActions.andDo(print())
+			.andReturn()
+			.getResponse().getContentAsString()
+	;
+	LOG.debug("=====================");
+	LOG.debug("=result="+result);
+	LOG.debug("=====================");  		
 	}
 	
 	
 	@Test
+	@Ignore
 	public void doUpdate() throws Exception {
 		//1. 전체 삭제
 		//reservDaoImple.doDeleteAll();
