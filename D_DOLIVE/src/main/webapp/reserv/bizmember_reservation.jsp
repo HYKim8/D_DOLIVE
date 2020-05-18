@@ -123,9 +123,21 @@
 					<input type="hidden" name="searchWord02" id="searchWord02" value="">
 	    			<div class="form-group">
 	    				<%=StringUtil.makeSelectBox(searchList, "reservSelect", searchDiv, true) %>
-	    				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+	    				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	    				<button type="button" onclick="javascript:doRetrieve();"
 							class="btn btn-primary btn-sm">조회</button>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="button" onclick="doUpdate(3);"
+							class="btn btn-primary btn-sm">승인완료</button>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="button" onclick="doUpdate(4);"
+							class="btn btn-primary btn-sm">승인거절</button>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="button" onclick="doUpdate(6);"
+							class="btn btn-primary btn-sm">상품배정</button>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="button" onclick="doUpdate(7);"
+							class="btn btn-primary btn-sm">구매확정</button>
 	    			</div>
 	    		</form>
     		</div>
@@ -137,6 +149,7 @@
     		<table class="table table-striped table-bordered jong" id="listTable">
     		    <!-- hidden-sm hidden-xs 숨기기 -->
     			<thead class="bg-primary">
+    				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">체크</th>
     				<th class="text-center col-lg-1 col-md-1 col-sm-1 hidden-xs ">번호</th>
     				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">신청자 이름</th>
     				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">신청자 주민등록번호</th>
@@ -144,7 +157,6 @@
     				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">예약상태</th>
     				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">결제금액</th>
     				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">신청일</th>
-    				<th style="display: none;">rno</th>
     				<th style="display: none;">imp_uid</th>
     			</thead>
     			<tbody>
@@ -152,14 +164,14 @@
     					<c:when test="${list.size()>0 }">
     						<c:forEach var="vo" items="${list }">
     							<tr>
+    								<td class="text-center"><input type="radio" name="rno" id="rno" value="${vo.rno }"/></td>
 			    					<td class="text-center hidden-sm hidden-xs"><c:out value="${vo.num }"></c:out></td>
-			    					<td class="text-left"><c:out value="${vo.name }"></c:out></td>
+			    					<td class="text-center"><c:out value="${vo.name }"></c:out></td>
 			    					<td class="text-center"><c:out value="${vo.ihidnum }"></c:out></td>
 			    					<td class="text-center"><c:out value="${vo.maskCnt }"></c:out></td>
 			    					<td class="text-center"><c:out value="${vo.approval }"></c:out></td>
 			    					<td class="text-center"><c:out value="${vo.amount }"></c:out></td>
 			    					<td class="text-center"><c:out value="${vo.regDt }"></c:out></td>
-			    					<td style="display: none;"><c:out value="${vo.rno }"></c:out></td>
 			    					<td style="display: none;"><c:out value="${vo.impuid }"></c:out></td>
 			    				</tr>
     						</c:forEach>
@@ -190,6 +202,69 @@
    
    
    	<script type="text/javascript">
+		function doUpdate(approval) {
+			var rno = $('input[name="rno"]:checked').val();
+
+			if(rno == undefined) {
+				alert("체크를 해주세요.");
+				return;
+			}
+
+			var nowApproval = $('input[name="rno"]:checked').parent().parent().children().eq(5).text();
+
+			if(nowApproval=="취소완료") {
+				alert("취소완료인건은 변경이 불가능합니다.");
+				return;
+			}else if(nowApproval=="승인완료") {
+				alert("승인완료인건은 변경이 불가능합니다.");
+				return;
+			}else if(nowApproval=="승인거절") {
+				alert("승인거절인건은 변경이 불가능합니다.");
+				return;
+			}else if(nowApproval=="결제완료" && approval!="6") {
+				alert("결제완료인건은 상품배정으로만 변경이 가능합니다.");
+				return;
+			}else if(nowApproval=="상품배정" && approval!="7") {
+				alert("상품배정인건은 구매확정으로만 변경이 가능합니다.");
+				return;
+			}else if(nowApproval=="구매확정") {
+				alert("구매확정인건은 변경이 불가능합니다.");
+				return;
+			}else if(nowApproval=="예약신청" && (approval=="3" || approval=="4")) {
+				
+			}else {
+				alert("예약신청인건은 승인완료 또는 승인거절로만 변경 가능합니다.");
+				return;
+			}
+			
+			//ajax
+			$.ajax({
+				type : "POST",
+				url : "${hContext}/reserv/do_update.do",
+				dataType : "html",
+				data : {
+					"rno" : rno
+					, "approval" : approval
+					, "modId" : "업체회원1"
+				},
+				success : function(data) { //성공
+					var jData = JSON.parse(data);
+					if(null!=jData && jData.msgId=="1") {
+						alert(jData.msgMsg);
+						history.go(0);
+					}else {
+						alert(jData.msgMsg);
+					}
+				},
+				error : function(xhr, status, error) {
+					alert("error:"+error);
+				},
+				complete : function(data) {
+	
+				}
+			});//--ajax
+		}
+   	
 	   	function doRetrieve() {
 			//console.log("doRetrieve");
 			var frm = document.searchFrm;
