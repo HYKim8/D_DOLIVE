@@ -3,6 +3,7 @@ package com.sist.d_dolive.reservation;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +27,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.sist.d_dolive.reservation.imple.ReservDaoImple;
+
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml",
@@ -42,6 +45,9 @@ public class TestReservWeb {
 	@Autowired
 	ReservService reservService;
 	
+	@Autowired
+	ReservDaoImple reservDaoImple;
+	
 	//브라우저 대신 Mock
 	private MockMvc mockMvc;
 	
@@ -57,7 +63,7 @@ public class TestReservWeb {
 		reservList = Arrays.asList(
 				new ReservVO("200515_60","code_1",3,"1","imp_111",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일","약국명","약국주소")
 				,new ReservVO("200515_61","code_1",3,"1","imp_111",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일","약국명","약국주소")        
-				,new ReservVO("200515_62","code_1",3,"1","imp_111",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일","약국명","약국주소")       
+				,new ReservVO("200515_62","code_12",3,"1","imp_111",4500,"bealright6@naver.com2","등록일","bealright6@naver.com","수정일","약국명","약국주소")       
 				);
 		
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
@@ -68,7 +74,46 @@ public class TestReservWeb {
 	}
 	
 	@Test
+	@Ignore
+	public void doRetrieve() throws Exception {
+		//1. 전체 삭제
+		reservDaoImple.doDeleteAll();
+		
+		//2. 3건 입력
+		int flag = reservDaoImple.doInsert(reservList.get(0));
+		flag += reservDaoImple.doInsert(reservList.get(1));
+		flag += reservDaoImple.doInsert(reservList.get(2));
+		assertThat(flag, is(3));
+		
+		//3. 조회
+		//url+param
+		MockHttpServletRequestBuilder createMesage 
+			= MockMvcRequestBuilders.get("/reserv/do_retrieve.do")
+				.param("pageNum", "1")
+				.param("pageSize", "10")
+	            .param("searchDiv", "20")
+	            .param("searchWord", "code_1")
+		;
+		
+		ResultActions resultActions = mockMvc.perform(createMesage)
+				.andExpect(status().is2xxSuccessful())
+		;
+				
+		String result = resultActions.andDo(print())
+				.andReturn()
+				.getResponse().getContentAsString()
+		;
+		LOG.debug("=====================");
+		LOG.debug("=result="+result);
+		LOG.debug("=====================");
+	}
+	
+	@Test
+	@Ignore
 	public void doInsert() throws Exception {
+		//1. 전체 삭제
+		reservDaoImple.doDeleteAll();
+		
 		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/reserv/do_insert.do")
 				.param("rno", reservList.get(0).getRno())
 				.param("pcode", reservList.get(0).getPcode())

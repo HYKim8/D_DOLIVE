@@ -1,5 +1,6 @@
 package com.sist.d_dolive.reservation.web;
 
+import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.sist.d_dolive.cmn.MessageVO;
+import com.sist.d_dolive.cmn.SearchVO;
+import com.sist.d_dolive.cmn.StringUtil;
 import com.sist.d_dolive.reservation.ReservService;
 import com.sist.d_dolive.reservation.ReservVO;
 
@@ -27,6 +30,59 @@ public class ReservCont {
 	
 	@Autowired
 	MessageSource messageSource;
+	
+	@RequestMapping(value = "reserv/do_retrieve.do", method = RequestMethod.GET)
+	public String doRetrieve(SearchVO search, Model model) {
+		//param 기본값 처리
+		if(search.getPageNum() == 0) {
+			search.setPageNum(1);
+		}
+		
+		if(search.getPageSize() == 0) {
+			search.setPageSize(10);
+		}
+		
+		search.setSearchDiv(StringUtil.nvl(search.getSearchDiv()));
+		search.setSearchWord(StringUtil.nvl(search.getSearchWord().trim()));
+		LOG.debug("1==================");
+		LOG.debug("1=param="+search);
+		LOG.debug("1==================");
+		
+		//검색 조건 화면으로 전달
+		model.addAttribute("vo", search);
+		
+		//TODO: codeTable : 검색 조건, 페이지 사이즈
+//		CodeVO code = new CodeVO();
+//		
+//		//페이지 사이즈: PAGE_SIZE
+//		code.setCodeTypeId("PAGE_SIZE");
+//		List<CodeVO> pageSizeList = (List<CodeVO>) this.codeService.doRetrieve(code);
+//		LOG.debug("1.2=pageSizeList="+pageSizeList);
+//		model.addAttribute("pageSizeList", pageSizeList);
+		
+		List<ReservVO> list = (List<ReservVO>) this.reservService.doRetrieve(search);
+	
+		//조회 결과 화면 전달
+		model.addAttribute("list", list);
+		
+		for(ReservVO vo : list) {
+			LOG.debug("1.1=out="+vo);
+		}
+		
+		//총건수
+		int totalCnt = 0;
+		if(null!=list && list.size()>0) {
+			totalCnt = list.get(0).getTotalCnt();
+		}
+		LOG.debug("1.2==================");
+		LOG.debug("1.2=totalCnt="+totalCnt);
+		LOG.debug("1.2==================");
+
+		//조회 결과 화면 전달
+		model.addAttribute("totalCnt", totalCnt);
+		
+		return "bizmember/bizmember_reservation";
+	}
 	
 	@RequestMapping(value = "reserv/do_insert.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
 	@ResponseBody

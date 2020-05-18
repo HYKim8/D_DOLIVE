@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sist.d_dolive.cmn.DTO;
+import com.sist.d_dolive.cmn.SearchVO;
 import com.sist.d_dolive.reservation.ReservDao;
 import com.sist.d_dolive.reservation.ReservVO;
 
@@ -113,6 +114,19 @@ public class ReservDaoImple implements ReservDao {
 			
 		return outVO;
 	}
+	
+	public void doDeleteAll() {
+		// namespace+id = com.sist.ehr.board.doInsert
+		String statement = NAMESPACE + ".doDeleteAll";
+		LOG.debug("1==========================");
+		LOG.debug("1=statement="+statement);
+		LOG.debug("1==========================");
+		
+		int flag = this.sqlSessionTemplate.delete(statement);
+		LOG.debug("2==========================");
+		LOG.debug("2=flag="+flag);
+		LOG.debug("2==========================");
+	}
 
 	@Override
 	public int doDelete(DTO dto) {
@@ -126,8 +140,23 @@ public class ReservDaoImple implements ReservDao {
 
 	@Override
 	public List<?> doRetrieve(DTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		SearchVO inVO = (SearchVO) dto;
+		LOG.debug("1==========================");
+		LOG.debug("1=inVO="+inVO);
+		LOG.debug("1==========================");
+		
+		// namespace+id = com.sist.d_dolive.reservation.doInsert
+		String statement = NAMESPACE + ".doRetrieve";
+		LOG.debug("2==========================");
+		LOG.debug("2=statement="+statement);
+		LOG.debug("2==========================");
+		
+		List<ReservVO> outList = this.sqlSessionTemplate.selectList(statement, inVO);
+		LOG.debug("3==========================");
+		LOG.debug("3=outList="+outList);
+		LOG.debug("3==========================");
+		
+		return outList;
 	}
 
 	@Override
