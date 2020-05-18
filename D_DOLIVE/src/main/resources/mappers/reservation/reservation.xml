@@ -77,7 +77,7 @@
 			, modId			
 			, modDt							                                      
 		) VALUES (                                            
-		    #{rno, jdbcType = VARCHAR} 
+		    TO_CHAR(SYSDATE,'YYMMDD')||'_'||RESERV_SEQ.NEXTVAL 
 		    , #{pcode, jdbcType = VARCHAR}	                                                  
 		    , #{maskCnt}                                                  
 		    , #{approval, jdbcType = VARCHAR}                                                  
