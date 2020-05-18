@@ -355,7 +355,7 @@
                          minlength: $.validator.format('{0}자 이상 입력하세요.')
                      },name:{
                          //필수값 
-                         required: "제목은 필수값 입니다.",
+                         required: "이름은 필수값 입니다.",
                          //최소길이
                          minlength: $.validator.format('{0}자 이상 입력하세요.')
                      },tel:{
