@@ -27,7 +27,7 @@
 			email	
 			, pw		
 			, gender
-			, ihidnum	
+			, ihidnum
 			, name
 			, tel
 			, zipNo		
@@ -39,7 +39,7 @@
 			#{email, jdbcType = VARCHAR}
 			, #{pw, jdbcType = VARCHAR}	
 			, #{gender, jdbcType = VARCHAR}	
-			, #{ihidnum, jdbcType = VARCHAR}
+			, CryptString.encrypt(#{ihidnum, jdbcType = VARCHAR},'key')
 			, #{name, jdbcType = VARCHAR}
 			, #{tel, jdbcType = VARCHAR}
 			, #{zipno, jdbcType = VARCHAR}
@@ -56,7 +56,7 @@
 		SET pw = #{pw, jdbcType = VARCHAR}
 			, gender = #{gender, jdbcType = VARCHAR}
 			, name	= #{name, jdbcType = VARCHAR}
-			, ihidnum	= #{ihidnum, jdbcType = VARCHAR}
+			, ihidnum	= CryptString.encrypt(#{ihidnum, jdbcType = VARCHAR},'key')
 			, addr	= #{addr, jdbcType = VARCHAR}
 			, addr2	= #{addr2, jdbcType = VARCHAR}
 			, zipno	= #{zipno, jdbcType = VARCHAR}
@@ -72,7 +72,7 @@
 		SELECT email
 		FROM member
 		WHERE name = #{name}
-		AND ihidnum = #{ihidnum}
+		AND CryptString.decrypt(ihidnum,'key') = #{ihidnum}
 	</select>	
 	
 	<!-- 비밀번호찾기 단건조회 -->
@@ -82,7 +82,7 @@
 		FROM member
 		WHERE email = #{email}
 		AND name = #{name}
-		AND ihidnum = #{ihidnum}
+		AND CryptString.decrypt(ihidnum,'key') = #{ihidnum}
 	</select>		 
 	 
 	 
