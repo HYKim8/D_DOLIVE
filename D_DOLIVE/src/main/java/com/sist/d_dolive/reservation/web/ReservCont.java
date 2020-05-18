@@ -59,6 +59,12 @@ public class ReservCont {
 		//TODO: codeTable : 검색 조건, 페이지 사이즈
 		CodeVO code = new CodeVO();
 		
+		//검색 조건
+		code.setCodeTypeId("APPROVAL");
+		List<CodeVO> searchList = (List<CodeVO>) this.codeService.doRetrieve(code);
+		LOG.debug("1.1=searchList="+searchList);
+		model.addAttribute("searchList", searchList);
+		
 		//페이지 사이즈: PAGE_SIZE
 		code.setCodeTypeId("PAGE_SIZE");
 		List<CodeVO> pageSizeList = (List<CodeVO>) this.codeService.doRetrieve(code);
