@@ -16,6 +16,7 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -61,7 +62,7 @@ public class TestReservWeb {
 		LOG.debug("*********************");
 		
 		reservList = Arrays.asList(
-				new ReservVO("200515_60","code_1",3,"1","imp_111",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일","이름1","주민1","약국명","약국주소")
+				new ReservVO("200518_141","code_1",3,"1","imp_111",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일","이름1","주민1","약국명","약국주소")
 				,new ReservVO("200515_61","code_1",3,"1","imp_111",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일","이름2","주민2","약국명","약국주소")        
 				,new ReservVO("200515_62","code_12",3,"1","imp_111",4500,"bealright6@naver.com2","등록일","bealright6@naver.com","수정일","이름3","주민3","약국명","약국주소")       
 				);
@@ -109,6 +110,7 @@ public class TestReservWeb {
 	}
 	
 	@Test
+	@Ignore
 	public void doInsert() throws Exception {
 		//1. 전체 삭제
 		reservDaoImple.doDeleteAll();
@@ -139,12 +141,53 @@ public class TestReservWeb {
 	}
 	
 	@Test
-	public void doUpdate() throws Exception {
-		//1. 전체 삭제
+	@Ignore
+	public void doSelectOne() throws Exception {
+		//1. 전체삭제
 		reservDaoImple.doDeleteAll();
 		
 		//2. 단건 입력
 		int flag = reservService.doInsert(reservList.get(0));
+		assertThat(flag, is(1));
+		
+		//3. 
+	}
+	
+	
+	@Test
+	public void doUpdate() throws Exception {
+		//1. 전체 삭제
+		//reservDaoImple.doDeleteAll();
+		
+		//2. 단건 입력
+		//int flag = reservService.doInsert(reservList.get(0));
+		//assertThat(flag, is(1));
+		
+		//3. 단건 수정
+		reservList.get(0).setApproval("2");
+		reservList.get(0).setModId("수정자");
+		
+		//4. Mock 테스트
+		MockHttpServletRequestBuilder createMessage = MockMvcRequestBuilders.post("/reserv/do_update.do")
+													
+													.param("approval", reservList.get(0).getApproval())
+													.param("modId", reservList.get(0).getModId())
+													.param("rno", reservList.get(0).getRno());
+		
+		ResultActions resultActions = mockMvc.perform(createMessage)
+				.andExpect(status().is2xxSuccessful())
+				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.msgId", is("1")))
+				;
+		
+		String result = resultActions.andDo(print())
+				.andReturn()
+				.getResponse().getContentAsString()
+				;
+		
+		LOG.debug("=====================");
+		LOG.debug("=result="+result);
+		LOG.debug("=====================");
 	}
 
 	@After

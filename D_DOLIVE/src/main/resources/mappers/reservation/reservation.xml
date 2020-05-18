@@ -104,13 +104,15 @@
 	<update id="doUpdate" parameterType="ReservVO">
 		UPDATE reservation
 		SET approval = #{approval, jdbcType = VARCHAR}  
-		WHERE rno = #{rNo, jdbcType = VARCHAR}   
+		    , modId  = #{modId, jdbcType = VARCHAR}  
+    		, modDt  = SYSDATE
+		WHERE rno = #{rno, jdbcType = VARCHAR}   
 	</update>
 	
 	<!-- 단건 조회 -->
 	<select id="doSelectOne" parameterType="ReservVO" resultType="ReservVO">
 		SELECT							
-    		t1.rNo,                   
+    		t1.rno,                   
 		    t1.approval,              
 		    t1.amount,                
 		    t2.email,                 
@@ -119,7 +121,7 @@
 		    t2.addr,                  
 		    t2.zipno                  
 		FROM reservation t1, member t2
-		WHERE t1.rNo = #{rNo, jdbcType = VARCHAR}              
+		WHERE t1.rno = #{rno, jdbcType = VARCHAR}              
 		AND t1.regId = t2.email       
 	</select>
   

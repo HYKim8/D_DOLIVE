@@ -79,7 +79,7 @@ public class ReservDaoImple implements ReservDao {
 		LOG.debug("dao 2.==========================");
 		
 		//3. SqlSessionTemplate 처리
-		int flag = this.sqlSessionTemplate.insert(statement, inVO);
+		int flag = this.sqlSessionTemplate.update(statement, inVO);
 		LOG.debug("dao 3.==========================");
 		LOG.debug("dao 3.=flag="+flag);
 		LOG.debug("dao 3.==========================");
@@ -88,6 +88,27 @@ public class ReservDaoImple implements ReservDao {
 		return flag;
 	}
 
+	public DTO doSelectOneRNO(DTO dto) {
+		ReservVO inVO = (ReservVO) dto;
+		
+		LOG.debug("1=======================================");
+		LOG.debug("1=doSelectOne inVO="+inVO);
+		LOG.debug("1=======================================");
+		
+		//namespace+id(board.xml애서 지정해준 id값대로 찾아감) = com.sist.board.doSelectOneTitle
+		String statement = NAMESPACE+".doSelectOneRNO";
+		LOG.debug("2=======================================");
+		LOG.debug("2=statement="+statement);
+		LOG.debug("2=======================================");
+		
+		ReservVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("3=======================================");
+		LOG.debug("3=outVO="+outVO);
+		LOG.debug("3=======================================");
+		
+		return outVO;
+	}
+	
 	@Override
 	public DTO doSelectOne(DTO dto) {
 		//1. 결제
