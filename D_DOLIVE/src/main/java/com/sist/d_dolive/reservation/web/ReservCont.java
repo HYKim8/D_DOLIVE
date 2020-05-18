@@ -92,7 +92,15 @@ public class ReservCont {
 		//조회 결과 화면 전달
 		model.addAttribute("totalCnt", totalCnt);
 		
-		return "bizmember/bizmember_reservation";
+		String url = "";
+		
+		if(search.getOptionDiv().equals("1")) {
+			url = "member/member_reservation";
+		}else if(search.getOptionDiv().equals("2")) {
+			url = "bizmember/bizmember_reservation";
+		}
+		
+		return url;
 	}
 	
 	@RequestMapping(value = "reserv/do_insert.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
