@@ -28,6 +28,12 @@
         <put-attribute name="title" value="D_DOLIVE>Bizmember"/>
         <put-attribute name="body" value="/bizmember/{1}.jsp"/>
     </definition>
+    
+    <!-- reservation -->
+    <definition name="reserv/*" extends="basede-finition">
+        <put-attribute name="title" value="D_DOLIVE>Reservation"/>
+        <put-attribute name="body" value="/reserv/{1}.jsp"/>
+    </definition>
 </tiles-definitions>
 
 

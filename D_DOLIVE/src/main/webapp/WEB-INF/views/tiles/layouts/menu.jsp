@@ -20,7 +20,7 @@
 <c:set var="context" value="${pageContext.request.contextPath }" />
 <table>
   <tr>
-    <td><a href="${context}/bizmember/do_select_one.do?email=jnhoon111&optionDiv=1">업체회원 조회</a></td>
+    <td><a href="${context}/bizmember/do_select_one.do?email=이메일123&optionDiv=1">업체회원 조회</a></td>
   </tr>
 </table>
 

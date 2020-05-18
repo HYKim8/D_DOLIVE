@@ -15,7 +15,7 @@ public class ReservVO extends DTO {
 	private String 	pcode			;	//판매처코드
 	private int 	maskCnt			;	//마스크수량
 	private String 	approval		;	//예약상태
-	private String 	impuId			;	//아임포트고유번호
+	private String 	impuid			;	//아임포트고유번호
 	private int		amount			;	//결제금액
 	private String 	regId			;	//등록자아이디
 	private String 	regDt			;	//등록일
@@ -33,14 +33,14 @@ public class ReservVO extends DTO {
 		return rno;
 	}
 
-	public ReservVO(String rno, String pcode, int maskCnt, String approval, String impuId, int amount, String regId,
+	public ReservVO(String rno, String pcode, int maskCnt, String approval, String impuid, int amount, String regId,
 			String regDt, String modId, String modDt, String name, String addr) {
 		super();
 		this.rno = rno;
 		this.pcode = pcode;
 		this.maskCnt = maskCnt;
 		this.approval = approval;
-		this.impuId = impuId;
+		this.impuid = impuid;
 		this.amount = amount;
 		this.regId = regId;
 		this.regDt = regDt;
@@ -48,10 +48,6 @@ public class ReservVO extends DTO {
 		this.modDt = modDt;
 		this.name = name;
 		this.addr = addr;
-	}
-
-	public void setRno(String rno) {
-		this.rno = rno;
 	}
 
 	public String getPcode() {
@@ -78,12 +74,12 @@ public class ReservVO extends DTO {
 		this.approval = approval;
 	}
 
-	public String getImpuId() {
-		return impuId;
+	public String getImpuid() {
+		return impuid;
 	}
 
-	public void setImpuId(String impuId) {
-		this.impuId = impuId;
+	public void setImpuid(String impuid) {
+		this.impuid = impuid;
 	}
 
 	public int getAmount() {
@@ -142,10 +138,14 @@ public class ReservVO extends DTO {
 		this.addr = addr;
 	}
 
+	public void setRno(String rno) {
+		this.rno = rno;
+	}
+
 	@Override
 	public String toString() {
 		return "ReservVO [rno=" + rno + ", pcode=" + pcode + ", maskCnt=" + maskCnt + ", approval=" + approval
-				+ ", impuId=" + impuId + ", amount=" + amount + ", regId=" + regId + ", regDt=" + regDt + ", modId="
+				+ ", impuid=" + impuid + ", amount=" + amount + ", regId=" + regId + ", regDt=" + regDt + ", modId="
 				+ modId + ", modDt=" + modDt + ", name=" + name + ", addr=" + addr + ", toString()=" + super.toString()
 				+ "]";
 	}
