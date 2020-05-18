@@ -17,6 +17,8 @@ import com.google.gson.Gson;
 import com.sist.d_dolive.cmn.MessageVO;
 import com.sist.d_dolive.cmn.SearchVO;
 import com.sist.d_dolive.cmn.StringUtil;
+import com.sist.d_dolive.code.CodeService;
+import com.sist.d_dolive.code.CodeVO;
 import com.sist.d_dolive.reservation.ReservService;
 import com.sist.d_dolive.reservation.ReservVO;
 
@@ -30,6 +32,9 @@ public class ReservCont {
 	
 	@Autowired
 	MessageSource messageSource;
+	
+	@Autowired
+	CodeService codeService;
 	
 	@RequestMapping(value = "reserv/do_retrieve.do", method = RequestMethod.GET)
 	public String doRetrieve(SearchVO search, Model model) {
@@ -52,13 +57,13 @@ public class ReservCont {
 		model.addAttribute("vo", search);
 		
 		//TODO: codeTable : 검색 조건, 페이지 사이즈
-//		CodeVO code = new CodeVO();
-//		
-//		//페이지 사이즈: PAGE_SIZE
-//		code.setCodeTypeId("PAGE_SIZE");
-//		List<CodeVO> pageSizeList = (List<CodeVO>) this.codeService.doRetrieve(code);
-//		LOG.debug("1.2=pageSizeList="+pageSizeList);
-//		model.addAttribute("pageSizeList", pageSizeList);
+		CodeVO code = new CodeVO();
+		
+		//페이지 사이즈: PAGE_SIZE
+		code.setCodeTypeId("PAGE_SIZE");
+		List<CodeVO> pageSizeList = (List<CodeVO>) this.codeService.doRetrieve(code);
+		LOG.debug("1.2=pageSizeList="+pageSizeList);
+		model.addAttribute("pageSizeList", pageSizeList);
 		
 		List<ReservVO> list = (List<ReservVO>) this.reservService.doRetrieve(search);
 	
