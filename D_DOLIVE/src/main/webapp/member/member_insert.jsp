@@ -95,8 +95,8 @@
 			<div class="form-group">
 				<label for="gender" class="col-lg-4 col-sm-4 col-xs-4  control-label">성별</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-						 <input type = "radio" id="gender" name = "gender" value = "1" >남자
-				         <input type = "radio" id="gender" name = "gender" value = "2" >여자
+						 <input type = "radio" id="gender1" name = "gender" value = "1" >남자
+				         <input type = "radio" id="gender2" name = "gender" value = "2" >여자
 				</div>
 			</div>				
 			
@@ -104,7 +104,7 @@
 				<label for="ihidnum" class="col-lg-4 col-sm-4 col-xs-4  control-label">주민번호</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
 					<input type="text" maxlength="50" class="form-control input-sm"
-						id="ihidnum" name="ihidnum" placeholder="주민번호" />
+						id="ihidnum" name="ihidnum" placeholder="- 없이 입력" />
 				</div>
 			</div>				
 			
@@ -119,7 +119,7 @@
 			<div class="form-group">
 				<label for="tel" class="col-lg-4 col-sm-4 col-xs-4  control-label">전화번호</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-					<input type="text"  class="phoneNum" id="tel" name="tel" placeholder="전화번호" />
+					<input type="text"  class="phoneNum" id="tel" name="tel" placeholder="- 없이 입력" />
 						
 				</div>
 			</div>			
@@ -127,22 +127,22 @@
 			<div class="form-group">
 				<label for="zipno" class="col-lg-4 col-sm-4 col-xs-4  control-label">주소</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-						<input type="text" id="sample2_postcode" placeholder="우편번호" name="ZIPNO" readonly >
-						<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>
+						<input type="text" id="zipno" placeholder="우편번호" name="zipno" readonly >
+						<input type="button" onclick="sample2_execDaumPostcode()" name="find" value="우편번호 찾기"><br>
 				</div>
 			</div>	
 			
 			<div class="form-group">
-				<label for="ADDR" class="col-lg-4 col-sm-4 col-xs-4  control-label">기본주소</label>
+				<label for="addr" class="col-lg-4 col-sm-4 col-xs-4  control-label">기본주소</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-						<input type="text" name="ADDR" id="sample2_address" class="address" placeholder="기본주소" readonly>
+						<input type="text" name="addr" id="addr" class="address" placeholder="기본주소" readonly>
 				</div>
 			</div>		
 			
 			<div class="form-group">
-				<label for="ADDR2" class="col-lg-4 col-sm-4 col-xs-4  control-label">상세주소</label>
+				<label for="addr2" class="col-lg-4 col-sm-4 col-xs-4  control-label">상세주소</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-						<input type="text" id=ADDR2 name="ADDR2" class="address" placeholder="상세주소" >
+						<input type="text" id=addr2 name="addr2" class="address" placeholder="상세주소" >
 				</div>
 			</div>	
 			
@@ -216,8 +216,8 @@
 							}
 
 							// 우편번호와 주소 정보를 해당 필드에 넣는다.
-							document.getElementById('sample2_postcode').value = data.zonecode; //5자리 새우편번호 사용
-							document.getElementById('sample2_address').value = fullAddr;
+							document.getElementById('zipno').value = data.zonecode; //5자리 새우편번호 사용
+							document.getElementById('addr').value = fullAddr;
 
 							// iframe을 넣은 element를 안보이게 한다.
 							// (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
@@ -271,16 +271,11 @@
     <script type="text/javascript">
 
 
-
-
-
-    
          function bindEventHandler(){
         	 $("#registerForm").validate({
                  onfocus: true,
                  //서버전송여부
                  debug: true,
-                  
                  rules: {
                 	 email:{
                         //필수값
@@ -304,6 +299,7 @@
 
                  	 },ihidnum:{
                  		required: true
+                 		//rangelength: [13,14]
                  		
                  	 },name:{
                     	 //필수값
@@ -312,15 +308,13 @@
                          minlength: 3
                      },tel:{
                          //필수값
-                         required: true,
-                         number:true,
-                         rangelength: [10,11]
-                         
-                     },sample2_postcode:{
+                         required: true
+                         //rangelength: [10,11]
+                     },zipno:{
                     	 required: true
-                     },sample2_address:{
+                     },addr:{
                     	 required: true
-                     },ADDR2:{
+                     },addr2:{
                     	 required: true
                      }     
 
@@ -345,14 +339,13 @@
                           equalTo:"비밀번호 항목과 일치하지 않습니다."
                      },gender:{
                          //필수값 
-                         required: "필수값 선택값입니다.",
+                         required: "필수값 선택값입니다."
                          //최소길이
-                         minlength: $.validator.format('{0}자 이상 입력하세요.')
                      },ihidnum:{
                          //필수값 
-                         required: "주민번호는 필수값 입니다.",
+                         required: "주민번호는 필수값 입니다."
+                         //rangelength: $.validator.format('주민번호는 {0}이상~{1}이하로 입력하세요.')
                          //최소길이
-                         minlength: $.validator.format('{0}자 이상 입력하세요.')
                      },name:{
                          //필수값 
                          required: "이름은 필수값 입니다.",
@@ -360,15 +353,14 @@
                          minlength: $.validator.format('{0}자 이상 입력하세요.')
                      },tel:{
                          //필수값 
-                         required: "전화번호는 필수값 입니다.",
-                         //최소길이
-						 rangelength: $.validator.format('비밀번호는 {0}이상~{1}이하로 입력하세요.')                           
-                     },sample2_postcode:{
+                         required: "전화번호는 필수값 입니다."
+                         //rangelength: $.validator.format('전화번호는 {0}이상~{1}이하로 입력하세요.')
+                     },zipno:{
                          //필수값
                          required: "우편번호는 필수값 입니다."
-                     },sample2_address:{
+                     },addr:{
                     	 required: "기본주소는 필수값 입니다."
-                     },ADDR2:{
+                     },addr2:{
                     	 required: "상세주소는 필수값 입니다."
                      }       
    
@@ -443,14 +435,25 @@
 		//등록
 		 $("#doInsert").on("click", function() { 
 			
+/*  			 alert($('#email').val());
+			 alert($('#pw').val());
+			 alert($('input[name=gender]:checked').val());
+			 alert($('#ihidnum').val());
+			 alert($('#name').val());
+			 alert($('#tel').val());
+			 alert($('#zipno').val());
+			 alert($('#addr').val());
+			 alert($('#addr2').val()); */ 
+			 
+				
 	 		 if (duplicate == false) {
 					alert("아이디 중복확인을 해주세요!");
 					return false;
 				} else if (duplicate == true) {
-
+					
 		            //confirm
 		            if (confirm("등록 하시겠습니까?") == false)return;
-		            
+		            //var gender = $('input[name="gender"]:checked').val();
 		            //ajax
 		            $.ajax({
 		                type : "POST",
@@ -459,13 +462,13 @@
 		                data : {
 		                    "email" : $("#email").val(),
 		                    "pw" : $("#pw").val(),
-		                    "gender" : $("#gender").val(),
+		                    "gender" :$('input[name=gender]:checked').val(),
 		                    "ihidnum" : $("#ihidnum").val(),
 		                    "name" : $("#name").val(),
 		                    "tel" : $("#tel").val(),
-		                    "zipno" : $("#sample2_postcode").val(),
-		                    "addr" : $("#sample2_address").val(),
-		                    "addr2" : $("#ADDR2").val(),
+		                    "zipno" : $("#zipno").val(),
+		                    "addr" : $("#addr").val(),
+		                    "addr2" : $("#addr2").val(),
 		                    "regid" : $("#email").val(),
 		                    "modid" : $("#email").val()
 

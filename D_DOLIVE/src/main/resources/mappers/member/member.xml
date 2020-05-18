@@ -30,7 +30,7 @@
 			, ihidnum
 			, name
 			, tel
-			, zipNo		
+			, zipno		
 			, addr	
 			, addr2	
 			, regid
