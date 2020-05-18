@@ -3,7 +3,8 @@
   * Class Name : board_list.jsp
   * Description : 게시판 목록
   * Modification Information
-  * http://localhost:8080/d_dolive/reserv/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=20&searchWord=code_1&optionDiv=2
+  * http://localhost:8080/d_dolive/reserv/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=30&searchWord=code_1&optionDiv=2
+  * http://localhost:8080/d_dolive/reserv/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=40&searchWord=code_1&searchWord02=1&optionDiv=2
   *
   *   수정일                   수정자                      수정내용
   *  -------    --------    ---------------------------
@@ -108,6 +109,29 @@
   	    	<h1>업체 회원 예약 신청 목록</h1>
   	    </div>
   	    <!--// div title -->
+  	    
+  	    <!-- 검색영역 -->
+    	<div class="row">
+    		<div class="col-md-12 text-right">
+	    		<form action="${hContext}/reserv/do_retrieve.do" name="searchFrm"
+					method="get" class="form-inline">
+					<input type="hidden" name="pageNum" id="pageNum" value="${vo.pageNum }">
+					<input type="hidden" name="pageSize" id="pageSize" value="${vo.pageSize }">
+					<input type="hidden" name="optionDiv" id="optionDiv" value="${vo.optionDiv }">
+					<input type="hidden" name="searchDiv" id="searchDiv" value="${vo.searchDiv }">
+					<input type="hidden" name="searchWord" id="searchWord" value="">
+					<input type="hidden" name="searchWord02" id="searchWord02" value="">
+	    			<div class="form-group">
+	    				<%=StringUtil.makeSelectBox(searchList, "reservSelect", searchDiv, true) %>
+	    				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+	    				<button type="button" onclick="javascript:doRetrieve();"
+							class="btn btn-primary btn-sm">조회</button>
+	    			</div>
+	    		</form>
+    		</div>
+    	</div>
+   		<!--// 검색영역 -->
+  	    
     	<!-- Grid영역 -->
     	<div class="table-responsive">
     		<table class="table table-striped table-bordered jong" id="listTable">
@@ -130,7 +154,7 @@
     							<tr>
 			    					<td class="text-center hidden-sm hidden-xs"><c:out value="${vo.num }"></c:out></td>
 			    					<td class="text-left"><c:out value="${vo.name }"></c:out></td>
-			    					<td class="text-center"><c:out value="${vo.addr }"></c:out></td>
+			    					<td class="text-center"><c:out value="${vo.ihidnum }"></c:out></td>
 			    					<td class="text-center"><c:out value="${vo.maskCnt }"></c:out></td>
 			    					<td class="text-center"><c:out value="${vo.approval }"></c:out></td>
 			    					<td class="text-center"><c:out value="${vo.amount }"></c:out></td>
@@ -166,6 +190,23 @@
    
    
    	<script type="text/javascript">
+	   	function doRetrieve() {
+			//console.log("doRetrieve");
+			var frm = document.searchFrm;
+			frm.searchWord.value = "code_1";
+
+			var approval = $("#reservSelect option:selected").val();
+
+			if(approval=="") {
+				frm.searchDiv.value = "30";
+			} else {
+				frm.searchDiv.value = "40";
+				frm.searchWord02.value = approval;
+			}
+			
+			frm.action = "${hContext}/reserv/do_retrieve.do";
+			frm.submit();
+		}
 	</script>
    
 </body>

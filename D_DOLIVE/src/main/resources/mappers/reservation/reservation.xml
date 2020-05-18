@@ -13,7 +13,15 @@
 				AND regId = #{searchWord}
 			</when>
 			<when test="'20' == searchDiv">
+				AND regId = #{searchWord}
+				AND approval = #{searchWord02}
+			</when>
+			<when test="'30' == searchDiv">
 				AND pcode = #{searchWord}
+			</when>
+			<when test="'40' == searchDiv">
+				AND pcode = #{searchWord}
+				AND approval = #{searchWord02}
 			</when>
 		</choose>
 	</sql>
@@ -25,11 +33,11 @@
 			SELECT b.rno
 					, b.pcode
 					, m.name AS name
-					, m.ihidnum AS ihidnum
+					, CryptString.decrypt(m.ihidnum,'key') AS ihidnum
 					, p.name AS pname
 					, p.addr AS paddr
 					, b.maskCnt
-					, b.approval
+					, func_code('APPROVAL', b.approval) AS approval
 					, b.impuid
 					, b.amount
 					, b.regId
