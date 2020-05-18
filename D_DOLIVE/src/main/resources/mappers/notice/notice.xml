@@ -9,7 +9,7 @@
 	<sql id="baseCondition">
 		<choose>
 			<when test="'10' == searchDiv">
-				AND email like '%' || #{searchWord} || '%'
+				AND email = #{searchWord}
 			</when>
 		</choose>
 	</sql>
