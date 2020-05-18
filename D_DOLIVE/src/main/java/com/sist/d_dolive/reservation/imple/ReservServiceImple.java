@@ -8,7 +8,7 @@ import com.sist.d_dolive.reservation.ReservVO;
 
 public class ReservServiceImple implements ReservService {
 
-	ReservDaoImple dao;
+	ReservDaoImpleXXX dao;
 	
 	@Override
 	public int doInsert(DTO dto) {

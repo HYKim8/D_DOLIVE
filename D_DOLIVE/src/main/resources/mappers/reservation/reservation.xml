@@ -16,16 +16,16 @@
 			, regDt			
 			, modId			
 			, modDt							                                      
-		) VALUES (                                              
-		    TO_CHAR(SYSDATE,'YYMMDD')||'_'||RESERV_SEQ.NEXTVAL, 
-		    ?,                                                  
-		    ?,                                                  
-		    ?,                                                  
-		    ?,                                                  
-		    ?,                                                  
-		    SYSDATE,                                            
-		    ?,                                                  
-		    SYSDATE                                             
+		) VALUES (                                        
+		    (TO_CHAR(SYSDATE,'YYMMDD')||'_'||RESERV_SEQ.NEXTVAL,#{rNo})
+		    ,#{pCode,jdbcType=VARCHAR}                                                
+		    ,#{maskCnt}                                                    
+		    ,#{approval,jdbcType=VARCHAR}                                                       
+		    ,#{amount}                                                       
+		    ,#{regId,jdbcType=VARCHAR}                                                      
+		    ,SYSDATE                                            
+		    ,#{modId,jdbcType=VARCHAR}                                                      
+		    ,SYSDATE                                             
 		); 
 	</insert>
 </mapper>

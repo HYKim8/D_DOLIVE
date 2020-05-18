@@ -19,7 +19,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.sist.d_dolive.cmn.DTO;
-import com.sist.d_dolive.reservation.imple.ReservDaoImple;
+import com.sist.d_dolive.reservation.imple.ReservDaoImpleXXX;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -34,7 +34,7 @@ public class TestReservDao {
 	WebApplicationContext webApplicationContext;
 	
 	@Autowired
-	ReservDaoImple dao;
+	ReservDaoImpleXXX dao;
 	
 	ReservVO reserv01;
 	ReservVO reserv02;
@@ -56,7 +56,6 @@ public class TestReservDao {
 	}
 
 	@Test
-	@Ignore
 	public void doInsert() {
 		
 		//1. 입력
