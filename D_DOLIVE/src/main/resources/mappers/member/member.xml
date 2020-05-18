@@ -87,7 +87,7 @@
 	 
 	 
 	<!-- 아이디 중복체크 -->
-	<select id="idCount" parameterType="MemberVO" resultType="MemberVO">
+	<select id="idCount" parameterType="MemberVO" resultType="int">
 		SELECT COUNT(*)
 		FROM member
 		WHERE email = #{email}

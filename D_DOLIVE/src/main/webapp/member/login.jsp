@@ -44,12 +44,16 @@
 
 </head>
 <body>
+
+
 	<!-- div container -->
 	<div class="container">
-		
-		<div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 "></div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 ">
+		<div class="page-header">
+			<h1 align="center">Login</h1>
+		</div>
+		<div class="row" >
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 " ></div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 ">
                 <!-- div title -->
                 <form action="login.do" class="form-horizontal" name="login_form" method="post">
 				    <%-- <!-- div 언어 -->
@@ -61,7 +65,6 @@
 						     </select>
 					     </div>
 				    </div> --%>
-                        
                     <!-- div 아이디 -->
                     <div class="form-group">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -83,7 +86,8 @@
                     <div class="text-center">
                         <input type="submit" value="로그인" class="submit">  
                     </div>  
-                    <a href="member_insert.jsp" class="more">아직  회원이 아니신가요?</a>                     
+                    <a href="member_insert.jsp" class="more">아직  회원이 아니신가요?</a><br/>
+                    <a href="id_pw_find.jsp" class="more">아이디/비번찾기</a>                            
                 </form>	
                    
                 	

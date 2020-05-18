@@ -443,53 +443,57 @@
 		//등록
 		 $("#doInsert").on("click", function() { 
 			
-			 if (duplicate == false) {
+	 		 if (duplicate == false) {
 					alert("아이디 중복확인을 해주세요!");
 					return false;
 				} else if (duplicate == true) {
-					return true;
-					}
-            //confirm
-            if (confirm("등록 하시겠습니까?") == false)return;
-            
-            //ajax
-            $.ajax({
-                type : "POST",
-                url : "${hContext}/member/insert.do",
-                dataType : "html",
-                data : {
-                    "email" : $("#email").val(),
-                    "pw" : $("#pw").val(),
-                    "gender" : $("#gender").val(),
-                    "ihidnum" : $("#ihidnum").val(),
-                    "name" : $("#name").val(),
-                    "tel" : $("#tel").val(),
-                    "zipno" : $("#sample2_postcode").val(),
-                    "addr" : $("#sample2_address").val(),
-                    "addr2" : $("#ADDR2").val(),
-                    "regid" : $("#email").val(),
-                    "modid" : $("#email").val()
 
-                },
-                success : function(data) { //성공
-                    console.log("data:" + data);
-                    var parseData = $.parseJSON(data);
-                    if (parseData.msgId == "1") {
-                        alert(parseData.msgMsg);
-                        goLogin();
-                    } else {
-                        alert(parseData.msgMsg);
-                    }
+		            //confirm
+		            if (confirm("등록 하시겠습니까?") == false)return;
+		            
+		            //ajax
+		            $.ajax({
+		                type : "POST",
+		                url : "${hContext}/member/insert.do",
+		                dataType : "html",
+		                data : {
+		                    "email" : $("#email").val(),
+		                    "pw" : $("#pw").val(),
+		                    "gender" : $("#gender").val(),
+		                    "ihidnum" : $("#ihidnum").val(),
+		                    "name" : $("#name").val(),
+		                    "tel" : $("#tel").val(),
+		                    "zipno" : $("#sample2_postcode").val(),
+		                    "addr" : $("#sample2_address").val(),
+		                    "addr2" : $("#ADDR2").val(),
+		                    "regid" : $("#email").val(),
+		                    "modid" : $("#email").val()
 
-                },
-                error : function(xhr, status, error) {
-                    //alert("error:" + error);
-                },
-                complete : function(data) {
+		                },
+		                success : function(data) { //성공
+		                    console.log("data:" + data);
+		                    var parseData = $.parseJSON(data);
+		                    if (parseData.msgId == "1") {
+		                        alert(parseData.msgMsg);
+		                        goLogin();
+		                    } else {
+		                        alert(parseData.msgMsg);
+		                    }
 
-                }
+		                },
+		                error : function(xhr, status, error) {
+		                    //alert("error:" + error);
+		                },
+		                complete : function(data) {
 
-            });//--ajax 
+		                }
+
+		            });//--ajax 					
+
+
+					
+					} 
+
 
         });
 

@@ -69,20 +69,20 @@
         <div class="row text-right">
 			<label for="title" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label"></label>
 		    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-				<input type="button" class="btn btn-primary btn-sm" value="수정" onclick="doUpdate();" />
+				<input type="button" class="btn btn-primary btn-sm" value="수정" onclick="$(this.form).submit()" id="doUpdate" name="doUpdate" />
 			</div>
 		</div>
 		<!--// Button Area -->
 
 		<!-- 입력 Form -->
-		<form action="${hContext}/member/do_update.do" name="member_edit" method="post" class="form-horizontal">
+		<form action="${hContext}/member/do_update.do" name="updateForm" id="updateForm" method="post" class="form-horizontal">
 			
 			
 			<div class="form-group">
 				<label for="email" class="col-lg-4 col-sm-4 col-xs-4  control-label">메일</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
 					<input type="text"  value="${vo.email}"  maxlength="350" class="form-control input-sm"
-						id="email" name="email" placeholder="메일"  />
+						id="email" name="email" placeholder="메일" readonly />
 				</div>
 			</div>			
 			
@@ -250,14 +250,135 @@
 
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 	<script src="${hContext}/resources/js/jquery-migrate-1.4.1.js"></script>
+    <!-- jQuery validator -->
+    <script src="${hContext}/resources/js/jquery.validate.js"></script>		
 	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
 	<script src="${hContext}/resources/js/bootstrap.min.js"></script>
 	<!-- page -->
 	<script src="${hContext}/resources/js/jquery.bootpag.min.js"></script>
+	
+	
+   <script type="text/javascript">
+    
+         function bindEventHandler(){
+        	 $("#updateForm").validate({
+                 onfocus: true,
+                 //서버전송여부
+                 debug: true,
+                  
+                 rules: {
+                	 email:{
+                        //필수값
+                        required: true,
+                        //최소길이
+                        email: true
+                     },pw:{
+                         //필수값
+                         required: true,
+                         //범위
+                         rangelength: [5,12]
+                     },gender:{
+                    	required: true
+
+                 	 },ihidnum:{
+                 		required: true
+                 		
+                 	 },name:{
+                    	 //필수값
+                         required: true,
+                         //이메일형식
+                         minlength: 3
+                     },tel:{
+                         //필수값
+                         required: true,
+                         number:true,
+                         rangelength: [10,11]
+                         
+                     },sample2_postcode:{
+                    	 required: true
+                     },sample2_address:{
+                    	 required: true
+                     },ADDR2:{
+                    	 required: true
+                     }     
+
+                 },messages: {
+                     //message
+                     email:{
+                         //필수값
+                         required: "이메일은 필수값 입니다.",
+                         //이메일형식
+                         email:  "올바른 이메일 형식이 아닙니다."
+                 	 },pw:{
+                         //필수값 
+                         required: "비밀번호는 필수값 입니다.",
+                         //최소길이
+                         rangelength: $.validator.format('비밀번호는 {0}이상~{1}이하로 입력하세요.')
+                     },gender:{
+                         //필수값 
+                         required: "필수값 선택값입니다.",
+                         //최소길이
+                         minlength: $.validator.format('{0}자 이상 입력하세요.')
+                     },ihidnum:{
+                         //필수값 
+                         required: "주민번호는 필수값 입니다.",
+                         //최소길이
+                         minlength: $.validator.format('{0}자 이상 입력하세요.')
+                     },name:{
+                         //필수값 
+                         required: "제목은 필수값 입니다.",
+                         //최소길이
+                         minlength: $.validator.format('{0}자 이상 입력하세요.')
+                     },tel:{
+                         //필수값 
+                         required: "전화번호는 필수값 입니다.",
+                         //최소길이
+						 rangelength: $.validator.format('비밀번호는 {0}이상~{1}이하로 입력하세요.')                           
+                     },sample2_postcode:{
+                         //필수값
+                         required: "우편번호는 필수값 입니다."
+                     },sample2_address:{
+                    	 required: "기본주소는 필수값 입니다."
+                     },ADDR2:{
+                    	 required: "상세주소는 필수값 입니다."
+                     }       
+   
+                 },errorElement: "em"
+                 ,errorPlacement: function ( error, element ) {
+                     // Add the `help-block` class to the error element
+                     error.addClass( "help-block" );
+
+                     if ( element.prop( "type" ) === "checkbox" ) {
+                         error.insertAfter( element.parent( "label" ) );
+                     } else {
+                         error.insertAfter( element );
+                     }
+                 },
+                 highlight: function ( element, errorClass, validClass ) {
+                     $( element ).parents( ".col-lg-6 " ).addClass( "has-error" ).removeClass( "has-success" );
+                 },
+                 unhighlight: function (element, errorClass, validClass) {
+                     $( element ).parents( ".col-lg-6 " ).addClass( "has-success" ).removeClass( "has-error" );
+                 }
+				
+
+          });
+
+         }
+    
+
+    </script>	
+	
 
 	<script type="text/javascript">
 	
+	 $(document).ready(function(){
+         //input validation
+    	 bindEventHandler();
+    	 
+     });
 
+	
 	function goSelectOne() {
 		var frm = document.updateFrm;
 		frm.h_email.value = $("#email").val();
@@ -266,7 +387,7 @@
 	}
 
 		//수정
-		function doUpdate() {
+		$("#doUpdate").on("click", function() {			
 			
 			var email = $("#email").val();
 			var pw = $("#pw").val();
@@ -317,7 +438,7 @@
 				}
 			});//--ajax
 
-		}
+		 });
 
 
  
