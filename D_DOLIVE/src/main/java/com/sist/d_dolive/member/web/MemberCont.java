@@ -91,7 +91,7 @@ public class MemberCont {
 			message.setMsgMsg(memberVO.getEmail()+"님이 수정 되었습니다.");
 		//실패	
 		}else {
-			message.setMsgMsg(memberVO.getEmail()+"님 등록 실패.");			
+			message.setMsgMsg(memberVO.getEmail()+"님 수정 실패.");			
 		}		
 		
 		//JSON

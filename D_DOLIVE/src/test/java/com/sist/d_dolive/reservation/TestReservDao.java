@@ -19,7 +19,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.sist.d_dolive.cmn.DTO;
-import com.sist.d_dolive.reservation.imple.ReservDaoImpleXXX;
+import com.sist.d_dolive.reservation.imple.ReservDaoImple;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -34,7 +34,7 @@ public class TestReservDao {
 	WebApplicationContext webApplicationContext;
 	
 	@Autowired
-	ReservDaoImpleXXX dao;
+	ReservDaoImple dao;
 	
 	ReservVO reserv01;
 	ReservVO reserv02;
@@ -48,14 +48,15 @@ public class TestReservDao {
 		LOG.debug("~~webApplicationContext~~"+webApplicationContext);
 		LOG.debug("~~~~~~~~~~~~~~~~~~~~~~~~");
 		
-		reserv01 = new ReservVO("200515_60","code_1",3,"1",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일");
-		reserv02 = new ReservVO("2","code_2",3,"1",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일");
-		reserv03 = new ReservVO("3","code_3",3,"1",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일");
+		reserv01 = new ReservVO("200515_60","code_1",3,"1","imp_111",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일","약국명","약국주소");
+		reserv02 = new ReservVO("200515_61","code_1",3,"1","imp_111",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일","약국명","약국주소");
+		reserv03 = new ReservVO("200515_62","code_1",3,"1","imp_111",4500,"bealright6@naver.com","등록일","bealright6@naver.com","수정일","약국명","약국주소");
 		
 		reserv04 = new ReservVO();
 	}
 
 	@Test
+	@Ignore
 	public void doInsert() {
 		
 		//1. 입력
@@ -72,6 +73,7 @@ public class TestReservDao {
 	}
 	
 	@Test
+	@Ignore
 	public void doUpdate() {
 		
 		reserv01.setApproval("2");
@@ -85,6 +87,7 @@ public class TestReservDao {
 	}
 	
 	@Test
+	@Ignore
 	public void doSelectOne() {
 		
 		ReservVO vsVO = (ReservVO) dao.doSelectOne(reserv01);
