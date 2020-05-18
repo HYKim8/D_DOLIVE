@@ -65,17 +65,19 @@
 		<div class="col-lg-12"></div>
 		<div class="panel panel-default"></div>
 
-		<!-- Button Area -->
-        <div class="row text-right">
-			<label for="title" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label"></label>
-		    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-				<input type="button" class="btn btn-primary btn-sm" value="수정" onclick="$(this.form).submit()" id="doUpdate" name="doUpdate" />
-			</div>
-		</div>
-		<!--// Button Area -->
+
 
 		<!-- 입력 Form -->
-		<form action="${hContext}/member/do_update.do" name="updateForm" id="updateForm" method="post" class="form-horizontal">
+		<form action="${hContext}/member/update.do" name="updateForm" id="updateForm" method="post" class="form-horizontal">
+			
+			<!-- Button Area -->
+	        <div class="row text-right">
+				<label for="title" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label"></label>
+			    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+					<input type="button" class="btn btn-primary btn-sm" value="수정" onclick="$(this.form).submit()" id="doUpdate" name="doUpdate" />
+				</div>
+			</div>
+			<!--// Button Area -->			
 			
 			
 			<div class="form-group">
@@ -326,7 +328,7 @@
                          minlength: $.validator.format('{0}자 이상 입력하세요.')
                      },name:{
                          //필수값 
-                         required: "제목은 필수값 입니다.",
+                         required: "이름은 필수값 입니다.",
                          //최소길이
                          minlength: $.validator.format('{0}자 이상 입력하세요.')
                      },tel:{
@@ -372,12 +374,12 @@
 
 	<script type="text/javascript">
 	
+
 	 $(document).ready(function(){
          //input validation
     	 bindEventHandler();
     	 
      });
-
 	
 	function goSelectOne() {
 		var frm = document.updateFrm;
@@ -386,10 +388,12 @@
         frm.submit();
 	}
 
+
+
 		//수정
 		$("#doUpdate").on("click", function() {			
 			
-			var email = $("#email").val();
+	/* 		var email = $("#email").val();
 			var pw = $("#pw").val();
 			var gender = $("#gender").val();
 			var ihidnum = $("#ihidnum").val();
@@ -398,8 +402,10 @@
 			var zipno = $("#sample2_postcode").val();
 			var addr = $("#sample2_address").val();
 			var addr2 = $("#ADDR2").val();
-			var modId = $("#modId").val();
+			var modId = $("#modId").val(); */
 
+
+			
             //confirm
             if (confirm("수정 하시겠습니까?") == false)return;
             
