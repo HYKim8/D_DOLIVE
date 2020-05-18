@@ -41,7 +41,7 @@
     <![endif]-->
   </head>
   <body>
-    <table border="1" >
+    <table border="1" style="width: 100%;height: 100%;">
         <tr>
             <!-- tiles header -->
             <td height="30" colspan="2"><tiles:insertAttribute name="header"/></td>

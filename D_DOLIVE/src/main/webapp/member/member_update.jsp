@@ -66,13 +66,10 @@
 		<div class="panel panel-default"></div>
 
 		<!-- Button Area -->
-		<div class="row">
-			<div class="col-lg-10 col-sm-10 col-xs-10 ">
-				<div class="text-right">
-					<button type="button" class="btn btn-default btn-sm" id="doUpdate">수정</button>
-					 <a href="javascript:history.go(-2)"><button type="button"
-								class="cancel">취 소</button></a>
-				</div>
+        <div class="row text-right">
+			<label for="title" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label"></label>
+		    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+				<input type="button" class="btn btn-primary btn-sm" value="수정" onclick="doUpdate();" />
 			</div>
 		</div>
 		<!--// Button Area -->
@@ -94,18 +91,9 @@
 					class="col-lg-4 col-sm-4 col-xs-4  control-label">비밀번호</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
 					<input type="password" maxlength="50" class="form-control input-sm"
-						id="pw" name="pw" placeholder="비밀번호" />
+						id="pw" name="pw" placeholder="비밀번호" value="${vo.pw }"/>
 				</div>
 			</div>
-			
-<!-- 			<div class="form-group">
-				<label for="pwcheck"
-					class="col-lg-4 col-sm-4 col-xs-4  control-label">비밀번호확인</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
-					<input type="password" maxlength="50" class="form-control input-sm"
-						id="pwcheck" name="pwcheck" placeholder="비밀번호확인" />
-				</div>
-			</div>	 -->		
 						
 			<div class="form-group">
 				<label for="gender" class="col-lg-4 col-sm-4 col-xs-4  control-label">성별</label>
@@ -116,10 +104,10 @@
 			</div>				
 			
 			<div class="form-group">
-				<label for="ihidNum" class="col-lg-4 col-sm-4 col-xs-4  control-label">주민번호</label>
+				<label for="ihidnum" class="col-lg-4 col-sm-4 col-xs-4  control-label">주민번호</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
 					<input type="text" maxlength="50" class="form-control input-sm"
-						id="ihidNum" name="ihidNum" placeholder="주민번호" />
+						id="ihidnum" name="ihidnum" placeholder="주민번호" value="${vo.ihidnum }"/>
 				</div>
 			</div>				
 			
@@ -127,14 +115,14 @@
 				<label for="name" class="col-lg-4 col-sm-4 col-xs-4  control-label">이름</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
 					<input type="text" maxlength="50" class="form-control input-sm"
-						id="name" name="name" placeholder="이름" />
+						id="name" name="name" placeholder="이름" value="${vo.name }" />
 				</div>
 			</div>
 			
 			<div class="form-group">
 				<label for="tel" class="col-lg-4 col-sm-4 col-xs-4  control-label">전화번호</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-					<input type="text"  class="phoneNum" id="tel" name="tel" placeholder="전화번호" />
+					<input type="text"  class="phoneNum" id="tel" name="tel" placeholder="전화번호" value="${vo.tel }"/>
 						
 				</div>
 			</div>			
@@ -143,21 +131,21 @@
 				<label for="zipno" class="col-lg-4 col-sm-4 col-xs-4  control-label">주소</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
 						<input type="text" id="sample2_postcode" placeholder="우편번호" name="ZIPNO" readonly >
-						<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>
+						<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기" value="${vo.zipno }"><br>
 				</div>
 			</div>	
 			
 			<div class="form-group">
 				<label for="ADDR" class="col-lg-4 col-sm-4 col-xs-4  control-label">기본주소</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-						<input type="text" name="ADDR" id="sample2_address" class="address" placeholder="기본주소" readonly>
+						<input type="text" name="ADDR" id="sample2_address" class="address" placeholder="기본주소" value="${vo.addr }" readonly>
 				</div>
 			</div>		
 			
 			<div class="form-group">
 				<label for="ADDR2" class="col-lg-4 col-sm-4 col-xs-4  control-label">상세주소</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-						<input type="text" id=ADDR2 name="ADDR2" class="address" placeholder="상세주소" >
+						<input type="text" id=ADDR2 name="ADDR2" class="address" placeholder="상세주소" value="${vo.addr2 }" >
 				</div>
 			</div>										
 
@@ -269,66 +257,27 @@
 
 	<script type="text/javascript">
 	
-    	
+
+	function goSelectOne() {
+		var frm = document.updateFrm;
+		frm.h_email.value = $("#email").val();
+        frm.action = "${hContext}/member/do_select_one.do";
+        frm.submit();
+	}
+
 		//수정
-		$("#doUpdate").on("click", function() {
+		function doUpdate() {
 			
-
-   /*           alert("email="+$("#email").val());
-            alert("pw="+$("#pw").val());
-            alert("gender="+$("#gender").val());
-            alert("ihidNum="+$("#ihidNum").val());
-            alert("name="+$("#name").val());
-            alert("tel="+$("#tel").val());
-            alert("sample2_postcode="+$("#sample2_postcode").val());
-            alert("sample2_address="+$("#sample2_address").val());
-            alert("ADDR2="+$("#ADDR2").val());  */
-
-            if ($("#email").val() == "" || $("#email").val() == false) {
-                alert("이메일을 입력 하세요.");
-                $("#email").focus();
-                return;
-            }
-            if ($("#pw").val() == "" || $("#pw").val() == false) {
-                alert("이름를 입력 하세요.");
-                $("#pw").focus();
-                return;
-            }
-            if ($("#gender").val() == "" || $("#gender").val() == false) {
-                alert("이름를 입력 하세요.");
-                $("#u_id").focus();
-                return;
-            }
-            if ($("#ihidnum").val() == "" || $("#ihidnum").val() == false) {
-                alert("이름를 입력 하세요.");
-                $("#ihidnum").focus();
-                return;
-            }
-            if ($("#name").val() == "" || $("#name").val() == false) {
-                alert("이름를 입력 하세요.");
-                $("#name").focus();
-                return;
-            }
-            if ($("#tel").val() == "" || $("#tel").val() == false) {
-                alert("이름를 입력 하세요.");
-                $("#tel").focus();
-                return;
-            }
-            if ($("#zipno").val() == "" || $("#zipno").val() == false) {
-                alert("이름를 입력 하세요.");
-                $("#zipno").focus();
-                return;
-            }
-            if ($("#addr").val() == "" || $("#addr").val() == false) {
-                alert("이름를 입력 하세요.");
-                $("#addr").focus();
-                return;
-            }
-            if ($("#addr2").val() == "" || $("#addr2").val() == false) {
-                alert("이름를 입력 하세요.");
-                $("#addr2").focus();
-                return;
-            }
+			var email = $("#email").val();
+			var pw = $("#pw").val();
+			var gender = $("#gender").val();
+			var ihidnum = $("#ihidnum").val();
+			var name = $("#name").val();
+			var tel = $("#tel").val();
+			var zipno = $("#sample2_postcode").val();
+			var addr = $("#sample2_address").val();
+			var addr2 = $("#ADDR2").val();
+			var modId = $("#modId").val();
 
             //confirm
             if (confirm("수정 하시겠습니까?") == false)return;
@@ -342,38 +291,33 @@
                     "email" : $("#email").val(),
                     "pw" : $("#pw").val(),
                     "gender" : $("#gender").val(),
-                    "ihidnum" : $("#ihidNum").val(),
+                    "ihidnum" : $("#ihidnum").val(),
                     "name" : $("#name").val(),
                     "tel" : $("#tel").val(),
                     "zipno" : $("#sample2_postcode").val(),
                     "addr" : $("#sample2_address").val(),
                     "addr2" : $("#ADDR2").val(),
-                    "regid" : $("#email").val(),
                     "modid" : $("#email").val()
 
                 },
                 success : function(data) { //성공
-                    console.log("data:" + data);
-                    //{"msgId":"1","msgMsg":"j_hr0000002님이 삭제 되었습니다.","num":0,"totalCnt":0}   
-                    var parseData = $.parseJSON(data);
-                    if (parseData.msgId == "1") {
-                        alert(parseData.msgMsg);
-                        doRetrieve();
-                    } else {
-                        alert(parseData.msgMsg);
-                    }
+					var jData = JSON.parse(data);
+					if(null!=jData && jData.msgId=="1") {
+						alert(jData.msgMsg);
+						goSelectOne();
+					}else {
+						alert(jData.msgMsg);
+					}
+				},
+				error : function(xhr, status, error) {
+					alert("error:"+error);
+				},
+				complete : function(data) {
+	
+				}
+			});//--ajax
 
-                },
-                error : function(xhr, status, error) {
-                    alert("error:" + error);
-                },
-                complete : function(data) {
-
-                }
-
-            });//--ajax 
-
-        });
+		}
 
 
  

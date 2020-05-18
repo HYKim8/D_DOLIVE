@@ -74,8 +74,14 @@
 	      	<div class="form-group">
 	      		<label for="gender" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">성별</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-		      		<input type="text" class="form-control" id="gender" name="gender" placeholder="성별"
-		      	 	value="${vo.gender }">
+		      		<c:if test="${vo.gender eq '남자'}">
+						&nbsp;<input type="radio" id="gender" name="gender" value="1" checked/>&nbsp;남자
+						&nbsp;<input type="radio" id="gender" name="gender" value="2" />&nbsp;여자
+					</c:if>
+					<c:if test="${vo.gender eq '여자'}">
+						&nbsp;<input type="radio" id="gender" name="gender" value="1" />&nbsp;남자
+						&nbsp;<input type="radio" id="gender" name="gender" value="2" checked/>&nbsp;여자
+					</c:if>
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
@@ -94,15 +100,16 @@
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="addr" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">주소</label>
+	      		<input type="button" value="주소 조회" onclick="goJusoPopup();"/>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-		      		<input type="text" class="form-control" id="addr" name="addr" placeholder="주소"
+		      		<input type="text" class="form-control" id="roadAddrPart1" name="roadAddrPart1" placeholder="주소"
 		      	 	value="${vo.addr }">
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
-	      		<label for="addr2" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">주소2</label>
+	      		<label for="addr2" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">상세주소</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-		      		<input type="text" class="form-control" id="addr2" name="addr2" placeholder="주소2"
+		      		<input type="text" class="form-control" id="addrDetail" name="addrDetail" placeholder="상세주소"
 		      	 	value="${vo.addr2 }">
 		      	</div>
 	      	</div>
@@ -141,13 +148,6 @@
 		      	 	value="${vo.pcode }">
 		      	</div>
 	      	</div>
-	      	<div class="form-group">
-	      		<label for="modId" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">수정자ID</label>
-		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-		      		<input type="text" class="form-control" id="modId" name="modId" placeholder="수정자ID"
-		      	 	value="${vo.modId }">
-		      	</div>
-	      	</div>
    		</form>
  	</div>   
  	
@@ -159,6 +159,24 @@
     
     
     <script type="text/javascript">
+	    function goJusoPopup(){
+	    	// 주소검색을 수행할 팝업 페이지를 호출합니다.
+	    	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+	    	var pop = window.open("${hContext}/jusoapi/juso_popup_api.jsp", "pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	    	
+	    	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+	        //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+	    }
+	
+	    function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, engAddr, jibunAddr, zipNo
+	    		, admCd, rnMgtSn, bdMgtSn, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm
+	    		, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo) {
+			// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+			document.updateFrm.roadAddrPart1.value = roadAddrPart1;
+			document.updateFrm.addrDetail.value = addrDetail;
+			document.updateFrm.zipNo.value = zipNo;
+		}
+    
 		function goSelectOne() {
 			var frm = document.updateFrm;
 			frm.optionDiv.value = "1";
@@ -172,7 +190,7 @@
 			
 			var email = $("#email").val();
 			var pw = $("#pw").val();
-			var gender = $("#gender").val();
+			var gender = $("input[name='gender']:checked").val();
 			var name = $("#name").val();
 			var birth = $("#birth").val();
 			var addr = $("#addr").val();
@@ -182,7 +200,6 @@
 			var bizRno = $("#bizRno").val();
 			var bizTel = $("#bizTel").val();
 			var pcode = $("#pcode").val();
-			var modId = $("#modId").val();
 
 			if(false==confirm("수정 하시겠습니까?"))return;
 
@@ -204,7 +221,6 @@
 					, "bizRno" : bizRno
 					, "bizTel" : bizTel
 					, "pcode" : pcode
-					, "modId" : modId
 				},
 				success : function(data) { //성공
 					var jData = JSON.parse(data);

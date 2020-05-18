@@ -17,6 +17,11 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ include file="/common/common.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,27 +29,36 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<button onclick="cancelPay()">환불하기</button>
-	<input type="button" value="환불" id="cancle"/>
-<script
-    src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script><!-- jQuery CDN --->
-  <script>
-function cancelPay() {
-    jQuery.ajax({
-      "url": "http://www.myservice.com/payments/cancel",
-      "type": "POST",
-      "contentType": "application/json",
-      "data": JSON.stringify({
-    	 	"imp_uid": "imp_120399097759", // 주문번호
-        	"reason": "테스트 결제 환불" // 환불사유
-      }),
-      "dataType": "json"
-    });
-  }
+	<input type="button" value="환불" onclick="cancelPay()"/>
 	
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 	
-</script>
+  	<script type="text/javascript">
+		function cancelPay() {
+			//ajax
+			$.ajax({
+				type : "POST",
+				url : "${hContext}/iamport/do_cancel.do",
+				dataType : "html",
+				data : {
+					"imp_uid" : "imp_056673462320"
+				},
+				success : function(data) { //성공
+					var jData = JSON.parse(data);
+					if(null!=jData && jData.msgId=="1") {
+						alert(jData.msgMsg);
+					}else {
+						alert(jData.msgMsg);
+					}
+				},
+				error : function(xhr, status, error) {
+					alert("error:"+error);
+				},
+				complete : function(data) {
+		
+				}
+			});//--ajax
+		}
+	</script>
 </body>
 </html>
