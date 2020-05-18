@@ -24,8 +24,10 @@
 		FROM(
 			SELECT b.rno
 					, b.pcode
-					, p.name
-					, p.addr
+					, m.name AS name
+					, m.ihidnum AS ihidnum
+					, p.name AS pname
+					, p.addr AS paddr
 					, b.maskCnt
 					, b.approval
 					, b.impuid
@@ -45,8 +47,9 @@
 					<include refid="baseCondition"></include>
 				)A
 				WHERE ROWNUM <![CDATA[ <= ]]> (#{pageSize} * (#{pageNum} -1) + #{pageSize})
-			)B, pharmacy P
+			)B, member m, pharmacy P
 			WHERE b.pcode = p.pcode
+			AND b.regId = m.email
 			AND rnum <![CDATA[ >= ]]> (#{pageSize} * (#{pageNum} -1) +1)
 		)t1
 		NATURAL JOIN
