@@ -48,7 +48,6 @@
         </tr>
         <tr>
             <!--tiles menu  -->
-            <td><tiles:insertAttribute name="menu"/></td> 
             <!--tiles body  -->
             <td><tiles:insertAttribute name="body"/></td>
         </tr>

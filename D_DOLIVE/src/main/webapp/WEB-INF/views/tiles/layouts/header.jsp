@@ -41,8 +41,9 @@
 	        </div>
 	    </div>
 	</nav>
+	<div style="height : 104px;"></div>
 	<!-- Masthead-->
-	<header class="masthead bg-primary text-white text-center" style="height: 800px;">
+	<header class="masthead bg-primary text-white text-center" style="display:none; height: 800px;">
 	    <div class="container d-flex align-items-center flex-column">
 	        <!-- Masthead Avatar Image--><img class="masthead-avatar mb-5" src="${hContext}/resources/assets/img/avataaars.svg" alt="" /><!-- Masthead Heading-->
 	        <h1 class="masthead-heading text-uppercase mb-0">Mask</h1>

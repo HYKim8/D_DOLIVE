@@ -19,7 +19,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="context" value="${pageContext.request.contextPath }" />
 <table>
-  <tr>
+  <tr> 
     <td><a href="${context}/bizmember/do_select_one.do?email=이메일123&optionDiv=1">업체회원 조회</a></td>
   </tr>
 </table>

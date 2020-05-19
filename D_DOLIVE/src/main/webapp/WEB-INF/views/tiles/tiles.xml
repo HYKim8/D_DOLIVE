@@ -23,8 +23,31 @@
         value="/WEB-INF/views/tiles/layouts/footer.jsp"/>
     </definition>
     
+    <!-- 메뉴없는 타일 -->
+    <definition name="basede-finition2" 
+    template="/WEB-INF/views/tiles/layouts/defaultLayout2.jsp">
+        <!-- 제목처리 -->
+        <put-attribute name="title" value=""/>
+        
+        <!-- top -->
+        <put-attribute name="header" 
+        value="/WEB-INF/views/tiles/layouts/header.jsp"/>
+        
+        <!-- 메뉴 -->
+        <put-attribute name="menu" 
+        value="/WEB-INF/views/tiles/layouts/menu.jsp"/>
+        
+        <!-- body -->
+        <put-attribute name="body" 
+        value=""/>
+        
+        <!-- 메뉴 -->
+        <put-attribute name="footer" 
+        value="/WEB-INF/views/tiles/layouts/footer.jsp"/>
+    	</definition>
+    
     <!-- bizmember -->
-    <definition name="bizmember/*" extends="basede-finition">
+    <definition name="bizmember/*" extends="basede-finition2">
         <put-attribute name="title" value="D_DOLIVE>Bizmember"/>
         <put-attribute name="body" value="/bizmember/{1}.jsp"/>
     </definition>
@@ -34,6 +57,13 @@
         <put-attribute name="title" value="D_DOLIVE>Reservation"/>
         <put-attribute name="body" value="/reserv/{1}.jsp"/>
     </definition>
+    
+    <!-- ======================================================== -->
+     <!-- reservation -->
+    <definition name="covidmap/*" extends="basede-finition2">
+        <put-attribute name="body" value="/covidmap/{1}.jsp"/>
+    </definition>
+    
 </tiles-definitions>
 
 
