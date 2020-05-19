@@ -37,6 +37,59 @@ public class MemberDaoImple implements MemberDao {
 	
 	private final String NAMESPACE= "com.sist.d_dolive.member";
 
+	public MemberDaoImple() {}
+	
+	public int passCheck(DTO dto) {
+		int cnt = 0;
+		MemberVO inVO = (MemberVO) dto;
+
+		LOG.debug("1==============================");
+		LOG.debug("1=inVO="+inVO);
+		LOG.debug("1==============================");
+
+		// namespace+id = com.sist.ehr.user.doUpdate
+		String statement = NAMESPACE+".passCheck";
+		LOG.debug("2==============================");
+		LOG.debug("2=statement="+statement);
+		LOG.debug("2==============================");
+
+		cnt = this.sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("3==============================");
+		LOG.debug("3=cnt="+cnt);
+		LOG.debug("3==============================");
+
+		LOG.debug("=cnt= "+cnt);
+		return cnt;
+	}
+	
+	
+	public int idCheck(DTO dto) {
+		int cnt = 0;
+		MemberVO inVO = (MemberVO) dto;
+
+		LOG.debug("1==============================");
+		LOG.debug("1=inVO="+inVO);
+		LOG.debug("1==============================");
+
+		// namespace+id = com.sist.ehr.user.doUpdate
+		String statement = NAMESPACE+".idCheck";
+		LOG.debug("2==============================");
+		LOG.debug("2=statement="+statement);
+		LOG.debug("2==============================");
+
+		cnt = this.sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("3==============================");
+		LOG.debug("3=cnt="+cnt);
+		LOG.debug("3==============================");
+
+		LOG.debug("=cnt= "+cnt);
+		return cnt;
+	}
+	
+	
+	
+	
+	
 	@Override
 	public int doInsert(DTO dto) {
 		MemberVO inVO = (MemberVO) dto;

@@ -81,11 +81,14 @@
                     </div>   
                     
                    <!-- div 버튼 -->
-                    <div class="text-center">
+<!--                     <div class="text-center">
                         <input type="submit" value="로그인"  class="submit">  
-                    </div>  
+                    </div>  --> 
+					<button type="button" class="btn btn-lg btn-primary btn-block"
+						id="member_login" size="30">로그인
+					</button>                    
                     <a href="member_insert.jsp" class="more">일반 회원가입</a><br/>
-                    <a href="../bizmember/bizmember_insert.jsp" class="more">업체 회원가입</a><br/>
+                    <a href="webapp/bizmember_insert.jsp" class="more">업체 회원가입</a><br/>
                     <a href="id_pw_find.jsp" class="more">아이디/비번찾기</a>                            
                 </form>	
                    
@@ -103,7 +106,41 @@
 	<!-- page -->
 	<script src="${hContext}/resources/js/jquery.bootpag.min.js"></script>	
 	
+	<script type="text/javascript">
 
+ 	function goLogin(){
+    	location.href="http://localhost:8080/d_dolive/pharmacymap/Main.jsp";
+    }
+
+	
+	   $("#member_login").on("click",function(){
+		  //alert("라디오="+$('input[name=member]:checked').val());
+		  $.ajax({
+			   type:"POST",
+			   url:"${hContext}/member/login.do",
+			   dataType:"html",
+			   data:{
+				     "member" :$('input[name=member]:checked').val(),
+				     "email":$("#email").val(),
+			         "pw":$("#pw").val()
+			         
+			   },
+			   success:function(data){ //성공
+				   //alert(data);
+				   goLogin();
+
+			   },
+			   error:function(xhr,status,error){
+			    alert("이메일과 비밀번호를 제대로 입력해주세요:"+error);
+			   },
+			   complete:function(data){
+
+			   }
+
+		  });//--ajax
+
+	   });
+	</script>
 	
 	
 	

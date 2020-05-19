@@ -104,7 +104,27 @@ public class MemberServiceImple implements MemberService {
 		memberDao.sendEmail(dto);
 	}
 	
-	
+	@Override
+	public int idPassCheck(DTO dto) {
+		//1. idCheck   실패: 10
+		//2. passCheck 실패: 20
+		//3. 성공: 30
+		int flag  =0;
+		//1.
+		flag = memberDao.idCheck(dto);
+		if(flag<1) {
+			return 10;//id not found
+		}
+
+        //2.
+		flag = memberDao.passCheck(dto);
+		if(flag<1) {
+			return 20;//비번확인
+		}
+
+
+		return 30;
+	}
 	
 	
 	

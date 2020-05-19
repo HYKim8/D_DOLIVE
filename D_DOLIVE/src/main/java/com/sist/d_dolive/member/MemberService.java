@@ -10,6 +10,8 @@ import com.sist.d_dolive.cmn.DTO;
 public interface MemberService {
 
 
+	public int idPassCheck(DTO dto);
+	
 	public int doInsert(DTO dto);
 
 	public int doUpdate(DTO dto);

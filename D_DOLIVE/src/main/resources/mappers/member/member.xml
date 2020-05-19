@@ -20,6 +20,22 @@
 		, TO_CHAR(moddt, 'YYYY/MM/DD HH24MISS') moddt
 	</sql>
 
+    <!-- id check -->
+    <select id="idCheck" parameterType="MemberVO" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM member
+		WHERE email = #{email,jdbcType=VARCHAR}
+    </select>
+
+    <!-- pass check -->
+    <select id="passCheck" parameterType="MemberVO" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM member
+		WHERE email   = #{email,jdbcType=VARCHAR}
+		AND   pw = #{pw,jdbcType=VARCHAR}
+    </select>
+	
+
 
 	<!-- 회원가입 -->
 	<insert id="doInsert" parameterType="MemberVO">

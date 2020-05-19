@@ -6,6 +6,9 @@ import com.sist.d_dolive.cmn.DTO;
 
 public interface MemberDao {
 
+	public int passCheck(DTO dto);
+	
+	public int idCheck(DTO dto);
 
 	public int doInsert(DTO dto);
 	
