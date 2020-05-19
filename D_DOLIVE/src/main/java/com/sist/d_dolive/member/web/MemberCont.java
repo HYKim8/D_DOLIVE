@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.sist.d_dolive.bizmember.BizMemberService;
+import com.sist.d_dolive.bizmember.BizMemberVO;
 import com.sist.d_dolive.cmn.DTO;
 import com.sist.d_dolive.cmn.MessageVO;
 import com.sist.d_dolive.cmn.SearchVO;
@@ -35,6 +37,8 @@ public class MemberCont {
 	//@Qualifier("dummyMailSender") : root-context.xml bean id
 	@Autowired
 	MemberService memberService;
+	@Autowired
+	BizMemberService bizmemberService;
 	
 	@Autowired
 	MessageSource messageSource;
@@ -283,14 +287,25 @@ public class MemberCont {
 	      LOG.debug("=doLogin/param");
 	      LOG.debug("=doLogin/memberId:"+req.getParameter("email"));
 	      LOG.debug("=doLogin/password:"+req.getParameter("pw"));
+	      LOG.debug("=rdaio:"+req.getParameter("member"));
 	      LOG.debug("=======================================");
+	      String radio;
+	      radio = req.getParameter("member");
 	      
+	      if("".equals(radio) || radio ==null ){
+	    	  model.addAttribute("loginFailure","회원구분을 선택해주세요");
+	    	  return "webapp/member/login";
+	      }
+	      
+	      if(radio.equals("1")) {
+	    	  
+	      LOG.debug("11radio="+radio);  
 	      MemberVO inVO=new MemberVO();
 	      inVO.setEmail(req.getParameter("email"));
 	      inVO.setPw(req.getParameter("pw"));
 	      
 	      MemberVO outVO=(MemberVO)this.memberService.getMember(inVO);
-	      if(outVO.getEmail()==null || "".equals(outVO.getEmail())) {
+	      if(outVO.getEmail()==null || "".equals(outVO.getEmail()) || outVO.getPw()==null ) {
 	         model.addAttribute("loginFailure","아이디와 비밀번호를 확인해주세요.");
 	         return "webapp/member/login";
 	      }else {
@@ -302,6 +317,27 @@ public class MemberCont {
 	         session.setAttribute("memberEmail", outVO.getEmail());
 	         return "pharmacymap/Main";
 
+	      	}
+	      
+	      }else  {
+		      BizMemberVO inVO=new BizMemberVO();
+		      inVO.setEmail(req.getParameter("email"));
+		      inVO.setPw(req.getParameter("pw"));
+		      
+		      BizMemberVO outVO=(BizMemberVO)this.bizmemberService.doSelectOne(inVO);
+		      if(outVO.getEmail()==null || "".equals(outVO.getEmail())) {
+		         model.addAttribute("loginFailure","아이디와 비밀번호를 확인해주세요.");
+		         return "webapp/member/login";
+		      }else {
+		    	  BizMemberVO memVO=new BizMemberVO();
+		         memVO.setEmail(outVO.getEmail());
+		         HttpSession session=req.getSession();
+		         //StringBuilder out=new StringBuilder();
+		         model.addAttribute("bizMemberVO", outVO);
+		         session.setAttribute("bizMemberEmail", outVO.getEmail());
+		         return "pharmacymap/Main";
+		      }
+	      
 	      }
 	   }	
 

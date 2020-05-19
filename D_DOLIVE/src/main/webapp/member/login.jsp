@@ -56,15 +56,13 @@
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 ">
                 <!-- div title -->
                 <form action="login.do" class="form-horizontal" name="login_form" method="post">
-				    <%-- <!-- div 언어 -->
-				    <div class="form-group">
-				         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">   
-						     <select class="form-control" name="lang" id="lang">
-						       <option value="en"><spring:message code='message.user.login.language.en' /></option>
-						       <option value="ko"><spring:message code='message.user.login.language.ko' /></option>
-						     </select>
-					     </div>
-				    </div> --%>
+					<div class="form-group">
+						<label for="gender" class="col-lg-4 col-sm-4 col-xs-4  control-label"></label>
+						<div class="col-lg-6 col-sm-6 col-xs-6">
+								 일반회원<input type = "radio" id="member1" name = "member" value = "1" checked="checked"><br/>
+						                   업체회원<input type = "radio" id="member2" name = "member" value = "2" >
+						</div>
+					</div>	                	
                     <!-- div 아이디 -->
                     <div class="form-group">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -76,7 +74,7 @@
                     <!-- div 비번 -->
                     <div class="form-group">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <input class="form-control" type="password" name="pw" id="pw" size="30"
+                            <input class="form-control" type="password" name="pw"  id="pw" size="30"
                              placeholder="비밀번호입력"
                              maxlength="50">
                         </div>
@@ -84,9 +82,10 @@
                     
                    <!-- div 버튼 -->
                     <div class="text-center">
-                        <input type="submit" value="로그인" class="submit">  
+                        <input type="submit" value="로그인"  class="submit">  
                     </div>  
-                    <a href="member_insert.jsp" class="more">아직  회원이 아니신가요?</a><br/>
+                    <a href="member_insert.jsp" class="more">일반 회원가입</a><br/>
+                    <a href="../bizmember/bizmember_insert.jsp" class="more">업체 회원가입</a><br/>
                     <a href="id_pw_find.jsp" class="more">아이디/비번찾기</a>                            
                 </form>	
                    
@@ -97,12 +96,18 @@
 	
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 	<script src="${hContext}/resources/js/jquery-migrate-1.4.1.js"></script>
+    <!-- jQuery validator -->
+    <script src="${hContext}/resources/js/jquery.validate.js"></script>		
 	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
 	<script src="${hContext}/resources/js/bootstrap.min.js"></script>
-	<script type="text/javascript">
+	<!-- page -->
+	<script src="${hContext}/resources/js/jquery.bootpag.min.js"></script>	
+	
 
-	  
-	</script>
+	
+	
+	
+	
 </body>
 </html>
 
