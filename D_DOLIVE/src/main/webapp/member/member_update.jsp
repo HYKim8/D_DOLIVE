@@ -132,7 +132,7 @@
 			<div class="form-group">
 				<label for="zipno" class="col-lg-4 col-sm-4 col-xs-4  control-label">주소</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-						<input type="text" id="sample2_postcode" placeholder="우편번호" name="ZIPNO" readonly >
+						<input type="text" id="zipno" placeholder="우편번호" name="ZIPNO" readonly >
 						<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기" value="${vo.zipno }"><br>
 				</div>
 			</div>	
@@ -140,14 +140,14 @@
 			<div class="form-group">
 				<label for="ADDR" class="col-lg-4 col-sm-4 col-xs-4  control-label">기본주소</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-						<input type="text" name="ADDR" id="sample2_address" class="address" placeholder="기본주소" value="${vo.addr }" readonly>
+						<input type="text" name="ADDR" id="addr" class="address" placeholder="기본주소" value="${vo.addr }" readonly>
 				</div>
 			</div>		
 			
 			<div class="form-group">
-				<label for="ADDR2" class="col-lg-4 col-sm-4 col-xs-4  control-label">상세주소</label>
+				<label for="addr2" class="col-lg-4 col-sm-4 col-xs-4  control-label">상세주소</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-						<input type="text" id=ADDR2 name="ADDR2" class="address" placeholder="상세주소" value="${vo.addr2 }" >
+						<input type="text" id=addr2 name="addr2" class="address" placeholder="상세주소" value="${vo.addr2 }" >
 				</div>
 			</div>										
 
@@ -210,8 +210,8 @@
 							}
 
 							// 우편번호와 주소 정보를 해당 필드에 넣는다.
-							document.getElementById('sample2_postcode').value = data.zonecode; //5자리 새우편번호 사용
-							document.getElementById('sample2_address').value = fullAddr;
+							document.getElementById('zipno').value = data.zonecode; //5자리 새우편번호 사용
+							document.getElementById('addr').value = fullAddr;
 
 							// iframe을 넣은 element를 안보이게 한다.
 							// (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
@@ -296,11 +296,11 @@
                          number:true,
                          rangelength: [10,11]
                          
-                     },sample2_postcode:{
+                     },zipno:{
                     	 required: true
-                     },sample2_address:{
+                     },addr:{
                     	 required: true
-                     },ADDR2:{
+                     },addr2:{
                     	 required: true
                      }     
 
@@ -336,12 +336,12 @@
                          required: "전화번호는 필수값 입니다.",
                          //최소길이
 						 rangelength: $.validator.format('비밀번호는 {0}이상~{1}이하로 입력하세요.')                           
-                     },sample2_postcode:{
+                     },zipno:{
                          //필수값
                          required: "우편번호는 필수값 입니다."
-                     },sample2_address:{
+                     },addr:{
                     	 required: "기본주소는 필수값 입니다."
-                     },ADDR2:{
+                     },addr2:{
                     	 required: "상세주소는 필수값 입니다."
                      }       
    
@@ -399,9 +399,9 @@
 			var ihidnum = $("#ihidnum").val();
 			var name = $("#name").val();
 			var tel = $("#tel").val();
-			var zipno = $("#sample2_postcode").val();
-			var addr = $("#sample2_address").val();
-			var addr2 = $("#ADDR2").val();
+			var zipno = $("#zipno").val();
+			var addr = $("#addr").val();
+			var addr2 = $("#addr2").val();
 			var modId = $("#modId").val(); */
 
 
@@ -421,9 +421,9 @@
                     "ihidnum" : $("#ihidnum").val(),
                     "name" : $("#name").val(),
                     "tel" : $("#tel").val(),
-                    "zipno" : $("#sample2_postcode").val(),
-                    "addr" : $("#sample2_address").val(),
-                    "addr2" : $("#ADDR2").val(),
+                    "zipno" : $("#zipno").val(),
+                    "addr" : $("#addr").val(),
+                    "addr2" : $("#addr2").val(),
                     "modid" : $("#email").val()
 
                 },

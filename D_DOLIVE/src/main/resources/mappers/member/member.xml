@@ -9,7 +9,7 @@
 		, pw		
 		, gender	 
 		, name	
-		, ihidnum	
+		, CryptString.decrypt(ihidnum,'key') as ihidnum
 		, addr	
 		, addr2	
 		, zipno	 

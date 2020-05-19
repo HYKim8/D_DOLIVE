@@ -181,7 +181,7 @@ public class MemberCont {
 	@RequestMapping(value="member/do_delete.do",method = RequestMethod.POST
 			       ,produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String doDelete(MemberVO memberVO, Locale locale) {
+	public String doDelete(MemberVO memberVO, Locale locale,HttpSession session) {
 		LOG.debug("1===================");
 		LOG.debug("1=memberVO="+memberVO);
 		LOG.debug("1===================");		
@@ -194,7 +194,7 @@ public class MemberCont {
 		LOG.debug("1.2===================");
 		LOG.debug("1.2=flag="+flag); 
 		LOG.debug("1.2===================");	
-		
+		session.removeAttribute("member");
 		//성공
 		if(flag ==1) {
 			message.setMsgMsg(memberVO.getEmail()+"님이 삭제 되었습니다.");
