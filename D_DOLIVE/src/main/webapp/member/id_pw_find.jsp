@@ -200,7 +200,7 @@
                 },
                 success : function(data) { //성공
                 	if($.trim(data) == "x"){
-    					alert("가입기록이 없습니다.<br>이름 또는 이메일을 다시 한 번 확인해주세요!");
+    					alert("가입기록이 없습니다.이름 또는 이메일을 다시 한 번 확인해주세요!");
                     }
                     else{
                     	alert("회원님의 아이디는"+$.trim(data)+"입니다.");
