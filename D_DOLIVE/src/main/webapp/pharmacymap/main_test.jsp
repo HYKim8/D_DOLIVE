@@ -53,10 +53,10 @@
 	            <div class="divider-custom-line"></div>
 	        </div>
 			<!-- 주소 입력란 -->
-			<form action="${hContext }/pharmacymap/pharmacy_map_test.do" name="main" method="get"></form>
+			<form action="${hContext }/pharmacymap/pharmacy_map_test.do" name="main" method="get">
 			<div class="form-group has-success has-feedback">
 			  <label class="control-label" for="inputSuccess2">지역을 검색 해주세요</label>
-			  <input type="text" class="form-control" id="address" placeholder="주소를 입력하세요." value="서울특별시 마포구" aria-describedby="inputSuccess2Status">
+			  <input type="text" class="form-control" id="p_address" name="p_address" placeholder="주소를 입력하세요." value="서울특별시 마포구" aria-describedby="inputSuccess2Status">
 			  <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
 			  <span id="inputSuccess2Status" class="sr-only">(success)</span>
 			</div>
@@ -71,20 +71,15 @@
         </header>
         
     <script type="text/javascript">
-	function test(){
-		window.location.href = 'http//:localhost8080/d_dolive/pharmacymap/pharmacy_map_test.do';
-	}
 	function goUpdate() {
 		//console.log("update_btn");
 		
-		var frm = document.selectFrm;
-		frm.optionDiv.value = "1";
-		frm.address.value = $("#address").val();
+		var frm = document.main;
         frm.action = "${hContext}/pharmacymap/pharmacy_map_test.do";
+        frm.p_address.value = "서울특별시 마포구";
         frm.submit();
 	}	
-
-
+	
     </script>
     
     <!-- Bootstrap core JS-->

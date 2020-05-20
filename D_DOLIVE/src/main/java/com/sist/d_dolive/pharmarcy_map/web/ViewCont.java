@@ -1,5 +1,8 @@
 package com.sist.d_dolive.pharmarcy_map.web;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +39,11 @@ Logger LOG = LoggerFactory.getLogger(this.getClass());
 	}
 	
 	@RequestMapping(value = "pharmacymap/pharmacy_map_test.do", method = RequestMethod.GET)
-	public String doStart() {
+	public String doStart(HttpServletRequest req, HttpServletResponse res) {
 		LOG.debug("=아아아아아=");
-		
+		String p_address = req.getParameter("p_address");
+		LOG.debug("이시발년놈들="+p_address);
+		req.setAttribute("p_address", p_address);
 		return "pharmacymap/pharmacy_map_test";
 	}
 }

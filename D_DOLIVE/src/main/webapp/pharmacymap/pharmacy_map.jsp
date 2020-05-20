@@ -152,6 +152,14 @@
             </div>
         </nav> -->
     <div align="center" style="mwidth: 100%;height: 80%;">
+      <!-- 주소 입력란 -->
+      <input type="text" id="address" placeholder="주소를 입력하세요." value="서울특별시 마포구"/>
+      <!-- //주소 입력란 -->
+      
+      <!-- 검색 버튼 -->
+      <input type="button" value="검색" onclick="javascript:test();"/>
+      <!-- 검색 버튼 -->
+    	
 	   <!-- 지도 -->
 	   <div id="map" style="width:100%;height:1000px;"/>
 	   <!-- //지도 -->

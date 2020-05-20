@@ -20,8 +20,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <%@ include file="/common/common.jsp" %>
 <c:set var="hContext" value="${pageContext.request.contextPath }"></c:set> 
+<%
+	String p_address = (String)request.getAttribute("p_address");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -32,10 +36,10 @@
     .wrap .info {width: 300px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
     .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
     .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
-    .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+    .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://t1.kakaocdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
     .info .close:hover {cursor: pointer;}
     .info .body {position: relative;overflow: hidden;}
-    .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+    .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.kakaocdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
     .info .link {color: #5085BB;}
     
     .switch {
@@ -126,7 +130,7 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7c798e37b13fac506a55eb2eebfd5a18&libraries=services"></script>
 <title>Insert title here</title>
 <!-- Font Awesome icons (free version)-->
@@ -138,17 +142,18 @@
 <link href="../startbootstrap-freelancer-gh-pages/css/styles.css" rel="stylesheet" />
 </head>
 <body>
-    <div align="center" style="mwidth: 100%;height: 80%;">
-    	<!-- 주소 입력란 -->
-      <input type="text" id="address" placeholder="주소를 입력하세요." value="서울특별시 마포구"/>
+	
+    <div align="center" style="width: 100%;height: 80%;">
+      <!-- 주소 입력란 -->
+      <input type="text" id="address" placeholder="주소를 입력하세요." value="서울특별시 노원구"/> 
       <!-- //주소 입력란 -->
       
       <!-- 검색 버튼 -->
-      <input type="button" value="검색" onclick="javascript:test();"/>
+      <input type="button" value="검색" onclick="javascript:maskSearch();"/>
       <!-- 검색 버튼 -->
     	
 	   <!-- 지도 -->
-	   <div id="map" style="width:100%;height:1000px;"/>
+	   <div id="map" style="width:100%;height:1000px;"></div>
 	   <!-- //지도 -->
     </div>
     
@@ -165,11 +170,8 @@
    <script type="text/javascript">
    
       //검색 버튼
-      function test(){
-         
-         // 검색 지역
-         var address = $("#address").val();
-         
+      function maskSearch(){
+		var address = $("#address").val();
          //ajax
          $.ajax({
             url:"https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByAddr/json",
@@ -191,17 +193,17 @@
                        
                    // 지도의 중심좌표
                    mapOption = { 
-                       center: new daum.maps.LatLng(data.stores[0].lat, data.stores[0].lng),
+                       center: new kakao.maps.LatLng(data.stores[0].lat, data.stores[0].lng),
                        
                        // 지도의 확대 레벨
                        level: 5
                    };
                
                   // 지도를 생성합니다
-                  var map = new daum.maps.Map(mapContainer, mapOption); 
+                  var map = new kakao.maps.Map(mapContainer, mapOption); 
                   
                   // 주소-좌표 변환 객체를 생성합니다
-                  var geocoder = new daum.maps.services.Geocoder();
+                  var geocoder = new kakao.maps.services.Geocoder();
 
                   var addr = data.address; // 최종 주소 변수
                   // 주소 정보를 해당 필드에 넣는다.
@@ -211,10 +213,10 @@
                   geocoder.addressSearch(address, function(result, status) {
 
                   // 정상적으로 검색이 완료됐으면 
-                  if (status === daum.maps.services.Status.OK) {
+                  if (status === kakao.maps.services.Status.OK) {
                 	 var result = results[0]; //첫번째 결과의 값을 활용
  					 
-                     var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+                     var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
                           mapContainer.style.display = "block";
                           map.relayout();
                           // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
@@ -246,24 +248,24 @@
                             imageSrc = "${hContext}/resources/img/main/icon_gray.png";
                           }
                      positions.push({title: data.stores[i].name
-                                 , latlng: new daum.maps.LatLng(data.stores[i].lat, data.stores[i].lng)
+                                 , latlng: new kakao.maps.LatLng(data.stores[i].lat, data.stores[i].lng)
                                  , image : imageSrc
                                  });
             
                   }
                   
                   // 마커 이미지의 이미지 크기 입니다
-                  var imageSize = new daum.maps.Size(30, 40); 
+                  var imageSize = new kakao.maps.Size(30, 40); 
                   
                   
                   // 검색 결과의 수만큼 마커 출력
                   for (var i = 0; i < positions.length; i ++) {
                       // 마커 이미지를 생성합니다    
                       //var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize,imageSrc1,imageSrc2,imageSrc3,imageSrc4); 
-                      var markerImage = new daum.maps.MarkerImage(positions[i].image, imageSize ); 
+                      var markerImage = new kakao.maps.MarkerImage(positions[i].image, imageSize ); 
                       
                       // 마커를 생성합니다
-                      var marker = new daum.maps.Marker({
+                      var marker = new kakao.maps.Marker({
                           map: map, // 마커를 표시할 지도
                           position: positions[i].latlng, // 마커를 표시할 위치
                           title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
@@ -288,7 +290,7 @@
 						  data.stores[i].stock_at = "예정 없음"
 				  	  }
 				      
-					  daum.maps.event.addListener(marker, 'click', openOverlay(data.stores[i].code, map, marker,data.stores[i].name,
+					  kakao.maps.event.addListener(marker, 'click', openOverlay(data.stores[i].code, map, marker,data.stores[i].name,
                                                  data.stores[i].addr,data.stores[i].stock_at,data.stores[i].remain_stat));
                   }
                   
@@ -298,7 +300,7 @@
             },
                     complete:function(data){
             }
-         }).open();//--ajax
+         });//--ajax
          
          // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
          function openOverlay(code, map, marker,name,addr,stock,remain) {
@@ -306,7 +308,7 @@
                if($("#"+code+"").text()==""){
                   // 마커 위에 커스텀오버레이를 표시합니다
                      // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-                     overlay = new daum.maps.CustomOverlay({
+                     overlay = new kakao.maps.CustomOverlay({
                          content: '<div class="wrap" id="'+code+'">' + 
                          '    <div class="info">' + 
                          '        <div class="title">' + 
@@ -335,10 +337,19 @@
             };
          }//--openOverlay
       }//--test
+
+      window.onload = function(){
+          $("#address").val("<%=p_address%>");
+           maskSearch();
+      }
       
-      function closeOverlay(data){
+      function closeOverlay(data){+
          data.remove();
       }
+
+	  
+      
+      
    </script>
 </body>
 </html>
