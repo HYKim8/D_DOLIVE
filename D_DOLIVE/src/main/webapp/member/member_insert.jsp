@@ -286,7 +286,7 @@
                          //필수값
                          required: true,
                          //범위
-                         rangelength: [5,12]
+                         maxlength: 12
                      },confirm_pass:{
                          //필수값
                          required: true,
@@ -305,7 +305,7 @@
                     	 //필수값
                          required: true,
                          //이메일형식
-                         minlength: 3
+                         minlength: 2
                      },tel:{
                          //필수값
                          required: true,
@@ -329,7 +329,7 @@
                          //필수값 
                          required: "비밀번호는 필수값 입니다.",
                          //최소길이
-                         rangelength: $.validator.format('비밀번호는 {0}이상~{1}이하로 입력하세요.')
+                         maxlength: $.validator.format('{0}자 이하 입력하세요.')
                      },confirm_pass:{
                           //필수값 
                           required: "비밀번호확인을 입력하세요.",

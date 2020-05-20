@@ -66,15 +66,15 @@
                     <!-- div 아이디 -->
                     <div class="form-group">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <input class="form-control" type="text" name="email" id="email" size="30"
+                            <input class="form-control" type="text" name="email" id="email" size="40"
                              placeholder="이메일입력"
-                             maxlength="20"> 
+                             maxlength="40"> 
                         </div>
                     </div>
                     <!-- div 비번 -->
                     <div class="form-group">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <input class="form-control" type="password" name="pw"  id="pw" size="30"
+                            <input class="form-control" type="password" name="pw"  id="pw" size="40"
                              placeholder="비밀번호입력"
                              maxlength="50">
                         </div>
@@ -109,7 +109,7 @@
 	<script type="text/javascript">
 
  	function goLogin(){
-    	location.href="http://localhost:8080/d_dolive/member/member_select_one.jsp";
+    	location.href="http://localhost:8080/d_dolive/pharmacymap/Main.jsp";
     }
 
 	
