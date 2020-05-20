@@ -70,7 +70,13 @@ public class MemberCont {
 		return "member/id_pw_find";
 	}
 	
-	
+	@RequestMapping(value = "member/gomypage.do", method = RequestMethod.GET)
+	public String gomypage() {
+		LOG.debug("=아아아아아=");
+		
+		
+		return "member/member_select_one";
+	}
 	
 	
 	
@@ -294,10 +300,10 @@ public class MemberCont {
 		return "member/member_update";
 	}
 	
-	@RequestMapping(value="member/do_select_one1.do",method = RequestMethod.GET)
+	@RequestMapping(value="member/do_select_one1.do",method = RequestMethod.POST)
 	public String doSelectOne1(MemberVO memberVO,Locale locale, Model model) {
 		LOG.debug("1===================");
-		LOG.debug("1=memberVO="+memberVO);
+		LOG.debug("1=memberVO1="+memberVO);
 		LOG.debug("1===================");		
 		if(null==memberVO.getEmail() || memberVO.getEmail().equals("")) {
 			throw new IllegalArgumentException("Email을 확인 하세요.");
@@ -309,7 +315,7 @@ public class MemberCont {
 		LOG.debug("1.2=outVO="+outVO);
 		LOG.debug("1.2===================");		
 		
-		model.addAttribute("vo", outVO);
+		model.addAttribute("member", outVO);
 		
 		return "member/member_select_one";
 	}

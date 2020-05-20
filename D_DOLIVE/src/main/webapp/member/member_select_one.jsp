@@ -107,22 +107,22 @@
 	      	
 			<div class="form-group">
 				<label for="zipno" class="col-lg-4 col-sm-4 col-xs-4  control-label">주소</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
-						<input type="text" id="zipno" placeholder="우편번호" name="zipno" value="${member.zipno }" readonly >
+				<div class="col-lg-10 col-sm-10 col-xs-10">
+						<input type="text" id="zipno"  class="form-control" placeholder="우편번호" name="zipno" value="${member.zipno }" readonly >
 				</div>
 			</div>	
 			
 			<div class="form-group">
 				<label for="addr" class="col-lg-4 col-sm-4 col-xs-4  control-label">기본주소</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
-						<input type="text" name="addr" id="addr" class="address" placeholder="기본주소" value="${member.addr }" readonly>
+				<div class="col-lg-10 col-sm-10 col-xs-10">
+						<input type="text" name="addr" id="addr"  class="form-control" placeholder="기본주소" value="${member.addr }" readonly>
 				</div>
 			</div>		
 			
 			<div class="form-group">
 				<label for="addr2" class="col-lg-4 col-sm-4 col-xs-4  control-label">상세주소</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
-						<input type="text" id=addr2 name="addr2" class="address" placeholder="상세주소" value="${member.addr2 }" readonly >
+				<div class="col-lg-10 col-sm-10 col-xs-10">
+						<input type="text" id=addr2 name="addr2"  class="form-control" placeholder="상세주소" value="${member.addr2 }" readonly >
 				</div>
 			</div>		      	
 

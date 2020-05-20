@@ -81,10 +81,10 @@
 			
 			
 			<div class="form-group">
-				<label for="email" class="col-lg-4 col-sm-4 col-xs-4  control-label">메일</label>
+				<label for="email" class="col-lg-4 col-sm-4 col-xs-4  control-label">이메일</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
 					<input type="text"  value="${vo.email}"  maxlength="350" class="form-control input-sm"
-						id="email" name="email" placeholder="메일" readonly />
+						id="email" name="email" placeholder="이메일" readonly />
 				</div>
 			</div>			
 			
@@ -92,7 +92,7 @@
 				<label for="pw"
 					class="col-lg-4 col-sm-4 col-xs-4  control-label">비밀번호</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-					<input type="password" maxlength="50" class="form-control input-sm"
+					<input type="password" maxlength="12" class="form-control input-sm"
 						id="pw" name="pw" placeholder="비밀번호" value="${vo.pw }"/>
 				</div>
 			</div>
@@ -100,8 +100,8 @@
 			<div class="form-group">
 				<label for="gender" class="col-lg-4 col-sm-4 col-xs-4  control-label">성별</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-						 <input type = "radio" id="gender" name = "gender" value = "1" >남자
-				         <input type = "radio" id="gender" name = "gender" value = "2" >여자
+						 <input type = "radio" id="gender1" name = "gender" value = "1" >남자
+				         <input type = "radio" id="gender2" name = "gender" value = "2" >여자
 				</div>
 			</div>				
 			
@@ -124,7 +124,7 @@
 			<div class="form-group">
 				<label for="tel"  class="col-lg-4 col-sm-4 col-xs-4  control-label">전화번호</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-					<input type="text"  maxlength="50" class="form-control input-sm" id="tel" name="tel" placeholder="전화번호" value="${vo.tel }"/>
+					<input type="text"  maxlength="12" class="form-control input-sm" id="tel" name="tel" placeholder="전화번호" value="${vo.tel }"/>
 						
 				</div>
 			</div>			
@@ -133,14 +133,14 @@
 				<label for="zipno" class="col-lg-4 col-sm-4 col-xs-4  control-label">주소</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
 						<input type="text" id="zipno" placeholder="우편번호" name="zipno" value="${vo.zipno }" readonly >
-						<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기" ><br>
+						<input type="button" name="name1" onclick="sample2_execDaumPostcode()" value="우편번호 찾기" ><br>
 				</div>
 			</div>	
 			
 			<div class="form-group">
-				<label for="ADDR" class="col-lg-4 col-sm-4 col-xs-4  control-label">기본주소</label>
+				<label for="addr" class="col-lg-4 col-sm-4 col-xs-4  control-label">기본주소</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-						<input type="text" name="ADDR" id="addr" class="form-control input-sm" placeholder="기본주소" value="${vo.addr }" readonly>
+						<input type="text" name="addr" id="addr" class="form-control input-sm" placeholder="기본주소" value="${vo.addr }" readonly>
 				</div>
 			</div>		
 			
@@ -381,10 +381,11 @@
     	 
      });
 	
-	function goSelectOne() {
-		var frm = document.updateFrm;
-		frm.h_email.value = $("#email").val();
-        frm.action = "${hContext}/member/do_select_one.do";
+	function goSelectOne1() {
+		alert("email"+$("#email").val());
+		var frm = document.updateForm;
+		frm.email.value = $("#email").val();
+        frm.action = "${hContext}/member/do_select_one1.do"; 
         frm.submit();
 	}
 
@@ -393,17 +394,25 @@
 		//수정
 		$("#doUpdate").on("click", function() {			
 			
-	/* 		var email = $("#email").val();
+/*  	 		var email = $("#email").val();
 			var pw = $("#pw").val();
-			var gender = $("#gender").val();
+			var gender = $('input[name=gender]:checked').val();
 			var ihidnum = $("#ihidnum").val();
 			var name = $("#name").val();
 			var tel = $("#tel").val();
 			var zipno = $("#zipno").val();
 			var addr = $("#addr").val();
 			var addr2 = $("#addr2").val();
-			var modId = $("#modId").val(); */
-
+			var modId = $("#modId").val();  
+			alert("email"+email);
+			alert("pw"+pw);
+			alert("gender"+gender);
+			alert("ihidnum"+ihidnum);
+			alert("name"+name);
+			alert("tel"+tel);
+			alert("zipno"+zipno);
+			alert("addr"+addr);
+			alert("addr2"+addr2); */
 
 			
             //confirm
@@ -417,7 +426,7 @@
                 data : {
                     "email" : $("#email").val(),
                     "pw" : $("#pw").val(),
-                    "gender" : $("#gender").val(),
+                    "gender" : $('input[name=gender]:checked').val(),
                     "ihidnum" : $("#ihidnum").val(),
                     "name" : $("#name").val(),
                     "tel" : $("#tel").val(),
@@ -431,7 +440,7 @@
 					var jData = JSON.parse(data);
 					if(null!=jData && jData.msgId=="1") {
 						alert(jData.msgMsg);
-						goSelectOne();
+						goSelectOne1();
 					}else {
 						alert("입력을 확인해주세요");
 					}
