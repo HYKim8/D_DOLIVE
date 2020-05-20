@@ -130,7 +130,7 @@
 		SELECT
 			<include refid="MemberColumns"></include>
 		FROM member
-		WHERE email = #{email} 
+		WHERE email = #{email,jdbcType=VARCHAR} 
 	</select>	
 	
 	<!-- 단건조회 -->

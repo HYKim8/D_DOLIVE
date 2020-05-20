@@ -138,7 +138,7 @@
 				<label for="ihidnum"
 					class="col-lg-4 col-sm-4 col-xs-4  control-label">주민번호</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-					<input type="text" maxlength="50" class="form-control input-sm"
+					<input type="password" maxlength="50" class="form-control input-sm"
 						id="ihidnum1" name="ihidnum1" placeholder="비밀번호" />
 				</div>
 			</div>

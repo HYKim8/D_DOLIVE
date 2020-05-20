@@ -59,8 +59,8 @@
 					<div class="form-group">
 						<label for="gender" class="col-lg-4 col-sm-4 col-xs-4  control-label"></label>
 						<div class="col-lg-6 col-sm-6 col-xs-6">
-								 일반회원<input type = "radio" id="member1" name = "member" value = "1" checked="checked"><br/>
-						                   업체회원<input type = "radio" id="member2" name = "member" value = "2" >
+								 일반회원<input type = "radio" id="member1" name = "radio" value = "1" checked="checked"><br/>
+						                   업체회원<input type = "radio" id="member2" name = "radio" value = "2" >
 						</div>
 					</div>	                	
                     <!-- div 아이디 -->
@@ -120,18 +120,24 @@
 			   url:"${hContext}/member/login.do",
 			   dataType:"html",
 			   data:{
-				     "member" :$('input[name=member]:checked').val(),
+				     "radio" :$('input[name=radio]:checked').val(),
 				     "email":$("#email").val(),
 			         "pw":$("#pw").val()
 			         
 			   },
 			   success:function(data){ //성공
 				   //alert(data);
+				   if(data == "10" ){
+						alert("아이디를 확인해주세요");
+					}else if(data == "20"){
+						alert("비밀번호를 확인해주세요");
+					}else{
 				   goLogin();
+					}
 
 			   },
 			   error:function(xhr,status,error){
-			    alert("이메일과 비밀번호를 제대로 입력해주세요:"+error);
+			    alert("이메일과 비밀번호를 다시 확인해주세요:"+error);
 			   },
 			   complete:function(data){
 
