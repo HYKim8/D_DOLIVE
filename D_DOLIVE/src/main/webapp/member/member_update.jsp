@@ -122,9 +122,9 @@
 			</div>
 			
 			<div class="form-group">
-				<label for="tel" class="col-lg-4 col-sm-4 col-xs-4  control-label">전화번호</label>
+				<label for="tel"  class="col-lg-4 col-sm-4 col-xs-4  control-label">전화번호</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-					<input type="text"  class="phoneNum" id="tel" name="tel" placeholder="전화번호" value="${vo.tel }"/>
+					<input type="text"  maxlength="50" class="form-control input-sm" id="tel" name="tel" placeholder="전화번호" value="${vo.tel }"/>
 						
 				</div>
 			</div>			
@@ -132,22 +132,22 @@
 			<div class="form-group">
 				<label for="zipno" class="col-lg-4 col-sm-4 col-xs-4  control-label">주소</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-						<input type="text" id="zipno" placeholder="우편번호" name="ZIPNO" readonly >
-						<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기" value="${vo.zipno }"><br>
+						<input type="text" id="zipno" placeholder="우편번호" name="zipno" value="${vo.zipno }" readonly >
+						<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기" ><br>
 				</div>
 			</div>	
 			
 			<div class="form-group">
 				<label for="ADDR" class="col-lg-4 col-sm-4 col-xs-4  control-label">기본주소</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-						<input type="text" name="ADDR" id="addr" class="address" placeholder="기본주소" value="${vo.addr }" readonly>
+						<input type="text" name="ADDR" id="addr" class="form-control input-sm" placeholder="기본주소" value="${vo.addr }" readonly>
 				</div>
 			</div>		
 			
 			<div class="form-group">
 				<label for="addr2" class="col-lg-4 col-sm-4 col-xs-4  control-label">상세주소</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-						<input type="text" id=addr2 name="addr2" class="address" placeholder="상세주소" value="${vo.addr2 }" >
+						<input type="text" id=addr2 name="addr2" class="form-control input-sm" placeholder="상세주소" value="${vo.addr2 }" >
 				</div>
 			</div>										
 
@@ -433,11 +433,11 @@
 						alert(jData.msgMsg);
 						goSelectOne();
 					}else {
-						alert(jData.msgMsg);
+						alert("입력을 확인해주세요");
 					}
 				},
 				error : function(xhr, status, error) {
-					alert("error:"+error);
+					alert("입력을 확인해주세요!");
 				},
 				complete : function(data) {
 	

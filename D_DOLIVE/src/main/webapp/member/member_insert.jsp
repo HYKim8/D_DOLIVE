@@ -119,7 +119,7 @@
 			<div class="form-group">
 				<label for="tel" class="col-lg-4 col-sm-4 col-xs-4  control-label">전화번호</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-					<input type="text"  class="phoneNum" id="tel" name="tel" placeholder="- 없이 입력" />
+					<input type="text"  class="form-control input-sm" id="tel" name="tel" placeholder="- 없이 입력" />
 						
 				</div>
 			</div>			
@@ -135,14 +135,14 @@
 			<div class="form-group">
 				<label for="addr" class="col-lg-4 col-sm-4 col-xs-4  control-label">기본주소</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-						<input type="text" name="addr" id="addr" class="address" placeholder="기본주소" readonly>
+						<input type="text" name="addr" id="addr" class="form-control input-sm" placeholder="기본주소" readonly>
 				</div>
 			</div>		
 			
 			<div class="form-group">
 				<label for="addr2" class="col-lg-4 col-sm-4 col-xs-4  control-label">상세주소</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-						<input type="text" id=addr2 name="addr2" class="address" placeholder="상세주소" >
+						<input type="text" id=addr2 name="addr2" class="form-control input-sm" placeholder="상세주소" >
 				</div>
 			</div>	
 			
@@ -298,8 +298,8 @@
                     	required: true
 
                  	 },ihidnum:{
-                 		required: true
-                 		//rangelength: [13,14]
+                 		required: true,
+                 		rangelength: [13,14]
                  		
                  	 },name:{
                     	 //필수값
@@ -308,8 +308,8 @@
                          minlength: 3
                      },tel:{
                          //필수값
-                         required: true
-                         //rangelength: [10,11]
+                         required: true,
+                         rangelength: [10,11]
                      },zipno:{
                     	 required: true
                      },addr:{
@@ -343,9 +343,8 @@
                          //최소길이
                      },ihidnum:{
                          //필수값 
-                         required: "주민번호는 필수값 입니다."
-                         //rangelength: $.validator.format('주민번호는 {0}이상~{1}이하로 입력하세요.')
-                         //최소길이
+                         required: "주민번호는 필수값 입니다.",
+                         rangelength: $.validator.format('주민번호는 {0}이상~{1}이하로 입력하세요.')
                      },name:{
                          //필수값 
                          required: "이름은 필수값 입니다.",
@@ -353,8 +352,8 @@
                          minlength: $.validator.format('{0}자 이상 입력하세요.')
                      },tel:{
                          //필수값 
-                         required: "전화번호는 필수값 입니다."
-                         //rangelength: $.validator.format('전화번호는 {0}이상~{1}이하로 입력하세요.')
+                         required: "전화번호는 필수값 입니다.",
+                         rangelength: $.validator.format('전화번호는 {0}이상~{1}이하로 입력하세요.')
                      },zipno:{
                          //필수값
                          required: "우편번호는 필수값 입니다."
@@ -435,7 +434,7 @@
 		//등록
 		 $("#doInsert").on("click", function() { 
 			
-/*  			 alert($('#email').val());
+/*   			 alert($('#email').val());
 			 alert($('#pw').val());
 			 alert($('input[name=gender]:checked').val());
 			 alert($('#ihidnum').val());
@@ -443,7 +442,7 @@
 			 alert($('#tel').val());
 			 alert($('#zipno').val());
 			 alert($('#addr').val());
-			 alert($('#addr2').val()); */ 
+			 alert($('#addr2').val());   */
 			 
 				
 	 		 if (duplicate == false) {
@@ -485,7 +484,7 @@
 
 		                },
 		                error : function(xhr, status, error) {
-		                    //alert("error:" + error);
+		                    alert("입력값을 확인하세요!");
 		                },
 		                complete : function(data) {
 
