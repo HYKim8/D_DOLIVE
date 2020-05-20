@@ -22,7 +22,7 @@ function coivdupdatetime(){
 	
 	
 	
-	document.getElementById("coivdupdatetime").innerText = '데이터 업데이트 : 2020년 '+time.substring(1,2)+'월 '+ time.substring(3,5)+'일 '+time.substring(7,9)+':00:00';
+	document.getElementById("coivdupdatetime").innerText = '데이터 업데이트 : 2020년 '+time.substring(1,3)+'월 '+ time.substring(4,6)+'일 '+time.substring(7,9)+':00:00';
 }
 
 function clock() {
