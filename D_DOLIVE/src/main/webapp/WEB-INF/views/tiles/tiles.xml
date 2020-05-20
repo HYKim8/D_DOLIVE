@@ -45,11 +45,6 @@
         <put-attribute name="footer" 
         value="/WEB-INF/views/tiles/layouts/footer.jsp"/>
     	</definition>
-    <!-- member -->
-    <definition name="member/*" extends="basede-finition2">
-        <put-attribute name="title" value="D_DOLIVE>Member"/>
-        <put-attribute name="body" value="/member/{1}.jsp"/>
-    </definition>    	
     
     <!-- bizmember -->
     <definition name="bizmember/*" extends="basede-finition2">
@@ -63,24 +58,15 @@
         <put-attribute name="body" value="/reserv/{1}.jsp"/>
     </definition>
     
-    <!-- ======================================================== -->
-     <!-- reservation -->
+    <!-- ================정현 승민 만========================= -->
+    <!-- reservation -->
     <definition name="covidmap/*" extends="basede-finition2">
         <put-attribute name="body" value="/covidmap/{1}.jsp"/>
     </definition>
     
+    <!-- Main -->
+    <definition name="pharmacymap/*" extends="basede-finition2">
+        <put-attribute name="body" value="/pharmacymap/{1}.jsp"/>
+    </definition>
+    
 </tiles-definitions>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

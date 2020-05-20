@@ -28,5 +28,17 @@ Logger LOG = LoggerFactory.getLogger(this.getClass());
 		return "covidmap/sidomap";
 	}
 	
+	@RequestMapping(value = "pharmacymap/main_test.do", method = RequestMethod.GET)
+	public String doSelectTwo() {
+		LOG.debug("=아아아아아=");
+		
+		return "pharmacymap/main_test";
+	}
 	
+	@RequestMapping(value = "pharmacymap/pharmacy_map_test.do", method = RequestMethod.GET)
+	public String doStart() {
+		LOG.debug("=아아아아아=");
+		
+		return "pharmacymap/pharmacy_map_test";
+	}
 }
