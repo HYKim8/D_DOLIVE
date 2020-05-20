@@ -87,9 +87,9 @@
 					<button type="button" class="btn btn-lg btn-primary btn-block"
 						id="member_login" size="30">로그인
 					</button>                    
-                    <a href="member_insert.jsp" class="more">일반 회원가입</a><br/>
-                    <a href="webapp/bizmember_insert.jsp" class="more">업체 회원가입</a><br/>
-                    <a href="id_pw_find.jsp" class="more">아이디/비번찾기</a>                            
+                    <a href="http://localhost:8080/d_dolive/member/gomember.do" class="more">일반 회원가입</a><br/>
+                    <a href="http://localhost:8080/d_dolive/member/gobizmember.do" class="more">업체 회원가입</a><br/>
+                    <a href="http://localhost:8080/d_dolive/member/goidpw.do" class="more">아이디/비번찾기</a>                            
                 </form>	
                    
                 	

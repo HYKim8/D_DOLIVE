@@ -44,6 +44,38 @@ public class MemberCont {
 	@Autowired
 	MessageSource messageSource;
 	
+	
+	
+	
+	@RequestMapping(value = "member/gomember.do", method = RequestMethod.GET)
+	public String gomember() {
+		LOG.debug("=아아아아아=");
+		
+		
+		return "member/member_insert";
+	}
+	@RequestMapping(value = "member/gobizmember.do", method = RequestMethod.GET)
+	public String gobizmember() {
+		LOG.debug("=아아아아아=");
+		
+		
+		return "bizmember/bizmember_insert";
+	}
+	
+	@RequestMapping(value = "member/goidpw.do", method = RequestMethod.GET)
+	public String goidpw() {
+		LOG.debug("=아아아아아=");
+		
+		
+		return "member/id_pw_find";
+	}
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping(value = "member/insert.do",method = RequestMethod.POST
 			,produces = "application/json; charset=UTF-8")
 	@ResponseBody

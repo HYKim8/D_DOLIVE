@@ -3,7 +3,7 @@
   * Class Name : 
   * Description : bootstrap list 템플릿
   * Modification Information
-  * http://localhost:8080/d_dolive/bizmember/do_select_one.do?email=jnhoon111&optionDiv=1
+  * http://localhost:8080/d_dolive/member/do_select_one.do?email=wkdkfl815
   *
   *   수정일                   수정자                      수정내용
   *  -------    --------    ---------------------------
