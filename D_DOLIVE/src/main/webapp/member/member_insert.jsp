@@ -80,7 +80,7 @@
 				<label for="pw"
 					class="col-lg-4 col-sm-4 col-xs-4  control-label">비밀번호</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-					<input type="password" maxlength="50" class="form-control input-sm"
+					<input type="password" maxlength="12" class="form-control input-sm"
 						id="pw" name="pw" placeholder="비밀번호" />
 				</div>
 			</div>
@@ -88,7 +88,7 @@
          <div class="form-group">
               <label for="confirm_pass" class="col-lg-4 col-sm-4 col-xs-4  control-label">비밀번호 확인</label>
             <div class="col-lg-6 col-sm-6 col-xs-6">
-               <input type="password" class="form-control" name="confirm_pass" id="confirm_pass" placeholder="비밀번호 확인">
+               <input type="password" maxlength="12" class="form-control" name="confirm_pass" id="confirm_pass" placeholder="비밀번호 확인">
             </div>
          </div>		
 						
