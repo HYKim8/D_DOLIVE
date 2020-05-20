@@ -42,7 +42,7 @@ Logger LOG = LoggerFactory.getLogger(this.getClass());
 	public String doStart(HttpServletRequest req, HttpServletResponse res) {
 		LOG.debug("=아아아아아=");
 		String p_address = req.getParameter("p_address");
-		LOG.debug("이시발년놈들="+p_address);
+		LOG.debug("p_address="+p_address);
 		req.setAttribute("p_address", p_address);
 		return "pharmacymap/pharmacy_map_test";
 	}
