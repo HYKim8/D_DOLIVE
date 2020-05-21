@@ -110,8 +110,9 @@
 						<!-- StringUtil.makeSelectBox(승인상태에 따라 검색한 리스트, 셀렉트박스 이름, 검색구분(10-전체 검색,20-상태별 검색) -->
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<button type="button" onclick="javascript:doRetrieve();" class="btn btn-primary btn-sm">조회</button>
-						<button type="button" onclick="doUpdate(5)" class="btn btn-primary btn-sm">결제하기</button>
-						<button type="button" onclick="doUpdate(2)" class="btn btn-primary btn-sm">예약취소</button>
+						<button type="button" onclick="doPayment()" class="btn btn-primary btn-sm">결제하기</button>
+						<button type="button" onclick="doUpdate(2,0)" class="btn btn-primary btn-sm">예약취소</button>
+						<input type="button" value="환불" onclick="cancelPay()"/>
 					</div>
 				</form>
 			</div>
@@ -132,6 +133,7 @@
     				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">결제금액</th>
     				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">신청일</th>
     				<th style="display: none;">regId</th>
+    				<th style="display: none;">imp_uid</th>
 				</thead>
 				<tbody>
 				
@@ -147,6 +149,7 @@
 									<td class="text-center"><c:out value="${vo.approval }" /></td>
 									<td class="text-center"><c:out value="${vo.amount }" /></td>
 									<td class="text-center"><c:out value="${vo.regDt }" /></td>
+									<td style="display: none;"><c:out value="${vo.impuid }"></c:out></td>
 								</tr>
 							</c:forEach>
 						</c:when>
@@ -174,9 +177,38 @@
 	<script src="${hContext}/resources/js/jquery-migrate-1.4.1.js"></script>
 	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
 	<script src="${hContext}/resources/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" ></script>
 	<script type="text/javascript">
 
-		function doUpdate(approval){
+		function cancelPay() {
+			var imp_uid = $('input[name="rno"]:checked').parent().parent().children().eq(8).text();
+			
+			//ajax
+			$.ajax({
+				type : "POST",
+				url : "${hContext}/iamport/do_cancel.do",
+				dataType : "html",
+				data : {
+					"imp_uid" : imp_uid
+				},
+				success : function(data) { //성공
+					var jData = JSON.parse(data);
+					if(null!=jData && jData.msgId=="1") {
+						alert(jData.msgMsg);
+					}else {
+						alert(jData.msgMsg);
+					}
+				},
+				error : function(xhr, status, error) {
+					alert("error:"+error);
+				},
+				complete : function(data) {
+		
+				}
+			});//--ajax
+		}
+
+		function doUpdate(approval, imp_uid){
 			var rno = $('input[name="rno"]:checked').val();
 			console.log("rno=="+rno);
 
@@ -196,6 +228,8 @@
 					"rno" : rno
 				    , "approval" : approval
 				    , "modId" : "수정자"
+					, "impuid" : imp_uid
+					, "searchDiv" : 10
 				},
 				success:function(data){ //성공
 					//alert(data)
@@ -234,6 +268,53 @@
 			frm.action = "${hContext}/reserv/do_retrieve.do";
 			frm.submit();
 		}
+
+		function doPayment(){
+			var amount = 4500;
+			var email = "bealright6@naver.com";
+			var name = "박지수";
+			var tel = "010-1010-1111";
+			var addr = "주소";
+			var zipNo = "12345";
+		
+	        var IMP = window.IMP; // 생략가능
+	        IMP.init('iamport'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+	        //onclick, onload 등 원하는 이벤트에 호출합니다
+	        IMP.request_pay({
+	            
+	            
+	            pg : 'inicis', // version 1.1.0부터 지원.
+	            pay_method : 'card',
+	            merchant_uid : 'merchant_' + new Date().getTime(),
+	            name : 'COREA',
+	            amount : amount,
+	            buyer_email : email,
+	            buyer_name : name,
+	            buyer_tel : tel,
+	            buyer_addr : addr,
+	            buyer_postcode : zipNo,
+	            m_redirect_url : 'https://www.yourdomain.com/payments/complete',
+	            app_scheme : 'iamportapp'
+	              
+	             
+	
+	        }, function(rsp) {
+	            if ( rsp.success ) {
+	                var msg = '결제가 완료되었습니다.';
+	                msg += '고유ID : ' + rsp.imp_uid;
+	                msg += '상점 거래ID : ' + rsp.merchant_uid;
+	                msg += '결제 금액 : ' + rsp.paid_amount;
+	                msg += '카드 승인번호 : ' + rsp.apply_num;
+
+	                doUpdate(5, rsp.imp_uid);
+	            } else {
+	                var msg = '결제에 실패하였습니다.';
+	                msg += '에러내용 : ' + rsp.error_msg;
+	            }
+	            alert(msg);
+	        });
+		}
+		
 	</script>
 </body>
 </html>

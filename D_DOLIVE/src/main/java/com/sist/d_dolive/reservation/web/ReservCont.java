@@ -95,9 +95,9 @@ public class ReservCont {
 		String url = "";
 		
 		if(search.getOptionDiv().equals("1")) {
-			url = "reserv/member_reservation";
+			url = "member/member_reservation";
 		}else if(search.getOptionDiv().equals("2")) {
-			url = "reserv/bizmember_reservation";
+			url = "bizmember/bizmember_reservation";
 		}
 		
 		return url;

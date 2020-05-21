@@ -23,10 +23,26 @@ public class ReservServiceImple implements ReservService {
 
 	@Override
 	public int doUpdate(DTO dto) {
+		ReservVO reservVO = (ReservVO) dto;
 		
-		return dao.doUpdate(dto);
+		int flag = 0;
+		int cancelFlag = 0;
+		
+		flag = dao.doUpdate(reservVO);
+		
+		if(flag==1 && reservVO.getApproval().equals("5")) {
+			reservVO.setSearchDiv("20");
+			cancelFlag = dao.doUpdate(dto);
+			if(cancelFlag==1) {
+				flag = 1;
+			}else {
+				flag = 0;
+			}
+		}
+		
+		return flag;
 	}
-
+	
 	@Override
 	public DTO doSelectOne(DTO dto) {
 		

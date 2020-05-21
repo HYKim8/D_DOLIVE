@@ -41,7 +41,7 @@
 				url : "${hContext}/iamport/do_cancel.do",
 				dataType : "html",
 				data : {
-					"imp_uid" : "imp_056673462320"
+					"imp_uid" : "imp_141163619330"
 				},
 				success : function(data) { //성공
 					var jData = JSON.parse(data);

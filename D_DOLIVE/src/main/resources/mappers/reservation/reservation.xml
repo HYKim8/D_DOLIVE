@@ -101,13 +101,41 @@
 		) 
 	</insert>
 	
+	<sql id="updateSetCondition">
+		<choose>
+			<!-- 기본 doUpdate -->
+			<when test="'10' == searchDiv">
+				SET approval = #{approval, jdbcType = VARCHAR} 
+			</when>
+			<!-- 일괄 취소 처리용 doUpdate -->
+			<when test="'20' == searchDiv">
+				SET approval = 2
+			</when>
+		</choose>
+	</sql>
+	
+	<sql id="updateWhereCondition">
+		<choose>
+			<!-- 기본 doUpdate -->
+			<when test="'10' == searchDiv">
+				WHERE rno = #{rno, jdbcType = VARCHAR}
+			</when>
+			<!-- 일괄 취소 처리용 doUpdate -->
+			<when test="'20' == searchDiv">
+				WHERE approval = 1
+				OR approval = 3
+			</when>
+		</choose>
+	</sql>
+	
 	<!-- 수정 -->
 	<update id="doUpdate" parameterType="ReservVO">
 		UPDATE reservation
-		SET approval = #{approval, jdbcType = VARCHAR}  
+		<include refid="updateSetCondition"></include>   
+			, impuid = #{impuid, jdbcType = VARCHAR}   
 		    , modId  = #{modId, jdbcType = VARCHAR}  
     		, modDt  = SYSDATE
-		WHERE rno = #{rno, jdbcType = VARCHAR}   
+		<include refid="updateWhereCondition"></include>   
 	</update>
 	
 	<!-- 단건 조회 -->
