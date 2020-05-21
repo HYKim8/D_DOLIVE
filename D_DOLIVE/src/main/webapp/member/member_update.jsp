@@ -278,18 +278,18 @@
                          //필수값
                          required: true,
                          //범위
-                         rangelength: [5,12]
+                         maxlength: 12
                      },gender:{
                     	required: true
 
                  	 },ihidnum:{
-                 		required: true
-                 		
+                 		required: true,
+                 		rangelength: [13,14]
                  	 },name:{
                     	 //필수값
                          required: true,
                          //이메일형식
-                         minlength: 3
+                         minlength: 2
                      },tel:{
                          //필수값
                          required: true,
@@ -315,17 +315,15 @@
                          //필수값 
                          required: "비밀번호는 필수값 입니다.",
                          //최소길이
-                         rangelength: $.validator.format('비밀번호는 {0}이상~{1}이하로 입력하세요.')
+                        maxlength: $.validator.format('{0}자 이하 입력하세요.')
                      },gender:{
                          //필수값 
                          required: "필수값 선택값입니다.",
-                         //최소길이
-                         minlength: $.validator.format('{0}자 이상 입력하세요.')
                      },ihidnum:{
                          //필수값 
                          required: "주민번호는 필수값 입니다.",
                          //최소길이
-                         minlength: $.validator.format('{0}자 이상 입력하세요.')
+                         rangelength: $.validator.format('주민번호는 {0}이상~{1}이하로 입력하세요.')
                      },name:{
                          //필수값 
                          required: "이름은 필수값 입니다.",

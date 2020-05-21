@@ -309,6 +309,7 @@
                      },tel:{
                          //필수값
                          required: true,
+                         number:true,
                          rangelength: [10,11]
                      },zipno:{
                     	 required: true
