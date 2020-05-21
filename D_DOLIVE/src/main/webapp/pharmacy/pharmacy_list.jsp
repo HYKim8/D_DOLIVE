@@ -140,7 +140,7 @@
     					<c:when test="${list.size()>0 }">
     						<c:forEach var="vo" items="${list }">
     							<tr>
-    								<td class="text-center"><input type="radio" name="rno" id="rno" value="${vo.pcode }"/></td>
+    								<td class="text-center"><input type="radio" name="pcode" id="pcode" value="${vo.pcode }"/></td>
 			    					<td class="text-center hidden-sm hidden-xs"><c:out value="${vo.num }"></c:out></td>
 			    					<td class="text-center"><c:out value="${vo.name }"></c:out></td>
 			    					<td class="text-center"><c:out value="${vo.addr }"></c:out></td>
@@ -175,7 +175,11 @@
    
    	<script type="text/javascript">
 		function doChoice() {
-			
+			var name = $('input[name="pcode"]:checked').parent().parent().children().eq(2).text();
+			var addr = $('input[name="pcode"]:checked').parent().parent().children().eq(3).text();
+			var pcode = $('input[name="pcode"]:checked').val();
+			opener.pharmacyCallBack(name, addr, pcode);
+			window.close();
 		}
    	
 	   	function doRetrieve() {
