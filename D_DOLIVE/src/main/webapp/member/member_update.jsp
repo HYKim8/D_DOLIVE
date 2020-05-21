@@ -100,8 +100,16 @@
 			<div class="form-group">
 				<label for="gender" class="col-lg-4 col-sm-4 col-xs-4  control-label">성별</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-						 <input type = "radio" id="gender1" name = "gender" value = "1" >남자
-				         <input type = "radio" id="gender2" name = "gender" value = "2" >여자
+					<c:choose>
+						<c:when test="${vo.gender eq '1'}">
+							<input type = "radio" id="gender1" name = "gender" value = "1" checked="checked" >남자
+							<input type = "radio" id="gender2" name = "gender" value = "2"  >여자
+						</c:when>
+						<c:when test="${vo.gender eq '2'}">
+							<input type = "radio" id="gender1" name = "gender" value = "1"  >남자
+							<input type = "radio" id="gender2" name = "gender" value = "2" checked="checked" >여자
+						</c:when>
+					</c:choose>
 				</div>
 			</div>				
 			
