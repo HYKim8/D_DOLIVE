@@ -139,7 +139,7 @@
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
 <!-- Core theme CSS (includes Bootstrap)-->
-<link href="../startbootstrap-freelancer-gh-pages/css/styles.css" rel="stylesheet" />
+<!-- <link href="../startbootstrap-freelancer-gh-pages/css/styles.css" rel="stylesheet" /> -->
 </head>
 <body>
 	
@@ -257,7 +257,6 @@
                   // 마커 이미지의 이미지 크기 입니다
                   var imageSize = new kakao.maps.Size(30, 40); 
                   
-                  
                   // 검색 결과의 수만큼 마커 출력
                   for (var i = 0; i < positions.length; i ++) {
                       // 마커 이미지를 생성합니다    
@@ -320,9 +319,9 @@
                          //'           <label class="switch">'+
                          //'               <input type="checkbox"><span class="slider round"></span>'+
                          //'           </label>'+
-                         '           <button class="button" >알림</button>'+  
-                         '           <button class="button" >길찾기</button>'+ 
-                         '           <button class="button" >예약</button>'+ 
+                         '           <button class="button" id="" >알림</button>'+  
+                         '           <button class="button" id="">길찾기</button>'+ 
+                         '           <button class="button" id="" onclick="goReserv();">예약</button>'+ 
                          '        </div>'+
                          '        <div class="body">' + 
                          '           <div class="ellipsis" align="center">'+addr+'</div>' + 
@@ -342,12 +341,27 @@
           $("#address").val("<%=p_address%>");
            maskSearch();
       }
+
+      function goUpdate() {
+  		//console.log("update_btn");
+  		
+  		var frm = document.main;
+          frm.action = "http://localhost:8080/d_dolive/reserv/reserv_insert.do";
+          frm.p_address.value = "서울특별시 마포구";
+          frm.submit();
+      }
+
+	  function goReserv(){
+		
+		  location.href = "http://localhost:8080/d_dolive/reserv/reserv_insert.do"
+			
+      }
       
       function closeOverlay(data){+
          data.remove();
       }
 
-	  
+	  //http://localhost:8080/d_dolive/reserv/reserv_insert.do (예약신청 경로)
       
       
    </script>

@@ -214,4 +214,11 @@ public class ReservCont {
 		
 		return url;
 	}
+	
+	@RequestMapping(value = "reserv/reserv_insert.do", method = RequestMethod.GET)
+	public String doSelectTwo() {
+		LOG.debug("=아아아아아=");
+		
+		return "reserv/reserv_insert";
+	}
 }

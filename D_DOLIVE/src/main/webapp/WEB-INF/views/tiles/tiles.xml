@@ -22,8 +22,8 @@
         <put-attribute name="footer" 
         value="/WEB-INF/views/tiles/layouts/footer.jsp"/>
     </definition>
-    
-    <!-- 메뉴없는 타일 -->
+
+    <!--                  메뉴없는  타일                                                          -->
     <definition name="basede-finition2" 
     template="/WEB-INF/views/tiles/layouts/defaultLayout2.jsp">
         <!-- 제목처리 -->
@@ -45,7 +45,8 @@
         <put-attribute name="footer" 
         value="/WEB-INF/views/tiles/layouts/footer.jsp"/>
     	</definition>
-      <!-- member -->
+    
+    <!-- member -->
     <definition name="member/*" extends="basede-finition2">
         <put-attribute name="title" value="D_DOLIVE>Member"/>
         <put-attribute name="body" value="/member/{1}.jsp"/>
@@ -60,6 +61,11 @@
     <!-- reservation -->
     <definition name="reserv/*" extends="basede-finition">
         <put-attribute name="title" value="D_DOLIVE>Reservation"/>
+        <put-attribute name="body" value="/reserv/{1}.jsp"/>
+    </definition>
+    
+    <!-- reserv -->
+    <definition name="reserv/*" extends="basede-finition2">
         <put-attribute name="body" value="/reserv/{1}.jsp"/>
     </definition>
     

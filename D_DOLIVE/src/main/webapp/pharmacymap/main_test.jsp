@@ -44,7 +44,7 @@
 	<!-- Masthead-->
 	<header class="masthead bg-primary text-white text-center" style="height: 800px;">
 	    <div class="container d-flex align-items-center flex-column">
-	        <!-- Masthead Avatar Image--><img class="masthead-avatar mb-5" src="${hContext}/resources/assets/img/avataaars.svg" alt="" /><!-- Masthead Heading-->
+	        <!-- Masthead Avatar Image--><img class="masthead-avatar mb-5" src="${hContext}/resources/assets/img/mask.png" alt="" /><!-- Masthead Heading-->
 	        <h1 class="masthead-heading text-uppercase mb-0">Mask</h1>
 	        <!-- Icon Divider-->
 	        <div class="divider-custom divider-light">
