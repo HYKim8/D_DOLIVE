@@ -136,6 +136,7 @@
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="pcode" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">판매처코드</label>
+	      		<input type="button" value="판매처 조회" onclick="goPharmacyPopup();"/>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="pcode" name="pcode" placeholder="판매처코드"
 		      	 	value="12345">
@@ -152,7 +153,11 @@
     
     
     <script type="text/javascript">
-	    function goJusoPopup(){
+		function goPharmacyPopup() {
+			
+		}
+    
+	    function goJusoPopup() {
 	    	// 주소검색을 수행할 팝업 페이지를 호출합니다.
 	    	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
 	    	var pop = window.open("${hContext}/jusoapi/juso_popup_api.jsp", "pop","width=570,height=420, scrollbars=yes, resizable=yes"); 

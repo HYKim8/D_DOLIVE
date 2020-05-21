@@ -11,6 +11,7 @@
 
 	<!-- type별칭: parameterType="com.sist.ehr.board.service.BoardVO" BoardVO -->
 	<typeAliases>
+		<typeAlias type="com.sist.d_dolive.pharmacy.PharmacyVO" alias="PharmacyVO"/>
 		<typeAlias type="com.sist.d_dolive.code.CodeVO" alias="CodeVO"/>
 		<typeAlias type="com.sist.d_dolive.notice.NoticeVO" alias="NoticeVO"/>
 		<typeAlias type="com.sist.d_dolive.bizmember.BizMemberVO" alias="BizMemberVO"/>

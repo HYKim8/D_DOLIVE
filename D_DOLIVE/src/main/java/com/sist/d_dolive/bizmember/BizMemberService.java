@@ -18,6 +18,7 @@ public interface BizMemberService {
 	 * @return int
 	 */
 	public int doInsert(DTO dto);
+	
 	/**
 	 * 수정   
 	 * @param dto

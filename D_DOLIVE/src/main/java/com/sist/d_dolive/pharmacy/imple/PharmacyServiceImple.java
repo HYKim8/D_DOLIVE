@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.sist.d_dolive.notice.imple;
+package com.sist.d_dolive.pharmacy.imple;
 
 import java.util.List;
 
@@ -9,22 +9,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sist.d_dolive.cmn.DTO;
-import com.sist.d_dolive.notice.NoticeDao;
-import com.sist.d_dolive.notice.NoticeService;
-import com.sist.d_dolive.notice.NoticeVO;
+import com.sist.d_dolive.pharmacy.PharmacyDao;
+import com.sist.d_dolive.pharmacy.PharmacyService;
 
 /**
  * @author sist
  *
  */
 @Service
-public class NoticeServiceImple implements NoticeService {
+public class PharmacyServiceImple implements PharmacyService {
 	@Autowired
-	NoticeDao noticeDao;
+	PharmacyDao pharmacyDao;
 
 	@Override
 	public int doInsert(DTO dto) {
-		return noticeDao.doInsert(dto);
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
@@ -35,24 +35,19 @@ public class NoticeServiceImple implements NoticeService {
 
 	@Override
 	public DTO doSelectOne(DTO dto) {
-		NoticeVO outVO = (NoticeVO) noticeDao.doSelectOne(dto);
-		return outVO;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public int doDelete(DTO dto) {
-		return noticeDao.doDelete(dto);
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public List<?> doRetrieve(DTO dto) {
-		return noticeDao.doRetrieve(dto);
-	}
-
-	@Override
-	public List<?> getAll(DTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		return pharmacyDao.doRetrieve(dto);
 	}
 
 }

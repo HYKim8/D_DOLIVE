@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.sist.d_dolive.bizmember;
+package com.sist.d_dolive.pharmacy;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import com.sist.d_dolive.cmn.DTO;
  * @author sist
  *
  */
-public interface BizMemberDao {
+public interface PharmacyDao {
 	/**
 	 * 등록
 	 * @param dto
@@ -60,11 +60,4 @@ public interface BizMemberDao {
 	 * @return
 	 */
 	public List<?> doRetrieve(DTO dto);
-	   
-	/**
-	 * 전체 조회
-	 * @param dto
-	 * @return
-	 */
-	public List<?> getAll(DTO dto);
 }
