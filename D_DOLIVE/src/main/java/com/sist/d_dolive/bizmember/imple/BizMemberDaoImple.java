@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
 import com.sist.d_dolive.bizmember.BizMemberDao;
 import com.sist.d_dolive.bizmember.BizMemberVO;
 import com.sist.d_dolive.cmn.DTO;
-import com.sist.d_dolive.cmn.SearchVO;
 
 /**
  * @author sist
@@ -90,6 +89,54 @@ public class BizMemberDaoImple implements BizMemberDao {
 		LOG.debug("3==========================");
 		
 		return outVO;
+	}
+	
+	@Override
+	public int idCheck(DTO dto) {
+		int cnt = 0;
+		BizMemberVO inVO = (BizMemberVO) dto;
+
+		LOG.debug("1==============================");
+		LOG.debug("1=inVO="+inVO);
+		LOG.debug("1==============================");
+
+		// namespace+id = com.sist.ehr.user.doUpdate
+		String statement = NAMESPACE+".idPwCheck";
+		LOG.debug("2==============================");
+		LOG.debug("2=statement="+statement);
+		LOG.debug("2==============================");
+
+		cnt = this.sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("3==============================");
+		LOG.debug("3=cnt="+cnt);
+		LOG.debug("3==============================");
+
+		LOG.debug("=cnt= "+cnt);
+		return cnt;
+	}
+
+	@Override
+	public int pwCheck(DTO dto) {
+		int cnt = 0;
+		BizMemberVO inVO = (BizMemberVO) dto;
+
+		LOG.debug("1==============================");
+		LOG.debug("1=inVO="+inVO);
+		LOG.debug("1==============================");
+
+		// namespace+id = com.sist.ehr.user.doUpdate
+		String statement = NAMESPACE+".idPwCheck";
+		LOG.debug("2==============================");
+		LOG.debug("2=statement="+statement);
+		LOG.debug("2==============================");
+
+		cnt = this.sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("3==============================");
+		LOG.debug("3=cnt="+cnt);
+		LOG.debug("3==============================");
+
+		LOG.debug("=cnt= "+cnt);
+		return cnt;
 	}
 	
 	public void doDeleteAll() {

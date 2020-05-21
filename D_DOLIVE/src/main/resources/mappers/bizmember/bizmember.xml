@@ -40,14 +40,47 @@
 		, modId	
 		, TO_CHAR(modDt, 'YYYY/MM/DD HH24MISS') modDt
 	</sql>
+	
+	<sql id="selectOneCondition">
+		<choose>
+			<when test="'10' == searchDiv">
+				WHERE email = #{email, jdbcType = VARCHAR}
+			</when>
+			<when test="'20' == searchDiv">
+				WHERE name = #{name}
+				AND birth = #{birth}
+			</when>
+			<when test="'30' == searchDiv">
+				WHERE email = #{email}
+				AND name = #{name}
+				AND birth = #{birth}
+			</when>
+			<when test="'40' == searchDiv">
+				WHERE email = #{email,jdbcType=VARCHAR}
+				AND pw = #{pw,jdbcType=VARCHAR}
+			</when>
+		</choose>
+	</sql>
 	 
-	<!-- 단건조회 -->
+	<!-- 단건 조회 -->
 	<select id="doSelectOne" parameterType="BizMemberVO" resultType="BizMemberVO">
 		SELECT
 			<include refid="bizMemberColumns"></include>
 		FROM bizmember
-		WHERE email = #{email, jdbcType = VARCHAR}
+		<include refid="selectOneCondition"></include>
+		<!-- 단건 조회: searchDiv: 10 -->
+		<!-- 이메일 찾기: searchDiv: 20 -->
+		<!-- 비밀번호 찾기: searchDiv: 30 -->
 	</select>
+	
+	<!-- id / pw check -->
+    <select id="idPwCheck" parameterType="BizMemberVO" resultType="java.lang.Integer">
+		SELECT COUNT(1)
+		FROM bizmember
+		<include refid="selectOneCondition"></include>
+		<!-- id check: searchDiv: 10 -->
+		<!-- pw Check: searchDiv: 40 -->
+    </select>
 	 
 	<!-- 등록 -->
 	<insert id="doInsert" parameterType="BizMemberVO">

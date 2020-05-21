@@ -5,6 +5,8 @@ package com.sist.d_dolive.bizmember.web;
 
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -153,6 +155,52 @@ public class BizMemberCont {
 		}
 		
 		return url;
+	}
+	
+	@RequestMapping(value = "bizmember/do_login.do", method = RequestMethod.POST
+			, produces ="application/json; charset=UTF-8")
+	@ResponseBody
+	public String doLogin(BizMemberVO bizMemberVO, Locale locale, Model model, HttpSession session) {
+		LOG.debug("1===================");
+		LOG.debug("1=param="+bizMemberVO);
+		LOG.debug("1===================");
+		String message = "";
+		if(null == bizMemberVO.getEmail() || "".equals(bizMemberVO.getEmail().trim())) {
+			message="이메일을 입력 하세요.";
+			throw new IllegalArgumentException(message);
+		}
+
+		if(null == bizMemberVO.getPw() || "".equals(bizMemberVO.getPw().trim())) {
+			message="비번을 입력 하세요.";
+			throw new IllegalArgumentException(message);
+		}
+
+		int flag = this.bizMemberService.idPwCheck(bizMemberVO);
+		MessageVO messageVO = new MessageVO();
+		messageVO.setMsgId(String.valueOf(flag));
+
+		if(10==flag) {//ID CHECK
+			messageVO.setMsgMsg("아이디를 확인 하세요.");
+		}else if(20==flag) {// pass CHECK
+			messageVO.setMsgMsg("비번를 확인 하세요.");
+		}else if(30==flag) {// 성공
+			messageVO.setMsgMsg("로그인 성공.");
+			//사용자 정보 조회
+			BizMemberVO userInfo = (BizMemberVO) this.bizMemberService.doSelectOne(bizMemberVO);
+			LOG.debug("2===================");
+			LOG.debug("2=userInfo="+userInfo);
+			LOG.debug("2===================");
+
+			session.setAttribute("bizMember", userInfo);
+		}
+
+		Gson gson = new Gson();
+		String json = gson.toJson(messageVO);
+		LOG.debug("2===================");
+		LOG.debug("2=json="+json);
+		LOG.debug("2===================");
+
+		return json;
 	}
 	
 	@RequestMapping(value = "bizmember/do_insert.do", method = RequestMethod.POST

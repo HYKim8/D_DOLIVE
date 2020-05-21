@@ -33,6 +33,13 @@ public interface BizMemberService {
 	public DTO doSelectOne(DTO dto);
 	
 	/**
+	 * 아이디, 비밀번호 체크
+	 * @param dto
+	 * @return DTO
+	 */
+	public int idPwCheck(DTO dto);
+	
+	/**
 	 * 삭제
 	 * @param dto
 	 * @return int

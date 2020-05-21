@@ -34,13 +34,17 @@ public class DTO {
 	//컨트롤러 페이지 이동
 	private String optionDiv;
 	
+	//검색구분
+	private String searchDiv;
+	
 	public DTO() {}
 
-	public DTO(int num, int totalCnt, String optionDiv) {
+	public DTO(int num, int totalCnt, String optionDiv, String searchDiv) {
 		super();
 		this.num = num;
 		this.totalCnt = totalCnt;
 		this.optionDiv = optionDiv;
+		this.searchDiv = searchDiv;
 	}
 
 	public int getNum() {
@@ -67,10 +71,18 @@ public class DTO {
 		this.optionDiv = optionDiv;
 	}
 
+	public String getSearchDiv() {
+		return searchDiv;
+	}
+
+	public void setSearchDiv(String searchDiv) {
+		this.searchDiv = searchDiv;
+	}
+
 	@Override
 	public String toString() {
-		return "DTO [num=" + num + ", totalCnt=" + totalCnt + ", optionDiv=" + optionDiv + ", toString()="
-				+ super.toString() + "]";
+		return "DTO [num=" + num + ", totalCnt=" + totalCnt + ", optionDiv=" + optionDiv + ", searchDiv=" + searchDiv
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }

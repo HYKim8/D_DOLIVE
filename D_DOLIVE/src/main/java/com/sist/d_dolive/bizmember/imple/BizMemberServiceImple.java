@@ -41,6 +41,34 @@ public class BizMemberServiceImple implements BizMemberService {
 		BizMemberVO outVO = (BizMemberVO) bizMemberDao.doSelectOne(dto);
 		return outVO;
 	}
+	
+	@Override
+	public int idPwCheck(DTO dto) {
+		int idFlag = 0;
+		int pwFlag = 0;
+		int result = 0;
+		
+		//1. idCheck   실패: 10
+		dto.setSearchDiv("10");
+		idFlag = bizMemberDao.idCheck(dto);
+		if(idFlag!=1) {
+			result = 10;//id not found
+		}
+	
+		//2. pwCheck 실패: 20
+		if(idFlag==1) {
+			dto.setSearchDiv("40");
+			pwFlag = bizMemberDao.pwCheck(dto);
+			if(pwFlag!=1) {
+				result = 20;//pw not found
+			}else {
+				//3. 성공: 30
+				result = 30;
+			}
+		}
+	
+		return result;
+	}
 
 	@Override
 	public int doDelete(DTO dto) {

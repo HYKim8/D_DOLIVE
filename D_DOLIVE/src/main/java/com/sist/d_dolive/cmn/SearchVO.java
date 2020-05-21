@@ -31,9 +31,6 @@ public class SearchVO extends DTO {
 	//페이지 넘버
 	private int pageNum;
 	
-	//검색구분
-	private String searchDiv;
-	
 	//검색어
 	private String searchWord;
 	
@@ -42,11 +39,10 @@ public class SearchVO extends DTO {
 	
 	public SearchVO() {}
 
-	public SearchVO(int pageSize, int pageNum, String searchDiv, String searchWord, String searchWord02) {
+	public SearchVO(int pageSize, int pageNum, String searchWord, String searchWord02) {
 		super();
 		this.pageSize = pageSize;
 		this.pageNum = pageNum;
-		this.searchDiv = searchDiv;
 		this.searchWord = searchWord;
 		this.searchWord02 = searchWord02;
 	}
@@ -67,14 +63,6 @@ public class SearchVO extends DTO {
 		this.pageNum = pageNum;
 	}
 
-	public String getSearchDiv() {
-		return searchDiv;
-	}
-
-	public void setSearchDiv(String searchDiv) {
-		this.searchDiv = searchDiv;
-	}
-
 	public String getSearchWord() {
 		return searchWord;
 	}
@@ -93,8 +81,8 @@ public class SearchVO extends DTO {
 
 	@Override
 	public String toString() {
-		return "SearchVO [pageSize=" + pageSize + ", pageNum=" + pageNum + ", searchDiv=" + searchDiv + ", searchWord="
-				+ searchWord + ", searchWord02=" + searchWord02 + ", toString()=" + super.toString() + "]";
+		return "SearchVO [pageSize=" + pageSize + ", pageNum=" + pageNum + ", searchWord=" + searchWord
+				+ ", searchWord02=" + searchWord02 + ", toString()=" + super.toString() + "]";
 	}
 
 }

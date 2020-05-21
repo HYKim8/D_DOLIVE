@@ -33,6 +33,20 @@ public interface BizMemberDao {
 	public DTO doSelectOne(DTO dto);
 	
 	/**
+	 * 아이디 체크
+	 * @param dto
+	 * @return DTO
+	 */
+	public int idCheck(DTO dto);
+	
+	/**
+	 * 비밀번호 체크
+	 * @param dto
+	 * @return DTO
+	 */
+	public int pwCheck(DTO dto);
+	
+	/**
 	 * 삭제
 	 * @param dto
 	 * @return int

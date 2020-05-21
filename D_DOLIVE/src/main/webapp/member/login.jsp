@@ -55,7 +55,7 @@
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 " ></div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 ">
                 <!-- div title -->
-                <form action="login.do" class="form-horizontal" name="login_form" method="post">
+                <form action="login.do" class="form-horizontal" id="login_form" name="login_form" method="post">
 					<div class="form-group">
 						<label for="gender" class="col-lg-4 col-sm-4 col-xs-4  control-label"></label>
 						<div class="col-lg-6 col-sm-6 col-xs-6">
@@ -109,42 +109,45 @@
 	<script type="text/javascript">
 
  	function goLogin(){
-    	location.href="http://localhost:8080/d_dolive/member/gomypage.do"; 
+ 		location.href="http://localhost:8080/d_dolive/pharmacymap/main_test.do";
     }
 
 	
 	   $("#member_login").on("click",function(){
-		  //alert("라디오="+$('input[name=member]:checked').val());
-		  $.ajax({
-			   type:"POST",
-			   url:"${hContext}/member/login.do",
-			   dataType:"html",
-			   data:{
-				     "radio" :$('input[name=radio]:checked').val(),
-				     "email":$("#email").val(),
-			         "pw":$("#pw").val()
-			         
-			   },
-			   success:function(data){ //성공
-				   //alert(data);
-				   if(data == "10" ){
-						alert("아이디를 확인해주세요");
-					}else if(data == "20"){
-						alert("비밀번호를 확인해주세요");
-					}else{
-				   goLogin();
+		   var radio = $('input[name=radio]:checked').val();
+			var url = "";
+			if(radio=="1") {
+				url = "${hContext}/member/login.do";
+			}else if(radio=="2") {
+				url = "${hContext}/bizmember/do_login.do";
+			}
+			
+			$.ajax({
+				type:"POST",
+				url:url,
+				dataType:"html",
+				data:{
+					"email" : $("#email").val(),
+					"pw" : $("#pw").val()
+				},
+				success:function(data){ //성공
+					//alert(data);
+					var jData = JSON.parse(data);
+					if(null!=jData && jData.msgId=="10") {
+						alert(jData.msgMsg);
+					}else if(null!=jData && jData.msgId=="20") {
+						alert(jData.msgMsg);
+					}else if(null!=jData && jData.msgId=="30") {
+						alert(jData.msgMsg);
+						goLogin();
 					}
-
-			   },
-			   error:function(xhr,status,error){
-			    alert("이메일과 비밀번호를 다시 확인해주세요:"+error);
-			   },
-			   complete:function(data){
-
-			   }
-
-		  });//--ajax
-
+				},
+				error:function(xhr,status,error){
+				    alert("이메일과 비밀번호를 다시 확인해주세요:"+error);
+				},
+				   complete:function(data){
+				}
+			});//--ajax
 	   });
 	</script>
 	
