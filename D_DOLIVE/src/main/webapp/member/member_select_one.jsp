@@ -77,8 +77,15 @@
 	      	<div class="form-group">
 	      		<label for="gender" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">성별</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-		      		<input type="text" class="form-control" id="gender" name="gender" placeholder="성별"
-		      	 	value="${member.gender }" readonly>
+		    		<c:choose>
+		    			<c:when test="${member.gender eq '1'}">
+		    				<input type="text" class="form-control" id="gender" name="gender" placeholder="성별" value="남자" readonly>
+		    			</c:when>
+		    			<c:when test="${member.gender eq '2'}">
+		    				<input type="text" class="form-control" id="gender" name="gender" placeholder="성별" value="여자" readonly>
+		    			</c:when>		    			
+		    			
+		    		</c:choose>
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
