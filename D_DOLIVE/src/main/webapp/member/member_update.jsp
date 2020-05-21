@@ -382,7 +382,7 @@
      });
 	
 	function goSelectOne1() {
-		alert("email"+$("#email").val());
+		//alert("email"+$("#email").val());
 		var frm = document.updateForm;
 		frm.email.value = $("#email").val();
         frm.action = "${hContext}/member/do_select_one1.do"; 
