@@ -145,7 +145,7 @@
 	
     <div align="center" style="width: 100%;height: 80%;">
       <!-- 주소 입력란 -->
-      <input type="text" id="address" placeholder="주소를 입력하세요." value="서울특별시 노원구"/> 
+      <input type="text" id="address" placeholder="주소를 입력하세요." value=""/> 
       <!-- //주소 입력란 -->
       
       <!-- 검색 버튼 -->
@@ -308,7 +308,7 @@
                   // 마커 위에 커스텀오버레이를 표시합니다
                      // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
                      overlay = new kakao.maps.CustomOverlay({
-                         content: '<div class="wrap" id="'+code+'">' + 
+                         content: '<div class="wrap" id="'+code+' name="'+code+'">' + 
                          '    <div class="info">' + 
                          '        <div class="title">' + 
                          '            '+name+'' + 
@@ -342,20 +342,27 @@
            maskSearch();
       }
 
-      function goUpdate() {
-  		//console.log("update_btn");
-  		
-  		var frm = document.main;
-          frm.action = "http://localhost:8080/d_dolive/reserv/reserv_insert.do";
-          frm.p_address.value = "서울특별시 마포구";
-          frm.submit();
+	  function goReserv(){
+
+		  var frm = document.code
+		  
+		  frm.action = "http://localhost:8080/d_dolive/reserv/reserv_insert.do"
+		  frm.code
+
+			  	  	
       }
 
-	  function goReserv(){
+
+	  //샘플 지워도 됨
+	  function goUpdate() {
+		//console.log("update_btn");
 		
-		  location.href = "http://localhost:8080/d_dolive/reserv/reserv_insert.do"
-			
-      }
+		var frm = document.main;
+        frm.action = "${hContext}/pharmacymap/pharmacy_map_test.do";
+        frm.p_address.value = "서울특별시 마포구";
+        frm.submit();
+	  }	
+
       
       function closeOverlay(data){+
          data.remove();

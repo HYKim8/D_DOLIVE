@@ -79,6 +79,21 @@
         frm.p_address.value = "서울특별시 마포구";
         frm.submit();
 	}	
+
+	//function goMaket(){
+		//!!!!!!!!!!!!!!!!주소 매핑 변경!!!!!!!!!!!!!!!!
+		//location.href = "${hContext}/covidmap/sidomap.do"
+	//}
+
+	//function goSignUp(){
+		//!!!!!!!!!!!!!!!!주소 매핑 변경!!!!!!!!!!!!!!!!
+		//location.href = "http://localhost:8080/d_dolive/member/gomember.do"
+	//}
+
+	//function goLogIn(){//수정
+		//!!!!!!!!!!!!!!!!주소 매핑 변경!!!!!!!!!!!!!!!!
+		//location.href = "${hContext}/covidmap/sidomap.do"
+	//}
 	
     </script>
     
