@@ -167,3 +167,420 @@ function loadMap(){
 }
 
 
+var ageConfirmerDatas = {
+        type: 'doughnut',
+        data: {
+            labels: [  '80이상',
+                        '70-79',
+                        '60-69',
+                        '50-59',
+                        '40-49',
+                        '30-39',
+                        '20-29',
+                        '10-19',
+                        '0-9'],
+            datasets: [{
+                label: '나이별 확진자 현황',
+                data: [ 490,
+                        717,
+                        1369,
+                        1972,
+                        1468,
+                        1219,
+                        3100,
+                        627,
+                        148 ],
+                backgroundColor: [
+                	'rgb(255, 99, 132, 0.2)',
+                    'rgb(255, 159, 64, 0.2)',
+                     'rgb(255, 205, 86, 0.2)',
+                     'rgb(102, 255, 51, 0.2)',
+                     'rgb(75, 192, 192, 0.2)',
+                     'rgb(54, 162, 235, 0.2)',
+                     'rgb(153, 102, 255, 0.2)',
+                     'rgb(255, 0, 255, 0.2)',
+                     'rgb(120, 120, 120, 0.2)'
+                ],
+                borderColor: [
+                	'rgb(255, 99, 132, 0.2)',
+                    'rgb(255, 159, 64, 0.2)',
+                     'rgb(255, 205, 86, 0.2)',
+                     'rgb(102, 255, 51, 0.2)',
+                     'rgb(75, 192, 192, 0.2)',
+                     'rgb(54, 162, 235, 0.2)',
+                     'rgb(153, 102, 255, 0.2)',
+                     'rgb(255, 0, 255, 0.2)',
+                     'rgb(120, 120, 120, 0.2)'
+                ]
+            }]
+        },
+        options: {
+		            scales: {
+		                yAxes: [{
+		                    ticks: {
+		                        beginAtZero: true
+				                    }
+				                }]
+				            }
+                    ,legend: {
+                    	  position: 'top'
+                    		  },
+                      title : {
+                          display: true,
+                          text: '확진자 연령별 현황'
+                      }
+		        }
+    };
+
+	var ageDeadDatas = {
+			 type: 'doughnut',
+		        data: {
+		            labels: [  '80이상',
+		                        '70-79',
+		                        '60-69',
+		                        '50-59',
+		                        '40-49',
+		                        '30-39',
+		                        '20-29',
+		                        '10-19',
+		                        '0-9'],
+		            datasets: [{
+		                label: '나이별 사망자 현황',
+		                data: [ 128,
+		                        78,
+		                        38,
+		                        15,
+		                        3,
+		                        2,
+		                        0,
+		                        0,
+		                        0 ],
+		                backgroundColor: [
+		                    'rgb(255, 99, 132, 0.2)',
+		                    'rgb(255, 159, 64, 0.2)',
+		                     'rgb(255, 205, 86, 0.2)',
+		                     'rgb(102, 255, 51, 0.2)',
+		                     'rgb(75, 192, 192, 0.2)',
+		                     'rgb(54, 162, 235, 0.2)',
+		                     'rgb(153, 102, 255, 0.2)',
+		                     'rgb(255, 0, 255, 0.2)',
+		                     'rgb(120, 120, 120, 0.2)'
+		                ],
+		                borderColor: [
+		                    'rgb(255, 99, 132, 0.2)',
+		                    'rgb(255, 159, 64, 0.2)',
+		                     'rgb(255, 205, 86, 0.2)',
+		                     'rgb(102, 255, 51, 0.2)',
+		                     'rgb(75, 192, 192, 0.2)',
+		                     'rgb(54, 162, 235, 0.2)',
+		                     'rgb(153, 102, 255, 0.2)',
+		                     'rgb(255, 0, 255, 0.2)',
+		                     'rgb(120, 120, 120, 0.2)'
+		                ]
+		            }]
+		        },
+		        options: {
+		                    scales: {
+		                        yAxes: [{
+		                            ticks: {
+		                                beginAtZero: true
+		                                    }
+		                                }]
+		                            }
+		                    ,legend: {
+		                          position: 'top'
+		                              },
+                              title : {
+                                  display: true,
+                                  text: '사망자 연령별 현황'
+                              }
+		                }		
+	};
+	
+	var ageCFRDatas = {
+			 type: 'doughnut',
+		        data: {
+		            labels: [  '80이상',
+		                        '70-79',
+		                        '60-69',
+		                        '50-59',
+		                        '40-49',
+		                        '30-39',
+		                        '20-29',
+		                        '10-19',
+		                        '0-9'],
+		            datasets: [{
+		                label: '나이별 치명률 현황',
+		                data: [ 26.12,
+		                        10.88,
+		                        2.78,
+		                        0.76,
+		                        0.2,
+		                        0.16,
+		                        0,
+		                        0,
+		                        0 ],
+		                backgroundColor: [
+		                    'rgb(255, 99, 132, 0.2)',
+		                    'rgb(255, 159, 64, 0.2)',
+		                     'rgb(255, 205, 86, 0.2)',
+		                     'rgb(102, 255, 51, 0.2)',
+		                     'rgb(75, 192, 192, 0.2)',
+		                     'rgb(54, 162, 235, 0.2)',
+		                     'rgb(153, 102, 255, 0.2)',
+		                     'rgb(255, 0, 255, 0.2)',
+		                     'rgb(120, 120, 120, 0.2)'
+		                ],
+		                borderColor: [
+		                    'rgb(255, 99, 132, 0.2)',
+		                    'rgb(255, 159, 64, 0.2)',
+		                     'rgb(255, 205, 86, 0.2)',
+		                     'rgb(102, 255, 51, 0.2)',
+		                     'rgb(75, 192, 192, 0.2)',
+		                     'rgb(54, 162, 235, 0.2)',
+		                     'rgb(153, 102, 255, 0.2)',
+		                     'rgb(255, 0, 255, 0.2)',
+		                     'rgb(120, 120, 120, 0.2)'
+		                ]
+		            }]
+		        },
+		        options: {
+		                    scales: {
+		                        yAxes: [{
+		                            ticks: {
+		                                beginAtZero: true
+		                                    }
+		                                }]
+		                            }
+		                    ,legend: {
+		                          position: 'top'
+		                              },
+                              title : {
+                                  display: true,
+                                  text: '치명률(사망자/확진자) 연령별 현황'
+                              }
+		                }
+	};
+	
+	var ctxOne = document.getElementById('ageChart');
+	var ageChart;
+	
+	ageChart = new Chart(ctxOne, ageConfirmerDatas);
+    
+    
+    function ageConfirmer(){
+	   ageChart.destroy();
+       ageChart = new Chart(ctxOne, ageConfirmerDatas);
+    }
+
+    function ageDead(){
+    	ageChart.destroy();
+    	ageChart = new Chart(ctxOne, ageDeadDatas);
+	    }
+    function ageCFR(){
+    	  ageChart.destroy();
+    	ageChart = new Chart(ctxOne, ageCFRDatas);
+	    }
+
+    function ageConfirmer(){
+    	setChart(ageConfirmerDatas);
+
+    	    }
+
+    	    function ageDead(){
+    	setChart(ageDeadDatas);
+    	       }
+    	    function ageCFR(){
+    	setChart(ageCFRDatas);
+    	       }
+    	var ageChartData;
+    	function getChartElement(){
+    	return document.getElementById('ageChart');
+    	}
+    	function setChart(data){
+    	   if(ageChartData){ageChartData.destroy();}
+    	   ageChartData= new Chart(getChartElement(), data);
+    	}
+    	function getChart(){
+    	   return ageChartData==undefined?"":ageChartData;
+    	}
+
+
+        google.charts.load('current', {'packages':['corechart', 'controls']});
+
+        google.charts.setOnLoadCallback(drawDashboard);
+
+        function drawDashboard() {
+            
+      	  var data = new google.visualization.DataTable();
+            data.addColumn('datetime', '날짜');
+            data.addColumn('number', '확진자수');
+            data.addColumn('number', '완치자수');
+            data.addColumn('number', '사망자수');
+
+             var datas = [];
+
+              //날짜형식 변경하고 싶으시면 이 부분 수정하세요.
+             var chartDateformat  = 'MM월dd일';
+
+             //라인차트의 라인 수
+             var chartLineCount    = 10;
+
+             console.log(koreaRegionalCumulativeData[1][1]);         
+             for(var i =0; i<koreaRegionalCumulativeData.length;i++){
+                 //x 날짜
+                 var obj=[];
+                 var dateArray = koreaRegionalCumulativeData[i][0].split('/');
+                 
+                 obj.push(new Date('2020',dateArray[0]-1,dateArray[1]))
+                 obj.push(koreaRegionalCumulativeData[i][3])
+                 obj.push(koreaRegionalCumulativeData[i][4])
+                 obj.push(koreaRegionalCumulativeData[i][1])
+                 
+                 datas.push(obj);
+                }
+             
+            data.addRows(datas);
+
+            var chart = new google.visualization.ChartWrapper({
+                chartType   : 'LineChart',
+                containerId : 'chart_div', //라인 차트 생성할 영역
+                options     : {
+                                isStacked   : 'percent',
+                                focusTarget : 'category',
+                                height          : 500,
+                                width              : '100%',
+                                legend          : { position: "top", textStyle: {fontSize: 13}},
+                                pointSize        : 5,
+                                tooltip          : {textStyle : {fontSize:12}, showColorCode : true,trigger: 'both'},
+                                hAxis              : {format: chartDateformat, gridlines:{count:chartLineCount,units: {
+                                                                    months: {format: ['MM월']},
+                                                                    days  : {format: ['dd일']}}
+                                                                  },textStyle: {fontSize:12}},
+  			                vAxis              : {minValue: 100,viewWindow:{min:0},gridlines:{count:-1},textStyle:{fontSize:12}},
+  			                animation        : {startup: true,duration: 1000,easing: 'in' },
+  			                annotations    : {pattern: chartDateformat,
+  			                                textStyle: {
+  			                                fontSize: 15,
+  			                                bold: true,
+  			                                italic: true,
+  			                                color: '#871b47',
+  			                                auraColor: '#d799ae',
+  			                                opacity: 0.8,
+  			                                pattern: chartDateformat
+  			                              }
+  			                            }
+                }
+              });
+
+
+            var control = new google.visualization.ControlWrapper({
+                controlType: 'DateRangeFilter',
+                containerId: 'filter_div',  //control bar를 생성할 영역
+                options: {
+                      filterColumnIndex: 0
+                  }
+              });
+
+            var date_formatter = new google.visualization.DateFormat({ pattern: chartDateformat});
+            date_formatter.format(data, 0);
+
+
+            
+          var dashboard = new google.visualization.Dashboard(
+              document.getElementById('dashboard_div'));
+
+
+          dashboard.bind(control, chart);
+
+          dashboard.draw(data);
+          }
+        
+        google.charts.load('current', {
+            'packages':['geochart'],
+            // Note: you will need to get a mapsApiKey for your project.
+            // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+            'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+          });
+          google.charts.setOnLoadCallback(drawRegionsMap);
+
+          function drawRegionsMap() {
+              
+              let datas=[['국명', '확진자수', '사망자']];
+              for(let i in marker){
+            	  datas.push([
+            		           marker[i].Name_en, 
+            		           marker[i]["확진자수"],
+            		           marker[i]["사망자수"]
+            		          ]);
+                  }
+            var data = google.visualization.arrayToDataTable(datas);
+
+            var options = {colors: ['white', 'red']};
+
+            var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+            chart.draw(data, options);
+          }
+          
+          google.charts.load('current', {'packages':['corechart']});
+          google.charts.setOnLoadCallback(drawChart);
+
+          function drawChart() {
+              var data = new google.visualization.DataTable();
+                data.addColumn('datetime', '날짜');
+                data.addColumn('number', '확진자수');
+                data.addColumn('number', '완치자수');
+                data.addColumn('number', '사망자수');
+
+                 var datas = [];
+
+                  //날짜형식 변경하고 싶으시면 이 부분 수정하세요.
+                 var chartDateformat  = 'MM월dd일';
+
+                 //라인차트의 라인 수
+                 var chartLineCount    = 10;
+
+                 console.log(crawlWorldCumulativeData[1][1]);         
+                 for(var i =0; i<crawlWorldCumulativeData.length;i++){
+                     //x 날짜
+                     var obj=[];
+                     var dateArray = crawlWorldCumulativeData[i][0].split('/');
+                     
+                     obj.push(new Date('2020',dateArray[0]-1,dateArray[1]))
+                     obj.push(crawlWorldCumulativeData[i][1])
+                     obj.push(crawlWorldCumulativeData[i][3])
+                     obj.push(crawlWorldCumulativeData[i][2])
+                     
+                     datas.push(obj);
+                    }
+                 
+                data.addRows(datas);
+
+              var options = {
+                            isStacked   : 'precent',
+                            focusTarget : 'category',
+                            height          : 500,
+                            width              : '100%',
+                            legend          : { position: "top", textStyle: {fontSize: 13}},
+                            pointSize        : 5,
+                            tooltip          : {textStyle : {fontSize:12}, showColorCode : true,trigger: 'both'},
+                            hAxis              : {format: chartDateformat, gridlines:{count:chartLineCount,units: {
+                                                                months: {format: ['MM월']},
+                                                                days  : {format: ['dd일']}}
+                                                              },textStyle: {fontSize:12}},
+                              vAxis              : {minValue: 100,viewWindow:{min:0},gridlines:{count:-1},textStyle:{fontSize:12}},
+                              series: {
+                                  0: { color: '#3366FF' },
+                                  1: { color: '#66FF66' },
+                                  2: { color: '#FF3333' }
+                                }
+              };
+
+              var date_formatter = new google.visualization.DateFormat({ pattern: 'MM월dd일'});
+                date_formatter.format(data, 0);
+                
+              var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+              chart.draw(data, options);
+            }
