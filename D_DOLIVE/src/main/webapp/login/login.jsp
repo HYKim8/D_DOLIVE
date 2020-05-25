@@ -32,8 +32,7 @@
 <title>로그인</title>
 
 <!-- 부트스트랩 -->
-<link href="${hContext}/resources/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="${hContext}/resources/css/styles.css" rel="stylesheet" />
 
 <!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
 <!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->
@@ -87,11 +86,11 @@
 					<button type="button" class="btn btn-lg btn-primary btn-block"
 						id="member_login" size="30">로그인
 					</button>                    
-                    <a href="http://localhost:8080/d_dolive/member/gomember.do" class="more">일반 회원가입</a><br/>
-                    <a href="http://localhost:8080/d_dolive/member/goidpw.do" class="more">아이디/비번찾기</a>
+                    <a href="${hContext}/login/gomember.do" class="more">일반 회원가입</a><br/>
+                    <a href="${hContext}/login/goidpw.do" class="more">아이디/비번찾기</a>
                     <br/><br/>
-                    <a href="http://localhost:8080/d_dolive/member/gobizmember.do" class="more">업체 회원가입</a><br/>
-                    <a href="http://localhost:8080/d_dolive/bizmember/bizgoidpw.do" class="more">업체아이디/비번찾기</a>                            
+                    <a href="${hContext}/member/gobizmember.do" class="more">업체 회원가입</a><br/>
+                    <a href="${hContext}/bizmember/bizgoidpw.do" class="more">업체아이디/비번찾기</a>                            
                 </form>	
                    
                 	

@@ -45,20 +45,20 @@ public class MemberCont {
 	MessageSource messageSource;
 	
 	
-	@RequestMapping(value = "member/gologin.do", method = RequestMethod.GET)
+	@RequestMapping(value = "login/gologin.do", method = RequestMethod.GET)
 	public String gologin() {
 		
 		
-		return "member/login";
+		return "login/login";
 	}
 	
 	
-	@RequestMapping(value = "member/gomember.do", method = RequestMethod.GET)
+	@RequestMapping(value = "login/gomember.do", method = RequestMethod.GET)
 	public String gomember() {
 		LOG.debug("=아아아아아=");
 		
 		
-		return "member/member_insert";
+		return "login/member_insert";
 	}
 	@RequestMapping(value = "member/gobizmember.do", method = RequestMethod.GET)
 	public String gobizmember() {
@@ -68,12 +68,20 @@ public class MemberCont {
 		return "bizmember/bizmember_insert";
 	}
 	
-	@RequestMapping(value = "member/bizgoidpw.do", method = RequestMethod.GET)
+	@RequestMapping(value = "login/goidpw.do", method = RequestMethod.GET)
 	public String goidpw() {
 		LOG.debug("=아아아아아=");
 		
 		
-		return "member/id_pw_find";
+		return "login/id_pw_find";
+	}
+	
+	@RequestMapping(value = "login/gobizidpw.do", method = RequestMethod.GET)
+	public String gobizidpw() {
+		LOG.debug("=아아아아아=");
+		
+		
+		return "login/id_pw_find";
 	}
 	
 	@RequestMapping(value = "member/gomypage.do", method = RequestMethod.GET)
