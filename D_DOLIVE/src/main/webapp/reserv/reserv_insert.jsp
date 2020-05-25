@@ -36,19 +36,31 @@
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style type="text/css">
+    				
+    	.paddingMain {padding:100px 400px 160px;	}
+    				
+    	.paddingTitle {padding-bottom:50px}
+    	
+    	.paddingButton {padding-bottom:30px}
+    	
+    </style>
 </head>
 <body>
 	<!-- div container -->
-   	<div class="container">
+   	<div class="container, paddingMain">
+   	
       	<!-- div title --> 
       	<div class="page-header">
-        	<h2>마스크 예약</h2>
+      		<div class="paddingTitle">
+	        	<h2>마스크 예약</h2>
+      		</div>
       	</div>      	
       	<!--// div title -->
       	
-        <div class="row text-right">
+        <div class="paddingButton">
 			<label for="title" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label"></label>
-		    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+		    <div style="float:right;">
 				<input type="button" class="btn btn-primary btn-sm" value="예약하기" id="insertBtn" />
 				<input type="button" class="btn btn-primary btn-sm" value="돌아가기" id="returnBtn" />
 			</div>
@@ -57,8 +69,8 @@
       	<!-- div title -->
       	<form class="form-horizontal" action="${hContext }/reserv/do_insert.do" name="insertFrm" method="post">
       	<!-- hidden으로 변경! -> 회원아이디 session 처리, 약국코드 가지고 넘어오기 -->
-      	<input type="text" id="email" name="email" value="bealright6@naver.com">
-      	<input type="text" id="pcode" name="pcode" value="약국 코드">
+      	<input type="hidden" id="email" name="email" value="bealright6@naver.com">
+      	<input type="hidden" id="pcode" name="pcode" value="약국 코드">
 
 	      	<div class="form-group">
    				<select name="maskCnt" id="maskCnt" class="form-control input-sm">
@@ -123,6 +135,7 @@
 					var jData = JSON.parse(data);
 					if(jData != null && jData.msgId=="1") {
 						alert(jData.msgMsg);
+						//!!!!!!!!!!!!지도 메인 페이지로 주소 매핑!!!!!!!!!!!!!
 						
 					}else {
 						alert(jData.msgMsg);
@@ -137,7 +150,7 @@
 			});//--ajax
         	
         });
-		
+
 
     	$("#returnBtn").on("click", function(){
     		if(confirm("메인 화면으로 돌아가시겠습니까?") == false) return;

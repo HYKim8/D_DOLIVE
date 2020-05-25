@@ -61,43 +61,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-<title>Main</title>
-<!-- Font Awesome icons (free version)-->
-<script src="https://use.fontawesome.com/releases/v5.12.1/js/all.js" crossorigin="anonymous"></script>
-<!-- Google fonts-->
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-<!-- Core theme CSS (includes Bootstrap)-->
-<link href="${hContext}/resources/css/styles.css" rel="stylesheet" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>Main</title>
+	<!-- Font Awesome icons (free version)-->
+	<script src="https://use.fontawesome.com/releases/v5.12.1/js/all.js" crossorigin="anonymous"></script>
+	<!-- Google fonts-->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+	<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+	<!-- Core theme CSS (includes Bootstrap)-->
+	<link href="${hContext}/resources/css/styles.css" rel="stylesheet" />
+	
+   	<style type="text/css">
+    				
+    	.paddingMain {padding:80px 400px 160px;	}
+    				
+    	.paddingTitle {padding-bottom:40px}
+    	
+    	.paddingButton {padding-bottom:10px}
+    	
+    </style>
 </head>
 <body>
-<!-- Navigation-->
-	<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
-	    <div class="container">
-	        <a class="navbar-brand js-scroll-trigger" href="#page-top">COREA</a><button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu <i class="fas fa-bars"></i></button>
-	        <div class="collapse navbar-collapse" id="navbarResponsive">
-	            <ul class="navbar-nav ml-auto">
-	                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Main</a></li>
-	                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">Market</a></li>
-	                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">LogOut</a></li>
-	            </ul>
-	        </div>
-	    </div>
-	</nav>
-	<!-- div container -->
-	<div class="container">
+	<div class="container, paddingMain">
+	
 		<!-- div title -->
-		<div class="page-header">
+		<div class="paddingTitle">
 			<h1>예약 내역</h1>
 		</div>
 		<!--// div title -->
+		
 		<!-- 검색영역 -->
-		<div class="row">
-			<div class="col-md-12 text-right">
+		<div class="paddingButton">
 				<form action="${hContext}/reserv/do_retrieve.do" name="searchFrm" method="get" class="form-inline">
 					<input type="hidden" name="pageNum" id="pageNum" value="${vo.pageNum }">
 					<input type="hidden"   name="optionDiv" id="optionDiv" value="${vo.optionDiv }" />
@@ -108,30 +105,34 @@
 					<div class="form-group">
 						<%=StringUtil.makeSelectBox(searchList, "approvalSelect", searchDiv, true)%> 
 						<!-- StringUtil.makeSelectBox(승인상태에 따라 검색한 리스트, 셀렉트박스 이름, 검색구분(10-전체 검색,20-상태별 검색) -->
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;
 						<button type="button" onclick="javascript:doRetrieve();" class="btn btn-primary btn-sm">조회</button>
+					</div>
+					<div style ="float:right;">
+						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
 						<button type="button" onclick="doPayment()" class="btn btn-primary btn-sm">결제하기</button>
+						&nbsp;&nbsp;
+						<button type="button" onclick="cancelPay()" class="btn btn-primary btn-sm" >환불하기</button>
+						&nbsp;&nbsp;
 						<button type="button" onclick="doUpdate(2,0)" class="btn btn-primary btn-sm">예약취소</button>
-						<input type="button" value="환불" onclick="cancelPay()"/>
 					</div>
 				</form>
-			</div>
 		</div>
 		<!--// 검색영역 -->
 
 		<!-- Grid영역 -->
 		<div class="table-responsive">
-			<table class="table table-striped table-bordered sung" id="listTable">
+			<table class="table table-striped table-bordered sung" style="table-layout:fixed;word-break;break-all" id="listTable">
 				<!-- hidden-sm hidden-xs 숨기기 -->
 				<thead class="bg-primary">
-    				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8"></th>
-    				<th class="text-center col-lg-1 col-md-1 col-sm-1 hidden-xs ">번호</th>
-    				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">약국 이름</th>
-    				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">약국 주소</th>
-    				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">마스크수량</th>
-    				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">예약상태</th>
-    				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">결제금액</th>
-    				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">신청일</th>
+    				<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1" style="width: 5%;"></th>
+    				<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1" style="width: 6%;">번호</th>
+    				<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1" style="width: 15%;">약국 이름</th>
+    				<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1" style="width: 35%;">약국 주소</th>
+    				<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1" style="width: 10%;">마스크수량</th>
+    				<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1" style="width: 10%;">예약상태</th>
+    				<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1" style="width: 10%;">결제금액</th>
+    				<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1" style="width: 10%;">신청일</th>
     				<th style="display: none;">regId</th>
     				<th style="display: none;">imp_uid</th>
 				</thead>
@@ -145,9 +146,9 @@
 									<td class="text-center hidden-sm hidden-xs"><c:out value="${vo.num }" /></td>
 									<td class="text-center"><c:out value="${vo.pname }" /></td>
 									<td class="text-center"><c:out value="${vo.paddr }" /></td>
-									<td class="text-center"><c:out value="${vo.maskCnt }" /></td>
+									<td class="text-center"><c:out value="${vo.maskCnt } 개" /></td>
 									<td class="text-center"><c:out value="${vo.approval }" /></td>
-									<td class="text-center"><c:out value="${vo.amount }" /></td>
+									<td class="text-center"><c:out value="${vo.amount }원" /></td>
 									<td class="text-center"><c:out value="${vo.regDt }" /></td>
 									<td style="display: none;"><c:out value="${vo.impuid }"></c:out></td>
 								</tr>
@@ -155,7 +156,7 @@
 						</c:when>
 						<c:otherwise>
 							<tr>
-								<td class="text-center">No data found.</td>
+								<td class="text-center" colspan="8">해당 예약 상태인 건이 없습니다.</td>
 							</tr>
 						</c:otherwise>
 					</c:choose> 
@@ -181,7 +182,19 @@
 	<script type="text/javascript">
 
 		function cancelPay() {
+			var rno = $('input[name="rno"]:checked').val();
 			var imp_uid = $('input[name="rno"]:checked').parent().parent().children().eq(8).text();
+			var nowApproval = $('input[name="rno"]:checked').parent().parent().children().eq(5).text();
+
+			if(rno == undefined) {
+				alert("체크를 확인해주세요.");
+				return;
+			}
+
+			if(nowApproval != "결제완료"){
+				alert("결제완료된 건만 환불이 가능합니다.");
+				return;
+			}
 			
 			//ajax
 			$.ajax({
@@ -195,6 +208,7 @@
 					var jData = JSON.parse(data);
 					if(null!=jData && jData.msgId=="1") {
 						alert(jData.msgMsg);
+						doUpdate(8,0);//환불완료 상태로 업데이트
 					}else {
 						alert(jData.msgMsg);
 					}
@@ -210,19 +224,40 @@
 
 		function doUpdate(approval, imp_uid){
 			var rno = $('input[name="rno"]:checked').val();
-			console.log("rno=="+rno);
-
+			var nowApproval = $('input[name="rno"]:checked').parent().parent().children().eq(5).text();
+			
 			if(rno == undefined) {
-				alert("체크를 해주세요.");
+				alert("체크를 확인해주세요.");
 				return;
 			}
 
-			//TODO approval 상태 변경 validation!!
+			if(nowApproval == "취소완료"){
+				alert("취소완료된 건은 예약취소가 불가능합니다.");
+				return;
+			}else if(nowApproval == "승인거절"){
+				alert("승인거절된 건은 예약취소가 불가능합니다.");
+				return;
+			}else if(nowApproval == "결제완료 "){
+				alert("결제완료된 건은 예약취소가 불가능합니다.");
+				return;
+			}else if(nowApproval == "상품배정 "){
+				alert("상품배정 된 건은 예약취소가 불가능합니다.");
+				return;
+			}else if(nowApproval == "구매확정 "){
+				alert("구매확정 된 건은 예약취소가 불가능합니다.");
+				return;
+			}else if(nowApproval == "환불완료"){
+				alert("환불완료된 건은 예약취소가 불가능합니다.");
+				return;
+			}else if(nowApproval == "예약신청" || nowApproval == "승인완료"){
+				if(confirm("정말로 예약을 취소하시겠습니까?") == false)
+				return;
+			}
 
 			//ajax
 			$.ajax({
 				type:"POST",
-				       url:"${hContext}/reserv/do_update.do",
+				url:"${hContext}/reserv/do_update.do",
 				dataType:"html", 
 				data:{
 					"rno" : rno
@@ -270,13 +305,27 @@
 		}
 
 		function doPayment(){
+
+			var rno = $('input[name="rno"]:checked').val();
+			var nowApproval = $('input[name="rno"]:checked').parent().parent().children().eq(5).text();
+			
 			var amount = 4500;
 			var email = "bealright6@naver.com";
 			var name = "박지수";
 			var tel = "010-1010-1111";
 			var addr = "주소";
 			var zipNo = "12345";
-		
+
+			if(rno == undefined) {
+				alert("체크를 확인해주세요.");
+				return;
+			}
+			
+			if(nowApproval != "승인완료"){
+				alert("승인완료 된 건만 결제가 가능합니다.");
+				return;
+			}
+			
 	        var IMP = window.IMP; // 생략가능
 	        IMP.init('iamport'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 	        //onclick, onload 등 원하는 이벤트에 호출합니다
@@ -308,7 +357,7 @@
 
 	                doUpdate(5, rsp.imp_uid);
 	            } else {
-	                var msg = '결제에 실패하였습니다.';
+	                var msg = '결제에 실패하였습니다.\n';
 	                msg += '에러내용 : ' + rsp.error_msg;
 	            }
 	            alert(msg);
