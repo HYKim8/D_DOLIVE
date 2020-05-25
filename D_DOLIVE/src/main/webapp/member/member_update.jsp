@@ -55,10 +55,10 @@
 </head>
 <body>
 	<!-- div container -->
-	<div class="container">
+	<div class="container,paddingMain">
 		<!-- div title -->
 		<div class="page-header">
-			<h1>회원관리</h1><hr/>
+			<h2>내 정보 수정</h2><hr/>
 		</div>
 		<!--// div title -->
 	

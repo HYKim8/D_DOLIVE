@@ -57,7 +57,7 @@
 		            	<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="${hContext}/pharmacymap/main_test.do">Main</a></li>
 		            	<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="${hContext}/covidmap/sidomap.do">확진자현황</a></li>		            
 		                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Market</a></li>
-		                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="${hContext}/login/gomypage.do">Mypage</a></li>
+		                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="${hContext}/member/gomypage.do">Mypage</a></li>
 		                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="${hContext}/login/gologin.do">LogOut</a></li>
 		            </ul>
 		        </div>
