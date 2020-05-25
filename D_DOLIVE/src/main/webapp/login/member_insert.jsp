@@ -71,18 +71,19 @@
 			
 			<div class="form-group">
 				<label for="email" class="col-lg-4 col-sm-4 col-xs-4  control-label">메일</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
+				<span style="float:right"><input  type="button"  name="checkbtn" class="btn btn-primary btn-sm"  value="중복확인" id="checkbtn" /></span>
+				<div class="col-lg-13 col-sm-13 col-xs-13">
 					<input type="text" maxlength="350" class="form-control input-sm" id="email" name="email" placeholder="메일" />
 				</div>
 				<div>
-					<input  type="button"  name="checkbtn" class="btn btn-primary btn-sm"  value="중복확인" id="checkbtn" />
+					
 				</div>
 			</div>			
 			
 			<div class="form-group">
 				<label for="pw"
 					class="col-lg-4 col-sm-4 col-xs-4  control-label">비밀번호</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
+				<div class="col-lg-13 col-sm-13 col-xs-13">
 					<input type="password" maxlength="12" class="form-control input-sm"
 						id="pw" name="pw" placeholder="비밀번호" />
 				</div>
@@ -90,7 +91,7 @@
 			
          <div class="form-group">
               <label for="confirm_pass" class="col-lg-4 col-sm-4 col-xs-4  control-label">비밀번호 확인</label>
-            <div class="col-lg-6 col-sm-6 col-xs-6">
+            <div class="col-lg-13 col-sm-13 col-xs-13">
                <input type="password" maxlength="12" class="form-control" name="confirm_pass" id="confirm_pass" placeholder="비밀번호 확인">
             </div>
          </div>		
@@ -105,7 +106,7 @@
 			
 			<div class="form-group">
 				<label for="ihidnum" class="col-lg-4 col-sm-4 col-xs-4  control-label">주민번호</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
+				<div class="col-lg-13 col-sm-13 col-xs-13">
 					<input type="text" maxlength="50" class="form-control input-sm"
 						id="ihidnum" name="ihidnum" placeholder="- 없이 입력" />
 				</div>
@@ -113,7 +114,7 @@
 			
 			<div class="form-group">
 				<label for="name" class="col-lg-4 col-sm-4 col-xs-4  control-label">이름</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
+				<div class="col-lg-13 col-sm-13 col-xs-13">
 					<input type="text" maxlength="50" class="form-control input-sm"
 						id="name" name="name" placeholder="이름" />
 				</div>
@@ -121,7 +122,7 @@
 			
 			<div class="form-group">
 				<label for="tel" class="col-lg-4 col-sm-4 col-xs-4  control-label">전화번호</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
+				<div class="col-lg-13 col-sm-13 col-xs-13">
 					<input type="text"  class="form-control input-sm" id="tel" name="tel" placeholder="- 없이 입력" />
 						
 				</div>
@@ -131,20 +132,20 @@
 				<label for="zipno" class="col-lg-4 col-sm-4 col-xs-4  control-label">주소</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
 						<input type="text" id="zipno" placeholder="우편번호" name="zipno" readonly >
-						<input type="button" onclick="sample2_execDaumPostcode()" name="find" value="우편번호 찾기"><br>
+						<input type="button" class="btn btn-primary btn-sm" onclick="sample2_execDaumPostcode()" name="find" value="우편번호 찾기"><br>
 				</div>
 			</div>	
 			
 			<div class="form-group">
 				<label for="addr" class="col-lg-4 col-sm-4 col-xs-4  control-label">기본주소</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
+				<div class="col-lg-13 col-sm-13 col-xs-13">
 						<input type="text" name="addr" id="addr" class="form-control input-sm" placeholder="기본주소" readonly>
 				</div>
 			</div>		
 			
 			<div class="form-group">
 				<label for="addr2" class="col-lg-4 col-sm-4 col-xs-4  control-label">상세주소</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
+				<div class="col-lg-13 col-sm-13 col-xs-13">
 						<input type="text" id=addr2 name="addr2" class="form-control input-sm" placeholder="상세주소" >
 				</div>
 			</div>	
@@ -152,10 +153,10 @@
 			
 			<!-- Button Area -->
 			<div class="form-group">
-				<div class="col-lg-10 col-sm-10 col-xs-10 ">
+				<div class="col-lg-13 col-sm-13 col-xs-13 ">
 					<span style="float:right">
 						<!-- <input  type="button"  name="doInsert" onclick="$(this.form).submit()" class="btn btn-primary btn-sm"  value="등록" id="doInsert" /> -->
-						<button name="doInsert" id="doInsert" onclick="javascript:bindEventHandler();">등록 테스트</button>
+						<button class="btn btn-primary btn-sm" name="doInsert" id="doInsert" onclick="javascript:bindEventHandler();">회원가입</button>
 					</span>
 				</div>
 			</div>
