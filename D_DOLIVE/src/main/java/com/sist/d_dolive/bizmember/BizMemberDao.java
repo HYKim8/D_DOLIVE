@@ -13,6 +13,13 @@ import com.sist.d_dolive.cmn.DTO;
  */
 public interface BizMemberDao {
 	/**
+	 * 이메일 보내기
+	 * @param dto
+	 * @return 
+	 */
+	public void sendEmail(DTO dto);
+	
+	/**
 	 * 등록
 	 * @param dto
 	 * @return int

@@ -59,19 +59,18 @@
 			<h1>업체 아이디 비번찾기</h1>
 		</div>
 		<!--// div title -->
+	</div>
 	
-
-	<!-- 입력 form -->
 	<div class="container">
 		<div class="col-lg-12"></div>
 		<div class="col-lg-12"></div>
 		<div class="panel panel-default"></div>
-		</br></br>
+		<br/><br/>
 		<!-- Button Area -->
 		<div class="row">
 			<div class="col-lg-10 col-sm-10 col-xs-10 ">
 				<div class="text-right">
-					<button type="button" class="btn btn-default btn-sm" id="findId">아이디찾기</button>
+					<button type="button" class="btn btn-default btn-sm" onclick="idFind();">아이디찾기</button>
 					<!-- <input class="btn btn-primary py-2 px-3" type="button" onclick="location.href='javascript:findId();'"  value="Id찾기" id="cancel" /> -->
 				</div>
 			</div>
@@ -79,9 +78,7 @@
 		<!--// Button Area -->
 
 		<!-- 아이디찾기 Form -->
-		<form action="${hContext}/bizmember/find_id.do" name="member_edit" method="post" class="form-horizontal">
-			
-			
+		<form action="${hContext}/bizmember/find_id.do" name="idFrm" method="post" class="form-horizontal">
 			<div class="form-group">
 				<label for="name" class="col-lg-4 col-sm-4 col-xs-4  control-label">이름</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
@@ -89,7 +86,6 @@
 						id="name" name="name" placeholder="이름" />
 				</div>
 			</div>			
-			
 			<div class="form-group">
 				<label for="birth"
 					class="col-lg-4 col-sm-4 col-xs-4  control-label">생일</label>
@@ -98,27 +94,22 @@
 						id="birth" name="birth" placeholder="비밀번호" />
 				</div>
 			</div>
-	
-
-
 		</form>
-		
 		<!--// 아이디찾기 Form -->
-		</br></br></br>
+		<br/><br/><br/>
 		
 		<!-- Button Area -->
 		<div class="row">
 			<div class="col-lg-10 col-sm-10 col-xs-10 ">
 				<div class="text-right">
-					<button type="button" class="btn btn-default btn-sm" id="findPw">비밀번호찾기</button>
+					<button type="button" class="btn btn-default btn-sm" onclick="pwFind();">비밀번호찾기</button>
 				</div>
 			</div>
 		</div>
 		<!--// Button Area -->		
 		
 		<!-- 비번찾기 Form -->
-		<form action="${hContext}/bizmember/do_find_pw.do" name="member_edit" method="post" class="form-horizontal">
-			
+		<form action="${hContext}/bizmember/do_find_pw.do" name="pwFrm" method="post" class="form-horizontal">
 			<div class="form-group">
 				<label for="email" class="col-lg-4 col-sm-4 col-xs-4  control-label">이메일</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
@@ -126,7 +117,6 @@
 						id="email" name="email" placeholder="이메일" />
 				</div>
 			</div>				
-			
 			<div class="form-group">
 				<label for="name" class="col-lg-4 col-sm-4 col-xs-4  control-label">이름</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
@@ -134,7 +124,6 @@
 						id="name1" name="name1" placeholder="이름" />
 				</div>
 			</div>			
-			
 			<div class="form-group">
 				<label for="birth"
 					class="col-lg-4 col-sm-4 col-xs-4  control-label">생일</label>
@@ -143,18 +132,9 @@
 						id="birth1" name="birth1" placeholder="비밀번호" />
 				</div>
 			</div>
-	
-
-
 		</form>
-		
 		<!--// 비번찾기 Form -->		
-		
-
-
 	</div>
-	<!-- 입력 form -->
-
 
 
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
@@ -165,15 +145,8 @@
 	<script src="${hContext}/resources/js/jquery.bootpag.min.js"></script>
 
 	<script type="text/javascript">
-	
-    	
 		//아이디찾기버튼
-		$("#findId").on("click", function() {
-			
-/* 			alert("name="+$("#name").val());
-            alert("birth="+$("#birth").val()); */
-            
-
+		function idFind() {
             if ($("#name").val() == "" || $("#name").val() == false) {
                 alert("이름를 입력 하세요.");
                 $("#name").focus();
@@ -185,7 +158,6 @@
                 $("#birth").focus();
                 return;
             }
-
             
             //confirm
             if (confirm("아이디를 찾으시겠습니까?") == false)return;
@@ -193,20 +165,16 @@
             //ajax
             $.ajax({
                 type : "GET",
-                url : "${hContext}/bizmember/find_id.do",
+                url : "${hContext}/bizmember/id_pw_find.do",
                 dataType : "html",
                 data : {
                 	"name" : $("#name").val(),
-                    "birth" : $("#birth").val()
+                    "birth" : $("#birth").val(),
+                    "searchDiv" : "20"
                 },
                 success : function(data) { //성공
-                	if($.trim(data) == "x"){
-    					alert("가입기록이 없습니다.이름 또는 이메일을 다시 한 번 확인해주세요!");
-                    }
-                    else{
-                    	alert("회원님의 아이디는"+$.trim(data)+"입니다.");
-                    }
-
+                	var jData = JSON.parse(data);
+   					alert("이메일: "+jData.email);
                 },
                 error : function(xhr, status, error) {
                     alert("입력값을 다시 확인해주세요.");
@@ -216,19 +184,10 @@
                 }
 
             });//--ajax 
-
-        });
-
-
+		}
 
 		//비밀번호찾기버튼
-		$("#findPw").on("click", function() {
-
-/* 			alert("email="+$("#email").val());
- 			alert("name="+$("#name1").val());
-            alert("birth="+$("#birth1").val());  */
-            
-
+		function pwFind() {
             if ($("#email").val() == "" || $("#email").val() == false) {
                 alert("이메일를 입력 하세요.");
                 $("#email").focus();
@@ -246,43 +205,32 @@
                 $("#birth").focus();
                 return;
             }
-
             
             //confirm
             if (confirm("비밀번호를 이메일로 전송하시겠습니까?") == false)return;
             
             //ajax
             $.ajax({
-                type : "POST",
-                url : "${hContext}/bizmember/do_find_pw.do",
+                type : "GET",
+                url : "${hContext}/bizmember/id_pw_find.do",
                 dataType : "html",
                 data : {
                     "email" :$("#email").val(),
                 	"name" : $("#name1").val(),
-                    "birth" : $("#birth1").val()
+                    "birth" : $("#birth1").val(),
+                    "searchDiv" : "30"
                 },
                 success : function(data) { //성공
-                	if($.trim(data) == "x"){
-    					alert("이름 또는 이메일또는 생일 다시 확인해주세요!");
-                    }
-                    else{
-                    	 alert("전송완료");
-                    }
-               
-
+   					alert("비밀번호가 이메일로 발송되었습니다.");
                 },
                 error : function(xhr, status, error) {
-                	alert("이름 또는 이메일또는 생일 다시 확인해주세요!");
+                	alert("이름 또는 이메일 또는 생일을 다시 확인해주세요!");
                 },
                 complete : function(data) {
 
                 }
-
             });//--ajax 
-
-        });        
-
-
+		}
  
 	</script>
 </body>

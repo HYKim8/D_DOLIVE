@@ -8,6 +8,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.mail.MailSender;
 import org.springframework.stereotype.Service;
 
 import com.sist.d_dolive.bizmember.BizMemberDao;
@@ -25,6 +27,16 @@ public class BizMemberServiceImple implements BizMemberService {
 	
 	@Autowired
 	BizMemberDao bizMemberDao;
+	
+	@Autowired
+	@Qualifier("dummyMailSender")
+	private MailSender mailSender;
+	
+	@Override
+	public void sendEmail(DTO dto) {
+		LOG.debug("=service30=");
+		bizMemberDao.sendEmail(dto);
+	}
 
 	@Override
 	public int doInsert(DTO dto) {

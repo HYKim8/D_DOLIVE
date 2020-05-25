@@ -9,11 +9,15 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Repository;
 
 import com.sist.d_dolive.bizmember.BizMemberDao;
 import com.sist.d_dolive.bizmember.BizMemberVO;
 import com.sist.d_dolive.cmn.DTO;
+import com.sist.d_dolive.member.MemberVO;
 
 /**
  * @author sist
@@ -26,7 +30,56 @@ public class BizMemberDaoImple implements BizMemberDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
+	@Autowired
+	@Qualifier("mailSender")
+	private MailSender mailSender;
+	
 	private final String NAMESPACE= "com.sist.d_dolive.bizmember";
+	
+	@Override
+	public void sendEmail(DTO dto) {
+		LOG.debug("=dao30=");
+		/*
+		 * POP 서버명 : pop.naver.com SMTP 서버명 : smtp.naver.com POP 포트 : 995, 보안연결(SSL) 필요
+		 * SMTP 포트 : 465, 보안 연결(SSL) 필요 아이디 : jamesol 비밀번호 : 네이버 로그인 비밀번호
+		 */
+
+		// ------------------------------------------
+		// 받는사람
+		// 제목
+		// 내용
+		// ------------------------------------------
+		// 받는사람
+		String recipient = ((BizMemberVO) dto).getEmail();
+		// 제목
+		String title = "비밀번호찾기";
+		// 내용
+		String contents = "비밀번호:"+((BizMemberVO) dto).getPw() ;
+
+		// ------------------------------------------
+		// Message에,받는사람,제목,내용,인증
+		// 전송:Java
+		// ------------------------------------------
+
+		SimpleMailMessage mimeMessage = new SimpleMailMessage();
+
+		// 보내는 사람
+		mimeMessage.setFrom("jnhoon777@naver.com");
+
+		// 받는사람
+		mimeMessage.setTo(recipient);
+		// 제목
+		mimeMessage.setSubject(title);
+		// 내용
+		mimeMessage.setText(contents);
+
+		// 전송
+		mailSender.send(mimeMessage);
+
+		LOG.debug("===================");
+		LOG.debug("=mail send to=" + recipient);
+		LOG.debug("===================");
+	}
 
 	@Override
 	public int doInsert(DTO dto) {

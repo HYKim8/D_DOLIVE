@@ -36,17 +36,6 @@ public class BizMemberCont {
 	@Autowired
 	MessageSource messageSource;
 	
-	
-	
-	@RequestMapping(value = "bizmember/bizgoidpw.do", method = RequestMethod.GET)
-	public String bizgoidpw() {
-		
-		
-		return "bizmember/biz_id_pw_find";
-	}
-	
-	
-	
 	@RequestMapping(value = "bizmember/do_update.do", method = RequestMethod.POST
 			, produces = "application/json; charset=UTF-8")
 	@ResponseBody
@@ -166,6 +155,33 @@ public class BizMemberCont {
 		}
 		
 		return url;
+	}
+	
+	@RequestMapping(value = "bizmember/id_pw_find.do", method = RequestMethod.GET
+			, produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String idPwFind(BizMemberVO bizMemberVO, Locale locale, Model model) {
+		//board_id
+		LOG.debug("1==================");
+		LOG.debug("1=param="+bizMemberVO);
+		LOG.debug("1==================");
+		
+		BizMemberVO outVO = (BizMemberVO) this.bizMemberService.doSelectOne(bizMemberVO);
+		if(bizMemberVO.getSearchDiv().equals("30")) {
+			LOG.debug("=30=");
+			bizMemberService.sendEmail(outVO);
+		}
+		LOG.debug("1.1==================");
+		LOG.debug("1.1=outVO="+outVO);
+		LOG.debug("1.1==================");
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(outVO);
+		LOG.debug("2===================");
+		LOG.debug("2=json="+json);
+		LOG.debug("2===================");
+
+		return json;
 	}
 	
 	@RequestMapping(value = "bizmember/do_login.do", method = RequestMethod.POST

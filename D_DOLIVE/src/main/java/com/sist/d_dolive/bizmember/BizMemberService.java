@@ -15,6 +15,13 @@ public interface BizMemberService {
 	/**
 	 * 등록
 	 * @param dto
+	 * @return 
+	 */
+	public void sendEmail(DTO dto);
+	
+	/**
+	 * 등록
+	 * @param dto
 	 * @return int
 	 */
 	public int doInsert(DTO dto);
