@@ -75,7 +75,7 @@
 				<label for="title" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label"></label>
 			    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 					<!-- <input type="button" class="btn btn-primary btn-sm" value="수정" onclick="$(this.form).submit()" id="doUpdate" name="doUpdate" /> -->
-					<button name="doUpdate" id="doUpdate" onclick="javascript:bindEventHandler();">수정</button>
+					<button class="btn btn-primary btn-sm" name="doUpdate" id="doUpdate" onclick="javascript:bindEventHandler();">수정</button>
 				</div>
 			</div>
 			<!--// Button Area -->			
