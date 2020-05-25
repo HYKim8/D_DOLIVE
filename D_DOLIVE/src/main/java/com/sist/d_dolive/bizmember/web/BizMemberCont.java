@@ -129,15 +129,14 @@ public class BizMemberCont {
 	}
 	
 	@RequestMapping(value = "bizmember/do_select_one.do", method = RequestMethod.GET)
-	public String doSelectOne(BizMemberVO bizMemberVO, Locale locale, Model model) {
+	public String doSelectOne(BizMemberVO bizMemberVO, Locale locale, Model model, HttpSession session) {
 		//board_id
 		LOG.debug("1==================");
 		LOG.debug("1=param="+bizMemberVO);
 		LOG.debug("1==================");
 		
-		if(null==bizMemberVO.getEmail() || bizMemberVO.getEmail().equals("")) {
-			throw new IllegalArgumentException("Email을 확인 하세요.");
-		}
+		BizMemberVO ssBizMemberVO = (BizMemberVO) session.getAttribute("bizMember");
+		bizMemberVO.setEmail(ssBizMemberVO.getEmail());
 		
 		BizMemberVO outVO = (BizMemberVO) this.bizMemberService.doSelectOne(bizMemberVO);
 		LOG.debug("1.1==================");

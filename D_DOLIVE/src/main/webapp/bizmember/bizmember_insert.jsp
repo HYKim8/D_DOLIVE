@@ -93,7 +93,7 @@
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="addr" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">주소</label>
-	      		<input type="button" value="주소 조회" onclick="goJusoPopup();"/>
+	      		<input type="button" class="btn btn-primary btn-sm" value="주소 조회" onclick="goJusoPopup();"/>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="roadAddrPart1" name="roadAddrPart1" placeholder="주소"
 		      	 	value="">
@@ -136,7 +136,7 @@
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="pname" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">판매처 이름</label>
-	      		<input type="button" value="판매처 조회" onclick="goPharmacyPopup();"/>
+	      		<input type="button" class="btn btn-primary btn-sm" value="판매처 조회" onclick="goPharmacyPopup();"/>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="pname" name="pname" placeholder="판매처 이름"
 		      	 	value="">
