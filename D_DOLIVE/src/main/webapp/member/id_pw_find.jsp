@@ -66,7 +66,7 @@
 		<div class="col-lg-12"></div>
 		<div class="col-lg-12"></div>
 		<div class="panel panel-default"></div>
-
+		</br></br>
 		<!-- Button Area -->
 		<div class="row">
 			<div class="col-lg-10 col-sm-10 col-xs-10 ">
@@ -104,6 +104,7 @@
 		</form>
 		
 		<!--// 아이디찾기 Form -->
+		</br></br></br>
 		
 		<!-- Button Area -->
 		<div class="row">
@@ -208,7 +209,7 @@
 
                 },
                 error : function(xhr, status, error) {
-                    alert("error:" + error);
+                    alert("입력값을 다시 확인해주세요.");
                 },
                 complete : function(data) {
 
@@ -261,11 +262,17 @@
                     "ihidnum" : $("#ihidnum1").val()
                 },
                 success : function(data) { //성공
-                alert("전송완료");
+                	if($.trim(data) == "x"){
+    					alert("이름 또는 이메일또는 주민번호를 다시 확인해주세요!");
+                    }
+                    else{
+                    	 alert("전송완료");
+                    }
+               
 
                 },
                 error : function(xhr, status, error) {
-                    alert("error:" + error);
+                	alert("이름 또는 이메일또는 주민번호를 다시 확인해주세요!");
                 },
                 complete : function(data) {
 

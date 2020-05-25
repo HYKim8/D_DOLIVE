@@ -211,8 +211,11 @@ public class MemberCont {
 		LOG.debug("1.2===================");		
 		
 		model.addAttribute("vo", outVO);
-		
+		if (outVO != null) {
 		return "member/id_pw_find";
+		}else {
+			return "x";
+		}
 	}
 	
 	
