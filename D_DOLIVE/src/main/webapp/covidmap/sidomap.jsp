@@ -54,7 +54,7 @@
 		}
 		
 		.title{
-		      height:144px;
+		      height:174px;
 		      box-shadow: 0px 0px 5px #2c3e50;
 		}
 		
@@ -62,7 +62,7 @@
 		  width : 220px;
 		  position : fixed;
 		  right: 3%;
-		  top: 300px;
+		  top: 330px;
 		  border: 1px solid black;
 		}
 		
@@ -90,7 +90,7 @@
 <body style="width:100%;height:100%;margin:0;padding:0;">
    
    <div class="title">
-        <div style="font-size: 52px; font-weight:800; text-align:center;">코로나 현황</div>
+        <div style="font-size: 52px; font-weight:800; margin: 0 0 0 20%; padding: 40px 0 0 0;">코로나 현황</div>
         <div style="float:right;">
             <p id="coivdupdatetime" style="color:gray; margin:0; "></p>
             <p id="clock" style="color:gray; margin:0; ">00:00</p>
@@ -105,7 +105,7 @@
         <div class="nave" data-location="worldmap">세계 확진자/사망자 현황</div>
         <div class="nave" data-location="worldchart">일일 세계 코로나 현황</div>
    </div>
-        <div class="navegation moveTop" onclick="moveTop()" style="top:464px; cursor: pointer; height:25px; line-height:22px; text-align : center;">top</div>
+        <div class="navegation moveTop" onclick="moveTop()" style="top:494px; cursor: pointer; height:25px; line-height:22px; text-align : center;">top</div>
    
    <div class="chartContainer sidomap" style="width : 60%;">
      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
