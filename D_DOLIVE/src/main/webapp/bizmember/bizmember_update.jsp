@@ -146,18 +146,18 @@
 	      		<input type="button" class="btn btn-primary btn-sm" value="판매처 조회" onclick="goPharmacyPopup();"/>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="pname" name="pname" placeholder="판매처 이름"
-		      	 	value="" readonly="readonly">
+		      	 	value="${vo.pname }" readonly="readonly">
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="paddr" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">판매처 주소</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="paddr" name="paddr" placeholder="판매처 주소"
-		      	 	value="" readonly="readonly">
+		      	 	value="${vo.paddr }" readonly="readonly">
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
-	      		<input type="hidden" class="form-control" id="pcode" name="pcode" placeholder="판매처 코드" value="" readonly="readonly">
+	      		<input type="hidden" class="form-control" id="pcode" name="pcode" placeholder="판매처 코드" value="${vo.pcode }" readonly="readonly">
 	      	</div>
    		</form>
  	</div>   

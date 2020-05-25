@@ -230,6 +230,9 @@
 			}else if(nowApproval=="구매확정") {
 				alert("구매확정인건은 변경이 불가능합니다.");
 				return;
+			}else if(nowApproval=="환불완료") {
+				alert("환불완료인건은 변경이 불가능합니다.");
+				return;
 			}else if(nowApproval=="예약신청" && (approval=="3" || approval=="4")) {
 				
 			}else {
@@ -245,7 +248,7 @@
 				data : {
 					"rno" : rno
 					, "approval" : approval
-					, "modId" : "업체회원1"
+					, "optionDiv" : "20"
 				},
 				success : function(data) { //성공
 					var jData = JSON.parse(data);
@@ -268,8 +271,7 @@
 	   	function doRetrieve() {
 			//console.log("doRetrieve");
 			var frm = document.searchFrm;
-			frm.searchWord.value = "code_1";
-
+			
 			var approval = $("#reservSelect option:selected").val();
 
 			if(approval=="") {

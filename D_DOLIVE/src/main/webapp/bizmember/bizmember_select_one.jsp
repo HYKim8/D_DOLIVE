@@ -57,6 +57,7 @@
       	<!-- div title -->
       	<form class="form-horizontal" action="${hContext }/bizmember/do_select_one.do" name="selectFrm" method="get">
       		<input type="hidden" id="optionDiv" name="optionDiv"/>
+      		<input type="hidden" id="searchDiv" name="searchDiv"/>
       		<div class="form-group">
 	      		<label for="email" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">이메일</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
@@ -144,14 +145,14 @@
 	      		<label for="pname" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">판매처 이름</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="pname" name="pname" placeholder="판매처 이름"
-		      	 	value="" readonly="readonly">
+		      	 	value="${vo.pname }" readonly="readonly">
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="paddr" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">판매처 주소</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="paddr" name="paddr" placeholder="판매처 주소"
-		      	 	value="" readonly="readonly">
+		      	 	value="${vo.paddr }" readonly="readonly">
 		      	</div>
 	      	</div>
    		</form>
@@ -201,6 +202,7 @@
 			
 			var frm = document.selectFrm;
 			frm.optionDiv.value = "2";
+			frm.searchDiv.value = "10";
 	        frm.action = "${hContext}/bizmember/do_select_one.do";
 	        frm.submit();
 		}

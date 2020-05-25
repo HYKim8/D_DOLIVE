@@ -23,6 +23,8 @@ public class BizMemberVO extends DTO {
 	private String	bizRno	/*	사업자등록번호	*/	;
 	private String	bizTel	/*	업체전화번호	*/	;
 	private String	pcode	/*	판매처코드		*/	;
+	private String	pname	/*	판매처이름		*/	;
+	private String	paddr	/*	판매처주소		*/	;
 	private String	regId	/*	등록자아이디	*/	;
 	private String	regDt	/*	등록일		*/	;
 	private String	modId	/*	수정자아이디	*/	;
@@ -31,8 +33,8 @@ public class BizMemberVO extends DTO {
 	public BizMemberVO() {}
 
 	public BizMemberVO(String email, String pw, String gender, String name, String birth, String addr, String addr2,
-			String zipNo, String tel, String bizRno, String bizTel, String pcode, String regId, String regDt,
-			String modId, String modDt) {
+			String zipNo, String tel, String bizRno, String bizTel, String pcode, String pname, String paddr,
+			String regId, String regDt, String modId, String modDt) {
 		super();
 		this.email = email;
 		this.pw = pw;
@@ -46,6 +48,8 @@ public class BizMemberVO extends DTO {
 		this.bizRno = bizRno;
 		this.bizTel = bizTel;
 		this.pcode = pcode;
+		this.pname = pname;
+		this.paddr = paddr;
 		this.regId = regId;
 		this.regDt = regDt;
 		this.modId = modId;
@@ -148,6 +152,22 @@ public class BizMemberVO extends DTO {
 		this.pcode = pcode;
 	}
 
+	public String getPname() {
+		return pname;
+	}
+
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+
+	public String getPaddr() {
+		return paddr;
+	}
+
+	public void setPaddr(String paddr) {
+		this.paddr = paddr;
+	}
+
 	public String getRegId() {
 		return regId;
 	}
@@ -184,8 +204,9 @@ public class BizMemberVO extends DTO {
 	public String toString() {
 		return "BizMemberVO [email=" + email + ", pw=" + pw + ", gender=" + gender + ", name=" + name + ", birth="
 				+ birth + ", addr=" + addr + ", addr2=" + addr2 + ", zipNo=" + zipNo + ", tel=" + tel + ", bizRno="
-				+ bizRno + ", bizTel=" + bizTel + ", pcode=" + pcode + ", regId=" + regId + ", regDt=" + regDt
-				+ ", modId=" + modId + ", modDt=" + modDt + ", toString()=" + super.toString() + "]";
+				+ bizRno + ", bizTel=" + bizTel + ", pcode=" + pcode + ", pname=" + pname + ", paddr=" + paddr
+				+ ", regId=" + regId + ", regDt=" + regDt + ", modId=" + modId + ", modDt=" + modDt + ", toString()="
+				+ super.toString() + "]";
 	}
 	
 }
