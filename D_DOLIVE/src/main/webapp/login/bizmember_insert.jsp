@@ -60,14 +60,14 @@
 	      		<label for="email" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">이메일</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="email" name="email" placeholder="이메일"
-		      		value="jnhoon111">
+		      		value="">
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="pw" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">비밀번호</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="pw" name="pw" placeholder="비밀번호"
-		      	 	value="1234">
+		      	 	value="">
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
@@ -81,14 +81,14 @@
 	      		<label for="name" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">이름</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="name" name="name" placeholder="이름"
-		      	 	value="붹줭훈">
+		      	 	value="">
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="birth" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">생년월일</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="birth" name="birth" placeholder="생년월일"
-		      	 	value="123456">
+		      	 	value="">
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
@@ -117,21 +117,21 @@
 	      		<label for="tel" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">전화번호</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="tel" name="tel" placeholder="전화번호"
-		      	 	value="010-1111-2222">
+		      	 	value="">
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="bizRno" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">사업자등록번호</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="bizRno" name="bizRno" placeholder="사업자등록번호"
-		      	 	value="010-01-01010">
+		      	 	value="">
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="bizTel" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">업체전화번호</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="bizTel" name="bizTel" placeholder="업체전화번호"
-		      	 	value="010-1111-2222">
+		      	 	value="">
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
@@ -150,11 +150,7 @@
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
-	      		<label for="pcode" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">판매처코드</label>
-		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-		      		<input type="text" class="form-control" id="pcode" name="pcode" placeholder="판매처 코드"
-		      	 	value="">
-		      	</div>
+	      		<input type="hidden" class="form-control" id="pcode" name="pcode" placeholder="판매처 코드" value="">
 	      	</div>
    		</form>
  	</div>   

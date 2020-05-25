@@ -64,7 +64,7 @@
 					<div class="form-group">
 						<label for="gender" class="col-lg-4 col-sm-4 col-xs-4  control-label"></label>
 						<div class="col-lg-6 col-sm-6 col-xs-6">
-								 일반회원<input type = "radio" id="member1" name = "radio" value = "1" checked="checked"><br/>
+								 일반회원<input type = "radio" id="member1" name = "radio" value = "1"><br/>
 						                   업체회원<input type = "radio" id="member2" name = "radio" value = "2" >
 						</div>
 					</div>	                	
@@ -92,11 +92,11 @@
 					<button type="button" class="btn btn-lg btn-primary btn-block"
 						id="member_login" size="30">로그인
 					</button>                    
-                    <a href="${hContext}/login/gomember.do" class="more">일반 회원가입</a><br/>
+                    <a href="${hContext}/login/gomember.do" class="more">일반 회원가입 / </a>
                     <a href="${hContext}/login/goidpw.do" class="more">아이디/비번찾기</a>
                     <br/><br/>
-                    <a href="${hContext}/member/gobizmember.do" class="more">업체 회원가입</a><br/>
-                    <a href="${hContext}/bizmember/bizgoidpw.do" class="more">업체아이디/비번찾기</a>                            
+                    <a href="${hContext}/bizmember/go_insert.do" class="more">업체 회원가입 / </a>
+                    <a href="${hContext}/bizmember/go_id_pw_find.do" class="more">업체아이디/비번찾기</a>                            
                 </form>	
                    
                 	
