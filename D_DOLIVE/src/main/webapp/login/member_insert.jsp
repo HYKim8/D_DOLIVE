@@ -460,30 +460,38 @@
 
 	var duplicate = false;
 		$('#checkbtn').on('click', function() {
-			//alert($('#m_id').val());
-			$.ajax({
-				type : 'POST',
-				url : "${hContext}/member/idCount.do",
-				data : {
-					"email" : $("#email").val()
-				},
-				success : function(data) {
-					if ($.trim(data) == 0) {
-						//$('#checkMsg').html('<p style="color:blue;width:100px;">사용가능</p>');
-						alert("사용 가능한 아이디 입니다!");
-						duplicate = true;
-					} else if ($.trim(data) == "blank") {
-						alert("아이디에 공백은 불가합니다!");
-						duplicate = false;
-					} else if ($.trim(data) == "@") {
-						alert("아이디에 특수문자@는 불가합니다!");
-						duplicate = false;
-					} else {
-						alert("사용 불가능한 아이디 입니다!");
-						duplicate = false;
+			
+			var emailVal = $('#email').val();
+			var regExp = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+
+			  if (emailVal.match(regExp) != null) {
+				 
+				$.ajax({
+					type : 'POST',
+					url : "${hContext}/member/idCount.do",
+					data : {
+						"email" : $("#email").val()
+					},
+					success : function(data) {
+						//alert(data);
+						if ($.trim(data) == 0) {
+							alert("사용 가능한 아이디 입니다!");
+							duplicate = true;
+						} else if ($.trim(data) == "blank") {
+							alert("아이디에 공백은 불가합니다!");
+							duplicate = false;
+						} else if ($.trim(data) == "@") {
+							alert("아이디에 특수문자@는 불가합니다!");
+							duplicate = false;
+						} else {
+							alert("사용 불가능한 아이디 입니다!");
+							duplicate = false;
+						}
 					}
-				}
-			}); //end ajax   
+				}); //end ajax 
+		   }else{
+				alert("이메일형식을 확인하세요");
+			   }  
 		}); //end on    
 
 	
