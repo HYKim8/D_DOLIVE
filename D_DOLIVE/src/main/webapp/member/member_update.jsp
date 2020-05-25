@@ -74,7 +74,8 @@
 	        <div class="row text-right">
 				<label for="title" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label"></label>
 			    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-					<input type="button" class="btn btn-primary btn-sm" value="수정" onclick="$(this.form).submit()" id="doUpdate" name="doUpdate" />
+					<!-- <input type="button" class="btn btn-primary btn-sm" value="수정" onclick="$(this.form).submit()" id="doUpdate" name="doUpdate" /> -->
+					<button name="doUpdate" id="doUpdate" onclick="javascript:bindEventHandler();">수정</button>
 				</div>
 			</div>
 			<!--// Button Area -->			
@@ -274,7 +275,7 @@
         	 $("#updateForm").validate({
                  onfocus: true,
                  //서버전송여부
-                 debug: true,
+                 debug: false, 
                   
                  rules: {
                 	 email:{
@@ -367,7 +368,51 @@
                  },
                  unhighlight: function (element, errorClass, validClass) {
                      $( element ).parents( ".col-lg-6 " ).addClass( "has-success" ).removeClass( "has-error" );
-                 }
+                 },
+                 submitHandler:function(form){
+
+
+                     if (confirm("수정 하시겠습니까?") == false)return;
+                     
+                     //ajax
+                     $.ajax({
+                         type : "POST",
+                         url : "${hContext}/member/update.do",
+                         dataType : "html",
+                         data : {
+                             "email" : $("#email").val(),
+                             "pw" : $("#pw").val(),
+                             "gender" : $('input[name=gender]:checked').val(),
+                             "ihidnum" : $("#ihidnum").val(),
+                             "name" : $("#name").val(),
+                             "tel" : $("#tel").val(),
+                             "zipno" : $("#zipno").val(),
+                             "addr" : $("#addr").val(),
+                             "addr2" : $("#addr2").val(),
+                             "modid" : $("#email").val()
+
+                         },
+                         success : function(data) { //성공
+         					var jData = JSON.parse(data);
+         					if(null!=jData && jData.msgId=="1") {
+         						alert(jData.msgMsg);
+         						goSelectOne1();
+         					}else {
+         						alert("입력을 확인해주세요");
+         					}
+         				},
+         				error : function(xhr, status, error) {
+         					alert("입력을 확인해주세요!");
+         				},
+         				complete : function(data) {
+         	
+         				}
+         			});//--ajax
+
+
+                     }
+
+                 
 				
 
           });
@@ -398,27 +443,8 @@
 
 
 		//수정
-		$("#doUpdate").on("click", function() {			
-			
-/*  	 		var email = $("#email").val();
-			var pw = $("#pw").val();
-			var gender = $('input[name=gender]:checked').val();
-			var ihidnum = $("#ihidnum").val();
-			var name = $("#name").val();
-			var tel = $("#tel").val();
-			var zipno = $("#zipno").val();
-			var addr = $("#addr").val();
-			var addr2 = $("#addr2").val();
-			var modId = $("#modId").val();  
-			alert("email"+email);
-			alert("pw"+pw);
-			alert("gender"+gender);
-			alert("ihidnum"+ihidnum);
-			alert("name"+name);
-			alert("tel"+tel);
-			alert("zipno"+zipno);
-			alert("addr"+addr);
-			alert("addr2"+addr2); */
+/* 		$("#doUpdate").on("click", function() {			
+
 
 			
             //confirm
@@ -459,7 +485,7 @@
 				}
 			});//--ajax
 
-		 });
+		 }); */
 
 
  

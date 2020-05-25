@@ -151,7 +151,8 @@
 			<div class="form-group">
 				<div class="col-lg-10 col-sm-10 col-xs-10 ">
 					<span style="float:right">
-						<input  type="button"  name="doInsert" onclick="$(this.form).submit()" class="btn btn-primary btn-sm"  value="등록" id="doInsert" />
+						<!-- <input  type="button"  name="doInsert" onclick="$(this.form).submit()" class="btn btn-primary btn-sm"  value="등록" id="doInsert" /> -->
+						<button name="doInsert" id="doInsert" onclick="javascript:bindEventHandler();">등록 테스트</button>
 					</span>
 				</div>
 			</div>
@@ -275,7 +276,7 @@
         	 $("#registerForm").validate({
                  onfocus: true,
                  //서버전송여부
-                 debug: true,
+                 debug: false,
                  rules: {
                 	 email:{
                         //필수값
@@ -380,17 +381,68 @@
                  },
                  unhighlight: function (element, errorClass, validClass) {
                      $( element ).parents( ".col-lg-6 " ).addClass( "has-success" ).removeClass( "has-error" );
-                 }
+                 },
+                 submitHandler:function(form){
+
+        	 		 if (duplicate == false) {
+     					alert("아이디 중복확인을 해주세요!");
+     					return false;
+     				} else if (duplicate == true) {
+     					
+     		            //confirm
+     		            if (confirm("등록 하시겠습니까?") == false)return;
+     		            //var gender = $('input[name="gender"]:checked').val();
+     		            //ajax
+     		            $.ajax({
+     		                type : "POST",
+     		                url : "${hContext}/member/insert.do",
+     		                dataType : "html",
+     		                data : {
+     		                    "email" : $("#email").val(),
+     		                    "pw" : $("#pw").val(),
+     		                    "gender" :$('input[name=gender]:checked').val(),
+     		                    "ihidnum" : $("#ihidnum").val(),
+     		                    "name" : $("#name").val(),
+     		                    "tel" : $("#tel").val(),
+     		                    "zipno" : $("#zipno").val(),
+     		                    "addr" : $("#addr").val(),
+     		                    "addr2" : $("#addr2").val(),
+     		                    "regid" : $("#email").val(),
+     		                    "modid" : $("#email").val()
+
+     		                },
+     		                success : function(data) { //성공
+     		                    console.log("data:" + data);
+     		                    var parseData = $.parseJSON(data);
+     		                    if (parseData.msgId == "1") {
+     		                        alert(parseData.msgMsg);
+     		                        goLogin();
+     		                    } else {
+     		                        alert(parseData.msgMsg);
+     		                    }
+
+     		                },
+     		                error : function(xhr, status, error) {
+     		                    alert("입력값을 확인하세요!");
+     		                },
+     		                complete : function(data) {
+
+     		                }
+
+     		            });//--ajax 					
+
+
+     					
+     					} 
+
+
+                     }
 				
 
           });
 
          }
     
-
-    </script>	
-	
- 	<script type="text/javascript">
 	
  	 $(document).ready(function(){
          //input validation
@@ -432,18 +484,9 @@
 
 	
      
-		//등록
+/* 		//등록
 		 $("#doInsert").on("click", function() { 
-			
-/*   			 alert($('#email').val());
-			 alert($('#pw').val());
-			 alert($('input[name=gender]:checked').val());
-			 alert($('#ihidnum').val());
-			 alert($('#name').val());
-			 alert($('#tel').val());
-			 alert($('#zipno').val());
-			 alert($('#addr').val());
-			 alert($('#addr2').val());   */
+
 			 
 				
 	 		 if (duplicate == false) {
@@ -498,7 +541,7 @@
 					} 
 
 
-        });
+        }); */
 
 
  

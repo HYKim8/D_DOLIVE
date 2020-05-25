@@ -335,7 +335,6 @@ public class MemberCont {
 	    radio = req.getParameter("radio");
 		
 	    
-//	    if(radio.equals("1")) {
 		LOG.debug("1===================");
 		LOG.debug("1=member="+member);
 		LOG.debug("1===================");
@@ -384,120 +383,10 @@ public class MemberCont {
 		LOG.debug("2===================");
 
 		return json;
-//	    }
-//	    else {
-//			LOG.debug("1===================");
-//			LOG.debug("1=bizmember="+bizmember);
-//			LOG.debug("1===================");
-//			String message = "";
-//			if(null == bizmember.getEmail() || "".equals(bizmember.getEmail().trim())) {
-//				message="이메일을 입력 하세요.";
-//				throw new IllegalArgumentException(message);
-//			}
-//
-//			if(null == bizmember.getPw() || "".equals(bizmember.getPw().trim())) {
-//				message="비번을 입력 하세요.";
-//				throw new IllegalArgumentException(message);
-//			}
-//
-//			int flag = this.bizmemberService.idPassCheck(member);
-//			MessageVO  messageVO=new MessageVO();
-//			messageVO.setMsgId(String.valueOf(flag));
-//
-//			if(10==flag) {//ID CHECK
-//				messageVO.setMsgMsg("아이디를 확인 하세요.");
-//			}else if(20==flag) {// pass CHECK
-//				messageVO.setMsgMsg("비번를 확인 하세요.");
-//			}else if(30==flag) {// 성공
-//				messageVO.setMsgMsg("로그인 성공.");
-//				//사용자 정보 조회
-//				MemberVO userInfo = (MemberVO) this.bizmemberService.doSelectOne(bizmember);
-//				LOG.debug("2===================");
-//				LOG.debug("2=userInfo="+userInfo);
-//				LOG.debug("2===================");
-//
-//				//Locale
-//				String lang = StringUtil.nvl(req.getParameter("lang"));
-//
-//				Locale  paramLocale=new Locale(lang);
-//
-//				session.setAttribute("member", userInfo);
-//				
-//			}
-//
-//			Gson gson=new Gson();
-//			String json = gson.toJson(messageVO);
-//			LOG.debug("2===================");
-//			LOG.debug("2=json="+json);
-//			LOG.debug("2===================");
-//
-//			return json;
-//	    }
 	}	
 	
 	
 	
-	
-	
-//	   @RequestMapping(value="member/login.do",method = RequestMethod.POST)
-//	   public String doLogin(HttpServletRequest req, Model model) {
-//	      LOG.debug("=======================================");
-//	      LOG.debug("=doLogin/param");
-//	      LOG.debug("=doLogin/memberId:"+req.getParameter("email"));
-//	      LOG.debug("=doLogin/password:"+req.getParameter("pw"));
-//	      LOG.debug("=rdaio:"+req.getParameter("member"));
-//	      LOG.debug("=======================================");
-//	      String radio;
-//	      radio = req.getParameter("member");
-//	      
-//	      if("".equals(radio) || radio ==null ){
-//	    	  model.addAttribute("loginFailure","회원구분을 선택해주세요");
-//	    	  return "webapp/member/login";
-//	      }
-//	      
-//	      if(radio.equals("1")) {
-//	    	  
-//	      LOG.debug("11radio="+radio);  
-//	      MemberVO inVO=new MemberVO();
-//	      inVO.setEmail(req.getParameter("email"));
-//	      inVO.setPw(req.getParameter("pw"));
-//	      
-//	      MemberVO outVO=(MemberVO)this.memberService.getMember(inVO);
-//	      if(outVO.getEmail()==null || "".equals(outVO.getEmail()) || outVO.getPw()==null || "".equals(outVO.getPw()) ) {
-//	         model.addAttribute("loginFailure","아이디와 비밀번호를 확인해주세요.");
-//	         return "member/login";
-//	      }else {
-//	         MemberVO memVO=new MemberVO();
-//	         memVO.setEmail(outVO.getEmail());
-//	         HttpSession session=req.getSession();
-//	         StringBuilder out=new StringBuilder();
-//	         model.addAttribute("memberVO", outVO);
-//	         session.setAttribute("memberEmail", outVO.getEmail());
-//	         return "pharmacymap/Main";
-//
-//	      	}
-//	      
-//	      }else  {
-//		      BizMemberVO inVO=new BizMemberVO();
-//		      inVO.setEmail(req.getParameter("email"));
-//		      inVO.setPw(req.getParameter("pw"));
-//		      
-//		      BizMemberVO outVO=(BizMemberVO)this.bizmemberService.doSelectOne(inVO);
-//		      if(outVO.getEmail()==null || "".equals(outVO.getEmail())) {
-//		         model.addAttribute("loginFailure","아이디와 비밀번호를 확인해주세요.");
-//		         return "webapp/member/login";
-//		      }else {
-//		    	  BizMemberVO memVO=new BizMemberVO();
-//		         memVO.setEmail(outVO.getEmail());
-//		         HttpSession session=req.getSession();
-//		         //StringBuilder out=new StringBuilder();
-//		         model.addAttribute("bizMemberVO", outVO);
-//		         session.setAttribute("bizMemberEmail", outVO.getEmail());
-//		         return "pharmacymap/Main";
-//		      }
-//	      
-//	      }
-//	   }	
 
 	
 }

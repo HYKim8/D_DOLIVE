@@ -111,7 +111,7 @@
 	<script type="text/javascript">
 
  	function goLogin(){
- 		location.href="http://localhost:8080/d_dolive/pharmacymap/main_test.do";
+ 		location.href="http://localhost:8080/d_dolive/member/gomypage.do"; 
     }
 
 	
@@ -135,12 +135,12 @@
 				success:function(data){ //성공
 					//alert(data);
 					var jData = JSON.parse(data);
-					if(null!=jData && jData.msgId=="10") {
-						alert(jData.msgMsg);
-					}else if(null!=jData && jData.msgId=="20") {
-						alert(jData.msgMsg);
-					}else if(null!=jData && jData.msgId=="30") {
-						alert(jData.msgMsg);
+					if(null!=data && data=="10") {
+						alert("이메일을 확인하세요");
+					}else if(null!=data && data=="20") {
+						alert("비밀번호를 확인하세요");
+					}else if(null!=data && data=="30") {
+						alert(data);
 						goLogin();
 					}
 				},
