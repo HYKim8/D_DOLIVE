@@ -40,24 +40,29 @@
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+   	<style type="text/css">
+    				
+    	.paddingMain {margin:80px 20% 160px;	}
+	    .paddingButton {margin:0 0 10px 70%}
+    </style>
 </head>
 <body>
 	<!-- div container -->
-   	<div class="container">
+   	<div class="container, paddingMain">
       	<!-- div title --> 
       	<div class="page-header">
-        	<h2>나의정보 보기</h2>
+        	<h2>나의정보 보기</h2><hr/>
       	</div>
       	
       	<!--// div title -->
-        <div class="row text-right">
-			<label for="title" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label"></label>
-		    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-				<input type="button" class="btn btn-primary btn-sm" value="수정하러가기" onclick="goUpdate();" />
-				<input type="button" class="btn btn-primary btn-sm" value="탈퇴" onclick="doDelete();" />
-			</div>
+      	
+        <div class="paddingButton" >
+        	<input type="button" class="btn btn-primary btn-sm" value="예약조회" onclick="goReserv();" />
+				<input type="button" class="btn btn-primary btn-sm" value="수정하기" onclick="goUpdate();" />
+				<input type="button" class="btn btn-primary btn-sm" value="탈퇴하기" onclick="doDelete();" />
 		</div>
-      	<!-- div title -->
+		
       	<form class="form-horizontal" action="${hContext }/bizmember/do_select_one.do" name="selectFrm" method="get">
       		<input type="hidden" id="h_email" name="h_email"/>
       		<div class="form-group">
@@ -191,6 +196,37 @@
 			frm.h_email.value = $("#email").val();
 	        frm.action = "${hContext}/member/do_select_one.do";
 	        frm.submit();
+		}
+
+		function goReserv() {
+			//console.log("update_btn");
+			
+			var frm = document.selectFrm;
+			frm.h_email.value = $("#email").val();
+	        frm.action = "${hContext}/reserv/do_retrieve.do";
+	        frm.submit();
+
+	        $.ajax({
+				type : "GET",
+				url : "${hContext}/reserv/do_retrieve.do",
+				dataType : "html",
+				data : {
+					"pageSize" : 0,
+					"pageNum" : 0,
+					"optionDiv" : 10
+					
+				},
+				success : function(data) { //성공
+
+					location.href="${hContext}/member/member_reservation"
+				},
+				error : function(xhr, status, error) {
+					alert("error:"+error);
+				},
+				complete : function(data) {
+	
+				}
+			});//--ajax
 		}
     </script>
 </body>

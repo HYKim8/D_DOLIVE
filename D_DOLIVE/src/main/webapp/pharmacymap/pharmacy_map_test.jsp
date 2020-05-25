@@ -321,7 +321,7 @@
                          //'           </label>'+
                          '           <button class="button" id="" >알림</button>'+  
                          '           <button class="button" id="">길찾기</button>'+ 
-                         '           <button class="button" id="" onclick="goReserv();">예약</button>'+ 
+                         '           <button class="button" id="" onclick="goReserv('+code+',\''+name+'\');">예약</button>'+ 
                          '        </div>'+
                          '        <div class="body">' + 
                          '           <div class="ellipsis" align="center">'+addr+'</div>' + 
@@ -342,12 +342,10 @@
            maskSearch();
       }
 
-	  function goReserv(){
+	  function goReserv(code, name){
 
-		  var frm = document.code
 		  
-		  frm.action = "http://localhost:8080/d_dolive/reserv/reserv_insert.do"
-		  frm.code
+		  window.location.href = "${hContext}/reserv/reserv_insert_page.do?pcode="+code+"&name="+name;
 
 			  	  	
       }

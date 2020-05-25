@@ -19,6 +19,7 @@ import com.sist.d_dolive.cmn.SearchVO;
 import com.sist.d_dolive.cmn.StringUtil;
 import com.sist.d_dolive.code.CodeService;
 import com.sist.d_dolive.code.CodeVO;
+import com.sist.d_dolive.pharmacy.PharmacyVO;
 import com.sist.d_dolive.reservation.ReservService;
 import com.sist.d_dolive.reservation.ReservVO;
 
@@ -215,9 +216,10 @@ public class ReservCont {
 		return url;
 	}
 	
-	@RequestMapping(value = "reserv/reserv_insert.do", method = RequestMethod.GET)
-	public String doSelectTwo() {
+	@RequestMapping(value = "reserv/reserv_insert_page.do", method = RequestMethod.GET)
+	public String goInsertPage(PharmacyVO vo, Model model) {
 		LOG.debug("=아아아아아=");
+		model.addAttribute("vo", vo);
 		
 		return "reserv/reserv_insert";
 	}

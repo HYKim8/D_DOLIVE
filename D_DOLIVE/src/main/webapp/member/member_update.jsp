@@ -19,6 +19,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="hContext" value="${pageContext.request.contextPath }"></c:set>
+
+
 <c:if test="${maxPageNo == null }">
 	<c:set var="maxPageNo" value="0"></c:set>
 </c:if>
@@ -48,22 +50,24 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+   	<style type="text/css">
+    				
+    	.paddingMain {margin:80px 20% 160px;	}
+    </style>
 </head>
 <body>
 	<!-- div container -->
 	<div class="container">
 		<!-- div title -->
 		<div class="page-header">
-			<h1>회원관리</h1>
+			<h1>회원관리</h1><hr/>
 		</div>
 		<!--// div title -->
 	
 
 	<!-- 입력 form -->
-	<div class="container">
-		<div class="col-lg-12"></div>
-		<div class="col-lg-12"></div>
-		<div class="panel panel-default"></div>
+	<div class="container, paddingMain">
 
 
 

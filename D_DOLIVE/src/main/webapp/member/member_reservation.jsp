@@ -48,14 +48,28 @@
 		searchDiv = String.valueOf(search.getSearchDiv());
 		searchWord = String.valueOf(search.getSearchWord());
 	}
-	//out.print("search:"+search);
+
 	
 	//주어진 승인상태를 검색조건으로 넘겨 그에 맞는 예약목록을 출력한 리스트
 	List<CodeVO> searchList = (List<CodeVO>)request.getAttribute("searchList");
-/* 	out.print("searchList:"+searchList);     
-    for(CodeVO vo:searchList){          
- 		out.print(vo.toString()+"<br/>");  
- 	}  */                                 
+    
+	int totalCnt = 0;	
+	totalCnt = (Integer) request.getAttribute("totalCnt");
+	
+	//paging
+	String url = H_PATH + "/reserv/do_retrieve.do";
+	String scriptName = "doSearchPage";
+	int maxNum = 0;//총 글 수
+	int currPageNo = 1;//현재 페이지
+	int rowPerPage = 10;
+	int bottomCount = 5;//바닥 페이지 수
+	
+	if(null != search) {
+		currPageNo = 	search.getPageNum();
+		rowPerPage = search.getPageSize();
+		maxNum = totalCnt;
+	}
+	//--paging
 %>
 <c:set var="hContext" value="${pageContext.request.contextPath }"></c:set>    
 <!DOCTYPE html>
@@ -76,7 +90,7 @@
 	
    	<style type="text/css">
     				
-    	.paddingMain {padding:80px 400px 160px;	}
+    	.paddingMain {margin:80px 20% 160px;	}
     				
     	.paddingTitle {padding-bottom:40px}
     	
@@ -89,7 +103,7 @@
 	
 		<!-- div title -->
 		<div class="paddingTitle">
-			<h1>예약 내역</h1>
+			<h1>예약 내역</h1><hr/>
 		</div>
 		<!--// div title -->
 		
@@ -108,7 +122,7 @@
 						&nbsp;&nbsp;
 						<button type="button" onclick="javascript:doRetrieve();" class="btn btn-primary btn-sm">조회</button>
 					</div>
-					<div style ="float:right;">
+					<div style ="margin: 0 0 0 auto;">
 						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
 						<button type="button" onclick="doPayment()" class="btn btn-primary btn-sm">결제하기</button>
 						&nbsp;&nbsp;
@@ -167,8 +181,8 @@
 		<!--// Grid영역 -->
 		
 		<!-- pagenation -->
-		<div class="text-center">
-<%-- 			<%=StringUtil.renderPaging(maxNum, currPageNo, rowPerPage, bottomCount, url, scriptName) %> --%>
+		<div >
+ 			<%=StringUtil.renderPaging(maxNum, currPageNo, rowPerPage, bottomCount, url, scriptName) %> 
 		</div>
 		<!--// pagenation -->
 	</div>

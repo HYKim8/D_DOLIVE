@@ -14,13 +14,17 @@
   * Copyright (C) 2009 by KandJang  All right reserved.
   */
 --%>
+<%@page import="com.sist.d_dolive.pharmacy.PharmacyVO"%>
+<%@page import="com.sist.d_dolive.reservation.ReservVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="/common/common.jsp" %>
-
+<%
+	PharmacyVO vo = (PharmacyVO)request.getAttribute("vo");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,9 +44,9 @@
     				
     	.paddingMain {padding:100px 400px 160px;	}
     				
-    	.paddingTitle {padding-bottom:50px}
+    	.paddingTitle {padding-bottom:20px}
     	
-    	.paddingButton {padding-bottom:30px}
+    	.paddingButton {padding-bottom:5px}
     	
     </style>
 </head>
@@ -53,24 +57,24 @@
       	<!-- div title --> 
       	<div class="page-header">
       		<div class="paddingTitle">
-	        	<h2>마스크 예약</h2>
+	        	<h2>마스크 예약</h2><hr/>
       		</div>
       	</div>      	
       	<!--// div title -->
       	
-        <div class="paddingButton">
-			<label for="title" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label"></label>
-		    <div style="float:right;">
-				<input type="button" class="btn btn-primary btn-sm" value="예약하기" id="insertBtn" />
-				<input type="button" class="btn btn-primary btn-sm" value="돌아가기" id="returnBtn" />
-			</div>
+       	<div>
+       		<h3><%= vo.getName() %></h3>
+	    </div>
+	    <div class="paddingButton" style="float:right;">
+			<input type="button" class="btn btn-primary btn-sm" value="예약하기" id="insertBtn" />
+			<input type="button" class="btn btn-primary btn-sm" value="돌아가기" id="returnBtn" />
 		</div>
 		
       	<!-- div title -->
       	<form class="form-horizontal" action="${hContext }/reserv/do_insert.do" name="insertFrm" method="post">
       	<!-- hidden으로 변경! -> 회원아이디 session 처리, 약국코드 가지고 넘어오기 -->
       	<input type="hidden" id="email" name="email" value="bealright6@naver.com">
-      	<input type="hidden" id="pcode" name="pcode" value="약국 코드">
+      	<input type="hidden" id="pcode" name="pcode" value="<%= vo.getPcode() %>">
 
 	      	<div class="form-group">
    				<select name="maskCnt" id="maskCnt" class="form-control input-sm">
@@ -94,7 +98,7 @@
 
 		function goMain(){
 			//!!!!!!!!!!!!!!!!주소 매핑 변경!!!!!!!!!!!!!!!!
-			location.href = "${hContext}/covidmap/sidomap.do"
+			location.href = "${hContext}/pharmacymap/pharmacy_map_test.do"
 		}
 
     
@@ -135,7 +139,8 @@
 					var jData = JSON.parse(data);
 					if(jData != null && jData.msgId=="1") {
 						alert(jData.msgMsg);
-						//!!!!!!!!!!!!지도 메인 페이지로 주소 매핑!!!!!!!!!!!!!
+						history.go(-1);
+						
 						
 					}else {
 						alert(jData.msgMsg);

@@ -46,8 +46,14 @@
         value="/WEB-INF/views/tiles/layouts/footer.jsp"/>
     	</definition>
     
+    <!-- login -->
+    <definition name="login/*" extends="basede-finition2">
+        <put-attribute name="title" value="D_DOLIVE>Login"/>
+        <put-attribute name="body" value="/login/{1}.jsp"/>
+    </definition> 
+    
     <!-- member -->
-    <definition name="member/*" extends="basede-finition2">
+    <definition name="member/*" extends="basede-finition">
         <put-attribute name="title" value="D_DOLIVE>Member"/>
         <put-attribute name="body" value="/member/{1}.jsp"/>
     </definition> 
