@@ -135,12 +135,12 @@
 				success:function(data){ //성공
 					//alert(data);
 					var jData = JSON.parse(data);
-					if(null!=data && data=="10") {
-						alert("이메일을 확인하세요");
-					}else if(null!=data && data=="20") {
-						alert("비밀번호를 확인하세요");
-					}else if(null!=data && data=="30") {
-						alert(data);
+					if(null!=jData.msgId && jData.msgId=="10") {
+						alert(jData.msgMsg);
+					}else if(null!=jData.msgId && jData.msgId=="20") {
+						alert(jData.msgMsg);
+					}else if(null!=jData.msgId && jData.msgId=="30") {
+						alert(jData.msgMsg);
 						goLogin();
 					}
 				},

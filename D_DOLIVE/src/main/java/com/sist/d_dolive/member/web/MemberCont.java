@@ -355,10 +355,8 @@ public class MemberCont {
 
 		if(10==flag) {//ID CHECK
 			messageVO.setMsgMsg("아이디를 확인 하세요.");
-			return "10";
 		}else if(20==flag) {// pass CHECK
 			messageVO.setMsgMsg("비번를 확인 하세요.");
-			return "20";
 		}else if(30==flag) {// 성공
 			messageVO.setMsgMsg("로그인 성공.");
 			//사용자 정보 조회
