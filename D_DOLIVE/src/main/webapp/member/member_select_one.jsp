@@ -147,6 +147,12 @@
     
     
     <script type="text/javascript">
+
+ 	function goLogin(){
+ 		location.href="http://localhost:8080/d_dolive/member/gologin.do"; 
+    }
+
+    
 		function doDelete() {
 			var email = $("#email").val();
 
@@ -164,7 +170,7 @@
 					var jData = JSON.parse(data);
 					if(null!=jData && jData.msgId=="1") {
 						alert(jData.msgMsg);
-						location.href = "http://localhost:8080/d_dolive/pharmacymap/Main.jsp";
+						goLogin();
 					}else {
 						alert(jData.msgMsg);
 					}

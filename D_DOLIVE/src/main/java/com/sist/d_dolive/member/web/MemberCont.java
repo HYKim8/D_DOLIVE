@@ -45,6 +45,12 @@ public class MemberCont {
 	MessageSource messageSource;
 	
 	
+	@RequestMapping(value = "member/gologin.do", method = RequestMethod.GET)
+	public String gologin() {
+		
+		
+		return "member/login";
+	}
 	
 	
 	@RequestMapping(value = "member/gomember.do", method = RequestMethod.GET)
