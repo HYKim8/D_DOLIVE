@@ -111,7 +111,8 @@
 	<script type="text/javascript">
 
  	function goLogin(){
- 		location.href="http://localhost:8080/d_dolive/member/gomypage.do"; 
+ 		//location.href="http://localhost:8080/d_dolive/member/gomypage.do";
+ 		location.href="http://localhost:8080/d_dolive/pharmacymap/main_test.do"; 
     }
 
 	

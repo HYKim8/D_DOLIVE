@@ -27,20 +27,49 @@
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
 <!-- Core theme CSS (includes Bootstrap)-->
-<link href="${hContext}/resources/css/styles.css" rel="stylesheet" />    
-<!-- Navigation-->
-	<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
-	    <div class="container">
-	        <a class="navbar-brand js-scroll-trigger" href="#page-top">COREA</a><button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu <i class="fas fa-bars"></i></button>
-	        <div class="collapse navbar-collapse" id="navbarResponsive">
-	            <ul class="navbar-nav ml-auto">
-	                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Maket</a></li>
-	                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">Sign Up</a></li>
-	                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">LogIn</a></li>
-	            </ul>
-	        </div>
-	    </div>
-	</nav>
+<link href="${hContext}/resources/css/styles.css" rel="stylesheet" /> 
+
+   <c:choose>
+   	<c:when test="${empty member}">
+   		<!-- Navigation-->
+		<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+		    <div class="container">
+		        <a class="navbar-brand js-scroll-trigger" href="#page-top">COREA</a><button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu <i class="fas fa-bars"></i></button>
+		        <div class="collapse navbar-collapse" id="navbarResponsive">
+		            <ul class="navbar-nav ml-auto">
+		            	<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Main</a></li>
+		            	<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">확진자현황</a></li>
+		                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Market</a></li>
+		                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="http://localhost:8080/d_dolive/member/gomember.do">Sign Up</a></li>
+		                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="http://localhost:8080/d_dolive/member/gologin.do">LogIn</a></li>
+		            </ul>
+		        </div>
+		    </div>
+		</nav>
+   	</c:when>
+   	<c:when test="${not empty member}">
+   		<!-- Navigation-->
+		<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+		    <div class="container">
+		        <a class="navbar-brand js-scroll-trigger" href="#page-top">COREA</a><button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu <i class="fas fa-bars"></i></button>
+		        <div class="collapse navbar-collapse" id="navbarResponsive">
+		            <ul class="navbar-nav ml-auto">
+		            	<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Main</a></li>
+		            	<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">확진자현황</a></li>		            
+		                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Maket</a></li>
+		                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="http://localhost:8080/d_dolive/member/gomypage.do">Mypage</a></li>
+		                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="http://localhost:8080/d_dolive/member/gologin.do">LogOut</a></li>
+		            </ul>
+		        </div>
+		    </div>
+		</nav>
+   	</c:when>
+   	
+   	
+   </c:choose>
+
+	
+	
 	<div style="height : 104px;"></div>
 	<!-- Masthead-->
 	<header class="masthead bg-primary text-white text-center" style="display:none; height: 800px;">
