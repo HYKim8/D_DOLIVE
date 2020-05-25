@@ -62,7 +62,7 @@ public class MemberCont {
 		return "bizmember/bizmember_insert";
 	}
 	
-	@RequestMapping(value = "member/goidpw.do", method = RequestMethod.GET)
+	@RequestMapping(value = "member/bizgoidpw.do", method = RequestMethod.GET)
 	public String goidpw() {
 		LOG.debug("=아아아아아=");
 		

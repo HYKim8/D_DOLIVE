@@ -88,8 +88,10 @@
 						id="member_login" size="30">로그인
 					</button>                    
                     <a href="http://localhost:8080/d_dolive/member/gomember.do" class="more">일반 회원가입</a><br/>
+                    <a href="http://localhost:8080/d_dolive/member/goidpw.do" class="more">아이디/비번찾기</a>
+                    <br/><br/>
                     <a href="http://localhost:8080/d_dolive/member/gobizmember.do" class="more">업체 회원가입</a><br/>
-                    <a href="http://localhost:8080/d_dolive/member/goidpw.do" class="more">아이디/비번찾기</a>                            
+                    <a href="http://localhost:8080/d_dolive/bizmember/bizgoidpw.do" class="more">업체아이디/비번찾기</a>                            
                 </form>	
                    
                 	

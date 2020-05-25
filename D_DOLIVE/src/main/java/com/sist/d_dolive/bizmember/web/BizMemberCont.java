@@ -36,6 +36,17 @@ public class BizMemberCont {
 	@Autowired
 	MessageSource messageSource;
 	
+	
+	
+	@RequestMapping(value = "bizmember/bizgoidpw.do", method = RequestMethod.GET)
+	public String bizgoidpw() {
+		
+		
+		return "bizmember/biz_id_pw_find";
+	}
+	
+	
+	
 	@RequestMapping(value = "bizmember/do_update.do", method = RequestMethod.POST
 			, produces = "application/json; charset=UTF-8")
 	@ResponseBody

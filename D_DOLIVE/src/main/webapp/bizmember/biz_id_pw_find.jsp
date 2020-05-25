@@ -56,7 +56,7 @@
 	<div class="container">
 		<!-- div title -->
 		<div class="page-header">
-			<h1>아이디 비번찾기</h1>
+			<h1>업체 아이디 비번찾기</h1>
 		</div>
 		<!--// div title -->
 	
@@ -79,7 +79,7 @@
 		<!--// Button Area -->
 
 		<!-- 아이디찾기 Form -->
-		<form action="${hContext}/member/find_id.do" name="member_edit" method="post" class="form-horizontal">
+		<form action="${hContext}/bizmember/find_id.do" name="member_edit" method="post" class="form-horizontal">
 			
 			
 			<div class="form-group">
@@ -91,11 +91,11 @@
 			</div>			
 			
 			<div class="form-group">
-				<label for="ihidnum"
-					class="col-lg-4 col-sm-4 col-xs-4  control-label">주민번호</label>
+				<label for="birth"
+					class="col-lg-4 col-sm-4 col-xs-4  control-label">생일</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
 					<input type="password" maxlength="50" class="form-control input-sm"
-						id="ihidnum" name="ihidnum" placeholder="비밀번호" />
+						id="birth" name="birth" placeholder="비밀번호" />
 				</div>
 			</div>
 	
@@ -117,7 +117,7 @@
 		<!--// Button Area -->		
 		
 		<!-- 비번찾기 Form -->
-		<form action="${hContext}/member/do_find_pw.do" name="member_edit" method="post" class="form-horizontal">
+		<form action="${hContext}/bizmember/do_find_pw.do" name="member_edit" method="post" class="form-horizontal">
 			
 			<div class="form-group">
 				<label for="email" class="col-lg-4 col-sm-4 col-xs-4  control-label">이메일</label>
@@ -136,11 +136,11 @@
 			</div>			
 			
 			<div class="form-group">
-				<label for="ihidnum"
-					class="col-lg-4 col-sm-4 col-xs-4  control-label">주민번호</label>
+				<label for="birth"
+					class="col-lg-4 col-sm-4 col-xs-4  control-label">생일</label>
 				<div class="col-lg-6 col-sm-6 col-xs-6">
-					<input type="password" maxlength="50" class="form-control input-sm"
-						id="ihidnum1" name="ihidnum1" placeholder="비밀번호" />
+					<input type="text" maxlength="50" class="form-control input-sm"
+						id="birth1" name="birth1" placeholder="비밀번호" />
 				</div>
 			</div>
 	
@@ -171,7 +171,7 @@
 		$("#findId").on("click", function() {
 			
 /* 			alert("name="+$("#name").val());
-            alert("ihidnum="+$("#ihidnum").val()); */
+            alert("birth="+$("#birth").val()); */
             
 
             if ($("#name").val() == "" || $("#name").val() == false) {
@@ -180,9 +180,9 @@
                 return;
             }
             
-            if ($("#ihidnum").val() == "" || $("#ihidnum").val() == false) {
-                alert("주민번호를 입력 하세요.");
-                $("#ihidnum").focus();
+            if ($("#birth").val() == "" || $("#birth").val() == false) {
+                alert("생일을 입력 하세요.");
+                $("#birth").focus();
                 return;
             }
 
@@ -193,11 +193,11 @@
             //ajax
             $.ajax({
                 type : "GET",
-                url : "${hContext}/member/find_id.do",
+                url : "${hContext}/bizmember/find_id.do",
                 dataType : "html",
                 data : {
                 	"name" : $("#name").val(),
-                    "ihidnum" : $("#ihidnum").val()
+                    "birth" : $("#birth").val()
                 },
                 success : function(data) { //성공
                 	if($.trim(data) == "x"){
@@ -226,7 +226,7 @@
 
 /* 			alert("email="+$("#email").val());
  			alert("name="+$("#name1").val());
-            alert("ihidnum="+$("#ihidnum1").val());  */
+            alert("birth="+$("#birth1").val());  */
             
 
             if ($("#email").val() == "" || $("#email").val() == false) {
@@ -241,9 +241,9 @@
                 return;
             }
             
-            if ($("#ihidnum1").val() == "" || $("#ihidnum1").val() == false) {
-                alert("주민번호를 입력 하세요.");
-                $("#ihidnum").focus();
+            if ($("#birth1").val() == "" || $("#birth1").val() == false) {
+                alert("생일 입력 하세요.");
+                $("#birth").focus();
                 return;
             }
 
@@ -254,16 +254,16 @@
             //ajax
             $.ajax({
                 type : "POST",
-                url : "${hContext}/member/do_find_pw.do",
+                url : "${hContext}/bizmember/do_find_pw.do",
                 dataType : "html",
                 data : {
                     "email" :$("#email").val(),
                 	"name" : $("#name1").val(),
-                    "ihidnum" : $("#ihidnum1").val()
+                    "birth" : $("#birth1").val()
                 },
                 success : function(data) { //성공
                 	if($.trim(data) == "x"){
-    					alert("이름 또는 이메일또는 주민번호를 다시 확인해주세요!");
+    					alert("이름 또는 이메일또는 생일 다시 확인해주세요!");
                     }
                     else{
                     	 alert("전송완료");
@@ -272,7 +272,7 @@
 
                 },
                 error : function(xhr, status, error) {
-                	alert("이름 또는 이메일또는 주민번호를 다시 확인해주세요!");
+                	alert("이름 또는 이메일또는 생일 다시 확인해주세요!");
                 },
                 complete : function(data) {
 
