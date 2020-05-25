@@ -3,6 +3,8 @@ package com.sist.d_dolive.reservation.web;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.sist.d_dolive.bizmember.BizMemberVO;
 import com.sist.d_dolive.cmn.MessageVO;
 import com.sist.d_dolive.cmn.SearchVO;
 import com.sist.d_dolive.cmn.StringUtil;
@@ -38,7 +41,7 @@ public class ReservCont {
 	CodeService codeService;
 	
 	@RequestMapping(value = "reserv/do_retrieve.do", method = RequestMethod.GET)
-	public String doRetrieve(SearchVO search, Model model) {
+	public String doRetrieve(SearchVO search, Model model, HttpSession session) {
 		//param 기본값 처리
 		if(search.getPageNum() == 0) {
 			search.setPageNum(1);
@@ -47,9 +50,13 @@ public class ReservCont {
 		if(search.getPageSize() == 0) {
 			search.setPageSize(10);
 		}
-		
 		search.setSearchDiv(StringUtil.nvl(search.getSearchDiv()));
-		search.setSearchWord(StringUtil.nvl(search.getSearchWord().trim()));
+		
+		if(search.getOptionDiv().equals("2")) {
+			BizMemberVO bizMemberVO = (BizMemberVO) session.getAttribute("bizMember");
+			search.setSearchWord(StringUtil.nvl(bizMemberVO.getPcode()));
+		}
+		
 		LOG.debug("1==================");
 		LOG.debug("1=param="+search);
 		LOG.debug("1==================");

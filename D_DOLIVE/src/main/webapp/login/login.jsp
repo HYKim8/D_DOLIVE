@@ -115,9 +115,13 @@
 	
 	<script type="text/javascript">
 
- 	function goLogin(){
+ 	function goLogin(radio){
  		//location.href="http://localhost:8080/d_dolive/member/gomypage.do";
- 		location.href="http://localhost:8080/d_dolive/pharmacymap/main_test.do"; 
+ 		if(radio=="1") {
+ 			location.href="http://localhost:8080/d_dolive/pharmacymap/main_test.do"; 
+ 	 	}else if(radio="2") {
+ 	 		location.href="http://localhost:8080/d_dolive/reserv/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=30&searchWord=&optionDiv=2";
+ 	 	}
     }
 
 	
@@ -147,7 +151,7 @@
 						alert(jData.msgMsg);
 					}else if(null!=jData.msgId && jData.msgId=="30") {
 						alert(jData.msgMsg);
-						goLogin();
+						goLogin(radio);
 					}
 				},
 				error:function(xhr,status,error){
