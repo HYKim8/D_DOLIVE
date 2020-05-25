@@ -115,6 +115,7 @@ function clock() {
     var map = new kakao.maps.Map(mapContainer, mapOption); 
     var geocoder = new kakao.maps.services.Geocoder();
     var markers=[];
+ /*확진자 일일 현황 */   
 function loadMap(){
     koreaRegionalData.forEach(function(element,index,array){
        if(index!=0&&index!=koreaRegionalData.length-1){
@@ -382,28 +383,6 @@ var ageConfirmerDatas = {
     	ageChart = new Chart(ctxOne, ageCFRDatas);
 	    }
 
-    function ageConfirmer(){
-    	setChart(ageConfirmerDatas);
-
-    	    }
-
-    	    function ageDead(){
-    	setChart(ageDeadDatas);
-    	       }
-    	    function ageCFR(){
-    	setChart(ageCFRDatas);
-    	       }
-    	var ageChartData;
-    	function getChartElement(){
-    	return document.getElementById('ageChart');
-    	}
-    	function setChart(data){
-    	   if(ageChartData){ageChartData.destroy();}
-    	   ageChartData= new Chart(getChartElement(), data);
-    	}
-    	function getChart(){
-    	   return ageChartData==undefined?"":ageChartData;
-    	}
 
 
         google.charts.load('current', {'packages':['corechart', 'controls']});
