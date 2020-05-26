@@ -343,7 +343,7 @@
 				  	  }
 				      
 					  kakao.maps.event.addListener(marker, 'click', openOverlay(data.stores[i].code, map, marker,data.stores[i].name,
-                                                 data.stores[i].addr,data.stores[i].stock_at,data.stores[i].remain_stat,data.stores[0].lat, data.stores[0].lng));
+                                                 data.stores[i].addr,data.stores[i].stock_at,data.stores[i].remain_stat,data.stores[i].lat, data.stores[i].lng));
                   }
                   
             },
@@ -358,7 +358,9 @@
          function openOverlay(code, map, marker,name,addr,stock,remain,lat,lng) {
             return function() {
                if($("#"+code+"").text()==""){
-					console.log(login_email);
+                   console.log(code);
+					console.log(lat);
+					console.log(lng);
                    
 					var notice = '           <button class="button" onclick="doNoticeInsert(\''+code+'\');">알림신청</button>';
 
@@ -385,7 +387,7 @@
                          '        </div>' + 
                          '        <div class="remain" align="center" style="font-size: 16px;">재고 상태:<b>'+remain+'</b></div>' + 
                          '        <div align="center">'+notice+
-                         '           <button class="button" id=""><a style = "text-decoration: none;" href="http://map.daum.net/link/map/CurrentLocation?addr=,'+addr+','+lat+','+lng+'">'+
+                         '           <button class="button" id=""><a style = "text-decoration: none;" href="https://map.kakao.com/link/to/'+name+','+lat+','+lng+'">'+
                          '               <div style="color:white;">길찾기</div></a></button>'+ 
                          '           <button class="button" id="" onclick="goReserv('+code+',\''+name+'\');">예약</button>'+ 
                          '        </div>'+
