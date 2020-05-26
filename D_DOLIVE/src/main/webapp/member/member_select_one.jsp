@@ -158,7 +158,7 @@
     <script type="text/javascript">
 
  	function goLogin(){
- 		location.href="http://localhost:8080/d_dolive/member/gologin.do"; 
+ 		location.href="http://localhost:8080/d_dolive/login/gologin.do"; 
     }
 
     
