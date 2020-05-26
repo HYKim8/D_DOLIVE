@@ -149,15 +149,16 @@
     		<table class="table table-striped table-bordered jong" id="listTable">
     		    <!-- hidden-sm hidden-xs 숨기기 -->
     			<thead class="bg-primary">
-    				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">체크</th>
-    				<th class="text-center col-lg-1 col-md-1 col-sm-1 hidden-xs ">번호</th>
-    				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">신청자 이름</th>
-    				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">신청자 주민등록번호</th>
-    				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">마스크수량</th>
-    				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">예약상태</th>
-    				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">결제금액</th>
-    				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">신청일</th>
-    				<th style="display: none;">imp_uid</th>
+    				<tr><th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8" style="width: 7%;">체크</th>
+                    <th class="text-center col-lg-1 col-md-1 col-sm-1 hidden-xs " style="width: 7%;">번호</th>
+                    <th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8" style="width: 13%;">신청자 이름</th>
+                    <th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8" style="width: 22%;">신청자 주민등록번호</th>
+                    <th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8" style="width: 10%;">마스크수량</th>
+                    <th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8" style="width: 12%;">예약상태</th>
+                    <th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8" style="width: 13%;">결제금액</th>
+                    <th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8" style="width: 16%;">신청일</th>
+                    <th style="display: none;">imp_uid</th>
+                </tr>
     			</thead>
     			<tbody>
     				<c:choose>
@@ -178,7 +179,7 @@
     					</c:when>
     					<c:otherwise>
     						<tr>
-    							<td class="text-center">No data found.</td>
+    							<td class="text-center" colspan="8">예약 신청된 건이 없습니다.</td>
     						</tr>
     					</c:otherwise>
     				</c:choose>

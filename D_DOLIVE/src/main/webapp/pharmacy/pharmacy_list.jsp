@@ -92,6 +92,11 @@
      	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
      	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
    	<![endif]-->
+   	<style>
+   	   th{ 
+   	   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            }
+   	</style>
  	</head>
  	<body>
  		<!-- div container -->
@@ -129,11 +134,12 @@
     		<table class="table table-striped table-bordered jong" id="listTable">
     		    <!-- hidden-sm hidden-xs 숨기기 -->
     			<thead class="bg-primary">
-    				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">체크</th>
-    				<th class="text-center col-lg-1 col-md-1 col-sm-1 hidden-xs ">번호</th>
-    				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">업체 이름</th>
-    				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">업체 주소</th>
-    				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">업체 유형</th>
+    		<tr><th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8" style="width: 7%;">체크</th>
+                    <th class="text-center col-lg-1 col-md-1 col-sm-1 hidden-xs " style="width: 7%; ">번호</th>
+                    <th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8" style="width: 26%;">업체 이름</th>
+                    <th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8" style="width: 50%;">업체 주소</th>
+                    <th class="text-center col-lg-8 col-md-8 col-sm-8 hidden-xs" style="width: 10%;">업체 유형</th>
+                </tr>
     			</thead>
     			<tbody>
     				<c:choose>
