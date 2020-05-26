@@ -455,7 +455,7 @@
      });
 
  	function goLogin(){
-    	location.href="http://localhost:8080/d_dolive/member/login.jsp";
+    	location.href="http://localhost:8080/d_dolive/login/login.jsp";
     }
 
 	var duplicate = false;
