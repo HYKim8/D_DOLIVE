@@ -112,6 +112,13 @@
   	    	<h1>알림 신청 목록</h1><hr/>
   	    </div>
   	    <!--// div title -->
+  	    
+  	    <form action="${hContext}/notice/do_retrieve.do" name="searchFrm"
+					method="get" class="form-inline">
+			<input type="hidden" name="pageNum" id="pageNum" value="${vo.pageNum }">
+			<input type="hidden" name="pageSize" id="pageSize" value="${vo.pageSize }">
+		</form>
+  	    
     	<!-- Grid영역 -->
     	<div class="table-responsive">
     		<table class="table table-striped table-bordered sung" style="table-layout:fixed;word-break;break-all" id="listTable">
@@ -162,6 +169,16 @@
    
    
    	<script type="text/javascript">
+	   	function doSearchPage(url, no) {
+			console.log("#url:"+url);
+			console.log("#no:"+no);
+	
+			var frm = document.searchFrm;
+			frm.pageNum.value = no;
+			frm.action = url;
+			frm.submit();
+		}
+   	
    		function doDelete(td) {
    			var tr = td.parent().parent();
 			var pcode = tr.children().eq(3).text();

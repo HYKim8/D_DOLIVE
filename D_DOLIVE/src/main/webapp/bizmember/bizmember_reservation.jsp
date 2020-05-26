@@ -204,6 +204,16 @@
    
    
    	<script type="text/javascript">
+	   	function doSearchPage(url, no) {
+			console.log("#url:"+url);
+			console.log("#no:"+no);
+	
+			var frm = document.searchFrm;
+			frm.pageNum.value = no;
+			frm.action = url;
+			frm.submit();
+		}
+   	
 		function doUpdate(approval) {
 			var rno = $('input[name="rno"]:checked').val();
 
