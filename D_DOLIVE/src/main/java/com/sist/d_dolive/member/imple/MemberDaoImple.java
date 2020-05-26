@@ -321,7 +321,7 @@ public class MemberDaoImple implements MemberDao {
 		SimpleMailMessage mimeMessage = new SimpleMailMessage();
 
 		// 보내는 사람
-		mimeMessage.setFrom("wkdkfl815@naver.com");
+		mimeMessage.setFrom("bealright6@naver.com");
 
 		// 받는사람
 		mimeMessage.setTo(recipient);
