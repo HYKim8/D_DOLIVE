@@ -81,6 +81,11 @@ public class BizMemberServiceImple implements BizMemberService {
 	
 		return result;
 	}
+	
+	@Override
+	public int idCheck(DTO dto) {
+		return bizMemberDao.idCheck(dto);
+	}
 
 	@Override
 	public int doDelete(DTO dto) {

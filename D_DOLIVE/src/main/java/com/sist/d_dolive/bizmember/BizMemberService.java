@@ -48,6 +48,13 @@ public interface BizMemberService {
 	public int idPwCheck(DTO dto);
 	
 	/**
+	 * 아이디 체크
+	 * @param dto
+	 * @return DTO
+	 */
+	public int idCheck(DTO dto);
+	
+	/**
 	 * 삭제
 	 * @param dto
 	 * @return int

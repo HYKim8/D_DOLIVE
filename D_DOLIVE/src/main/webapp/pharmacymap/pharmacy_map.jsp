@@ -148,7 +148,7 @@
       <!-- //주소 입력란 -->
       
       <!-- 검색 버튼 -->
-      <input type="button" value="검색" onclick="javascript:maskSearch();"/>
+      <input type="button" class="btn btn-primary" value="검색" onclick="javascript:maskSearch();"/>
       <!-- 검색 버튼 -->
     	
 	   <!-- 지도 -->

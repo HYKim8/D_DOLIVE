@@ -42,13 +42,14 @@
    	<div class="container">
       	<!-- div title --> 
       	<div class="page-header">
-        	<h2>업체회원 등록</h2>
+        	<h2>업체 회원 가입</h2>
       	</div>
       	
       	<!--// div title -->
         <div class="row text-right">
 			<label for="title" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label"></label>
 		    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+		    	<input type="button" class="btn btn-primary btn-sm" value="ID확인" onclick="idCheck();" />
 				<input type="button" class="btn btn-primary btn-sm" value="등록" id="insertBtn" />
 			</div>
 		</div>
@@ -163,6 +164,35 @@
     
     
     <script type="text/javascript">
+		function idCheck() {
+			var email = $("#email").val();
+
+			if(email=="") {
+				alert("이메일을 입력해주세요.");
+				return;
+			}
+			
+			$.ajax({
+				type : "POST",
+				url : "${hContext}/bizmember/id_check.do",
+				dataType : "html",
+				data : {
+					"email" : email
+					, "searchDiv" : "10"
+				},
+				success : function(data) {
+					var jData = JSON.parse(data);
+					alert(jData.msgMsg);
+				},
+				error : function(xhr, status, error) {
+					alert("error:"+error);
+				},
+				complete : function(data) {
+	
+				}
+			});//--ajax
+		}
+    
 		function goLogin() {
 			location.href = "${hContext}/login/gologin.do";
 		}
