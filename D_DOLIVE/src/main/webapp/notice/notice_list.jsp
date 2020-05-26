@@ -92,25 +92,36 @@
      	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
      	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
    	<![endif]-->
+   	
+   	<style type="text/css">
+    				
+    	.paddingMain {margin:80px 20% 160px;	}
+    				
+    	.paddingTitle {padding-bottom:40px}
+    	
+    	.paddingButton {padding-bottom:10px}
+    	
+    </style>
+   	
  	</head>
  	<body>
  		<!-- div container -->
- 		<div class="container">
+ 		<div class="container, paddingMain">
   	    <!-- div title -->
-  	    <div class="page-header">
-  	    	<h1>알림 신청 목록</h1>
+  	    <div class="paddingTitle">
+  	    	<h1>알림 신청 목록</h1><hr/>
   	    </div>
   	    <!--// div title -->
     	<!-- Grid영역 -->
     	<div class="table-responsive">
-    		<table class="table table-striped table-bordered jong" id="listTable">
+    		<table class="table table-striped table-bordered sung" style="table-layout:fixed;word-break;break-all" id="listTable">
     		    <!-- hidden-sm hidden-xs 숨기기 -->
     			<thead class="bg-primary">
-    				<th class="text-center col-lg-1 col-md-1 col-sm-1 hidden-xs ">번호</th>
-    				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">업체명</th>
-    				<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">주소</th>
+    			<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1" style="width: 6%;">번호</th>
+    				<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1" style="width: 15%;">약국 이름</th>
+    				<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1" style="width: 35%;">약국 주소</th>
     				<th style="display: none;">pcode</th>
-    				<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1">삭제</th>
+    				<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1" style="width: 10%;">삭제</th>
     			</thead>
     			<tbody>
     				<c:choose>
@@ -118,16 +129,16 @@
     						<c:forEach var="vo" items="${list }">
     							<tr>
 			    					<td class="text-center hidden-sm hidden-xs"><c:out value="${vo.num }"></c:out></td>
-			    					<td class="text-left"><c:out value="${vo.name }"></c:out></td>
+			    					<td class="text-center"><c:out value="${vo.name }"></c:out></td>
 			    					<td class="text-center"><c:out value="${vo.addr }"></c:out></td>
 			    					<td style="display: none;"><c:out value="${vo.pcode }"></c:out></td>
-			    					<td><input type="button" value="삭제" class="btn btn-primary btn-sm" onclick="doDelete($(this));"/></td>
+			    					<td><input style="margin: 0 0 0 auto;" type="button" value="삭제" class="btn btn-primary btn-sm" onclick="doDelete($(this));"/></td>
 			    				</tr>
     						</c:forEach>
     					</c:when>
     					<c:otherwise>
     						<tr>
-    							<td class="text-center">No data found.</td>
+    							<td class="text-center" colspan="5">알림 신청한 약국이 없습니다.</td>
     						</tr>
     					</c:otherwise>
     				</c:choose>
