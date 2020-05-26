@@ -49,26 +49,13 @@ public class BizMemberCont {
 	@RequestMapping(value = "bizmember/do_update.do", method = RequestMethod.POST
 			, produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public String doUpdate(BizMemberVO bizMemberVO, Locale locale) {
+	public String doUpdate(BizMemberVO bizMemberVO, Locale locale, HttpSession session) {
 		LOG.debug("1==================");
 		LOG.debug("1=param="+bizMemberVO);
 		LOG.debug("1==================");
 		
-		if(null==bizMemberVO.getEmail() || bizMemberVO.getEmail().equals("")) {
-			throw new IllegalArgumentException("Email을 확인 하세요.");
-		}
-		
-		if(null==bizMemberVO.getPw() || bizMemberVO.getPw().equals("")) {
-			//다국어 메시지 처리
-			String pw = messageSource.getMessage("message.bizmember.pw", null, locale);
-			Object[] args = new String[]{pw};			
-			String commMsg = messageSource.getMessage("message.common.message.save", args, locale);
-			LOG.debug("1.1==================");
-			LOG.debug("1.1=commMsg="+commMsg);
-			LOG.debug("1.1==================");
-			
-			throw new IllegalArgumentException(commMsg);
-		}
+		BizMemberVO ssBizMemberVO = (BizMemberVO) session.getAttribute("bizMember");
+		bizMemberVO.setEmail(ssBizMemberVO.getEmail());
 		
 		if(null==bizMemberVO.getName() || bizMemberVO.getName().equals("")) {
 			//다국어 메시지 처리

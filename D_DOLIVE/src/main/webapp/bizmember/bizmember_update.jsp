@@ -56,7 +56,7 @@
       	<!-- div title -->
       	<form class="form-horizontal" action="${hContext }/bizmember/do_select_one.do" name="updateFrm" method="get">
       		<input type="hidden" id="optionDiv" name="optionDiv"/>
-      		<input type="hidden" id="h_email" name="h_email"/>
+      		<input type="hidden" id="searchDiv" name="searchDiv"/>
       		<div class="form-group">
 	      		<label for="email" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">이메일</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
@@ -201,7 +201,7 @@
 		function goSelectOne() {
 			var frm = document.updateFrm;
 			frm.optionDiv.value = "1";
-			frm.h_email.value = $("#email").val();
+			frm.searchDiv.value = "10";
 	        frm.action = "${hContext}/bizmember/do_select_one.do";
 	        frm.submit();
 		}
@@ -214,8 +214,8 @@
 			var gender = $("input[name='gender']:checked").val();
 			var name = $("#name").val();
 			var birth = $("#birth").val();
-			var addr = $("#addr").val();
-			var addr2 = $("#addr2").val();
+			var addr = $("#roadAddrPart1").val();
+			var addr2 = $("#addrDetail").val();
 			var zipNo = $("#zipNo").val();
 			var tel = $("#tel").val();
 			var bizRno = $("#bizRno").val();
