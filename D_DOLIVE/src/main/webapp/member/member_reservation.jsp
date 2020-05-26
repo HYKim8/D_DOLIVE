@@ -162,7 +162,7 @@
 									<td class="text-center"><c:out value="${vo.paddr }" /></td>
 									<td class="text-center"><c:out value="${vo.maskCnt } 개" /></td>
 									<td class="text-center"><c:out value="${vo.approval }" /></td>
-									<td class="text-center"><c:out value="${vo.amount }원" /></td>
+									<td class="text-center"><c:out value="${vo.amount }" /></td>
 									<td class="text-center"><c:out value="${vo.regDt }" /></td>
 									<td style="display: none;"><c:out value="${vo.impuid }"></c:out></td>
 								</tr>
@@ -263,9 +263,6 @@
 			}else if(nowApproval == "환불완료"){
 				alert("환불완료된 건은 예약취소가 불가능합니다.");
 				return;
-			}else if(nowApproval == "예약신청" || nowApproval == "승인완료"){
-				if(confirm("정말로 예약을 취소하시겠습니까?") == false)
-				return;
 			}
 
 			//ajax
@@ -276,7 +273,6 @@
 				data:{
 					"rno" : rno
 				    , "approval" : approval
-				    , "modId" : "수정자"
 					, "impuid" : imp_uid
 					, "searchDiv" : 10
 					, "optionDiv" : 1
@@ -324,12 +320,7 @@
 			var rno = $('input[name="rno"]:checked').val();
 			var nowApproval = $('input[name="rno"]:checked').parent().parent().children().eq(5).text();
 			
-			var amount = 4500;
-			var email = "bealright6@naver.com";
-			var name = "박지수";
-			var tel = "010-1010-1111";
-			var addr = "주소";
-			var zipNo = "12345";
+			var amount = $('input[name="rno"]:checked').parent().parent().children().eq(6).text();
 
 			if(rno == undefined) {
 				alert("체크를 확인해주세요.");

@@ -53,9 +53,19 @@ public class ReservCont {
 		}
 		search.setSearchDiv(StringUtil.nvl(search.getSearchDiv()));
 		
+		MemberVO memberVO = new MemberVO();
+		
 		if(search.getOptionDiv().equals("1")) {
-			MemberVO memberVO = (MemberVO) session.getAttribute("member");
+			memberVO = (MemberVO) session.getAttribute("member");
 			search.setSearchWord(StringUtil.nvl(memberVO.getEmail()));
+			memberVO.setPw("");
+			memberVO.setGender("");
+			memberVO.setIhidnum("");
+			memberVO.setModdt("");
+			memberVO.setModid("");
+			memberVO.setRegdt("");
+			memberVO.setRegid("");
+			model.addAttribute("memberVO", memberVO);
 		}else if(search.getOptionDiv().equals("2")) {
 			BizMemberVO bizMemberVO = (BizMemberVO) session.getAttribute("bizMember");
 			search.setSearchWord(StringUtil.nvl(bizMemberVO.getPcode()));
