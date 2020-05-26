@@ -21,4 +21,5 @@
   	<div style="margin : 77px 0 0 0;"><a href="${context}/member/gomypage.do">내 정보 조회</a></div>
     <div><a href="${context}/member/goupdate.do">내 정보 수정</a></div>
     <div><a href="${context}/reserv/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=10&searchWord=&optionDiv=1">예약목록 조회</a></div>
+    <div><a href="${context}/notice/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=10">알림 신청 목록 조회</a></div>
 

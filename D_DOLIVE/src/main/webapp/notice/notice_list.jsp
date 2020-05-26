@@ -84,7 +84,7 @@
    	<title>부트스트랩 템플릿_LIST</title>
 
    	<!-- 부트스트랩 -->  
-   	<!-- <link href="${hContext}/resources/css/bootstrap.min.css" rel="stylesheet"> -->
+   	<link href="${hContext}/resources/css/styles.css" rel="stylesheet" />
 
    	<!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
    	<!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->
@@ -121,7 +121,7 @@
 			    					<td class="text-left"><c:out value="${vo.name }"></c:out></td>
 			    					<td class="text-center"><c:out value="${vo.addr }"></c:out></td>
 			    					<td style="display: none;"><c:out value="${vo.pcode }"></c:out></td>
-			    					<td><input type="button" value="삭제" onclick="doDelete($(this));"/></td>
+			    					<td><input type="button" value="삭제" class="btn btn-primary btn-sm" onclick="doDelete($(this));"/></td>
 			    				</tr>
     						</c:forEach>
     					</c:when>
@@ -155,8 +155,8 @@
    			var tr = td.parent().parent();
 			var pcode = tr.children().eq(3).text();
 
-			var email = "이메일1";
-   	   		
+			if (confirm("삭제 하시겠습니까?") == false)return;
+
    			//ajax
 			$.ajax({
 				type : "POST",
@@ -164,7 +164,6 @@
 				dataType : "html",
 				data : {
 					"pcode" : pcode
-					, "email" : email
 				},
 				success : function(data) { //성공
 					var jData = JSON.parse(data);

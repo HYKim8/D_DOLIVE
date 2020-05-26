@@ -68,6 +68,12 @@
         <put-attribute name="footer" 
         value="/WEB-INF/views/tiles/layouts/footer.jsp"/>
    	</definition>
+   	
+   	<!-- notice -->
+    <definition name="notice/*" extends="basede-finition">
+        <put-attribute name="title" value="D_DOLIVE>Notice"/>
+        <put-attribute name="body" value="/notice/{1}.jsp"/>
+    </definition> 
     
     <!-- login -->
     <definition name="login/*" extends="basede-finition2">
