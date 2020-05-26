@@ -399,6 +399,10 @@
              				alert("이름은 한글만 입력 가능합니다.");
              				return false;
          				}else{
+         					var emailVal = $('#email').val();
+         					var regExp = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+
+         					  if (emailVal.match(regExp) != null) {
      		            //confirm
      		            if (confirm("등록 하시겠습니까?") == false)return;
      		            //var gender = $('input[name="gender"]:checked').val();
@@ -440,7 +444,9 @@
      		                }
 
      		            });//--ajax 					
-
+         			  }else{
+         				 alert("이메일형식을 확인하세요");
+             			  }
          			}
      					
      					} 
