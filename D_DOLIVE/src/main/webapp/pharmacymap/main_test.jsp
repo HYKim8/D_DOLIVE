@@ -85,10 +85,10 @@
 		//location.href = "${hContext}/covidmap/sidomap.do"
 	//}
 
-	//function goSignUp(){
+	function goSignUp(){
 		//!!!!!!!!!!!!!!!!주소 매핑 변경!!!!!!!!!!!!!!!!
-		//location.href = "http://localhost:8080/d_dolive/member/gomember.do"
-	//}
+		location.href = "${hContext}/member/gomember.do"
+	}
 
 	//function goLogIn(){//수정
 		//!!!!!!!!!!!!!!!!주소 매핑 변경!!!!!!!!!!!!!!!!

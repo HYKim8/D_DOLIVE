@@ -6,6 +6,8 @@ package com.sist.d_dolive.notice.web;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import com.sist.d_dolive.cmn.StringUtil;
 import com.sist.d_dolive.notice.NoticeService;
 import com.sist.d_dolive.notice.NoticeVO;
 import com.sist.d_dolive.code.CodeVO;
+import com.sist.d_dolive.member.MemberVO;
 import com.sist.d_dolive.code.CodeService;
 
 /**
@@ -42,8 +45,10 @@ public class NoticeCont {
 	@Autowired
 	MessageSource messageSource;
 	
-	@RequestMapping(value = "notice/do_retrieve.do", method = RequestMethod.GET)
-	public String doRetrieve(SearchVO search, Model model) {
+	@RequestMapping(value = "notice/do_retrieve.do", method = RequestMethod.POST
+			, produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String doRetrievePcode(SearchVO search, Model model, HttpSession session) {
 		//param 기본값 처리
 		if(search.getPageNum() == 0) {
 			search.setPageNum(1);
@@ -54,7 +59,41 @@ public class NoticeCont {
 		}
 		
 		search.setSearchDiv(StringUtil.nvl(search.getSearchDiv()));
-		search.setSearchWord(StringUtil.nvl(search.getSearchWord().trim()));
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		search.setSearchWord(StringUtil.nvl(memberVO.getEmail()));
+		LOG.debug("1==================");
+		LOG.debug("1=param="+search);
+		LOG.debug("1==================");
+		
+		List<NoticeVO> list = (List<NoticeVO>) this.noticeService.doRetrieve(search);
+	
+		for(NoticeVO vo : list) {
+			LOG.debug("1.1=out="+vo);
+		}
+		
+		Gson gson = new Gson();
+		String gsonStr = gson.toJson(list);
+		LOG.debug("2==================");
+		LOG.debug("2=gsonStr="+gsonStr);
+		LOG.debug("2==================");
+		
+		return gsonStr;
+	}
+	
+	@RequestMapping(value = "notice/do_retrieve.do", method = RequestMethod.GET)
+	public String doRetrieve(SearchVO search, Model model, HttpSession session) {
+		//param 기본값 처리
+		if(search.getPageNum() == 0) {
+			search.setPageNum(1);
+		}
+		
+		if(search.getPageSize() == 0) {
+			search.setPageSize(10);
+		}
+		
+		search.setSearchDiv(StringUtil.nvl(search.getSearchDiv()));
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		search.setSearchWord(StringUtil.nvl(memberVO.getEmail()));
 		LOG.debug("1==================");
 		LOG.debug("1=param="+search);
 		LOG.debug("1==================");
@@ -98,19 +137,14 @@ public class NoticeCont {
 	@RequestMapping(value = "notice/do_delete.do", method = RequestMethod.POST
 			, produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public String doDelete(NoticeVO noticeVO, Locale locale) {
+	public String doDelete(NoticeVO noticeVO, Locale locale, HttpSession session) {
 		//param board_id
 		LOG.debug("1==================");
 		LOG.debug("1=param="+noticeVO);
 		LOG.debug("1==================");
 		
-		if(null==noticeVO.getPcode() || noticeVO.getPcode().equals("")) {
-			throw new IllegalArgumentException("Pcode를 확인 하세요.");
-		}
-		
-		if(null==noticeVO.getEmail() || noticeVO.getEmail().equals("")) {
-			throw new IllegalArgumentException("Email을 확인 하세요.");
-		}
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		noticeVO.setEmail(memberVO.getEmail());
 		
 		int flag = this.noticeService.doDelete(noticeVO);
 		
@@ -132,6 +166,38 @@ public class NoticeCont {
 		LOG.debug("2==================");
 		
 		return gsonStr;
+	}
+	
+	@RequestMapping(value = "notice/do_insert.do", method = RequestMethod.POST
+			, produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String doInsert(NoticeVO noticeVO, Locale locale, HttpSession session) {
+		LOG.debug("1==================");
+		LOG.debug("1=param="+noticeVO);
+		LOG.debug("1==================");
+		
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		noticeVO.setEmail(memberVO.getEmail());
+		
+		int flag = this.noticeService.doInsert(noticeVO);
+		
+		MessageVO message = new MessageVO();
+		
+		if(flag>0) {
+			message.setMsgId(String.valueOf(flag));
+			message.setMsgMsg("등록 성공.");
+		}else {
+			message.setMsgId(String.valueOf(flag));
+			message.setMsgMsg("등록 실패.");
+		}
+		
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(message);
+		LOG.debug("1.2==================");
+		LOG.debug("1.2=jsonStr="+jsonStr);
+		LOG.debug("1.2==================");
+		
+		return jsonStr;
 	}
 	
 	@RequestMapping(value = "notice/do_select_one.do", method = RequestMethod.GET
@@ -165,56 +231,5 @@ public class NoticeCont {
 		return jsonStr;
 	}
 	
-	@RequestMapping(value = "notice/do_insert.do", method = RequestMethod.POST
-			, produces = "application/json; charset=UTF-8")
-	@ResponseBody
-	public String doInsert(NoticeVO noticeVO, Locale locale) {
-		LOG.debug("1==================");
-		LOG.debug("1=param="+noticeVO);
-		LOG.debug("1==================");
-		
-		if(null == noticeVO.getPcode() || "".equals(noticeVO.getPcode().trim())) {
-			//다국어 메시지 처리
-			String pcode = messageSource.getMessage("message.notice.pcode", null, locale);
-			Object[] args = new String[]{pcode};			
-			String commMsg = messageSource.getMessage("message.common.message.save", args, locale);
-			LOG.debug("1.1==================");
-			LOG.debug("1.1=commMsg="+commMsg);
-			LOG.debug("1.1==================");
-			
-			throw new IllegalArgumentException(commMsg);
-		}
-		
-		if(null == noticeVO.getEmail() || "".equals(noticeVO.getEmail().trim())) {
-			//다국어 메시지 처리
-			String email = messageSource.getMessage("message.notice.email", null, locale);
-			Object[] args = new String[]{email};			
-			String commMsg = messageSource.getMessage("message.common.message.save", args, locale);
-			LOG.debug("1.1==================");
-			LOG.debug("1.1=commMsg="+commMsg);
-			LOG.debug("1.1==================");
-			
-			throw new IllegalArgumentException(commMsg);
-		}
-		
-		int flag = this.noticeService.doInsert(noticeVO);
-		
-		MessageVO message = new MessageVO();
-		
-		if(flag>0) {
-			message.setMsgId(String.valueOf(flag));
-			message.setMsgMsg("등록 성공.");
-		}else {
-			message.setMsgId(String.valueOf(flag));
-			message.setMsgMsg("등록 실패.");
-		}
-		
-		Gson gson = new Gson();
-		String jsonStr = gson.toJson(message);
-		LOG.debug("1.2==================");
-		LOG.debug("1.2=jsonStr="+jsonStr);
-		LOG.debug("1.2==================");
-		
-		return jsonStr;
-	}
+	
 }

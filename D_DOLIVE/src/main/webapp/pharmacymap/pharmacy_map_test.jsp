@@ -142,7 +142,6 @@
 <!-- <link href="../startbootstrap-freelancer-gh-pages/css/styles.css" rel="stylesheet" /> -->
 </head>
 <body>
-	
     <div align="center" style="width: 100%;height: 80%;">
       <!-- 주소 입력란 -->
       <input type="text" id="address" placeholder="주소를 입력하세요." value=""/> 
@@ -157,6 +156,11 @@
 	   <!-- //지도 -->
     </div>
     
+    <form action="${hContext}/notice/do_retrieve.do" name="searchFrm"
+					method="get" class="form-inline">
+    	<input type="hidden" id="optionDiv" name="optionDiv" value="1">
+    </form>
+    
     <!-- Bootstrap core JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
@@ -168,7 +172,62 @@
     <!-- Core theme JS-->
     <script src="${hContext}/resources/js/scripts.js"></script>
    <script type="text/javascript">
+	var login_email = "";
+	var pcode_list = new Array();
    
+   	function doLoginCheck() {
+   		$.ajax({
+			type : "POST",
+			url : "${hContext}/member/do_login_check.do",
+			dataType : "html",
+			data : {
+			},
+			success : function(data) { //성공
+				var jData = JSON.parse(data);
+				if(null!=jData.email) {
+					login_email = jData.email;
+					//console.log(login_email);
+				}else {
+					login_email = jData.email;
+					//console.log(login_email);
+				}
+			},
+			error : function(xhr, status, error) {
+				login_email = jData.email;
+				//console.log(login_email);
+			},
+			complete : function(data) {
+
+			}
+		});//--ajax	
+   	}
+
+   	function doNoticePcode() {
+   		$.ajax({
+			type : "POST",
+			url : "${hContext}/notice/do_retrieve.do",
+			dataType : "html",
+			data : {
+				"searchDiv" : "10"
+			},
+			success : function(data) { //성공
+				var jData = JSON.parse(data);
+				for(var i=0;i<jData.length;i++) {
+					pcode_list[i] = jData[i].pcode;
+				}
+				for(var i=0;i<pcode_list.length;i++) {
+					console.log(pcode_list[i]);
+				}
+			},
+			error : function(xhr, status, error) {
+				console.log("error:"+error);
+			},
+			complete : function(data) {
+
+			}
+		});//--ajax	
+   	}
+
       //검색 버튼
       function maskSearch(){
 		var address = $("#address").val();
@@ -213,7 +272,7 @@
                   geocoder.addressSearch(address, function(result, status) {
 
                   // 정상적으로 검색이 완료됐으면 
-                  if (status === kakao.maps.services.Status.OK) {
+                  if (status == kakao.maps.services.Status.OK) {
                 	 var result = results[0]; //첫번째 결과의 값을 활용
  					 
                      var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
@@ -305,6 +364,16 @@
          function openOverlay(code, map, marker,name,addr,stock,remain) {
             return function() {
                if($("#"+code+"").text()==""){
+					var notice = "";
+                   
+            	   for(var i=0;i<pcode_list.length;i++) {
+                       if(pcode_list[i]==code) {
+                    	   notice = '           <button class="button" onclick="doNoticeDelete(\''+code+'\');">알림삭제</button>';
+                       }else if(pcode_list[i]!=code) {
+                    	   notice = '           <button class="button" onclick="doNoticeInsert(\''+code+'\');">알림신청</button>';
+                       }
+                   }
+                   
                   // 마커 위에 커스텀오버레이를 표시합니다
                      // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
                      overlay = new kakao.maps.CustomOverlay({
@@ -315,11 +384,7 @@
                          '            <div class="close" onclick="closeOverlay('+"$(this).parent().parent().parent()"+')" title="닫기"></div>' + 
                          '        </div>' + 
                          '        <div class="remain" align="center" style="font-size: 16px;">재고 상태:<b>'+remain+'</b></div>' + 
-                         '        <div align="center">'+
-                         //'           <label class="switch">'+
-                         //'               <input type="checkbox"><span class="slider round"></span>'+
-                         //'           </label>'+
-                         '           <button class="button" id="" >알림</button>'+  
+                         '        <div align="center">'+notice+
                          '           <button class="button" id="">길찾기</button>'+ 
                          '           <button class="button" id="" onclick="goReserv('+code+',\''+name+'\');">예약</button>'+ 
                          '        </div>'+
@@ -337,37 +402,85 @@
          }//--openOverlay
       }//--test
 
+	  //주소 받아오기
       window.onload = function(){
+    	  doLoginCheck();
           $("#address").val("<%=p_address%>");
            maskSearch();
+          if(login_email != "x") {
+              doNoticePcode();
+          }
       }
 
+	  //예약신청 경로
 	  function goReserv(code, name){
-
-		  
 		  window.location.href = "${hContext}/reserv/reserv_insert_page.do?pcode="+code+"&name="+name;
-
-			  	  	
       }
 
-
-	  //샘플 지워도 됨
-	  function goUpdate() {
-		//console.log("update_btn");
-		
-		var frm = document.main;
-        frm.action = "${hContext}/pharmacymap/pharmacy_map_test.do";
-        frm.p_address.value = "서울특별시 마포구";
-        frm.submit();
-	  }	
-
+	  //알림 삭제
+	  function doNoticeDelete(code){
+		  console.log(code);
+		  $.ajax({
+				type : "POST",
+				url : "${hContext}/notice/do_delete.do",
+				dataType : "html",
+				data : {
+					"pcode" : code
+				},
+				success : function(data) { //성공
+					var jData = JSON.parse(data);
+					if(null!=jData && jData.msgId=="1") {
+						alert(jData.msgMsg);
+						//새로고침
+						history.go(0);
+					}else {
+						alert(jData.msgMsg);
+					}
+				},
+				error : function(xhr, status, error) {
+					alert("error:"+error);
+				},
+				complete : function(data) {
+	
+				}
+			});//--ajax	
+      }
       
+      //알림 등록
+	  function doNoticeInsert(code){
+		  $.ajax({
+				type : "POST",
+				url : "${hContext}/notice/do_insert.do",
+				dataType : "html",
+				data : {
+					"pcode" : code
+				},
+				success : function(data) { //성공
+					var jData = JSON.parse(data);
+					if(null!=jData && jData.msgId=="1") {
+						alert(jData.msgMsg);
+						//새로고침
+						history.go(0);
+					}else {
+						alert(jData.msgMsg);
+					}
+				},
+				error : function(xhr, status, error) {
+					alert("error:"+error);
+				},
+				complete : function(data) {
+	
+				}
+			});//--ajax	
+      }
+
+	  //오버레이 창 닫기
       function closeOverlay(data){+
          data.remove();
       }
 
 	  //http://localhost:8080/d_dolive/reserv/reserv_insert.do (예약신청 경로)
-      
+      //http://localhost:8080/d_dolive/notice/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord= (알림경로)
       
    </script>
 </body>

@@ -75,8 +75,8 @@
 		) VALUES (
 			#{pcode, jdbcType = VARCHAR}
 			, #{email, jdbcType = VARCHAR}	
-			, #{remainStockYn, jdbcType = VARCHAR}	
-			, #{emptyStockYn, jdbcType = VARCHAR}
+			, 0	
+			, 0
 		)
 	</insert>
 	 

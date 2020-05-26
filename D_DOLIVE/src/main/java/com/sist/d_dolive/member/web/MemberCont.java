@@ -44,6 +44,34 @@ public class MemberCont {
 	@Autowired
 	MessageSource messageSource;
 	
+	@RequestMapping(value="member/do_login_check.do",method = RequestMethod.POST
+			, produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String doLoginCheck(HttpSession session) {
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		//outVO.setLevel(outVO.getLevel().intValue());
+		LOG.debug("1.2===================");
+		LOG.debug("1.2=memberVO="+memberVO);
+		LOG.debug("1.2===================");
+		
+		MemberVO outVO = new MemberVO();
+		if(memberVO!=null) {
+			outVO.setEmail("o");
+		}else if(memberVO==null) {
+			outVO.setEmail("x");
+		}
+		LOG.debug("1.3===================");
+		LOG.debug("1.3=outVO="+outVO);
+		LOG.debug("1.3===================");
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(outVO);
+		LOG.debug("2===================");
+		LOG.debug("2=json="+json);
+		LOG.debug("2===================");
+
+		return json;
+	}
 	
 	@RequestMapping( value = "login/gologin.do", method = RequestMethod.GET)
 	public String gologin() {

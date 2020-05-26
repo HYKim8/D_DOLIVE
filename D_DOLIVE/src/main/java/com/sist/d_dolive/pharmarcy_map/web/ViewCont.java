@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sist.d_dolive.bizmember.BizMemberService;
+import com.sist.d_dolive.notice.NoticeService;
 
 @Controller
 public class ViewCont {
@@ -22,6 +23,9 @@ Logger LOG = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	MessageSource messageSource;
+	
+	@Autowired
+	NoticeService noticeService;
 	
 	@RequestMapping(value = "covidmap/sidomap.do", method = RequestMethod.GET)
 	public String doSidomap() {
