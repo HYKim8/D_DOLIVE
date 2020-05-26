@@ -143,7 +143,7 @@
 				<label for="zipno" class="col-lg-4 col-sm-4 col-xs-4  control-label">주소</label>
 				<div class="col-lg-13 col-sm-13 col-xs-13">
 						<input type="text" id="zipno" placeholder="우편번호" name="zipno" value="${vo.zipno }" readonly >
-						<input type="button" name="name1" onclick="sample2_execDaumPostcode()" value="우편번호 찾기" ><br>
+						<input type="button" class="btn btn-primary btn-sm" name="name1" onclick="sample2_execDaumPostcode()" value="우편번호 찾기" ><br>
 				</div>
 			</div>	
 			
