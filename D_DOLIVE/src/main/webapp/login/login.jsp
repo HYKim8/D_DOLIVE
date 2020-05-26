@@ -118,7 +118,7 @@
  	function goLogin(radio){
  		//location.href="http://localhost:8080/d_dolive/member/gomypage.do";
  		if(radio=="1") {
- 			location.href="http://localhost:8080/d_dolive/pharmacymap/main_test.do"; 
+ 			location.href="http://localhost:8080/d_dolive/pharmacymap/main.do"; 
  	 	}else if(radio="2") {
  	 		location.href="http://localhost:8080/d_dolive/reserv/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=30&searchWord=&optionDiv=2";
  	 	}

@@ -20,8 +20,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <%@ include file="/common/common.jsp" %>
 <c:set var="hContext" value="${pageContext.request.contextPath }"></c:set> 
+<%
+	String p_address = (String)request.getAttribute("p_address");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -32,10 +36,10 @@
     .wrap .info {width: 300px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
     .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
     .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
-    .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+    .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://t1.kakaocdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
     .info .close:hover {cursor: pointer;}
     .info .body {position: relative;overflow: hidden;}
-    .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+    .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.kakaocdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
     .info .link {color: #5085BB;}
     
     .switch {
@@ -126,7 +130,7 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7c798e37b13fac506a55eb2eebfd5a18&libraries=services"></script>
 <title>Insert title here</title>
 <!-- Font Awesome icons (free version)-->
@@ -135,241 +139,27 @@
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
 <!-- Core theme CSS (includes Bootstrap)-->
-<link href="../startbootstrap-freelancer-gh-pages/css/styles.css" rel="stylesheet" />
+<!-- <link href="../startbootstrap-freelancer-gh-pages/css/styles.css" rel="stylesheet" /> -->
 </head>
 <body>
-	<!-- Navigation-->
-       <!--  <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top">COREA</a><button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu <i class="fas fa-bars"></i></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Maket</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">Sign Up</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">LogIn</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav> -->
-    <div align="center" style="mwidth: 100%;height: 80%;">
+    <div align="center" style="width: 100%;height: 80%;">
       <!-- 주소 입력란 -->
-      <input type="text" id="address" placeholder="주소를 입력하세요." value="서울특별시 마포구"/>
+      <input type="text" id="address" placeholder="주소를 입력하세요." value=""/> 
       <!-- //주소 입력란 -->
       
       <!-- 검색 버튼 -->
-      <input type="button" value="검색" onclick="javascript:test();"/>
+      <input type="button" value="검색" onclick="javascript:maskSearch();"/>
       <!-- 검색 버튼 -->
     	
 	   <!-- 지도 -->
-	   <div id="map" style="width:100%;height:1000px;"/>
+	   <div id="map" style="width:100%;height:1000px;"></div>
 	   <!-- //지도 -->
     </div>
     
-    <!-- Footer-->
-        <footer class="footer text-center">
-            <div class="container">
-                <div class="row">
-                    <!-- Footer Location-->
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Location</h4>
-                        <p class="lead mb-0">2215 John Daniel Drive<br />Clark, MO 65243</p>
-                    </div>
-                    <!-- Footer Social Icons-->
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Around the Web</h4>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#"><i class="fab fa-fw fa-facebook-f"></i></a><a class="btn btn-outline-light btn-social mx-1" href="#"><i class="fab fa-fw fa-twitter"></i></a><a class="btn btn-outline-light btn-social mx-1" href="#"><i class="fab fa-fw fa-linkedin-in"></i></a><a class="btn btn-outline-light btn-social mx-1" href="#"><i class="fab fa-fw fa-dribbble"></i></a>
-                    </div>
-                    <!-- Footer About Text-->
-                    <div class="col-lg-4">
-                        <h4 class="text-uppercase mb-4">About Freelancer</h4>
-                        <p class="lead mb-0">Freelance is a free to use, MIT licensed Bootstrap theme created by <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- Copyright Section-->
-        <section class="copyright py-4 text-center text-white">
-            <div class="container"><small>Copyright © Your Website 2020</small></div>
-        </section>
-        <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
-        <div class="scroll-to-top d-lg-none position-fixed">
-            <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
-        </div>
-        <!-- Portfolio Modals--><!-- Portfolio Modal 1-->
-        <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
-                <div class="modal-content">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
-                    <div class="modal-body text-center">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8">
-                                    <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Log Cabin</h2>
-                                    <!-- Icon Divider-->
-                                    <div class="divider-custom">
-                                        <div class="divider-custom-line"></div>
-                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                        <div class="divider-custom-line"></div>
-                                    </div>
-                                    <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5" src="${hContext}/resources/assets/img/portfolio/cabin.png" alt="" /><!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                                    <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Portfolio Modal 2-->
-        <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-labelledby="portfolioModal2Label" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
-                <div class="modal-content">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
-                    <div class="modal-body text-center">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8">
-                                    <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Tasty Cake</h2>
-                                    <!-- Icon Divider-->
-                                    <div class="divider-custom">
-                                        <div class="divider-custom-line"></div>
-                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                        <div class="divider-custom-line"></div>
-                                    </div>
-                                    <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5" src="${hContext}/resources/assets/img/portfolio/cake.png" alt="" /><!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                                    <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Portfolio Modal 3-->
-        <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-labelledby="portfolioModal3Label" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
-                <div class="modal-content">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
-                    <div class="modal-body text-center">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8">
-                                    <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Circus Tent</h2>
-                                    <!-- Icon Divider-->
-                                    <div class="divider-custom">
-                                        <div class="divider-custom-line"></div>
-                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                        <div class="divider-custom-line"></div>
-                                    </div>
-                                    <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5" src="${hContext}/resources/assets/img/portfolio/circus.png" alt="" /><!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                                    <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Portfolio Modal 4-->
-        <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-labelledby="portfolioModal4Label" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
-                <div class="modal-content">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
-                    <div class="modal-body text-center">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8">
-                                    <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Controller</h2>
-                                    <!-- Icon Divider-->
-                                    <div class="divider-custom">
-                                        <div class="divider-custom-line"></div>
-                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                        <div class="divider-custom-line"></div>
-                                    </div>
-                                    <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5" src="${hContext}/resources/assets/img/portfolio/game.png" alt="" /><!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                                    <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Portfolio Modal 5-->
-        <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-labelledby="portfolioModal5Label" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
-                <div class="modal-content">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
-                    <div class="modal-body text-center">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8">
-                                    <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Locked Safe</h2>
-                                    <!-- Icon Divider-->
-                                    <div class="divider-custom">
-                                        <div class="divider-custom-line"></div>
-                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                        <div class="divider-custom-line"></div>
-                                    </div>
-                                    <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5" src="${hContext}/resources/assets/img/portfolio/safe.png" alt="" /><!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                                    <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Portfolio Modal 6-->
-        <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-labelledby="portfolioModal6Label" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
-                <div class="modal-content">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
-                    <div class="modal-body text-center">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8">
-                                    <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Submarine</h2>
-                                    <!-- Icon Divider-->
-                                    <div class="divider-custom">
-                                        <div class="divider-custom-line"></div>
-                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                        <div class="divider-custom-line"></div>
-                                    </div>
-                                    <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5" src="${hContext}/resources/assets/img/portfolio/submarine.png" alt="" /><!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                                    <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
+    <form action="${hContext}/notice/do_retrieve.do" name="searchFrm"
+					method="get" class="form-inline">
+    	<input type="hidden" id="optionDiv" name="optionDiv" value="1">
+    </form>
     
     <!-- Bootstrap core JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -382,13 +172,61 @@
     <!-- Core theme JS-->
     <script src="${hContext}/resources/js/scripts.js"></script>
    <script type="text/javascript">
+	var login_email = "x";
+	var pcode_list = new Array();
    
+   	function doLoginCheck() {
+   		$.ajax({
+			type : "POST",
+			url : "${hContext}/member/do_login_check.do",
+			dataType : "html",
+			data : {
+			},
+			success : function(data) { //성공
+				var jData = JSON.parse(data);
+				login_email = jData.email;
+				//console.log(login_email);
+			},
+			error : function(xhr, status, error) {
+				//console.log("error:"+error);
+			},
+			complete : function(data) {
+
+			}
+		});//--ajax	
+   	}
+
+   	function doNoticePcode() {
+   	   	$.ajax({
+			type : "POST",
+			url : "${hContext}/notice/do_retrieve.do",
+			dataType : "html",
+			data : {
+				"searchDiv" : "10",
+				"pageSize" : "100000"
+			},
+			success : function(data) { //성공
+				var jData = JSON.parse(data);
+				for(var i=0;i<jData.length;i++) {
+					pcode_list[i] = jData[i].pcode;
+				}
+				for(var i=0;i<pcode_list.length;i++) {
+					//console.log(pcode_list[i]);
+				}
+				//console.log(pcode_list.length);
+			},
+			error : function(xhr, status, error) {
+				
+			},
+			complete : function(data) {
+
+			}
+		});//--ajax	
+   	}
+
       //검색 버튼
-      function test(){
-         
-         // 검색 지역
-         var address = $("#address").val();
-         
+      function maskSearch(){
+		var address = $("#address").val();
          //ajax
          $.ajax({
             url:"https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByAddr/json",
@@ -410,17 +248,17 @@
                        
                    // 지도의 중심좌표
                    mapOption = { 
-                       center: new daum.maps.LatLng(data.stores[0].lat, data.stores[0].lng),
+                       center: new kakao.maps.LatLng(data.stores[0].lat, data.stores[0].lng),
                        
                        // 지도의 확대 레벨
                        level: 5
                    };
                
                   // 지도를 생성합니다
-                  var map = new daum.maps.Map(mapContainer, mapOption); 
+                  var map = new kakao.maps.Map(mapContainer, mapOption); 
                   
                   // 주소-좌표 변환 객체를 생성합니다
-                  var geocoder = new daum.maps.services.Geocoder();
+                  var geocoder = new kakao.maps.services.Geocoder();
 
                   var addr = data.address; // 최종 주소 변수
                   // 주소 정보를 해당 필드에 넣는다.
@@ -430,10 +268,8 @@
                   geocoder.addressSearch(address, function(result, status) {
 
                   // 정상적으로 검색이 완료됐으면 
-                  if (status === daum.maps.services.Status.OK) {
-                	 var result = results[0]; //첫번째 결과의 값을 활용
- 					 
-                     var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+                  if (status == kakao.maps.services.Status.OK) {
+                     var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
                           mapContainer.style.display = "block";
                           map.relayout();
                           // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
@@ -465,24 +301,23 @@
                             imageSrc = "${hContext}/resources/img/main/icon_gray.png";
                           }
                      positions.push({title: data.stores[i].name
-                                 , latlng: new daum.maps.LatLng(data.stores[i].lat, data.stores[i].lng)
+                                 , latlng: new kakao.maps.LatLng(data.stores[i].lat, data.stores[i].lng)
                                  , image : imageSrc
                                  });
             
                   }
                   
                   // 마커 이미지의 이미지 크기 입니다
-                  var imageSize = new daum.maps.Size(30, 40); 
-                  
+                  var imageSize = new kakao.maps.Size(30, 40); 
                   
                   // 검색 결과의 수만큼 마커 출력
                   for (var i = 0; i < positions.length; i ++) {
                       // 마커 이미지를 생성합니다    
                       //var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize,imageSrc1,imageSrc2,imageSrc3,imageSrc4); 
-                      var markerImage = new daum.maps.MarkerImage(positions[i].image, imageSize ); 
+                      var markerImage = new kakao.maps.MarkerImage(positions[i].image, imageSize ); 
                       
                       // 마커를 생성합니다
-                      var marker = new daum.maps.Marker({
+                      var marker = new kakao.maps.Marker({
                           map: map, // 마커를 표시할 지도
                           position: positions[i].latlng, // 마커를 표시할 위치
                           title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
@@ -507,7 +342,7 @@
 						  data.stores[i].stock_at = "예정 없음"
 				  	  }
 				      
-					  daum.maps.event.addListener(marker, 'click', openOverlay(data.stores[i].code, map, marker,data.stores[i].name,
+					  kakao.maps.event.addListener(marker, 'click', openOverlay(data.stores[i].code, map, marker,data.stores[i].name,
                                                  data.stores[i].addr,data.stores[i].stock_at,data.stores[i].remain_stat));
                   }
                   
@@ -517,29 +352,38 @@
             },
                     complete:function(data){
             }
-         }).open();//--ajax
+         });//--ajax
          
          // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
          function openOverlay(code, map, marker,name,addr,stock,remain) {
             return function() {
                if($("#"+code+"").text()==""){
+					console.log(login_email);
+                   
+					var notice = '           <button class="button" onclick="doNoticeInsert(\''+code+'\');">알림신청</button>';
+
+                   	for(var i=0;i<pcode_list.length;i++) {
+      						if(pcode_list[i]==code) {
+   	   						//console.log("코드:"+code);
+   	   						//console.log(pcode_list[i]);
+                       	   notice = '           <button class="button" onclick="doNoticeDelete(\''+code+'\');">알림삭제</button>';
+                       	   continue;
+                          }
+                      }
+
                   // 마커 위에 커스텀오버레이를 표시합니다
                      // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-                     overlay = new daum.maps.CustomOverlay({
-                         content: '<div class="wrap" id="'+code+'">' + 
+                     overlay = new kakao.maps.CustomOverlay({
+                         content: '<div class="wrap" id="'+code+' name="'+code+'">' + 
                          '    <div class="info">' + 
                          '        <div class="title">' + 
                          '            '+name+'' + 
                          '            <div class="close" onclick="closeOverlay('+"$(this).parent().parent().parent()"+')" title="닫기"></div>' + 
                          '        </div>' + 
                          '        <div class="remain" align="center" style="font-size: 16px;">재고 상태:<b>'+remain+'</b></div>' + 
-                         '        <div align="center">'+
-                         //'           <label class="switch">'+
-                         //'               <input type="checkbox"><span class="slider round"></span>'+
-                         //'           </label>'+
-                         '           <button class="button" >알림</button>'+  
-                         '           <button class="button" >길찾기</button>'+ 
-                         '           <button class="button" >예약</button>'+ 
+                         '        <div align="center">'+notice+
+                         '           <button class="button" id="">길찾기</button>'+ 
+                         '           <button class="button" id="" onclick="goReserv('+code+',\''+name+'\');">예약</button>'+ 
                          '        </div>'+
                          '        <div class="body">' + 
                          '           <div class="ellipsis" align="center">'+addr+'</div>' + 
@@ -554,10 +398,90 @@
             };
          }//--openOverlay
       }//--test
+
+	  //주소 받아오기
+      window.onload = function(){
+    	  doLoginCheck();
+          $("#address").val("<%=p_address%>");
+          maskSearch();
+          doNoticePcode();
+      }
+
+	  //예약신청 경로
+	  function goReserv(code, name){
+		  window.location.href = "${hContext}/reserv/reserv_insert_page.do?pcode="+code+"&name="+name;
+      }
+
+	  //알림 삭제
+	  function doNoticeDelete(code){
+		  console.log(code);
+		  $.ajax({
+				type : "POST",
+				url : "${hContext}/notice/do_delete.do",
+				dataType : "html",
+				data : {
+					"pcode" : code
+				},
+				success : function(data) { //성공
+					var jData = JSON.parse(data);
+					if(null!=jData && jData.msgId=="1") {
+						alert(jData.msgMsg);
+						//새로고침
+						history.go(0);
+					}else {
+						alert(jData.msgMsg);
+					}
+				},
+				error : function(xhr, status, error) {
+					alert("error:"+error);
+				},
+				complete : function(data) {
+	
+				}
+			});//--ajax	
+      }
       
-      function closeOverlay(data){
+      //알림 등록
+	  function doNoticeInsert(code){
+		  if(login_email=="x"){
+			  alert("로그인 후에 이용 가능합니다.");
+			  return;
+		  }
+		  
+		  $.ajax({
+				type : "POST",
+				url : "${hContext}/notice/do_insert.do",
+				dataType : "html",
+				data : {
+					"pcode" : code
+				},
+				success : function(data) { //성공
+					var jData = JSON.parse(data);
+					if(null!=jData && jData.msgId=="1") {
+						alert(jData.msgMsg);
+						//새로고침
+						history.go(0);
+					}else {
+						alert(jData.msgMsg);
+					}
+				},
+				error : function(xhr, status, error) {
+					alert("error:"+error);
+				},
+				complete : function(data) {
+	
+				}
+			});//--ajax	
+      }
+
+	  //오버레이 창 닫기
+      function closeOverlay(data){+
          data.remove();
       }
+
+	  //http://localhost:8080/d_dolive/reserv/reserv_insert.do (예약신청 경로)
+      //http://localhost:8080/d_dolive/notice/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord= (알림경로)
+      
    </script>
 </body>
 </html>

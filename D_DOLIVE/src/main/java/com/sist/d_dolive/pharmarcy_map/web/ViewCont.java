@@ -29,7 +29,7 @@ Logger LOG = LoggerFactory.getLogger(this.getClass());
 	
 	@RequestMapping(value = "covidmap/sidomap.do", method = RequestMethod.GET)
 	public String doSidomap() {
-		LOG.debug("=아아아아아=");
+		//LOG.debug("=아아아아아=");
 		
 		
 		return "covidmap/sidomap";
@@ -37,24 +37,24 @@ Logger LOG = LoggerFactory.getLogger(this.getClass());
 	
 	@RequestMapping(value = "countdown/count_down.do", method = RequestMethod.GET)
 	public String doCountdown() {
-		LOG.debug("=아아아아아=");
+		//LOG.debug("=아아아아아=");
 		
 		return "countdown/count_down";
 	}
 	
-	@RequestMapping(value = "pharmacymap/main_test.do", method = RequestMethod.GET)
+	@RequestMapping(value = "pharmacymap/main.do", method = RequestMethod.GET)
 	public String doSelectTwo() {
-		LOG.debug("=아아아아아=");
+		//LOG.debug("=아아아아아=");
 		
-		return "pharmacymap/main_test";
+		return "pharmacymap/main";
 	}
 	
-	@RequestMapping(value = "pharmacymap/pharmacy_map_test.do", method = RequestMethod.GET)
+	@RequestMapping(value = "pharmacymap/pharmacy_map.do", method = RequestMethod.GET)
 	public String doStart(HttpServletRequest req, HttpServletResponse res) {
-		LOG.debug("=아아아아아=");
+		//LOG.debug("=아아아아아=");
 		String p_address = req.getParameter("p_address");
 		LOG.debug("p_address="+p_address);
 		req.setAttribute("p_address", p_address);
-		return "pharmacymap/pharmacy_map_test";
+		return "pharmacymap/pharmacy_map";
 	}
 }

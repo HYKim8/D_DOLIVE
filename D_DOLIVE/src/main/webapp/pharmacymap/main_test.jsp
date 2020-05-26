@@ -56,7 +56,7 @@
 			<form action="${hContext }/pharmacymap/pharmacy_map_test.do" name="main" method="get">
 			<div class="form-group has-success has-feedback">
 			  <label class="control-label" for="inputSuccess2">지역을 검색 해주세요</label>
-			  <input type="text" class="form-control" id="p_address" name="p_address" placeholder="주소를 입력하세요." aria-describedby="inputSuccess2Status">
+			  <input type="text" class="form-control" id="p_address" name="p_address" placeholder="주소를 입력하세요." value="" aria-describedby="inputSuccess2Status">
 			  <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
 			  <span id="inputSuccess2Status" class="sr-only">(success)</span>
 			</div>
