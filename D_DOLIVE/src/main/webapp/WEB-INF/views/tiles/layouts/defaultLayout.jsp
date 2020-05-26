@@ -48,7 +48,7 @@
         </tr>
         <tr>
             <!--tiles menu  -->
-            <td><tiles:insertAttribute name="menu"/></td> 
+            <td align=center valign=top style="width:10%; border: 1px solid black;"><tiles:insertAttribute name="menu"/></td> 
             <!--tiles body  -->
             <td><tiles:insertAttribute name="body"/></td>
         </tr>
