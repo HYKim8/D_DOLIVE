@@ -61,7 +61,7 @@
 	      		<label for="email" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">이메일</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="email" name="email" placeholder="이메일"
-		      		value="${vo.email }">
+		      		value="${vo.email }" readonly="readonly">
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
@@ -100,24 +100,24 @@
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="addr" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">주소</label>
-	      		<input type="button" value="주소 조회" onclick="goJusoPopup();"/>
+	      		<input type="button" class="btn btn-primary btn-sm" value="주소 조회" onclick="goJusoPopup();"/>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="roadAddrPart1" name="roadAddrPart1" placeholder="주소"
-		      	 	value="${vo.addr }">
+		      	 	value="${vo.addr }" readonly="readonly">
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="addr2" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">상세주소</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="addrDetail" name="addrDetail" placeholder="상세주소"
-		      	 	value="${vo.addr2 }">
+		      	 	value="${vo.addr2 }" readonly="readonly">
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="zipNo" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">우편번호</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<input type="text" class="form-control" id="zipNo" name="zipNo" placeholder="우편번호"
-		      	 	value="${vo.zipNo }">
+		      	 	value="${vo.zipNo }" readonly="readonly">
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
@@ -142,11 +142,22 @@
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
-	      		<label for="pcode" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">판매처코드</label>
+	      		<label for="pname" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">판매처 이름</label>
+	      		<input type="button" class="btn btn-primary btn-sm" value="판매처 조회" onclick="goPharmacyPopup();"/>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-		      		<input type="text" class="form-control" id="pcode" name="pcode" placeholder="판매처코드"
-		      	 	value="${vo.pcode }">
+		      		<input type="text" class="form-control" id="pname" name="pname" placeholder="판매처 이름"
+		      	 	value="${vo.pname }" readonly="readonly">
 		      	</div>
+	      	</div>
+	      	<div class="form-group">
+	      		<label for="paddr" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">판매처 주소</label>
+		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+		      		<input type="text" class="form-control" id="paddr" name="paddr" placeholder="판매처 주소"
+		      	 	value="${vo.paddr }" readonly="readonly">
+		      	</div>
+	      	</div>
+	      	<div class="form-group">
+	      		<input type="hidden" class="form-control" id="pcode" name="pcode" placeholder="판매처 코드" value="${vo.pcode }" readonly="readonly">
 	      	</div>
    		</form>
  	</div>   
@@ -159,6 +170,16 @@
     
     
     <script type="text/javascript">
+	    function goPharmacyPopup() {
+			var pop = window.open("${hContext}/pharmacy/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=", "pop", "width=570,height=420, scrollbars=yes, resizable=yes"); 
+		}
+	
+		function pharmacyCallBack(pname, paddr, pcode) {
+			document.updateFrm.pname.value = pname;
+			document.updateFrm.paddr.value = paddr;
+			document.updateFrm.pcode.value = pcode;
+		}
+    
 	    function goJusoPopup(){
 	    	// 주소검색을 수행할 팝업 페이지를 호출합니다.
 	    	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.

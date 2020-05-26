@@ -23,41 +23,47 @@
 	</update>
 	 
 	<sql id="bizMemberColumns">
-		email	
-		, pw		
-		, func_code('GENDER', gender) AS gender	
-		, name	
-		, birth	
-		, addr	
-		, addr2	
-		, zipNo	
-		, tel		
-		, bizRno	
-		, bizTel	
-		, pcode	
-		, regId	
-		, TO_CHAR(regDt, 'YYYY/MM/DD HH24MISS') regDt	
-		, modId	
-		, TO_CHAR(modDt, 'YYYY/MM/DD HH24MISS') modDt
+		b.email	
+		, b.pw		
+		, func_code('GENDER', b.gender) AS gender	
+		, b.name AS name	
+		, b.birth	
+		, b.addr AS addr	
+		, b.addr2	
+		, b.zipNo	
+		, b.tel		
+		, b.bizRno	
+		, b.bizTel	
+		, b.pcode
+		, p.name AS pname
+		, p.addr AS paddr
+		, b.regId	
+		, TO_CHAR(b.regDt, 'YYYY/MM/DD HH24MISS') AS regDt	
+		, b.modId	
+		, TO_CHAR(b.modDt, 'YYYY/MM/DD HH24MISS') AS modDt
 	</sql>
 	
 	<sql id="selectOneCondition">
 		<choose>
 			<when test="'10' == searchDiv">
-				WHERE email = #{email, jdbcType = VARCHAR}
+				WHERE b.email = #{email, jdbcType = VARCHAR}
+				AND b.pcode = p.pcode
 			</when>
 			<when test="'20' == searchDiv">
-				WHERE name = #{name}
-				AND birth = #{birth}
+				WHERE b.name = #{name}
+				AND b.birth = #{birth}
+				AND b.pcode = p.pcode
 			</when>
 			<when test="'30' == searchDiv">
-				WHERE email = #{email}
-				AND name = #{name}
-				AND birth = #{birth}
+				WHERE b.email = #{email}
+				AND b.name = #{name}
+				AND b.birth = #{birth}
+				AND b.pcode = p.pcode
 			</when>
 			<when test="'40' == searchDiv">
-				WHERE email = #{email,jdbcType=VARCHAR}
-				AND pw = #{pw,jdbcType=VARCHAR}
+				WHERE b.email = #{email,jdbcType=VARCHAR}
+				AND b.pw = #{pw,jdbcType=VARCHAR}
+				AND b.pcode = p.pcode
 			</when>
 		</choose>
 	</sql>
@@ -66,7 +72,7 @@
 	<select id="doSelectOne" parameterType="BizMemberVO" resultType="BizMemberVO">
 		SELECT
 			<include refid="bizMemberColumns"></include>
-		FROM bizmember
+		FROM bizmember b, pharmacy p
 		<include refid="selectOneCondition"></include>
 		<!-- 단건 조회: searchDiv: 10 -->
 		<!-- 이메일 찾기: searchDiv: 20 -->
@@ -76,7 +82,7 @@
 	<!-- id / pw check -->
     <select id="idPwCheck" parameterType="BizMemberVO" resultType="java.lang.Integer">
 		SELECT COUNT(1)
-		FROM bizmember
+		FROM bizmember b, pharmacy p
 		<include refid="selectOneCondition"></include>
 		<!-- id check: searchDiv: 10 -->
 		<!-- pw Check: searchDiv: 40 -->

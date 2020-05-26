@@ -24,11 +24,18 @@ Logger LOG = LoggerFactory.getLogger(this.getClass());
 	MessageSource messageSource;
 	
 	@RequestMapping(value = "covidmap/sidomap.do", method = RequestMethod.GET)
-	public String doSelectOne() {
+	public String doSidomap() {
 		LOG.debug("=아아아아아=");
 		
 		
 		return "covidmap/sidomap";
+	}
+	
+	@RequestMapping(value = "countdown/count_down.do", method = RequestMethod.GET)
+	public String doCountdown() {
+		LOG.debug("=아아아아아=");
+		
+		return "countdown/count_down";
 	}
 	
 	@RequestMapping(value = "pharmacymap/main_test.do", method = RequestMethod.GET)

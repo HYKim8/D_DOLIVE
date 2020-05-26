@@ -57,31 +57,35 @@
       	
       	<!--// div title -->
       	
-        <div class="paddingButton" >
+<!--         <div class="paddingButton" >
         	<input type="button" class="btn btn-primary btn-sm" value="예약조회" onclick="goReserv();" />
 				<input type="button" class="btn btn-primary btn-sm" value="수정하기" onclick="goUpdate();" />
 				<input type="button" class="btn btn-primary btn-sm" value="탈퇴하기" onclick="doDelete();" />
 		</div>
-		
+ -->		
+ 
+ 		<div >
+ 			<input type="button" style="float: right;" class="btn btn-primary btn-sm" value="탈퇴하기" onclick="doDelete();" />
+ 		</div>
       	<form class="form-horizontal" action="${hContext }/bizmember/do_select_one.do" name="selectFrm" method="get">
       		<input type="hidden" id="h_email" name="h_email"/>
       		<div class="form-group">
 	      		<label for="email" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">이메일</label>
-		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+		    	<div class="col-lg-13 col-sm-13 col-xs-13">
 		      		<input type="text" class="form-control" id="email" name="email" placeholder="이메일"
 		      		value="${member.email }" readonly>
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="pw" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">비밀번호</label>
-		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+		    	<div class="col-lg-13 col-sm-13 col-xs-13">
 		      		<input type="text" class="form-control" id="pw" name="pw" placeholder="비밀번호"
 		      	 	value="${member.pw }" readonly>
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="gender" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">성별</label>
-		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+		    	<div class="col-lg-13 col-sm-13 col-xs-13">
 		    		<c:choose>
 		    			<c:when test="${member.gender eq '1'}">
 		    				<input type="text" class="form-control" id="gender" name="gender" placeholder="성별" value="남자" readonly>
@@ -95,21 +99,21 @@
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="ihidnum" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">주민번호</label>
-		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+		    	<div class="col-lg-13 col-sm-13 col-xs-13">
 		      		<input type="text" class="form-control" id="ihidnum" name="ihidnum" placeholder="주민번호"
 		      	 	value="${member.ihidnum }" readonly>
 		      	</div>
 	      	</div>	      	
 	      	<div class="form-group">
 	      		<label for="name" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">이름</label>
-		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+		    	<div class="col-lg-13 col-sm-13 col-xs-13">
 		      		<input type="text" class="form-control" id="name" name="name" placeholder="이름"
 		      	 	value="${member.name }" readonly>
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
 	      		<label for="tel" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">전화번호</label>
-		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+		    	<div class="col-lg-13 col-sm-13 col-xs-13">
 		      		<input type="text" class="form-control" id="tel" name="tel" placeholder="전화번호"
 		      	 	value="${member.tel }" readonly>
 		      	</div>
@@ -119,21 +123,21 @@
 	      	
 			<div class="form-group">
 				<label for="zipno" class="col-lg-4 col-sm-4 col-xs-4  control-label">주소</label>
-				<div class="col-lg-10 col-sm-10 col-xs-10">
+				<div class="col-lg-13 col-sm-13 col-xs-13">
 						<input type="text" id="zipno"  class="form-control" placeholder="우편번호" name="zipno" value="${member.zipno }" readonly >
 				</div>
 			</div>	
 			
 			<div class="form-group">
 				<label for="addr" class="col-lg-4 col-sm-4 col-xs-4  control-label">기본주소</label>
-				<div class="col-lg-10 col-sm-10 col-xs-10">
+				<div class="col-lg-13 col-sm-13 col-xs-13">
 						<input type="text" name="addr" id="addr"  class="form-control" placeholder="기본주소" value="${member.addr }" readonly>
 				</div>
 			</div>		
 			
 			<div class="form-group">
 				<label for="addr2" class="col-lg-4 col-sm-4 col-xs-4  control-label">상세주소</label>
-				<div class="col-lg-10 col-sm-10 col-xs-10">
+				<div class="col-lg-13 col-sm-13 col-xs-13">
 						<input type="text" id=addr2 name="addr2"  class="form-control" placeholder="상세주소" value="${member.addr2 }" readonly >
 				</div>
 			</div>		      	
@@ -198,36 +202,6 @@
 	        frm.submit();
 		}
 
-		function goReserv() {
-			//console.log("update_btn");
-			
-			var frm = document.selectFrm;
-			frm.h_email.value = $("#email").val();
-	        frm.action = "${hContext}/reserv/do_retrieve.do";
-	        frm.submit();
-
-	        $.ajax({
-				type : "GET",
-				url : "${hContext}/reserv/do_retrieve.do",
-				dataType : "html",
-				data : {
-					"pageSize" : 0,
-					"pageNum" : 0,
-					"optionDiv" : 10
-					
-				},
-				success : function(data) { //성공
-
-					location.href="${hContext}/member/member_reservation"
-				},
-				error : function(xhr, status, error) {
-					alert("error:"+error);
-				},
-				complete : function(data) {
-	
-				}
-			});//--ajax
-		}
     </script>
 </body>
 </html>

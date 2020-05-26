@@ -75,7 +75,7 @@
 		<div class="row">
 			<div class="col-lg-10 col-sm-10 col-xs-10 ">
 				<div class="text-right">
-					<button type="button" class="btn btn-default btn-sm" id="findId">아이디찾기</button>
+					<span style="float:right"><button type="button" class="btn btn-primary btn-sm" id="findId">아이디찾기</button></span>
 					<!-- <input class="btn btn-primary py-2 px-3" type="button" onclick="location.href='javascript:findId();'"  value="Id찾기" id="cancel" /> -->
 				</div>
 			</div>
@@ -88,7 +88,7 @@
 			
 			<div class="form-group">
 				<label for="name" class="col-lg-4 col-sm-4 col-xs-4  control-label">이름</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
+				<div class="col-lg-10 col-sm-10 col-xs-10">
 					<input type="text" maxlength="350" class="form-control input-sm"
 						id="name" name="name" placeholder="이름" />
 				</div>
@@ -97,7 +97,7 @@
 			<div class="form-group">
 				<label for="ihidnum"
 					class="col-lg-4 col-sm-4 col-xs-4  control-label">주민번호</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
+				<div class="col-lg-10 col-sm-10 col-xs-10">
 					<input type="password" maxlength="50" class="form-control input-sm"
 						id="ihidnum" name="ihidnum" placeholder="비밀번호" />
 				</div>
@@ -114,7 +114,7 @@
 		<div class="row">
 			<div class="col-lg-10 col-sm-10 col-xs-10 ">
 				<div class="text-right">
-					<button type="button" class="btn btn-default btn-sm" id="findPw">비밀번호찾기</button>
+					<span style="float:right"><button type="button" class="btn btn-primary btn-sm" id="findPw">비밀번호찾기</button></span>
 				</div>
 			</div>
 		</div>
@@ -125,7 +125,7 @@
 			
 			<div class="form-group">
 				<label for="email" class="col-lg-4 col-sm-4 col-xs-4  control-label">이메일</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
+				<div class="col-lg-10 col-sm-10 col-xs-10">
 					<input type="text" maxlength="350" class="form-control input-sm"
 						id="email" name="email" placeholder="이메일" />
 				</div>
@@ -133,7 +133,7 @@
 			
 			<div class="form-group">
 				<label for="name" class="col-lg-4 col-sm-4 col-xs-4  control-label">이름</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
+				<div class="col-lg-10 col-sm-10 col-xs-10">
 					<input type="text" maxlength="350" class="form-control input-sm"
 						id="name1" name="name1" placeholder="이름" />
 				</div>
@@ -142,7 +142,7 @@
 			<div class="form-group">
 				<label for="ihidnum"
 					class="col-lg-4 col-sm-4 col-xs-4  control-label">주민번호</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
+				<div class="col-lg-10 col-sm-10 col-xs-10">
 					<input type="password" maxlength="50" class="form-control input-sm"
 						id="ihidnum1" name="ihidnum1" placeholder="비밀번호" />
 				</div>

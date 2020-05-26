@@ -45,9 +45,8 @@ public class MemberCont {
 	MessageSource messageSource;
 	
 	
-	@RequestMapping(value = "login/gologin.do", method = RequestMethod.GET)
+	@RequestMapping( value = "login/gologin.do", method = RequestMethod.GET)
 	public String gologin() {
-		
 		
 		return "login/login";
 	}
@@ -91,6 +90,13 @@ public class MemberCont {
 		
 		return "member/member_select_one";
 	}
+	
+	
+	@RequestMapping(value="login/logout.do",method = RequestMethod.GET)
+	public String logOut(MemberVO memberVO,HttpSession session) {
+	session.removeAttribute("member");
+	return "login/login";	
+}	
 	
 	
 	
@@ -269,6 +275,8 @@ public class MemberCont {
 		
 		return json;	
 	}
+	
+
 	
 	
 	@RequestMapping(value="member/do_getmember.do",method = RequestMethod.POST

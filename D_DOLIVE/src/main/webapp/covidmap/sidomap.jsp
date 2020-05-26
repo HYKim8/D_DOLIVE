@@ -23,7 +23,7 @@
 <html style="width:100%;height:100%;margin:0;padding:0;">
 <head>
 <meta charset="UTF-8">
-<title>지역별 확진자 현황</title>
+<title>확진자 현황</title>
    <!-- 전국 확진자 현황 -->
    <script src="https://livecorona.co.kr/data/koreaRegionalData.js"></script>
    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=43aece2f44d2c157208d1b90434bfa71&libraries=services"></script>
@@ -90,7 +90,7 @@
 <body style="width:100%;height:100%;margin:0;padding:0;">
    
    <div class="title">
-        <div style="font-size: 52px; font-weight:800; margin: 0 0 0 20%; padding: 40px 0 0 0;">코로나 현황</div>
+        <div style="font-size: 47px; font-weight:800; margin: 0 0 0 20%; padding: 40px 0 0 0;">코로나 현황</div>
         <div style="float:right;">
             <p id="coivdupdatetime" style="color:gray; margin:0; "></p>
             <p id="clock" style="color:gray; margin:0; ">00:00</p>

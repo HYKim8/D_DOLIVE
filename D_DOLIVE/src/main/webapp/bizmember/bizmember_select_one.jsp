@@ -57,7 +57,7 @@
       	<!-- div title -->
       	<form class="form-horizontal" action="${hContext }/bizmember/do_select_one.do" name="selectFrm" method="get">
       		<input type="hidden" id="optionDiv" name="optionDiv"/>
-      		<input type="hidden" id="h_email" name="h_email"/>
+      		<input type="hidden" id="searchDiv" name="searchDiv"/>
       		<div class="form-group">
 	      		<label for="email" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">이메일</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
@@ -76,12 +76,12 @@
 	      		<label for="gender" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">성별</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<c:if test="${vo.gender eq '남자'}">
-						&nbsp;<input type="radio" id="gender" name="gender" value="${vo.gender }" checked/>&nbsp;남자
-						&nbsp;<input type="radio" id="gender" name="gender" value="${vo.gender }" />&nbsp;여자
+						&nbsp;<input type="radio" id="gender" name="gender" value="${vo.gender }" checked disabled="disabled"/>&nbsp;남자
+						&nbsp;<input type="radio" id="gender" name="gender" value="${vo.gender }" disabled="disabled"/>&nbsp;여자
 					</c:if>
 					<c:if test="${vo.gender eq '여자'}">
-						&nbsp;<input type="radio" id="gender" name="gender" value="${vo.gender }" />&nbsp;남자
-						&nbsp;<input type="radio" id="gender" name="gender" value="${vo.gender }" checked/>&nbsp;여자
+						&nbsp;<input type="radio" id="gender" name="gender" value="${vo.gender }" disabled="disabled"/>&nbsp;남자
+						&nbsp;<input type="radio" id="gender" name="gender" value="${vo.gender }" checked disabled="disabled"/>&nbsp;여자
 					</c:if>
 		      	</div>
 	      	</div>
@@ -142,10 +142,17 @@
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
-	      		<label for="pcode" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">판매처코드</label>
+	      		<label for="pname" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">판매처 이름</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-		      		<input type="text" class="form-control" id="pcode" name="pcode" placeholder="판매처코드"
-		      	 	value="${vo.pcode }" readonly>
+		      		<input type="text" class="form-control" id="pname" name="pname" placeholder="판매처 이름"
+		      	 	value="${vo.pname }" readonly="readonly">
+		      	</div>
+	      	</div>
+	      	<div class="form-group">
+	      		<label for="paddr" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">판매처 주소</label>
+		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+		      		<input type="text" class="form-control" id="paddr" name="paddr" placeholder="판매처 주소"
+		      	 	value="${vo.paddr }" readonly="readonly">
 		      	</div>
 	      	</div>
    		</form>
@@ -195,7 +202,7 @@
 			
 			var frm = document.selectFrm;
 			frm.optionDiv.value = "2";
-			frm.h_email.value = $("#email").val();
+			frm.searchDiv.value = "10";
 	        frm.action = "${hContext}/bizmember/do_select_one.do";
 	        frm.submit();
 		}

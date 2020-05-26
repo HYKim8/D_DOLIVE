@@ -41,8 +41,7 @@
 <link rel="shortcut icon" type="image/x-icon"
 	href="${hContext}/resources/img/main/favicon.ico">
 <!-- 부트스트랩 -->
-<link href="${hContext}/resources/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="${hContext}/resources/css/styles.css" rel="stylesheet" />
 
 <!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
 <!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->
@@ -70,7 +69,7 @@
 		<div class="row">
 			<div class="col-lg-10 col-sm-10 col-xs-10 ">
 				<div class="text-right">
-					<button type="button" class="btn btn-default btn-sm" onclick="idFind();">아이디찾기</button>
+					<button type="button" class="btn btn-primary btn-sm" onclick="idFind();">아이디찾기</button>
 					<!-- <input class="btn btn-primary py-2 px-3" type="button" onclick="location.href='javascript:findId();'"  value="Id찾기" id="cancel" /> -->
 				</div>
 			</div>
@@ -102,7 +101,7 @@
 		<div class="row">
 			<div class="col-lg-10 col-sm-10 col-xs-10 ">
 				<div class="text-right">
-					<button type="button" class="btn btn-default btn-sm" onclick="pwFind();">비밀번호찾기</button>
+					<button type="button" class="btn btn-primary btn-sm" onclick="pwFind();">비밀번호찾기</button>
 				</div>
 			</div>
 		</div>
