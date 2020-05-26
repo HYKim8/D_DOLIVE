@@ -60,6 +60,7 @@
 			WHERE b.pcode = p.pcode
 			AND b.regId = m.email
 			AND rnum <![CDATA[ >= ]]> (#{pageSize} * (#{pageNum} -1) +1)
+			ORDER BY num
 		)t1
 		NATURAL JOIN
 		(

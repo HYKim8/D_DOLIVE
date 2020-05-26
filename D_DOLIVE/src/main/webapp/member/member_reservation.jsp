@@ -194,6 +194,15 @@
 	<script src="${hContext}/resources/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" ></script>
 	<script type="text/javascript">
+		function doSearchPage(url, no) {
+			console.log("#url:"+url);
+			console.log("#no:"+no);
+	
+			var frm = document.searchFrm;
+			frm.pageNum.value = no;
+			frm.action = url;
+			frm.submit();
+		}
 
 		function cancelPay() {
 			var rno = $('input[name="rno"]:checked').val();
@@ -246,22 +255,34 @@
 			}
 
 			if(nowApproval == "취소완료"){
-				alert("취소완료된 건은 예약취소가 불가능합니다.");
+				alert("취소완료된 건은 상태변경이 불가능합니다.");
 				return;
 			}else if(nowApproval == "승인거절"){
-				alert("승인거절된 건은 예약취소가 불가능합니다.");
+				alert("승인거절된 건은 상태변경이 불가능합니다.");
 				return;
-			}else if(nowApproval == "결제완료 "){
-				alert("결제완료된 건은 예약취소가 불가능합니다.");
+			}else if(nowApproval == "상품배정"){
+				alert("상품배정 된 건은 상태변경이 불가능합니다.");
 				return;
-			}else if(nowApproval == "상품배정 "){
-				alert("상품배정 된 건은 예약취소가 불가능합니다.");
-				return;
-			}else if(nowApproval == "구매확정 "){
-				alert("구매확정 된 건은 예약취소가 불가능합니다.");
+			}else if(nowApproval == "구매확정"){
+				alert("구매확정 된 건은 상태변경이 불가능합니다.");
 				return;
 			}else if(nowApproval == "환불완료"){
-				alert("환불완료된 건은 예약취소가 불가능합니다.");
+				alert("환불완료된 건은 상태변경이 불가능합니다.");
+				return;
+			}else if(nowApproval == "예약신청" && approval == "2"){
+				
+			}else if(nowApproval == "예약신청" && approval != "2"){
+				alert("예약신청된 건은 예약취소만 가능합니다.");
+				return;
+			}else if(nowApproval == "승인완료" && approval == "5"){
+				
+			}else if(nowApproval == "승인완료" && approval != "5"){
+				alert("승인완료된 건은 결제하기만 가능합니다.");
+				return;
+			}else if(nowApproval == "결제완료" && approval == "8"){
+				
+			}else if(nowApproval == "결제완료" && approval != "8"){
+				alert("결제완료된 건은 환불하기만 가능합니다.");
 				return;
 			}
 
@@ -321,6 +342,11 @@
 			var nowApproval = $('input[name="rno"]:checked').parent().parent().children().eq(5).text();
 			
 			var amount = $('input[name="rno"]:checked').parent().parent().children().eq(6).text();
+			var email = "${memberVO.email}";
+			var name = "${memberVO.name}";
+			var tel = "${memberVO.tel}";
+			var addr = "${memberVO.addr}";
+			var zipNo = "${memberVO.zipno}";
 
 			if(rno == undefined) {
 				alert("체크를 확인해주세요.");
@@ -356,10 +382,10 @@
 	        }, function(rsp) {
 	            if ( rsp.success ) {
 	                var msg = '결제가 완료되었습니다.';
-	                msg += '고유ID : ' + rsp.imp_uid;
+	                /* msg += '고유ID : ' + rsp.imp_uid;
 	                msg += '상점 거래ID : ' + rsp.merchant_uid;
 	                msg += '결제 금액 : ' + rsp.paid_amount;
-	                msg += '카드 승인번호 : ' + rsp.apply_num;
+	                msg += '카드 승인번호 : ' + rsp.apply_num; */
 
 	                doUpdate(5, rsp.imp_uid);
 	            } else {
