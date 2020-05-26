@@ -246,6 +246,8 @@
 				alert("예약신청인건은 승인완료 또는 승인거절로만 변경 가능합니다.");
 				return;
 			}
+
+			if(false==confirm("수정 하시겠습니까?"))return;
 			
 			//ajax
 			$.ajax({

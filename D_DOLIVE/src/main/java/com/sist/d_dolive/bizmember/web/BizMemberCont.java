@@ -93,15 +93,14 @@ public class BizMemberCont {
 	@RequestMapping(value = "bizmember/do_delete.do", method = RequestMethod.POST
 			, produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public String doDelete(BizMemberVO bizMemberVO, Locale locale) {
+	public String doDelete(BizMemberVO bizMemberVO, Locale locale, HttpSession session) {
 		//param board_id
 		LOG.debug("1==================");
 		LOG.debug("1=param="+bizMemberVO);
 		LOG.debug("1==================");
 		
-		if(null==bizMemberVO.getEmail() || bizMemberVO.getEmail().equals("")) {
-			throw new IllegalArgumentException("Email을 확인 하세요.");
-		}
+		BizMemberVO ssBizMemberVO = (BizMemberVO) session.getAttribute("bizMember");
+		bizMemberVO.setEmail(ssBizMemberVO.getEmail());
 		
 		int flag = this.bizMemberService.doDelete(bizMemberVO);
 		
