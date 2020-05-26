@@ -22,6 +22,7 @@ import com.sist.d_dolive.cmn.SearchVO;
 import com.sist.d_dolive.cmn.StringUtil;
 import com.sist.d_dolive.code.CodeService;
 import com.sist.d_dolive.code.CodeVO;
+import com.sist.d_dolive.member.MemberVO;
 import com.sist.d_dolive.pharmacy.PharmacyVO;
 import com.sist.d_dolive.reservation.ReservService;
 import com.sist.d_dolive.reservation.ReservVO;
@@ -52,7 +53,10 @@ public class ReservCont {
 		}
 		search.setSearchDiv(StringUtil.nvl(search.getSearchDiv()));
 		
-		if(search.getOptionDiv().equals("2")) {
+		if(search.getOptionDiv().equals("1")) {
+			MemberVO memberVO = (MemberVO) session.getAttribute("member");
+			search.setSearchWord(StringUtil.nvl(memberVO.getEmail()));
+		}else if(search.getOptionDiv().equals("2")) {
 			BizMemberVO bizMemberVO = (BizMemberVO) session.getAttribute("bizMember");
 			search.setSearchWord(StringUtil.nvl(bizMemberVO.getPcode()));
 		}
@@ -113,14 +117,15 @@ public class ReservCont {
 	
 	@RequestMapping(value = "reserv/do_insert.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public String doInsert(ReservVO reservVO, Locale locale) {
+	public String doInsert(ReservVO reservVO, Locale locale, HttpSession session) {
 		
 		//1. param
 		LOG.debug("Cont 1.==========================");
 		LOG.debug("Cont 1.=param="+reservVO);
 		LOG.debug("Cont 1.==========================");
 		
-		//TODO 다국어 메시지 처리
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		reservVO.setRegId(memberVO.getEmail());
 		
 		//2. doInsert
 		int flag = this.reservService.doInsert(reservVO);
@@ -132,10 +137,10 @@ public class ReservCont {
 		MessageVO message = new MessageVO();
 		if(flag>0) {
 			message.setMsgId(String.valueOf(flag));
-			message.setMsgMsg("등록 성공");
+			message.setMsgMsg("예약에 성공하였습니다.");
 		} else {
 			message.setMsgId(String.valueOf(flag));
-			message.setMsgMsg("등록 실패");
+			message.setMsgMsg("예약에 실패했습니다.");
 		}
 		LOG.debug("Cont 3.==========================");
 		LOG.debug("Cont 3.=message="+message.getMsgMsg());
@@ -154,7 +159,7 @@ public class ReservCont {
 	
 	@RequestMapping(value = "reserv/do_update.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public String doUpdate(ReservVO reservVO, Locale locale) {
+	public String doUpdate(ReservVO reservVO, Locale locale, HttpSession session) {
 		
 		//1. param
 		LOG.debug("Cont 1.==========================");
@@ -162,10 +167,16 @@ public class ReservCont {
 		LOG.debug("Cont 1.==========================");
 		
 		if(reservVO.getApproval() == null || reservVO.getApproval().equals("")) {
-			throw new IllegalArgumentException("에약건을 확인하세요.");
+			throw new IllegalArgumentException("예약건을 확인하세요.");
 		}
-		
-		//TODO 다국어 메시지 처리
+
+		if(reservVO.getOptionDiv().equals("1")) {
+			MemberVO memberVO = (MemberVO) session.getAttribute("member");
+			reservVO.setModId(memberVO.getEmail());
+		} else if(reservVO.getOptionDiv().equals("2")) {
+			BizMemberVO bizMemberVO = (BizMemberVO) session.getAttribute("bizMember");
+			reservVO.setModId(bizMemberVO.getEmail());
+		}
 		
 		//2. doUpdate
 		int flag = this.reservService.doUpdate(reservVO);
@@ -177,10 +188,10 @@ public class ReservCont {
 		MessageVO message = new MessageVO();
 		if(flag>0) {
 			message.setMsgId(String.valueOf(flag));
-			message.setMsgMsg("상태 변경 성공");
+			message.setMsgMsg("예약상태 변경에 성공하였습니다.");
 		} else {
 			message.setMsgId(String.valueOf(flag));
-			message.setMsgMsg("상태 변경 실패");
+			message.setMsgMsg("예약상태 변경에 실패하였습니다.");
 		}
 		LOG.debug("Cont 3.==========================");
 		LOG.debug("Cont 3.=message="+message.getMsgMsg());
@@ -206,7 +217,7 @@ public class ReservCont {
 		LOG.debug("Cont 1.==========================");
 		
 		if(reservVO.getRno() == null || reservVO.getRno().equals("")) {
-			throw new IllegalArgumentException("에약건을 확인하세요.");
+			throw new IllegalArgumentException("예약건을 확인하세요.");
 		}
 		
 		//2. doSelectOne

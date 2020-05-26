@@ -279,6 +279,7 @@
 				    , "modId" : "수정자"
 					, "impuid" : imp_uid
 					, "searchDiv" : 10
+					, "optionDiv" : 1
 				},
 				success:function(data){ //성공
 					//alert(data)
