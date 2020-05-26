@@ -213,6 +213,7 @@
 			}
 
 			var nowApproval = $('input[name="rno"]:checked').parent().parent().children().eq(5).text();
+			console.log(nowApproval);
 
 			if(nowApproval=="취소완료") {
 				alert("취소완료인건은 변경이 불가능합니다.");
@@ -226,9 +227,13 @@
 			}else if(nowApproval=="결제완료" && approval!="6") {
 				alert("결제완료인건은 상품배정으로만 변경이 가능합니다.");
 				return;
+			}else if(nowApproval=="결제완료" && approval=="6") {
+
 			}else if(nowApproval=="상품배정" && approval!="7") {
 				alert("상품배정인건은 구매확정으로만 변경이 가능합니다.");
 				return;
+			}else if(nowApproval=="상품배정" && approval=="7") {
+
 			}else if(nowApproval=="구매확정") {
 				alert("구매확정인건은 변경이 불가능합니다.");
 				return;
@@ -250,7 +255,8 @@
 				data : {
 					"rno" : rno
 					, "approval" : approval
-					, "optionDiv" : "20"
+					, "searchDiv" : "10"
+					, "optionDiv" : "2"
 				},
 				success : function(data) { //성공
 					var jData = JSON.parse(data);
