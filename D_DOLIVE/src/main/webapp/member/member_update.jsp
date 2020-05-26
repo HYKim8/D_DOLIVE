@@ -55,7 +55,7 @@
 </head>
 <body>
 	<!-- div container -->
-	<div class="container,paddingMain">
+	<div class="container, paddingMain">
 		<!-- div title -->
 		<div class="page-header">
 			<h2>내 정보 수정</h2><hr/>
@@ -163,7 +163,7 @@
 
 
 		</form>
-		
+		</div>
 		<!--// 입력 Form -->
 
 
