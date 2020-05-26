@@ -54,14 +54,12 @@ public class MemberCont {
 	
 	@RequestMapping(value = "login/gomember.do", method = RequestMethod.GET)
 	public String gomember() {
-		LOG.debug("=아아아아아=");
 		
 		
 		return "login/member_insert";
 	}
 	@RequestMapping(value = "member/gobizmember.do", method = RequestMethod.GET)
 	public String gobizmember() {
-		LOG.debug("=아아아아아=");
 		
 		
 		return "bizmember/bizmember_insert";
@@ -69,7 +67,6 @@ public class MemberCont {
 	
 	@RequestMapping(value = "login/goidpw.do", method = RequestMethod.GET)
 	public String goidpw() {
-		LOG.debug("=아아아아아=");
 		
 		
 		return "login/id_pw_find";
@@ -77,7 +74,6 @@ public class MemberCont {
 	
 	@RequestMapping(value = "login/gobizidpw.do", method = RequestMethod.GET)
 	public String gobizidpw() {
-		LOG.debug("=아아아아아=");
 		
 		
 		return "login/id_pw_find";
@@ -85,11 +81,19 @@ public class MemberCont {
 	
 	@RequestMapping(value = "member/gomypage.do", method = RequestMethod.GET)
 	public String gomypage() {
-		LOG.debug("=아아아아아=");
 		
 		
 		return "member/member_select_one";
 	}
+	
+	@RequestMapping(value = "member/goupdate.do", method = RequestMethod.GET)
+	public String goupdate(HttpSession session, Model model) {
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		MemberVO outVO = (MemberVO) this.memberService.doSelectOne(memberVO);
+		model.addAttribute("vo", outVO);
+		return "member/member_update";
+	}
+	
 	
 	
 	@RequestMapping(value="login/logout.do",method = RequestMethod.GET)

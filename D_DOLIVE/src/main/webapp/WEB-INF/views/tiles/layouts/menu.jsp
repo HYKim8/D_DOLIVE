@@ -21,7 +21,7 @@
 <table>
   <tr> 
   	<td><a href="${context}/member/gomypage.do">내 정보 조회</a></td>
-    <td><a href="${context}/bizmember/do_select_one.do?email=이메일123&optionDiv=1">내 정보 수정</a></td>
+    <td><a href="${context}/member/goupdate.do">내 정보 수정</a></td>
     <td><a href="${context}/reserv/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=10&searchWord=&optionDiv=1">예약목록 조회</a></td>
   </tr>
 </table>
