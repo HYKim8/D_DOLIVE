@@ -52,7 +52,7 @@
    	<div class="container, paddingMain">
       	<!-- div title --> 
       	<div class="page-header">
-        	<h2>나의정보 보기</h2><hr/>
+        	<h2>내 정보 조회</h2><hr/>
       	</div>
       	
       	<!--// div title -->
