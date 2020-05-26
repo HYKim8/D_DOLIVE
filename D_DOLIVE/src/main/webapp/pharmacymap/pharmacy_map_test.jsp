@@ -172,7 +172,7 @@
     <!-- Core theme JS-->
     <script src="${hContext}/resources/js/scripts.js"></script>
    <script type="text/javascript">
-	var login_email = "";
+	var login_email = "x";
 	var pcode_list = new Array();
    
    	function doLoginCheck() {
@@ -184,17 +184,11 @@
 			},
 			success : function(data) { //성공
 				var jData = JSON.parse(data);
-				if(null!=jData.email) {
-					login_email = jData.email;
-					//console.log(login_email);
-				}else {
-					login_email = jData.email;
-					//console.log(login_email);
-				}
-			},
-			error : function(xhr, status, error) {
 				login_email = jData.email;
 				//console.log(login_email);
+			},
+			error : function(xhr, status, error) {
+				//console.log("error:"+error);
 			},
 			complete : function(data) {
 
@@ -203,12 +197,13 @@
    	}
 
    	function doNoticePcode() {
-   		$.ajax({
+   	   	$.ajax({
 			type : "POST",
 			url : "${hContext}/notice/do_retrieve.do",
 			dataType : "html",
 			data : {
-				"searchDiv" : "10"
+				"searchDiv" : "10",
+				"pageSize" : "100000"
 			},
 			success : function(data) { //성공
 				var jData = JSON.parse(data);
@@ -216,11 +211,12 @@
 					pcode_list[i] = jData[i].pcode;
 				}
 				for(var i=0;i<pcode_list.length;i++) {
-					console.log(pcode_list[i]);
+					//console.log(pcode_list[i]);
 				}
+				//console.log(pcode_list.length);
 			},
 			error : function(xhr, status, error) {
-				console.log("error:"+error);
+				
 			},
 			complete : function(data) {
 
@@ -273,8 +269,6 @@
 
                   // 정상적으로 검색이 완료됐으면 
                   if (status == kakao.maps.services.Status.OK) {
-                	 var result = results[0]; //첫번째 결과의 값을 활용
- 					 
                      var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
                           mapContainer.style.display = "block";
                           map.relayout();
@@ -364,16 +358,19 @@
          function openOverlay(code, map, marker,name,addr,stock,remain) {
             return function() {
                if($("#"+code+"").text()==""){
-					var notice = "";
+					console.log(login_email);
                    
-            	   for(var i=0;i<pcode_list.length;i++) {
-                       if(pcode_list[i]==code) {
-                    	   notice = '           <button class="button" onclick="doNoticeDelete(\''+code+'\');">알림삭제</button>';
-                       }else if(pcode_list[i]!=code) {
-                    	   notice = '           <button class="button" onclick="doNoticeInsert(\''+code+'\');">알림신청</button>';
-                       }
-                   }
-                   
+					var notice = '           <button class="button" onclick="doNoticeInsert(\''+code+'\');">알림신청</button>';
+
+                   	for(var i=0;i<pcode_list.length;i++) {
+      						if(pcode_list[i]==code) {
+   	   						//console.log("코드:"+code);
+   	   						//console.log(pcode_list[i]);
+                       	   notice = '           <button class="button" onclick="doNoticeDelete(\''+code+'\');">알림삭제</button>';
+                       	   continue;
+                          }
+                      }
+
                   // 마커 위에 커스텀오버레이를 표시합니다
                      // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
                      overlay = new kakao.maps.CustomOverlay({
@@ -406,10 +403,8 @@
       window.onload = function(){
     	  doLoginCheck();
           $("#address").val("<%=p_address%>");
-           maskSearch();
-          if(login_email != "x") {
-              doNoticePcode();
-          }
+          maskSearch();
+          doNoticePcode();
       }
 
 	  //예약신청 경로
@@ -448,6 +443,11 @@
       
       //알림 등록
 	  function doNoticeInsert(code){
+		  if(login_email=="x"){
+			  alert("로그인 후에 이용 가능합니다.");
+			  return;
+		  }
+		  
 		  $.ajax({
 				type : "POST",
 				url : "${hContext}/notice/do_insert.do",
