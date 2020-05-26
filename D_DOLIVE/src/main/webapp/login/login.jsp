@@ -64,8 +64,8 @@
 					<div class="form-group">
 						<label for="gender" class="col-lg-4 col-sm-4 col-xs-4  control-label"></label>
 						<div class="col-lg-6 col-sm-6 col-xs-6">
-								 일반회원<input type = "radio" id="member1" name = "radio" value = "1"><br/>
-						                   업체회원<input type = "radio" id="member2" name = "radio" value = "2" >
+								 일반회원<input type = "radio" id="member1" name = "radio" value = "1" checked><br/>
+						               업체회원<input type = "radio" id="member2" name = "radio" value = "2" >
 						</div>
 					</div>	                	
                     <!-- div 아이디 -->
