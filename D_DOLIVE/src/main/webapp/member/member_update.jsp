@@ -374,49 +374,58 @@
 
          			var emailVal = $('#email').val();
         			var regExp = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-
+					
         			  if (emailVal.match(regExp) != null) {
+        			  var szKor = $("#name").val();
+           			  regexp = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g; 
+
+	           			if(regexp.test(szKor)){
+	         				alert("이름은 한글만 입력 가능합니다.");
+	         				return false;
+	     				}else{
                       if (confirm("수정 하시겠습니까?") == false)return;
                      
-	                     //ajax
-	                     $.ajax({
-	                         type : "POST",
-	                         url : "${hContext}/member/update.do",
-	                         dataType : "html",
-	                         data : {
-	                             "email" : $("#email").val(),
-	                             "pw" : $("#pw").val(),
-	                             "gender" : $('input[name=gender]:checked').val(),
-	                             "ihidnum" : $("#ihidnum").val(),
-	                             "name" : $("#name").val(),
-	                             "tel" : $("#tel").val(),
-	                             "zipno" : $("#zipno").val(),
-	                             "addr" : $("#addr").val(),
-	                             "addr2" : $("#addr2").val(),
-	                             "modid" : $("#email").val()
-	
-	                         },
-	                         success : function(data) { //성공
-	         					var jData = JSON.parse(data);
-	         					if(null!=jData && jData.msgId=="1") {
-	         						alert(jData.msgMsg);
-	         						goSelectOne1();
-	         					}else {
-	         						alert("입력을 확인해주세요");
-	         					}
-	         				},
-	         				error : function(xhr, status, error) {
-	         					alert("입력을 확인해주세요!");
-	         				},
-	         				complete : function(data) {
-	         	
-	         				}
-	         			});//--ajax
+		                     //ajax
+		                     $.ajax({
+		                         type : "POST",
+		                         url : "${hContext}/member/update.do",
+		                         dataType : "html",
+		                         data : {
+		                             "email" : $("#email").val(),
+		                             "pw" : $("#pw").val(),
+		                             "gender" : $('input[name=gender]:checked').val(),
+		                             "ihidnum" : $("#ihidnum").val(),
+		                             "name" : $("#name").val(),
+		                             "tel" : $("#tel").val(),
+		                             "zipno" : $("#zipno").val(),
+		                             "addr" : $("#addr").val(),
+		                             "addr2" : $("#addr2").val(),
+		                             "modid" : $("#email").val()
+		
+		                         },
+		                         success : function(data) { //성공
+		         					var jData = JSON.parse(data);
+		         					if(null!=jData && jData.msgId=="1") {
+		         						alert(jData.msgMsg);
+		         						goSelectOne1();
+		         					}else {
+		         						alert("입력을 확인해주세요");
+		         					}
+		         				},
+		         				error : function(xhr, status, error) {
+		         					alert("입력을 확인해주세요!");
+		         				},
+		         				complete : function(data) {
+		         	
+		         				}
+		         			});//--ajax
+		         			
+	     				}
         		     }else{
         		    	 alert("이메일형식을 확인하세요");
-            		     }
+            		   }
 
-                     }
+                  }
 
                  
 				

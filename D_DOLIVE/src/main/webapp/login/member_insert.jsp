@@ -392,7 +392,13 @@
      					alert("아이디 중복확인을 해주세요!");
      					return false;
      				} else if (duplicate == true) {
-     					
+
+         				var szKor = $("#name").val();
+         				regexp = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g; 
+         				if(regexp.test(szKor)){
+             				alert("이름은 한글만 입력 가능합니다.");
+             				return false;
+         				}else{
      		            //confirm
      		            if (confirm("등록 하시겠습니까?") == false)return;
      		            //var gender = $('input[name="gender"]:checked').val();
@@ -435,7 +441,7 @@
 
      		            });//--ajax 					
 
-
+         			}
      					
      					} 
 
