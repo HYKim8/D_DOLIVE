@@ -72,6 +72,13 @@
 		      	</div>
 	      	</div>
 	      	<div class="form-group">
+	      		<label for="pw" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">비밀번호 확인</label>
+		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+		      		<input type="password" class="form-control" id="confirm_pw" name="confirm_pw" placeholder="비밀번호 확인"
+		      	 	value="">
+		      	</div>
+	      	</div>
+	      	<div class="form-group">
 	      		<label for="gender" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">성별</label>
 		    	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 		      		<c:if test="${vo.gender eq '남자'}">
