@@ -74,7 +74,7 @@
 			<!-- Button Area -->
 	        <div class="row text-right">
 				<label for="title" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label"></label>
-			    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+			    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<!-- <input type="button" class="btn btn-primary btn-sm" value="수정" onclick="$(this.form).submit()" id="doUpdate" name="doUpdate" /> -->
 					<button class="btn btn-primary btn-sm" name="doUpdate" id="doUpdate" onclick="javascript:bindEventHandler();">수정</button>
 				</div>
@@ -84,7 +84,7 @@
 			
 			<div class="form-group">
 				<label for="email" class="col-lg-4 col-sm-4 col-xs-4  control-label">이메일</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
+				<div class="col-lg-13 col-sm-13 col-xs-13">
 					<input type="text"  value="${vo.email}"  maxlength="350" class="form-control input-sm"
 						id="email" name="email" placeholder="이메일" readonly />
 				</div>
@@ -93,7 +93,7 @@
 			<div class="form-group">
 				<label for="pw"
 					class="col-lg-4 col-sm-4 col-xs-4  control-label">비밀번호</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
+				<div class="col-lg-13 col-sm-13 col-xs-13">
 					<input type="password" maxlength="12" class="form-control input-sm"
 						id="pw" name="pw" placeholder="비밀번호" value="${vo.pw }"/>
 				</div>
@@ -101,7 +101,7 @@
 						
 			<div class="form-group">
 				<label for="gender" class="col-lg-4 col-sm-4 col-xs-4  control-label">성별</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
+				<div class="col-lg-13 col-sm-13 col-xs-13">
 					<c:choose>
 						<c:when test="${vo.gender eq '1'}">
 							<input type = "radio" id="gender1" name = "gender" value = "1" checked="checked" >남자
@@ -117,7 +117,7 @@
 			
 			<div class="form-group">
 				<label for="ihidnum" class="col-lg-4 col-sm-4 col-xs-4  control-label">주민번호</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
+				<div class="col-lg-13 col-sm-13 col-xs-13">
 					<input type="text" maxlength="50" class="form-control input-sm"
 						id="ihidnum" name="ihidnum" placeholder="주민번호" value="${vo.ihidnum }"/>
 				</div>
@@ -125,7 +125,7 @@
 			
 			<div class="form-group">
 				<label for="name" class="col-lg-4 col-sm-4 col-xs-4  control-label">이름</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
+				<div class="col-lg-13 col-sm-13 col-xs-13">
 					<input type="text" maxlength="50" class="form-control input-sm"
 						id="name" name="name" placeholder="이름" value="${vo.name }" />
 				</div>
@@ -133,7 +133,7 @@
 			
 			<div class="form-group">
 				<label for="tel"  class="col-lg-4 col-sm-4 col-xs-4  control-label">전화번호</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
+				<div class="col-lg-13 col-sm-13 col-xs-13">
 					<input type="text"  maxlength="12" class="form-control input-sm" id="tel" name="tel" placeholder="전화번호" value="${vo.tel }"/>
 						
 				</div>
@@ -141,7 +141,7 @@
 			
 			<div class="form-group">
 				<label for="zipno" class="col-lg-4 col-sm-4 col-xs-4  control-label">주소</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
+				<div class="col-lg-13 col-sm-13 col-xs-13">
 						<input type="text" id="zipno" placeholder="우편번호" name="zipno" value="${vo.zipno }" readonly >
 						<input type="button" name="name1" onclick="sample2_execDaumPostcode()" value="우편번호 찾기" ><br>
 				</div>
@@ -149,14 +149,14 @@
 			
 			<div class="form-group">
 				<label for="addr" class="col-lg-4 col-sm-4 col-xs-4  control-label">기본주소</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
+				<div class="col-lg-13 col-sm-13 col-xs-13">
 						<input type="text" name="addr" id="addr" class="form-control input-sm" placeholder="기본주소" value="${vo.addr }" readonly>
 				</div>
 			</div>		
 			
 			<div class="form-group">
 				<label for="addr2" class="col-lg-4 col-sm-4 col-xs-4  control-label">상세주소</label>
-				<div class="col-lg-6 col-sm-6 col-xs-6">
+				<div class="col-lg-13 col-sm-13 col-xs-13">
 						<input type="text" id=addr2 name="addr2" class="form-control input-sm" placeholder="상세주소" value="${vo.addr2 }" >
 				</div>
 			</div>										
