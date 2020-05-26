@@ -343,7 +343,7 @@
 				  	  }
 				      
 					  kakao.maps.event.addListener(marker, 'click', openOverlay(data.stores[i].code, map, marker,data.stores[i].name,
-                                                 data.stores[i].addr,data.stores[i].stock_at,data.stores[i].remain_stat));
+                                                 data.stores[i].addr,data.stores[i].stock_at,data.stores[i].remain_stat,data.stores[0].lat, data.stores[0].lng));
                   }
                   
             },
@@ -355,7 +355,7 @@
          });//--ajax
          
          // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
-         function openOverlay(code, map, marker,name,addr,stock,remain) {
+         function openOverlay(code, map, marker,name,addr,stock,remain,lat,lng) {
             return function() {
                if($("#"+code+"").text()==""){
 					console.log(login_email);
@@ -371,6 +371,9 @@
                           }
                       }
 
+					//var findload = '<a style = "text-decoration: none;" href="https://map.kakap.com/link/to/''+code+'">'
+
+					
                   // 마커 위에 커스텀오버레이를 표시합니다
                      // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
                      overlay = new kakao.maps.CustomOverlay({
@@ -382,7 +385,7 @@
                          '        </div>' + 
                          '        <div class="remain" align="center" style="font-size: 16px;">재고 상태:<b>'+remain+'</b></div>' + 
                          '        <div align="center">'+notice+
-                         '           <button class="button" id="">길찾기</button>'+ 
+                         '           <button class="button" id=""><a style = "text-decoration: none;" href="http://map.daum.net/link/map/CurrentLocation,'+addr+','+lat+','+lng+'">길찾기</a></button>'+ 
                          '           <button class="button" id="" onclick="goReserv('+code+',\''+name+'\');">예약</button>'+ 
                          '        </div>'+
                          '        <div class="body">' + 
