@@ -385,7 +385,8 @@
                          '        </div>' + 
                          '        <div class="remain" align="center" style="font-size: 16px;">재고 상태:<b>'+remain+'</b></div>' + 
                          '        <div align="center">'+notice+
-                         '           <button class="button" id=""><a style = "text-decoration: none;" href="http://map.daum.net/link/map/CurrentLocation,'+addr+','+lat+','+lng+'">길찾기</a></button>'+ 
+                         '           <button class="button" id=""><a style = "text-decoration: none;" href="http://map.daum.net/link/map/CurrentLocation?addr=,'+addr+','+lat+','+lng+'">'+
+                         '               <div style="color:white;">길찾기</div></a></button>'+ 
                          '           <button class="button" id="" onclick="goReserv('+code+',\''+name+'\');">예약</button>'+ 
                          '        </div>'+
                          '        <div class="body">' + 
