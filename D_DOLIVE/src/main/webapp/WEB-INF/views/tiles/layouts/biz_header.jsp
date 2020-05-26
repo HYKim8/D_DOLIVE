@@ -36,7 +36,7 @@
 	            <ul class="navbar-nav ml-auto">
 	            	<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="${hContext}/reserv/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=30&searchWord=&optionDiv=2">Reservation List</a></li>
 	                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="${hContext}/bizmember/do_select_one.do?email=&optionDiv=1&searchDiv=10">MyPage</a></li>
-	                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="http://localhost:8080/d_dolive/member/gologin.do">LogOut</a></li>
+	                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="${hContext}/login/logout.do">LogOut</a></li>
 	            </ul>
 	        </div>
 	    </div>
