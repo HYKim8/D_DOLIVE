@@ -25,6 +25,8 @@ function coivdupdatetime(){
 	document.getElementById("coivdupdatetime").innerText = '데이터 업데이트 : 2020년 '+time.substring(1,3)+'월 '+ time.substring(4,6)+'일 '+time.substring(7,9)+':00:00';
 }
 
+var agedata = '${agedata}';
+
 function clock() {
     var date = new Date();
 
@@ -168,6 +170,14 @@ function loadMap(){
 }
 
 
+
+agedata = [490,717,1369,1972,1468,1219,3100,627,148];
+
+
+
+
+
+
 var ageConfirmerDatas = {
         type: 'doughnut',
         data: {
@@ -182,15 +192,7 @@ var ageConfirmerDatas = {
                         '0-9'],
             datasets: [{
                 label: '나이별 확진자 현황',
-                data: [ 490,
-                        717,
-                        1369,
-                        1972,
-                        1468,
-                        1219,
-                        3100,
-                        627,
-                        148 ],
+                data: agedata,
                 backgroundColor: [
                 	'rgb(255, 99, 132, 0.2)',
                     'rgb(255, 159, 64, 0.2)',
@@ -563,3 +565,4 @@ var ageConfirmerDatas = {
 
               chart.draw(data, options);
             }
+          
