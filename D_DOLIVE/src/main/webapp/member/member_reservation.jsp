@@ -143,8 +143,8 @@
     				<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1" style="width: 6%;">번호</th>
     				<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1" style="width: 15%;">약국 이름</th>
     				<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1" style="width: 35%;">약국 주소</th>
-    				<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1" style="width: 10%;">마스크수량</th>
-    				<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1" style="width: 10%;">예약상태</th>
+    				<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1" style="width: 11%;">마스크수량</th>
+    				<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1" style="width: 9%;">예약상태</th>
     				<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1" style="width: 10%;">결제금액</th>
     				<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1" style="width: 10%;">신청일</th>
     				<th style="display: none;">regId</th>
