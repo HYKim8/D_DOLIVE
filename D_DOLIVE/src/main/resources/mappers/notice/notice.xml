@@ -38,6 +38,7 @@
 		    )B, pharmacy p
 		    WHERE b.pcode = p.pcode
 		    AND rnum <![CDATA[ >= ]]> (#{pageSize} * (#{pageNum} -1) +1)
+		    ORDER BY num
 		)t1
 		NATURAL JOIN
 		(

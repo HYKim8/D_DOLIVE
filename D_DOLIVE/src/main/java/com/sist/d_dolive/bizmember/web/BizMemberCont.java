@@ -46,6 +46,39 @@ public class BizMemberCont {
 		return "login/bizmember_insert";
 	}
 	
+	@RequestMapping(value = "bizmember/id_check.do", method = RequestMethod.POST
+			, produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String idCheck(BizMemberVO bizMemberVO) {
+		//board_id
+		LOG.debug("1==================");
+		LOG.debug("1=param="+bizMemberVO);
+		LOG.debug("1==================");
+		
+		int flag = this.bizMemberService.idCheck(bizMemberVO);
+		LOG.debug("1.1==================");
+		LOG.debug("1.1=flag="+flag);
+		LOG.debug("1.1==================");
+		
+		MessageVO message = new MessageVO();
+		
+		if(flag==1) {
+			message.setMsgId(String.valueOf(flag));
+			message.setMsgMsg("이미 가입된 ID가 있습니다.");
+		}else {
+			message.setMsgId(String.valueOf(flag));
+			message.setMsgMsg("가입 가능한 ID입니다.");
+		}
+		
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(message);
+		LOG.debug("1.2==================");
+		LOG.debug("1.2=jsonStr="+jsonStr);
+		LOG.debug("1.2==================");
+		
+		return jsonStr;
+	}
+	
 	@RequestMapping(value = "bizmember/do_update.do", method = RequestMethod.POST
 			, produces = "application/json; charset=UTF-8")
 	@ResponseBody
@@ -93,15 +126,14 @@ public class BizMemberCont {
 	@RequestMapping(value = "bizmember/do_delete.do", method = RequestMethod.POST
 			, produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public String doDelete(BizMemberVO bizMemberVO, Locale locale) {
+	public String doDelete(BizMemberVO bizMemberVO, Locale locale, HttpSession session) {
 		//param board_id
 		LOG.debug("1==================");
 		LOG.debug("1=param="+bizMemberVO);
 		LOG.debug("1==================");
 		
-		if(null==bizMemberVO.getEmail() || bizMemberVO.getEmail().equals("")) {
-			throw new IllegalArgumentException("Email을 확인 하세요.");
-		}
+		BizMemberVO ssBizMemberVO = (BizMemberVO) session.getAttribute("bizMember");
+		bizMemberVO.setEmail(ssBizMemberVO.getEmail());
 		
 		int flag = this.bizMemberService.doDelete(bizMemberVO);
 		

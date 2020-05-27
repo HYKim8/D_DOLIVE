@@ -180,6 +180,16 @@
    
    
    	<script type="text/javascript">
+	   	function doSearchPage(url, no) {
+			console.log("#url:"+url);
+			console.log("#no:"+no);
+	
+			var frm = document.searchFrm;
+			frm.pageNum.value = no;
+			frm.action = url;
+			frm.submit();
+		}
+   	
 		function doChoice() {
 			var name = $('input[name="pcode"]:checked').parent().parent().children().eq(2).text();
 			var addr = $('input[name="pcode"]:checked').parent().parent().children().eq(3).text();

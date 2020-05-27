@@ -98,7 +98,7 @@
 
 		function goMain(){
 			//!!!!!!!!!!!!!!!!주소 매핑 변경!!!!!!!!!!!!!!!!
-			location.href = "${hContext}/pharmacymap/pharmacy_map_test.do"
+			location.href = "${hContext}/pharmacymap/pharmacy_map.do"
 		}
 
     

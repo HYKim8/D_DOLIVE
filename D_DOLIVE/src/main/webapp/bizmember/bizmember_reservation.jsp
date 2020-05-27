@@ -20,11 +20,12 @@
 <%@page import="com.sist.d_dolive.cmn.SearchVO"%>
 <%@page import="com.sist.d_dolive.code.CodeVO"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ taglib  prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ include file="/common/common.jsp" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@include file="/common/common.jsp" %>
 <%
 	//페이지 사이즈
 	String pageSize = "10";
@@ -168,7 +169,7 @@
     								<td class="text-center"><input type="radio" name="rno" id="rno" value="${vo.rno }"/></td>
 			    					<td class="text-center hidden-sm hidden-xs"><c:out value="${vo.num }"></c:out></td>
 			    					<td class="text-center"><c:out value="${vo.name }"></c:out></td>
-			    					<td class="text-center"><c:out value="${vo.ihidnum }"></c:out></td>
+			    					<td class="text-center"><fmt:formatNumber var="ihidnum" value="${vo.ihidnum }" pattern="######,#######" /><c:out value="${fn:replace(ihidnum, ',', '-')}" /></td>
 			    					<td class="text-center"><c:out value="${vo.maskCnt }"></c:out></td>
 			    					<td class="text-center"><c:out value="${vo.approval }"></c:out></td>
 			    					<td class="text-center"><c:out value="${vo.amount }"></c:out></td>
@@ -203,6 +204,16 @@
    
    
    	<script type="text/javascript">
+	   	function doSearchPage(url, no) {
+			console.log("#url:"+url);
+			console.log("#no:"+no);
+	
+			var frm = document.searchFrm;
+			frm.pageNum.value = no;
+			frm.action = url;
+			frm.submit();
+		}
+   	
 		function doUpdate(approval) {
 			var rno = $('input[name="rno"]:checked').val();
 
@@ -212,6 +223,7 @@
 			}
 
 			var nowApproval = $('input[name="rno"]:checked').parent().parent().children().eq(5).text();
+			console.log(nowApproval);
 
 			if(nowApproval=="취소완료") {
 				alert("취소완료인건은 변경이 불가능합니다.");
@@ -225,9 +237,13 @@
 			}else if(nowApproval=="결제완료" && approval!="6") {
 				alert("결제완료인건은 상품배정으로만 변경이 가능합니다.");
 				return;
+			}else if(nowApproval=="결제완료" && approval=="6") {
+
 			}else if(nowApproval=="상품배정" && approval!="7") {
 				alert("상품배정인건은 구매확정으로만 변경이 가능합니다.");
 				return;
+			}else if(nowApproval=="상품배정" && approval=="7") {
+
 			}else if(nowApproval=="구매확정") {
 				alert("구매확정인건은 변경이 불가능합니다.");
 				return;
@@ -240,6 +256,8 @@
 				alert("예약신청인건은 승인완료 또는 승인거절로만 변경 가능합니다.");
 				return;
 			}
+
+			if(false==confirm("수정 하시겠습니까?"))return;
 			
 			//ajax
 			$.ajax({
@@ -249,7 +267,8 @@
 				data : {
 					"rno" : rno
 					, "approval" : approval
-					, "optionDiv" : "20"
+					, "searchDiv" : "10"
+					, "optionDiv" : "2"
 				},
 				success : function(data) { //성공
 					var jData = JSON.parse(data);

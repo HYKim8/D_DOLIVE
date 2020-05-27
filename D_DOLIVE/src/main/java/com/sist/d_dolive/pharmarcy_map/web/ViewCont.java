@@ -56,8 +56,6 @@ Logger LOG = LoggerFactory.getLogger(this.getClass());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 		return "covidmap/sidomap";
 	}
 	

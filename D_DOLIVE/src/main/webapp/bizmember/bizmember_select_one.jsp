@@ -177,7 +177,6 @@
 				url : "${hContext}/bizmember/do_delete.do",
 				dataType : "html",
 				data : {
-					"email" : email
 				},
 				success : function(data) { //성공
 					var jData = JSON.parse(data);

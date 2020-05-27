@@ -34,7 +34,7 @@
 	<%-- <jsp:forward page="${hContext}/webapp/pharmacymap/Main_test.do"/> --%> 
 	<script type="text/javascript">
 	 function msg(){
-	      location.href="http://localhost:8080/d_dolive/pharmacymap/main_test.do";
+	      location.href="http://localhost:8080/d_dolive/pharmacymap/main.do";
 	    }
 	    window.onload=msg;
 	</script>

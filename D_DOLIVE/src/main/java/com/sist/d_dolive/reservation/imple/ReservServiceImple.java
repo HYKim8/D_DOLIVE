@@ -26,18 +26,13 @@ public class ReservServiceImple implements ReservService {
 		ReservVO reservVO = (ReservVO) dto;
 		
 		int flag = 0;
-		int cancelFlag = 0;
 		
 		flag = dao.doUpdate(reservVO);
 		
 		if(flag==1 && reservVO.getApproval().equals("5")) {
 			reservVO.setSearchDiv("20");
-			cancelFlag = dao.doUpdate(dto);
-			if(cancelFlag==1) {
-				flag = 1;
-			}else {
-				flag = 0;
-			}
+			reservVO.setImpuid("0");
+			dao.doUpdate(dto);
 		}
 		
 		return flag;

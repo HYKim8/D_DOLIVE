@@ -89,10 +89,10 @@
     <!-- spring mail:id/pass -->
     <bean  id="passwordAuth"  class="javax.mail.PasswordAuthentication">
         <constructor-arg index="0">
-            <value>이메일아이디</value>
+            <value>bealright6</value>
         </constructor-arg>
         <constructor-arg index="1">
-            <value>이메일비번</value>
+            <value>dayjisu116</value>
         </constructor-arg>        
     </bean>
     
