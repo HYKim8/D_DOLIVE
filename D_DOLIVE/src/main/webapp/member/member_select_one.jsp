@@ -67,7 +67,7 @@
  		<div >
  			<input type="button" style="float: right;" class="btn btn-primary btn-sm" value="탈퇴하기" onclick="doDelete();" />
  		</div>
-      	<form class="form-horizontal" action="${hContext }/bizmember/do_select_one.do" name="selectFrm" method="get">
+      	<form class="form-horizontal" action="${hContext }/member/do_select_one.do" name="selectFrm" method="get">
       		<input type="hidden" id="h_email" name="h_email"/>
       		<div class="form-group">
 	      		<label for="email" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">이메일</label>

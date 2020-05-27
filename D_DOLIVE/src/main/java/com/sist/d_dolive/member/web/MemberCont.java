@@ -108,9 +108,10 @@ public class MemberCont {
 	}
 	
 	@RequestMapping(value = "member/gomypage.do", method = RequestMethod.GET)
-	public String gomypage() {
-		
-		
+	public String gomypage(HttpSession session, Model model) {
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		MemberVO outVO = (MemberVO) this.memberService.doSelectOne(memberVO);
+		model.addAttribute("member", outVO);
 		return "member/member_select_one";
 	}
 	
